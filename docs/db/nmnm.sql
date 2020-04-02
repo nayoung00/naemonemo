@@ -80,6 +80,15 @@ ALTER TABLE nm_group
       group_no -- 모임번호
     );
 
+-- 모임 유니크 인덱스
+CREATE UNIQUE INDEX UIX_nm_group
+  ON nm_group ( -- 모임
+    group_name ASC -- 모임명
+  );
+
+ALTER TABLE nm_group
+  MODIFY COLUMN group_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '모임번호';
+
 -- 회원
 CREATE TABLE nm_members (
   member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -107,6 +116,15 @@ ALTER TABLE nm_members
       member_no -- 회원번호
     );
 
+-- 회원 유니크 인덱스
+CREATE UNIQUE INDEX UIX_nm_members
+  ON nm_members ( -- 회원
+    tel ASC -- 휴대폰번호
+  );
+
+ALTER TABLE nm_members
+  MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+
 -- 게시물사진
 CREATE TABLE nm_board_photo (
   board_photo_no INTEGER      NOT NULL COMMENT '게시물사진번호', -- 게시물사진번호
@@ -121,6 +139,9 @@ ALTER TABLE nm_board_photo
     PRIMARY KEY (
       board_photo_no -- 게시물사진번호
     );
+
+ALTER TABLE nm_board_photo
+  MODIFY COLUMN board_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시물사진번호';
 
 -- 메시지
 CREATE TABLE nm_message (
@@ -139,6 +160,9 @@ ALTER TABLE nm_message
     PRIMARY KEY (
       message_no -- 메시지번호
     );
+
+ALTER TABLE nm_message
+  MODIFY COLUMN message_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '메시지번호';
 
 -- 알림
 CREATE TABLE nm_notify (
@@ -173,6 +197,9 @@ ALTER TABLE nm_meeting_board
       board_no -- 게시물번호
     );
 
+ALTER TABLE nm_meeting_board
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시물번호';
+
 -- 댓글
 CREATE TABLE nm_reply (
   reply_no INTEGER NOT NULL COMMENT '댓글번호', -- 댓글번호
@@ -187,6 +214,9 @@ ALTER TABLE nm_reply
       reply_no -- 댓글번호
     );
 
+ALTER TABLE nm_reply
+  MODIFY COLUMN reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+
 -- 공지사항
 CREATE TABLE nm_notices_board (
   board_no INTEGER       NOT NULL COMMENT '공지사항번호', -- 공지사항번호
@@ -200,6 +230,9 @@ ALTER TABLE nm_notices_board
     PRIMARY KEY (
       board_no -- 공지사항번호
     );
+
+ALTER TABLE nm_notices_board
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항번호';
 
 -- 일정
 CREATE TABLE nm_schedule (
@@ -220,6 +253,9 @@ ALTER TABLE nm_schedule
       board_no -- 일정번호
     );
 
+ALTER TABLE nm_schedule
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일정번호';
+
 -- 소통 게시판
 CREATE TABLE nm_normal_board (
   normal_board_no INTEGER       NOT NULL COMMENT '소통게시판번호', -- 소통게시판번호
@@ -237,6 +273,9 @@ ALTER TABLE nm_normal_board
     PRIMARY KEY (
       normal_board_no -- 소통게시판번호
     );
+
+ALTER TABLE nm_normal_board
+  MODIFY COLUMN normal_board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '소통게시판번호';
 
 -- 등급
 CREATE TABLE nm_grade (

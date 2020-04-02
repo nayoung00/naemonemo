@@ -64,11 +64,11 @@ CREATE TABLE nm_group (
   group_name     VARBINARY(50) NOT NULL COMMENT '모임명', -- 모임명
   group_info     VARCHAR(255)  NOT NULL COMMENT '모임 설명', -- 모임 설명
   category       INTEGER       NOT NULL COMMENT '모임 분류', -- 모임 분류
-  group_photo    VARCHAR(255)  NOT NULL COMMENT '대표이미지', -- 대표이미지
+  group_photo    VARCHAR(255)  NULL     COMMENT '대표이미지', -- 대표이미지
   city           VARCHAR(255)  NULL     COMMENT '지역', -- 지역
   max_people_no  INTEGER       NOT NULL COMMENT '최대인원', -- 최대인원
   bank           VARBINARY(50) NOT NULL COMMENT '은행', -- 은행
-  bank_no        INTEGER       NOT NULL COMMENT '계좌번호', -- 계좌번호
+  bank_no        VARCHAR(20)   NOT NULL COMMENT '계좌번호', -- 계좌번호
   account_holder VARCHAR(50)   NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임';
@@ -88,6 +88,9 @@ CREATE UNIQUE INDEX UIX_nm_group
 
 ALTER TABLE nm_group
   MODIFY COLUMN group_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '모임번호';
+
+ALTER TABLE nm_group
+  AUTO_INCREMENT = 1;
 
 -- 회원
 CREATE TABLE nm_members (
@@ -125,6 +128,9 @@ CREATE UNIQUE INDEX UIX_nm_members
 ALTER TABLE nm_members
   MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 
+ALTER TABLE nm_members
+  AUTO_INCREMENT = 1000;
+
 -- 게시물사진
 CREATE TABLE nm_board_photo (
   board_photo_no INTEGER      NOT NULL COMMENT '게시물사진번호', -- 게시물사진번호
@@ -143,6 +149,9 @@ ALTER TABLE nm_board_photo
 ALTER TABLE nm_board_photo
   MODIFY COLUMN board_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시물사진번호';
 
+ALTER TABLE nm_board_photo
+  AUTO_INCREMENT = 1;
+
 -- 메시지
 CREATE TABLE nm_message (
   message_no  INTEGER       NOT NULL COMMENT '메시지번호', -- 메시지번호
@@ -150,7 +159,7 @@ CREATE TABLE nm_message (
   receiver    INTEGER       NOT NULL COMMENT '수신자', -- 수신자
   title       VARBINARY(50) NOT NULL COMMENT '제목', -- 제목
   content     VARCHAR(255)  NOT NULL COMMENT '내용', -- 내용
-  create_date DATETIME      NOT NULL COMMENT '날짜' -- 날짜
+  create_date DATETIME      NOT NULL DEFAULT now() COMMENT '날짜' -- 날짜
 )
 COMMENT '메시지';
 
@@ -163,6 +172,9 @@ ALTER TABLE nm_message
 
 ALTER TABLE nm_message
   MODIFY COLUMN message_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '메시지번호';
+
+ALTER TABLE nm_message
+  AUTO_INCREMENT = 1;
 
 -- 알림
 CREATE TABLE nm_notify (
@@ -186,7 +198,7 @@ CREATE TABLE nm_meeting_board (
   group_no      INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
   member_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  create_date   DATETIME     NOT NULL COMMENT '작성일' -- 작성일
+  create_date   DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '모임게시글';
 
@@ -200,10 +212,14 @@ ALTER TABLE nm_meeting_board
 ALTER TABLE nm_meeting_board
   MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시물번호';
 
+ALTER TABLE nm_meeting_board
+  AUTO_INCREMENT = 1;
+
 -- 댓글
 CREATE TABLE nm_reply (
-  reply_no INTEGER NOT NULL COMMENT '댓글번호', -- 댓글번호
-  board_no INTEGER NOT NULL COMMENT '게시물번호' -- 게시물번호
+  reply_no INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
+  board_no INTEGER      NOT NULL COMMENT '게시물번호', -- 게시물번호
+  content  VARCHAR(255) NOT NULL COMMENT '댓글내용' -- 댓글내용
 )
 COMMENT '댓글';
 
@@ -216,6 +232,9 @@ ALTER TABLE nm_reply
 
 ALTER TABLE nm_reply
   MODIFY COLUMN reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+
+ALTER TABLE nm_reply
+  AUTO_INCREMENT = 1;
 
 -- 공지사항
 CREATE TABLE nm_notices_board (
@@ -233,6 +252,9 @@ ALTER TABLE nm_notices_board
 
 ALTER TABLE nm_notices_board
   MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항번호';
+
+ALTER TABLE nm_notices_board
+  AUTO_INCREMENT = 1;
 
 -- 일정
 CREATE TABLE nm_schedule (
@@ -256,6 +278,9 @@ ALTER TABLE nm_schedule
 ALTER TABLE nm_schedule
   MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '일정번호';
 
+ALTER TABLE nm_schedule
+  AUTO_INCREMENT = 1;
+
 -- 소통 게시판
 CREATE TABLE nm_normal_board (
   normal_board_no INTEGER       NOT NULL COMMENT '소통게시판번호', -- 소통게시판번호
@@ -263,7 +288,7 @@ CREATE TABLE nm_normal_board (
   title           VARBINARY(50) NOT NULL COMMENT '제목', -- 제목
   content         VARCHAR(255)  NOT NULL COMMENT '내용', -- 내용
   noticeable      INTEGER       NOT NULL COMMENT '공지사항 여부(운영자)', -- 공지사항 여부(운영자)
-  create_date     DATETIME      NOT NULL COMMENT '작성일' -- 작성일
+  create_date     DATETIME      NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '소통 게시판';
 
@@ -276,6 +301,9 @@ ALTER TABLE nm_normal_board
 
 ALTER TABLE nm_normal_board
   MODIFY COLUMN normal_board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '소통게시판번호';
+
+ALTER TABLE nm_normal_board
+  AUTO_INCREMENT = 1;
 
 -- 등급
 CREATE TABLE nm_grade (
@@ -345,8 +373,8 @@ ALTER TABLE nm_meeting_member
 
 -- 회계유형
 CREATE TABLE nm_account_type (
-  account_type_no   INTEGER       NOT NULL COMMENT '회계유형번호', -- 회계유형번호
-  account_type_name VARBINARY(50) NOT NULL COMMENT '유형명' -- 유형명
+  account_type_no INTEGER       NOT NULL COMMENT '회계유형번호', -- 회계유형번호
+  board_type_name VARBINARY(50) NOT NULL COMMENT '유형명' -- 유형명
 )
 COMMENT '회계유형';
 
@@ -359,8 +387,8 @@ ALTER TABLE nm_account_type
 
 -- 게시판유형
 CREATE TABLE nm_board_type (
-  board_type_no INTEGER NOT NULL COMMENT '게시판유형번호', -- 게시판유형번호
-  type_name     INTEGER NOT NULL COMMENT '유형명' -- 유형명
+  board_type_no INTEGER     NOT NULL COMMENT '게시판유형번호', -- 게시판유형번호
+  type_name     VARCHAR(50) NOT NULL COMMENT '유형명' -- 유형명
 )
 COMMENT '게시판유형';
 

@@ -495,7 +495,7 @@ ALTER TABLE nm_message
 
 -- 메시지
 ALTER TABLE nm_message
-  ADD CONSTRAINT FK_nm_members_TO_nm_message2 -- 회원 -> 메시지2
+  ADD CONSTRAINT FK_nm_members_TO_nm_message -- 회원 -> 메시지2
     FOREIGN KEY (
       receiver -- 수신자
     )

@@ -193,12 +193,12 @@ ALTER TABLE nm_notify
 
 -- 모임게시글
 CREATE TABLE nm_meeting_board (
-  board_no      INTEGER      NOT NULL COMMENT '게시물번호', -- 게시물번호
-  board_type_no INTEGER      NOT NULL COMMENT '게시판유형번호', -- 게시판유형번호
-  group_no      INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
-  member_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  create_date   DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  board_no      INTEGER  NOT NULL COMMENT '게시물번호', -- 게시물번호
+  board_type_no INTEGER  NOT NULL COMMENT '게시판유형번호', -- 게시판유형번호
+  group_no      INTEGER  NOT NULL COMMENT '모임번호', -- 모임번호
+  member_no     INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  content       TEXT     NOT NULL COMMENT '내용', -- 내용
+  create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '모임게시글';
 
@@ -495,7 +495,7 @@ ALTER TABLE nm_message
 
 -- 메시지
 ALTER TABLE nm_message
-  ADD CONSTRAINT FK_nm_members_TO_nm_message -- 회원 -> 메시지2
+  ADD CONSTRAINT FK_nm_members_TO_nm_message2 -- 회원 -> 메시지2
     FOREIGN KEY (
       receiver -- 수신자
     )

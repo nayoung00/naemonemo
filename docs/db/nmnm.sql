@@ -60,16 +60,16 @@ DROP TABLE IF EXISTS nm_meeting_board_like RESTRICT;
 
 -- 모임
 CREATE TABLE nm_group (
-  group_no       INTEGER       NOT NULL COMMENT '모임번호', -- 모임번호
-  group_name     VARBINARY(50) NOT NULL COMMENT '모임명', -- 모임명
-  group_info     VARCHAR(255)  NOT NULL COMMENT '모임 설명', -- 모임 설명
-  category       INTEGER       NOT NULL COMMENT '모임 분류', -- 모임 분류
-  group_photo    VARCHAR(255)  NULL     COMMENT '대표이미지', -- 대표이미지
-  city           VARCHAR(255)  NULL     COMMENT '지역', -- 지역
-  max_people_no  INTEGER       NOT NULL COMMENT '최대인원', -- 최대인원
-  bank           VARBINARY(50) NOT NULL COMMENT '은행', -- 은행
-  bank_no        VARCHAR(20)   NOT NULL COMMENT '계좌번호', -- 계좌번호
-  account_holder VARCHAR(50)   NOT NULL COMMENT '예금주' -- 예금주
+  group_no       INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
+  group_name     VARCHAR(255) NOT NULL COMMENT '모임명', -- 모임명
+  group_info     VARCHAR(255) NOT NULL COMMENT '모임 설명', -- 모임 설명
+  category       INTEGER      NOT NULL COMMENT '모임 분류', -- 모임 분류
+  group_photo    VARCHAR(255) NULL     COMMENT '대표이미지', -- 대표이미지
+  city           VARCHAR(255) NULL     COMMENT '지역', -- 지역
+  max_people_no  INTEGER      NOT NULL COMMENT '최대인원', -- 최대인원
+  bank           VARCHAR(255) NOT NULL COMMENT '은행', -- 은행
+  bank_no        VARCHAR(20)  NOT NULL COMMENT '계좌번호', -- 계좌번호
+  account_holder VARCHAR(50)  NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임';
 
@@ -154,12 +154,12 @@ ALTER TABLE nm_board_photo
 
 -- 메시지
 CREATE TABLE nm_message (
-  message_no  INTEGER       NOT NULL COMMENT '메시지번호', -- 메시지번호
-  sender      INTEGER       NOT NULL COMMENT '발신자', -- 발신자
-  receiver    INTEGER       NOT NULL COMMENT '수신자', -- 수신자
-  title       VARBINARY(50) NOT NULL COMMENT '제목', -- 제목
-  content     VARCHAR(255)  NOT NULL COMMENT '내용', -- 내용
-  create_date DATETIME      NOT NULL DEFAULT now() COMMENT '날짜' -- 날짜
+  message_no  INTEGER      NOT NULL COMMENT '메시지번호', -- 메시지번호
+  sender      INTEGER      NOT NULL COMMENT '발신자', -- 발신자
+  receiver    INTEGER      NOT NULL COMMENT '수신자', -- 수신자
+  title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content     VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  create_date DATETIME     NOT NULL DEFAULT now() COMMENT '날짜' -- 날짜
 )
 COMMENT '메시지';
 
@@ -218,7 +218,7 @@ ALTER TABLE nm_meeting_board
 -- 댓글
 CREATE TABLE nm_reply (
   reply_no INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
-  board_no INTEGER      NOT NULL COMMENT '게시물번호', -- 게시물번호
+  board_no INTEGER      NULL     COMMENT '게시물번호', -- 게시물번호
   content  VARCHAR(255) NOT NULL COMMENT '댓글내용' -- 댓글내용
 )
 COMMENT '댓글';
@@ -238,8 +238,8 @@ ALTER TABLE nm_reply
 
 -- 공지사항
 CREATE TABLE nm_notices_board (
-  board_no INTEGER       NOT NULL COMMENT '공지사항번호', -- 공지사항번호
-  title    VARBINARY(50) NOT NULL COMMENT '제목' -- 제목
+  board_no INTEGER      NOT NULL COMMENT '공지사항번호', -- 공지사항번호
+  title    VARCHAR(255) NOT NULL COMMENT '제목' -- 제목
 )
 COMMENT '공지사항';
 
@@ -258,13 +258,13 @@ ALTER TABLE nm_notices_board
 
 -- 일정
 CREATE TABLE nm_schedule (
-  board_no      INTEGER       NOT NULL COMMENT '일정번호', -- 일정번호
-  schedule_date DATE          NOT NULL COMMENT '일자', -- 일자
-  title         VARBINARY(50) NOT NULL COMMENT '제목', -- 제목
-  place_name    VARBINARY(50) NULL     COMMENT '장소명', -- 장소명
-  address       VARCHAR(255)  NOT NULL COMMENT '주소', -- 주소
-  latitude      INTEGER       NULL     COMMENT '위도', -- 위도
-  longitude     INTEGER       NULL     COMMENT '경도' -- 경도
+  board_no      INTEGER      NOT NULL COMMENT '일정번호', -- 일정번호
+  schedule_date DATE         NOT NULL COMMENT '일자', -- 일자
+  title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  place_name    VARCHAR(255) NULL     COMMENT '장소명', -- 장소명
+  address       VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
+  latitude      INTEGER      NULL     COMMENT '위도', -- 위도
+  longitude     INTEGER      NULL     COMMENT '경도' -- 경도
 )
 COMMENT '일정';
 
@@ -283,12 +283,12 @@ ALTER TABLE nm_schedule
 
 -- 소통 게시판
 CREATE TABLE nm_normal_board (
-  normal_board_no INTEGER       NOT NULL COMMENT '소통게시판번호', -- 소통게시판번호
-  member_no       INTEGER       NOT NULL COMMENT '회원번호', -- 회원번호
-  title           VARBINARY(50) NOT NULL COMMENT '제목', -- 제목
-  content         VARCHAR(255)  NOT NULL COMMENT '내용', -- 내용
-  noticeable      INTEGER       NOT NULL COMMENT '공지사항 여부(운영자)', -- 공지사항 여부(운영자)
-  create_date     DATETIME      NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  normal_board_no INTEGER      NOT NULL COMMENT '소통게시판번호', -- 소통게시판번호
+  member_no       INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  title           VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content         TEXT         NOT NULL COMMENT '내용', -- 내용
+  noticeable      INTEGER      NOT NULL COMMENT '공지사항 여부(운영자)', -- 공지사항 여부(운영자)
+  create_date     DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '소통 게시판';
 
@@ -307,8 +307,8 @@ ALTER TABLE nm_normal_board
 
 -- 등급
 CREATE TABLE nm_grade (
-  grade_no   INTEGER       NOT NULL COMMENT '등급번호', -- 등급번호
-  grade_name VARBINARY(50) NOT NULL COMMENT '등급명칭' -- 등급명칭
+  grade_no   INTEGER      NOT NULL COMMENT '등급번호', -- 등급번호
+  grade_name VARCHAR(255) NOT NULL COMMENT '등급명칭' -- 등급명칭
 )
 COMMENT '등급';
 
@@ -373,8 +373,8 @@ ALTER TABLE nm_meeting_member
 
 -- 회계유형
 CREATE TABLE nm_account_type (
-  account_type_no INTEGER       NOT NULL COMMENT '회계유형번호', -- 회계유형번호
-  board_type_name VARBINARY(50) NOT NULL COMMENT '유형명' -- 유형명
+  account_type_no INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
+  board_type_name VARCHAR(255) NOT NULL COMMENT '유형명' -- 유형명
 )
 COMMENT '회계유형';
 
@@ -548,16 +548,6 @@ ALTER TABLE nm_meeting_board
 -- 댓글
 ALTER TABLE nm_reply
   ADD CONSTRAINT FK_nm_meeting_board_TO_nm_reply -- 모임게시글 -> 댓글
-    FOREIGN KEY (
-      reply_no -- 댓글번호
-    )
-    REFERENCES nm_meeting_board ( -- 모임게시글
-      board_no -- 게시물번호
-    );
-
--- 댓글
-ALTER TABLE nm_reply
-  ADD CONSTRAINT FK_nm_meeting_board_TO_nm_reply2 -- 모임게시글 -> 댓글2
     FOREIGN KEY (
       board_no -- 게시물번호
     )

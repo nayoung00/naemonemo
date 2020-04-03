@@ -167,13 +167,23 @@ values(
 1,
 1001,'사이좋게 지냅시다');
 
+insert into nm_meeting_board(
+board_type_no,
+group_no,
+member_no, 
+content)
+values(
+1,
+1,
+1001,'어렵네요');
+
 -- 게시물 사진 예제
 
-INSERT INTO nm_board_photo(photo_file)
- values('나혼자.jpg');
+INSERT INTO nm_board_photo(board_no,photo_file)
+ values(1,'나혼자.jpg');
  
- INSERT INTO nm_board_photo(photo_file)
- values('디스코드.jpg');
+ INSERT INTO nm_board_photo(board_no,photo_file)
+ values(2,'디스코드.jpg');
  
 -- 메시지 예제
 
@@ -189,11 +199,7 @@ content)
 INSERT INTO nm_notify(member_no,board_no)
  values(1000,1);
 
--- 댓글 예제 데이터
-
-insert into nm_reply
-(board_no, content)
-values(1,'멋져요');
+-- 댓글 예제 데이터 meeting_board_no
 
 insert into nm_reply
 (board_no, content)
@@ -216,8 +222,8 @@ INSERT INTO nm_notices_board(title)
 -- 일정 예제 데이터
 
 insert into nm_schedule
-(board_no,schedule_date, title, place_name, address, latitude, longitude)
-values(1,'2020-03-03', '봉사활동', '비트캠프 강남센터',
+(schedule_date, title, place_name, address, latitude, longitude)
+values('2020-03-03', '봉사활동', '비트캠프 강남센터',
 '서울특별시 강남구 역삼동', 37.499497, 127.029350);
 
 
@@ -263,5 +269,3 @@ INSERT INTO nm_normal_board_like(member_no,normal_board_no)
 
 INSERT INTO nm_meeting_board_like(board_no,member_no,group_no)
  values(1,1000,1);
- 
--- 

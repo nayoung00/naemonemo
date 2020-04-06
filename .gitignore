@@ -7,6 +7,7 @@ build/
 temp/
 Debug/
 Release/
+html-exam/
 
 package-lock.json
 .DS_Store
@@ -18,4 +19,6 @@ package-lock.json
 .mtj.tmp/
 *.war
 *.ear
+*.out
+*.exe
 hs_err_pid*

@@ -60,14 +60,16 @@ values('코딩 모임',
 '엄진영');
 
 -- 등급 예제
-INSERT INTO nm_grade
-(grade_no,grade_name) values(1,'챌린저');
+insert into nm_grade(grade_no, grade_name)
+  values(4, '모임장');  
+insert into nm_grade(grade_no, grade_name)
+  values(3, '관리자');  
+insert into nm_grade(grade_no, grade_name)
+  values(2, '정회원');  
+insert into nm_grade(grade_no, grade_name)
+  values(1, '준회원');  
 
-INSERT INTO nm_grade
-(grade_no,grade_name) values(2,'그랜드 마스터');
-
-INSERT INTO nm_grade
-(grade_no,grade_name) values(3,'마스터');
+  
 -- 회원 예제 데이터
 
 INSERT INTO nm_members
@@ -125,6 +127,93 @@ true,
 '손타쿠',
 1,1,1,
 '인스타그램');
+
+INSERT INTO nm_members
+(member_name, 
+id_photo, 
+birthday,     
+gender,     
+email,       
+tel,        
+password,      
+intro,      
+interests,     
+nickname,      
+account_status,
+grade_no,      
+withdraw,
+sns) 
+values('신나라', 
+'photo.jpg', 
+'1988-4-9', 
+true, 
+'test@gmail.com', 
+'010-6823-5479', 
+'1111', 
+'곰비둘기입니다.', 
+1, 
+'곰비둘기', 
+1, 1, 1, 
+'instagram.com/gramrabbitbear');
+ 
+INSERT INTO nm_members
+(member_name, 
+id_photo, 
+birthday,     
+gender,     
+email,       
+tel,        
+password,      
+intro,      
+interests,     
+nickname,      
+account_status,
+grade_no,      
+withdraw,
+sns) 
+values('김나영', 
+'photo1.jpg', 
+'2000-4-9', 
+true, 
+'test1@gmail.com', 
+'010-1111-1111', 
+'2222', 
+'김나영입니다.', 
+1, 
+'나사김', 
+1, 4, 1, 
+'instagram.com/test');
+
+
+INSERT INTO nm_members
+(member_name, 
+id_photo, 
+birthday,     
+gender,     
+email,       
+tel,        
+password,      
+intro,      
+interests,     
+nickname,      
+account_status,
+grade_no,      
+withdraw,
+sns) 
+values('이선경', 
+'photo3.jpg', 
+'2000-2-2', 
+true, 
+'test3@gmail.com', 
+'010-1113-1111', 
+'4444', 
+'이선경입니다.', 
+1, 
+'선경삼', 
+1, 4, 1, 
+'instagram.com/test4');
+
+  
 
 -- 모임 회원 예제
 

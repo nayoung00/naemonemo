@@ -1,3 +1,6 @@
+-- CREATE DATABASE nmnm DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+-- utf8로 database 생성
+
 -- 회계
 DROP TABLE IF EXISTS nm_account RESTRICT;
 
@@ -450,7 +453,7 @@ ALTER TABLE nm_notice_photo
       board_photo_no -- 공지사항사진번호
     );
 
-ALTER TABLE nm_notice_photo
+ALTER TABLE nm_notice_photo -- 에러발생
   MODIFY COLUMN notice_board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항번호';
 
 ALTER TABLE nm_notice_photo

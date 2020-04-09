@@ -2,10 +2,10 @@ package com.nmnm.dto;
 
 public class PlanMember {
 
-  int planBoardNo; // nm_plan PK/ PK NN
-  int memberNo; // nm_meeting_member PK/ PK NN
-  int groupNo; // nm_meeting_member PK/ PK NN
-  int attend; // nm_plan_member NN default=0 미정,불참,참가
+  private int planBoardNo; // nm_plan PK/ PK NN
+  private int memberNo; // nm_meeting_member PK/ PK NN
+  private int groupNo; // nm_meeting_member PK/ PK NN
+  private int attend; // nm_plan_member NN default=0 미정,불참,참가
 
   @Override
   public String toString() {

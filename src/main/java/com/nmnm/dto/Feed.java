@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class Feed {
 
-  int feedNo; // nm_feed PK NN auto_increment default=1
-  int memberNo; // nm_meeting_member PK/ FK N
-  int groupNo; // nm_meeting_member PK/ FK N
-  String title; // VARCHAR(255) NN
-  String content; // text NN
-  Date createDate; // DATETIME default=now() NN
+  private int feedNo; // nm_feed PK NN auto_increment default=1
+  private int memberNo; // nm_meeting_member PK/ FK N
+  private int groupNo; // nm_meeting_member PK/ FK N
+  private String title; // VARCHAR(255) NN
+  private String content; // text NN
+  private Date createDate; // DATETIME default=now() NN
 
   @Override
   public String toString() {

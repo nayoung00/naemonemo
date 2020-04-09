@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class Plan {
 
-  int planBoardNo; // nm_plan PK auto_increment default=1 NN
-  int groupNo; // nm_group PK/ FK N
-  Date planDate; // DATE NN
-  String title; // VARCHAR(255) NN
-  String placeName; // VARCHAR(255) N
-  String address; // VARCHAR(255) NN
-  int latitude; // 위도 N
-  int longitude; // 경도 N
+  private int planBoardNo; // nm_plan PK auto_increment default=1 NN
+  private int groupNo; // nm_group PK/ FK N
+  private Date planDate; // DATE NN
+  private String title; // VARCHAR(255) NN
+  private String placeName; // VARCHAR(255) N
+  private String address; // VARCHAR(255) NN
+  private int latitude; // 위도 N
+  private int longitude; // 경도 N
 
   @Override
   public String toString() {

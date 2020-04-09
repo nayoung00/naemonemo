@@ -1,10 +1,11 @@
 package com.nmnm.dto;
 
 public class FeedReply {
-  int feedReplyNo; // nm_feed_reply PK NN auto_increment default=1
-  String content; // TEXT NN
-  int feedNo; // nm_feed PK/ FK NN
-  int memberNo; // nm_nenber PK/ FK N
+
+  private int feedReplyNo; // nm_feed_reply PK NN auto_increment default=1
+  private String content; // TEXT NN
+  private int feedNo; // nm_feed PK/ FK NN
+  private int memberNo; // nm_nenber PK/ FK N
 
   @Override
   public String toString() {

@@ -2,9 +2,9 @@ package com.nmnm.dto;
 
 public class FeedPhoto {
 
-  int feedPhotoNo; // nm_feed_photo PK auto_increment default=1 NN
-  String photoFile; // VARCHAR(255) NN
-  int feedNo; // nm_feed PK/ FK NS
+  private int feedPhotoNo; // nm_feed_photo PK auto_increment default=1 NN
+  private String photoFile; // VARCHAR(255) NN
+  private int feedNo; // nm_feed PK/ FK NS
 
   @Override
   public String toString() {

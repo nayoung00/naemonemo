@@ -65,7 +65,7 @@ DROP TABLE IF EXISTS nm_plan RESTRICT;
 DROP TABLE IF EXISTS nm_reply RESTRICT;
 
 -- 일정참여자
-DROP TABLE IF EXISTS nm_schedule_member RESTRICT;
+DROP TABLE IF EXISTS nm_plan_member RESTRICT;
 
 -- 사용권한
 DROP TABLE IF EXISTS nm_write_authority RESTRICT;
@@ -130,9 +130,9 @@ ALTER TABLE nm_account_type
 -- 알림
 CREATE TABLE nm_alram (
   member_no       INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  notice_board_no INTEGER NOT NULL COMMENT '공지사항번호', -- 공지사항번호
-  plan_board_no   INTEGER NOT NULL COMMENT '일정번호', -- 일정번호
-  feed_no         INTEGER NOT NULL COMMENT '피드게시글번호' -- 피드게시글번호
+  notice_board_no INTEGER NULL     DEFAULT 0 COMMENT '공지사항번호', -- 공지사항번호
+  plan_board_no   INTEGER NULL     DEFAULT 0 COMMENT '일정번호', -- 일정번호
+  feed_no         INTEGER NULL     DEFAULT 0 COMMENT '피드게시글번호' -- 피드게시글번호
 )
 COMMENT '알림';
 
@@ -140,10 +140,7 @@ COMMENT '알림';
 ALTER TABLE nm_alram
   ADD CONSTRAINT PK_nm_alram -- 알림 기본키
     PRIMARY KEY (
-      member_no,       -- 회원번호
-      notice_board_no, -- 공지사항번호
-      plan_board_no,   -- 일정번호
-      feed_no          -- 피드게시글번호
+      member_no -- 회원번호
     );
 
 -- 피드게시글사진
@@ -390,7 +387,7 @@ CREATE TABLE nm_message (
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content     TEXT         NOT NULL COMMENT '내용', -- 내용
   create_date DATETIME     NOT NULL DEFAULT now() COMMENT '날짜', -- 날짜
-  read_date   DATETIME     NOT NULL COMMENT '확인일시' -- 확인일시
+  read_date   DATETIME     NOT NULL DEFAULT now() COMMENT '확인일시' -- 확인일시
 )
 COMMENT '메시지';
 
@@ -453,8 +450,8 @@ ALTER TABLE nm_notice_photo
       board_photo_no -- 공지사항사진번호
     );
 
-ALTER TABLE nm_notice_photo -- 에러발생
-  MODIFY COLUMN notice_board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항번호';
+ALTER TABLE nm_notice_photo
+  MODIFY COLUMN board_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항사진번호';
 
 ALTER TABLE nm_notice_photo
   AUTO_INCREMENT = 1;
@@ -532,7 +529,7 @@ ALTER TABLE nm_reply
   AUTO_INCREMENT = 1;
 
 -- 일정참여자
-CREATE TABLE nm_schedule_member (
+CREATE TABLE nm_plan_member (
   plan_board_no INTEGER NOT NULL COMMENT '일정번호', -- 일정번호
   member_no     INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   group_no      INTEGER NOT NULL COMMENT '모임번호' -- 모임번호
@@ -540,8 +537,8 @@ CREATE TABLE nm_schedule_member (
 COMMENT '일정참여자';
 
 -- 일정참여자
-ALTER TABLE nm_schedule_member
-  ADD CONSTRAINT PK_nm_schedule_member -- 일정참여자 기본키
+ALTER TABLE nm_plan_member
+  ADD CONSTRAINT PK_nm_plan_member -- 일정참여자 기본키
     PRIMARY KEY (
       plan_board_no, -- 일정번호
       member_no,     -- 회원번호
@@ -550,8 +547,8 @@ ALTER TABLE nm_schedule_member
 
 -- 사용권한
 CREATE TABLE nm_write_authority (
-  authority_no INTEGER NOT NULL COMMENT '사용권한번호', -- 사용권한번호
-  authority    INTEGER NOT NULL COMMENT '권한' -- 권한
+  authority_no INTEGER     NOT NULL COMMENT '사용권한번호', -- 사용권한번호
+  authority    VARCHAR(20) NOT NULL COMMENT '권한' -- 권한
 )
 COMMENT '사용권한';
 
@@ -907,8 +904,8 @@ ALTER TABLE nm_reply
     );
 
 -- 일정참여자
-ALTER TABLE nm_schedule_member
-  ADD CONSTRAINT FK_nm_meeting_member_TO_nm_schedule_member -- 모임회원 -> 일정참여자
+ALTER TABLE nm_plan_member
+  ADD CONSTRAINT FK_nm_meeting_member_TO_nm_plan_member -- 모임회원 -> 일정참여자
     FOREIGN KEY (
       group_no,  -- 모임번호
       member_no  -- 회원번호
@@ -919,8 +916,8 @@ ALTER TABLE nm_schedule_member
     );
 
 -- 일정참여자
-ALTER TABLE nm_schedule_member
-  ADD CONSTRAINT FK_nm_plan_TO_nm_schedule_member -- 일정 -> 일정참여자
+ALTER TABLE nm_plan_member
+  ADD CONSTRAINT FK_nm_plan_TO_nm_plan_member -- 일정 -> 일정참여자
     FOREIGN KEY (
       plan_board_no -- 일정번호
     )

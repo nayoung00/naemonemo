@@ -56,7 +56,10 @@ insert into nm_grade(grade_no, grade_name)
 -- 뭔가요 굳이 둘다 번호로 나눌 필요가?) 아니면 VARCHAR를 INTEGER로 ??
 
 INSERT INTO nm_write_authority(authority_no,authority)
-  values(1,1);
+  values(1,'관리자');
+  
+INSERT INTO nm_write_authority(authority_no,authority)
+  values(2,'정회원');
   
 -- 회계권한 예제
 
@@ -70,12 +73,6 @@ INSERT INTO nm_notice_authority(notice_authority_no,authority_no,grade_no,group_
 
 INSERT INTO nm_notice_authority(notice_authority_no,authority_no,grade_no,group_no)
   values(1,1,2,1);
-  
--- 사용권한 예제 (? 사용권한 번호랑 권한이랑 차이가 
--- 뭔가요 굳이 둘다 번호로 나눌 필요가?) 아니면 VARCHAR를 INTEGER로 ??
-
-INSERT INTO nm_write_authority(authority_no,authority)
-  values(1,1);
   
 -- 회원 예제 데이터
 
@@ -234,25 +231,22 @@ INSERT INTO nm_message(
 sender,
 receiver,
 title,
-content,
-read_date)
- values(1,2,'내일 뭐하시나요','내일 시간되사뇽?','2020-04-09');
+content)
+ values(1,2,'내일 뭐하시나요','내일 시간되사뇽?');
  
 INSERT INTO nm_message(
 sender,
 receiver,
 title,
-content,
-read_date)
- values(2,1,'아뇨 내일 시간 안됩니다','아뇨 내일 시간 안될거 같아요','2025-04-09');
+content)
+ values(2,1,'아뇨 내일 시간 안됩니다','아뇨 내일 시간 안될거 같아요');
  
 INSERT INTO nm_message(
 sender,
 receiver,
 title,
-content,
-read_date)
- values(1,2,'ㄴ','ㅔ','2025-04-10');
+content)
+ values(1,2,'ㄴ','ㅔ');
  
 
 -- 공지사항 예제
@@ -281,10 +275,10 @@ values(1,'2020-04-09','나라누나 생축ㅊㅊㅊ','비트캠프 강남센터'
 
 -- 일정 참여자 & 일정이 먼저
 
-INSERT INTO nm_schedule_member(plan_board_no,member_no,group_no)
+INSERT INTO nm_plan_member(plan_board_no,member_no,group_no)
  values(1,1,1);
  
-INSERT INTO nm_schedule_member(plan_board_no,member_no,group_no)
+INSERT INTO nm_plan_member(plan_board_no,member_no,group_no)
  values(1,2,1);
 
 -- 피드 게시글 예제
@@ -381,7 +375,7 @@ INSERT INTO nm_alram(member_no,notice_board_no,plan_board_no,feed_no)
   values(2,1,1,1); 
 
 -- 알림은 4개중 하나만 올 수 있으니 not null 말고 0이랑 1로 구분하는게 좋을거 같아요
--- default는 0으로 하고 알림오면 1로 받게
+-- default는 0으로 하고 알림오면 1로 받게 -> member_no만 기본키고 나머지는 그냥 외래키로 null 허용
  
 -- 소통 게시판 좋아요 예제
 

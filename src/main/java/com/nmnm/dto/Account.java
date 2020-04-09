@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Account {
 
-  private int asset;
-  private int amount;
-  private Date paymentDate;
-  private String remark;
-  private String receiptPhoto;
+  private int asset; //잔액
+  private int amount; //금액 (입금, 출금 포함)
+  private Date paymentDate; // 결제일
+  private String remark; //비고
+  private String receiptPhoto; //영수증 사진
 
   @Override
   public String toString() {

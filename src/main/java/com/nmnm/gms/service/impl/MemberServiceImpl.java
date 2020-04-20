@@ -45,12 +45,12 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public List<Member> search(String keyword) throws Exception {
-    return memberDao.findByKeyword(keyword);
+  public int update(Member member) throws Exception {
+    return memberDao.update(member);
   }
 
   @Override
-  public int update(Member member) throws Exception {
-    return memberDao.update(member);
+  public List<Member> search(String keyword) throws Exception {
+    return memberDao.findByKeyword(keyword);
   }
 }

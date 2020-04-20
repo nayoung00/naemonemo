@@ -3,111 +3,120 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.eomcs.lms.dao.MemberDao">
+<mapper namespace="com.nmnm.gms.dao.MemberDao">
 
   <resultMap type="Member" id="MemberMap">
-    <id column="member_id"  property="no"/>
-    <result column="name"       property="name"/>
-    <result column="email"  property="email"/>
-    <result column="pwd"    property="password"/>
-    <result column="photo"    property="photo"/>
+    <id column="member_no"  property="no"/>
+    <result column="member_name"       property="name"/>
+    <result column="id_photo"  property="photo"/>
+    <result column="birthday"    property="birthday"/>
+    <result column="gender"    property="gender"/>
     <result column="tel" property="tel"/>
-    <result column="cdt" property="registeredDate"/>
+    <result column="password" property="password"/>
+    <result column="intro" property="intro"/>
+    <result column="interest" property="interest"/>
+    <result column="nickname" property="nickname"/>
+    <result column="account_status" property="accountStatus"/>
+    <result column="withdraw" property="withdraw"/>
+    <result column="sns" property="sns"/>
   </resultMap>
   
-  <sql id="select1">
-      member_id, 
-      name, 
-      email, 
-      tel,
-  </sql>
-  
   <insert id="insert" parameterType="Member">
-    insert into lms_member(
-      name, 
-      email, 
-      pwd, 
-      tel, 
-      photo
+    insert into nm_member(
+      member_name,
+      password, 
+      id_photo, 
+      birthday, 
+      gender, 
+      email,
+      tel,
+      intro,
+      interest,
+      nickname
     ) values(
       #{name},
-      #{email},
       password(#{password}),
+      #{photo},
+      #{birthday},
+      #{gender},
+      #{email},
       #{tel},
-      #{photo}
-    )
+      #{intro},
+      #{interest},
+      #{nickname})
   </insert>
   
   <select id="findAll" resultMap="MemberMap">
-    select 
-      <include refid="select1"/>
-      cdt
+    select
+      member_no,
+      member_name,
+      nickname,
+      gender,
+      email,
+      tel
     from 
-      lms_member
+      nm_member
   </select>
 
   
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
     select 
-      <include refid="select1"/>
-      pwd, 
-      photo
+      member_name,
+      nickname,
+      birthday,
+      gender,
+      email,
+      tel,
+      intro
     from 
-      lms_member
+      nm_member
     where 
-      member_id=#{no}
+      member_no=#{no}
   </select>
   
   <update id="update" parameterType="Member">
-    update lms_member
+    update nm_member
     <set>
       <if test="name != null and name != ''">name=#{name},</if>
+      <if test="nickname != null and nickname != ''">nicname=#{nickname},</if>
       <if test="email != null and email != ''">email=#{email},</if> 
       <if test="password != null and password != ''">pwd=password(#{password}),</if>
       <if test="tel != null and tel != ''">tel=#{tel},</if>
       <if test="photo != null and photo != ''">photo=#{photo}</if>
     </set>
     where 
-      member_id=#{no}
+      member_no=#{no}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from lms_member
-    where member_id=#{no}
+    delete from nm_member
+    where member_no=#{no}
   </delete>
   
-  <select id="findByKeyword" 
-    resultMap="MemberMap" 
+  <select id="findByKeyword" resultMap="MemberMap"
     parameterType="string">
-    <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
-    select 
-      <include refid="select1"/>
-      cdt
-    from 
-      lms_member
-    where 
-      name like #{keywordPattern}
-      or email like #{keywordPattern}
-      or tel like #{keywordPattern}
-  </select>
+        <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+        select
+            member_name
+            nickname,
+            tel
+        from nm_member
+        where     
+            member_name like #{keywordPattern}
+            or nickname like #{keywordPattern}
+            or tel  like #{keywordPattern}
+    </select>
   
   <select id="findByEmailAndPassword" 
     resultMap="MemberMap" 
     parameterType="map">
     select 
-      <include refid="select1"/>
-      pwd, 
-      photo
-    from lms_member
+      member_no, 
+      nickname
+    from nm_member
     where 
       email=#{email} 
       and pwd=password(#{password})
   </select>
 </mapper>
-
-
-
-
-
-
 

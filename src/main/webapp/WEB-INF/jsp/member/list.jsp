@@ -11,18 +11,20 @@
   <tr>
     <th>번호</th>
     <th>이름</th>
+    <th>닉네임</th>
+    <th>성별</th>
     <th>이메일</th>
     <th>전화</th>
-    <th>등록일</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.no}</td> 
     <td><a href='detail?no=${item.no}'>${item.name}</a></td> 
+    <td>${item.nickname}</td> 
+    <td>${item.gender}</td> 
     <td>${item.email}</td> 
     <td>${item.tel}</td>
-    <td>${item.registeredDate}</td>
   </tr>
 </c:forEach>
 

@@ -1,7 +1,7 @@
 package com.nmnm.gms.service;
 
-import java.lang.reflect.Member;
 import java.util.List;
+import com.nmnm.gms.domain.Member;
 
 public interface MemberService {
 
@@ -15,9 +15,7 @@ public interface MemberService {
 
   Member get(String email, String password) throws Exception;
 
-  List<Member> search(String keyword) throws Exception;
-
   int update(Member member) throws Exception;
 
-
+  List<Member> search(String keyword) throws Exception;
 }

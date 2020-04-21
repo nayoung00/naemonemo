@@ -7,8 +7,16 @@ public class CommunicationBoard {
   private int memberNo; // FK
   private String title;
   private String content;
-  private int noticeable;
   private Date createDate;
+  private int viewCount;
+
+  public int getViewCount() {
+    return viewCount;
+  }
+
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
+  }
 
   public int getCommunicationBoardNo() {
     return communicationBoardNo;
@@ -40,14 +48,6 @@ public class CommunicationBoard {
 
   public void setContent(String content) {
     this.content = content;
-  }
-
-  public int getNoticeable() {
-    return noticeable;
-  }
-
-  public void setNoticeable(int noticeable) {
-    this.noticeable = noticeable;
   }
 
   public Date getCreateDate() {

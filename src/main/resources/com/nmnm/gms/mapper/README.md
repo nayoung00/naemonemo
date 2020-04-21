@@ -1,1 +1,0 @@
-mabatis mapper파일을 만드시오

@@ -33,14 +33,17 @@ public class Plan {
   }
 
   public void setGroupNo(int groupNo) {
+    System.out.println("groupNo setter()");
     this.groupNo = groupNo;
   }
 
   public Date getPlanDate() {
+    System.out.println("planDate getter()");
     return planDate;
   }
 
   public void setPlanDate(Date planDate) {
+    System.out.println("planDate setter()");
     this.planDate = planDate;
   }
 

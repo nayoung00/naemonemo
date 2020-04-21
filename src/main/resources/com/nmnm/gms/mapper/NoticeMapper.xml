@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.NoticeDao">
+
+  <resultMap type="Notice" id="NoticeMap">
+    <id column="notice_board_no"   property="noticeBoardNo"/>
+    <result column="group_no"  property="groupNo"/>
+    <result column="member_no"    property="memberNo"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="create_date" property="createDate"/>
+  </resultMap>
+  
+  
+   <insert id="insert" parameterType="Notice">
+    insert into nm_notice_board(
+    title,
+    content) 
+    values(
+    #{title},
+    #{content})
+  </insert>
+  
+  
+  <select id="findAll" resultMap="NoticeMap">
+   select 
+      notice_board_no, 
+      group_no, 
+      member_no, 
+      title,
+      content,
+      create_date
+    from 
+      nm_notice_board
+  </select>
+  
+ 
+  
+  <select id="findByNo" resultMap="NoticeMap" parameterType="int">
+    select 
+      notice_board_no, 
+      group_no, 
+      member_no, 
+      title,
+      content,
+      create_date
+    from 
+      nm_notice_board
+    where 
+      notice_board_no=#{noticeBoardNo}
+  </select>
+  
+  <update id="update" parameterType="Notice">
+    update lms_board 
+    <set>
+      <if test="title != null and title != ''">title=#{title},</if>
+      <if test="content != null and content !=''">content=#{content}</if>
+    </set>
+    where 
+      notice_board_no=#{noticeBoardNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from nm_notice_board
+    where notice_board_no=#{noticeBoardNo}
+  </delete>
+</mapper>
+
+
+
+
+
+
+

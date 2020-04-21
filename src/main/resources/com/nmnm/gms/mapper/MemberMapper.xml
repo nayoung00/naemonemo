@@ -61,6 +61,7 @@
   
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
     select 
+      member_no,
       member_name,
       nickname,
       birthday,
@@ -77,12 +78,12 @@
   <update id="update" parameterType="Member">
     update nm_member
     <set>
-      <if test="name != null and name != ''">name=#{name},</if>
-      <if test="nickname != null and nickname != ''">nicname=#{nickname},</if>
+      <if test="name != null and name != ''">member_name=#{name},</if>
+      <if test="nickname != null and nickname != ''">nickname=#{nickname},</if>
       <if test="email != null and email != ''">email=#{email},</if> 
-      <if test="password != null and password != ''">pwd=password(#{password}),</if>
+      <if test="password != null and password != ''">password=password(#{password}),</if>
       <if test="tel != null and tel != ''">tel=#{tel},</if>
-      <if test="photo != null and photo != ''">photo=#{photo}</if>
+      <if test="photo != null and photo != ''">id_photo=#{photo}</if>
     </set>
     where 
       member_no=#{no}

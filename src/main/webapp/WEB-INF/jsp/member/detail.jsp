@@ -15,7 +15,7 @@
 자기소개: <input name='intro' type='text' value='${member.intro}'><br>
 이메일: <input name='email' type='email' value='${member.email}'><br>
 암호: <input name='password' type='password'><br>
-사진: <input name='photo' type='file'><br>
+사진: <input name='photoFile' type='file'><br>
 전화: <input name='tel' type='tel' value='${member.tel}'><br>
 SNS: <input name='sns' type='text' value='${member.sns}'><br>
 <p><button>변경</button>
@@ -27,4 +27,3 @@ SNS: <input name='sns' type='text' value='${member.sns}'><br>
 <p>해당 회원이 없습니다.</p>
 </c:if>
 <jsp:include page="../footer.jsp"/>
-    

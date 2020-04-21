@@ -35,6 +35,7 @@ public class Member {
     this.no = no;
   }
 
+
   public String getName() {
     return name;
   }

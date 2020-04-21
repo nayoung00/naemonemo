@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.CommunicationBoardDao">
+
+  <resultMap type="CommunicationBoard" id="CommunicationBoardMap">
+    <id column="communication_board_no"   property="communicationBoardNo"/>
+    <result column="member_no"  property="memberNo"/>
+    <result column="title"    property="title"/>
+    <result column="content"    property="content"/>
+    <result column="create_date" property="createDate"/>
+    <result column="view_count" property="viewCount"/>
+  </resultMap>
+  
+  <sql id="select1">
+    select 
+      communication_board_no, 
+      member_no, 
+      title, 
+      content, 
+      create_date, 
+      view_count
+    from 
+      nm_communication_board
+  </sql>
+  
+  <select id="findAll" resultMap="CommunicationBoardMap">
+    <include refid="select1"/>
+    order by 
+      communication_board_no desc
+  </select>
+  
+  <insert id="insert" parameterType="CommunicationBoard">
+    insert into nm_communication_board(
+      communication_board_no,
+      member_no,
+      title,
+      content,
+      view_count
+    ) values(
+      #{communicationBoardNo},
+      #{memberNo},
+      #{title},
+      #{content},
+      #{viewCount}
+    )
+  </insert>
+  
+  <select id="findByNo" resultMap="CommunicationBoardMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      communication_board_no=#{communicationBoardNo}
+  </select>
+  
+  <update id="update" parameterType="CommunicationBoard">
+    update nm_communication_board set
+      title=#{title},
+      content=#{content}
+    where communication_board_no=#{communicationBoardNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from nm_communication_board
+    where communication_board_no=#{communicationBoardNo}
+  </delete>
+</mapper>
+
+
+
+
+
+
+

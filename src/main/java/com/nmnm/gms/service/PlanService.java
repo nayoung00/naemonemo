@@ -14,4 +14,6 @@ public interface PlanService {
 
   int update(Plan plan) throws Exception;
 
+  List<Plan> search(String keyword) throws Exception;
+
 }

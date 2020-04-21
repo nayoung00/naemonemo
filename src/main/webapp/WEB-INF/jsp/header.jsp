@@ -9,7 +9,7 @@
 <c:if test="${not empty refreshUrl}">
 <meta http-equiv="Refresh" content="${refreshUrl}">
 </c:if>
-<title>Bitcamp-LMS</title>
+<title>네모내모</title>
 <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
 <style>
 body {
@@ -31,7 +31,7 @@ div.container {
 <div class='collapse navbar-collapse' id='navbarNav'>
   <ul class='navbar-nav mr-auto'>
     <li class='nav-item'>
-      <a class='nav-link' href='../board/list'>a</span></a>
+      <a class='nav-link' href='../notice/list'>a</span></a>
     </li>
     <li class='nav-item'>
       <a class='nav-link' href='../lesson/list'>b</a>

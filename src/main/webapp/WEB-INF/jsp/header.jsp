@@ -1,4 +1,5 @@
-<%@page import="com.nmnm.gms.domain.Member"%>
+<%@page import="com.nmnm.gms.domain.Member"%>\
+<%@page import="com.nmnm.gms.domain.Plan"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,7 +35,7 @@ div.container {
       <a class='nav-link' href='../notice/list'>a</span></a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='../lesson/list'>b</a>
+      <a class='nav-link' href='../plan/list'>b</a>
     </li>
     <li class='nav-item'>
       <a class='nav-link' href='../member/list'>c</a>

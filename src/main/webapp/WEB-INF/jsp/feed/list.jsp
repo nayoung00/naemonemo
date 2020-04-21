@@ -1,3 +1,5 @@
+<%@ page import="com.nmnm.gms.domain.Feed"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
@@ -5,23 +7,26 @@
 
 <jsp:include page="../header.jsp"/>
 
-  <h1>공지사항 게시글(JSP + EL + JSTL)</h1>
+  <h1>피드</h1>
   <a href='form'>새 글</a><br>
   <table border='1'>
   <tr>
     <th>번호</th>
     <th>제목</th>
+    <th>생성일</th>
     <th>내용</th>
-    <th>등록일</th>
+    <th>회원번호</th>
+    <th>모임번호</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
   <tr>
-    <td>${item.no}</td> 
-    <td><a href='detail?no=${item.noticeBoardNo}'>${item.title}</a></td> 
-    <td>${item.title}</td> 
-    <td>${item.content}</td>
-       <td>${item.createDate}</td>
+    <td>${item.feedNo}</td> 
+    <td><a href='detail?no=${item.feedNo}'>=> ${item.title}</a></td> 
+    <td>${item.content}</td> 
+    <td>${item.createDate}</td> 
+    <td>${item.memberNo}</td>
+    <td>${item.groupNo}</td>
   </tr>
 </c:forEach>
 

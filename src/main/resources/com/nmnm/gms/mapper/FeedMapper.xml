@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.domain.FeedDao">
+
+  <resultMap type="Feed" id="FeedMap">
+    <id column="feed_id"   property="feedNo"/>
+    <result column="membno" property="memberNo"/>
+    <result column="grpno"    property="groupNo"/>
+    <result column="titl"  property="title"/>
+    <result column="conts"  property="content"/>
+    <result column="cdt"    property="creatDate"/>
+  </resultMap>
+  
+  <sql id="select1">
+    select 
+      feed_id, 
+      membno,
+      grpno,
+      titl, 
+      conts, 
+      cdt
+  </sql>
+  
+  <insert id="insert" parameterType="Feed">
+    insert into gms_feed(
+      titl, 
+      conts)
+    values(
+      #{title}, 
+      #{content})
+  </insert>
+  
+  <select id="findAll" resultMap="FeedMap" parameterType="map">
+    <include refid="select1"/>
+    from gms_feed
+  </select>
+
+  
+  <select id="findByNo" resultMap="FeedMap" parameterType="int">
+    <include refid="select1"/>,
+      conts, 
+      day_hr
+    from 
+      gms_feed
+    where 
+      feed_id=#{feedNo}
+  </select>
+  
+  <update id="update" parameterType="Feed">
+    update gms_feed
+    <set>
+      <if test="title != null and title != ''">titl=#{title},</if>
+      <if test="description != null and description != ''">conts=#{content},</if>
+    </set>
+    where feed_id=#{feedNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_feed
+    where feed_id=#{feedNo}
+  </delete>
+  
+  <select id="findByKeyword" resultMap="FeedMap" parameterType="map">
+    <include refid="select1"/>
+    from gms_feed
+    <where>
+      <if test="title != null">titl like concat('%', #{title}, '%')</if>
+      <if test="memberNo != null">and sdt >= #{startDate}</if>
+      <if test="endDate != null">and edt &lt;= #{endDate}</if>
+      <if test="totalHours != null">and tot_hr &lt;= #{totalHours}</if>
+      <if test="dayHours != null">and day_hr &lt;= #{dayHours}</if>
+    </where>
+  </select>
+</mapper>
+
+
+
+
+
+
+

@@ -120,4 +120,3 @@
       and pwd=password(#{password})
   </select>
 </mapper>
-

@@ -66,10 +66,3 @@
     where communication_board_no=#{communicationBoardNo}
   </delete>
 </mapper>
-
-
-
-
-
-
-

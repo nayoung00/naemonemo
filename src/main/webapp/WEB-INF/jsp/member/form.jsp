@@ -24,4 +24,3 @@ SNS: <input name='sns' type='text'><br/>
 </form>
 
 <jsp:include page="../footer.jsp"/>
-    

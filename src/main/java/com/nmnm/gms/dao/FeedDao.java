@@ -19,5 +19,3 @@ public interface FeedDao {
 
   int delete(int feedNo) throws Exception;
 }
-
-

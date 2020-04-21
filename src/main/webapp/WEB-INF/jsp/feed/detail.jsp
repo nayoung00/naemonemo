@@ -27,4 +27,3 @@
 <p>해당 피드가 없습니다.</p>
 </c:if>
 <jsp:include page="../footer.jsp"/>
-    

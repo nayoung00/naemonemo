@@ -32,16 +32,19 @@ div.container {
 <div class='collapse navbar-collapse' id='navbarNav'>
   <ul class='navbar-nav mr-auto'>
     <li class='nav-item'>
-      <a class='nav-link' href='../notice/list'>a</span></a>
+      <a class='nav-link' href='../notice/list'>공지사항</span></a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='../plan/list'>b</a>
+      <a class='nav-link' href='../plan/list'>일정</a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='../member/list'>c</a>
+      <a class='nav-link' href='../feed/list'>피드</a>
     </li>
     <li class='nav-item'>
       <a class='nav-link' href='../communicationBoard/list'>소통게시판</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='../member/list'>회원</a>
     </li>
   </ul>
 <c:if test="${not empty loginUser}">

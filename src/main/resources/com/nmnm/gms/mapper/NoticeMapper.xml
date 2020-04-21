@@ -68,10 +68,3 @@
     where notice_board_no=#{noticeBoardNo}
   </delete>
 </mapper>
-
-
-
-
-
-
-

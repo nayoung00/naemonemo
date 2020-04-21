@@ -40,6 +40,9 @@ div.container {
     <li class='nav-item'>
       <a class='nav-link' href='../member/list'>c</a>
     </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='../communicationBoard/list'>소통게시판</a>
+    </li>
   </ul>
 <c:if test="${not empty loginUser}">
   <span class='navbar-text'>${loginUser.name}</span>

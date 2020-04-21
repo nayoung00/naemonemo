@@ -1,6 +1,7 @@
 package com.nmnm.gms.web;
 
 import java.util.List;
+import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import com.nmnm.gms.service.NoticeService;
 public class NoticeController {
 
   static Logger logger = LogManager.getLogger(NoticeController.class);
+  
+  //W@Autowired
+  ServletContext servletContext;
   
   //@Autowired
   NoticeService noticeService;
@@ -52,8 +56,7 @@ public class NoticeController {
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
-    List<Notice> notices = noticeService.list();
-    model.addAttribute("list", notices);
+    model.addAttribute("list", noticeService.list());
   }
 
   @GetMapping("updateForm")

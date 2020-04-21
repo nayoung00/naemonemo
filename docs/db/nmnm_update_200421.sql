@@ -90,7 +90,8 @@ CREATE TABLE nm_notice_board (
   member_no       INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   title           VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content         TEXT         NOT NULL COMMENT '내용', -- 내용
-  create_date     DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  create_date     DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
+  view_count      INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수' -- 조회수
 )
 COMMENT '공지사항게시글';
 
@@ -171,8 +172,8 @@ CREATE TABLE nm_message (
   receiver    INTEGER      NOT NULL COMMENT '수신자', -- 수신자
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content     TEXT         NOT NULL COMMENT '내용', -- 내용
-  create_date DATETIME     NOT NULL DEFAULT now() COMMENT '날짜', -- 날짜
-  read_date   DATETIME     NOT NULL DEFAULT now() COMMENT '확인일시' -- 확인일시
+  create_date DATETIME     NULL     DEFAULT now() COMMENT '날짜', -- 날짜
+  read_date   DATETIME     NULL     DEFAULT now() COMMENT '확인일시' -- 확인일시
 )
 COMMENT '메시지';
 
@@ -194,10 +195,10 @@ CREATE TABLE nm_group (
   group_no       INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
   group_name     VARCHAR(255) NOT NULL COMMENT '모임명', -- 모임명
   group_info     TEXT         NOT NULL COMMENT '모임 설명', -- 모임 설명
-  category       INTEGER      NOT NULL COMMENT '모임 분류', -- 모임 분류
+  category       VARCHAR(20)  NOT NULL COMMENT '모임 분류', -- 모임 분류
   group_photo    VARCHAR(255) NULL     COMMENT '대표이미지', -- 대표이미지
   city           VARCHAR(255) NULL     COMMENT '지역', -- 지역
-  max_people_no  INTEGER      NOT NULL COMMENT '최대인원', -- 최대인원
+  max_people_no  VARCHAR(20)  NOT NULL COMMENT '최대인원', -- 최대인원
   bank           VARCHAR(255) NOT NULL COMMENT '은행', -- 은행
   bank_no        VARCHAR(20)  NOT NULL COMMENT '계좌번호', -- 계좌번호
   account_holder VARCHAR(50)  NOT NULL COMMENT '예금주' -- 예금주
@@ -259,8 +260,8 @@ CREATE TABLE nm_communication_board (
   member_no              INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   title                  VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content                TEXT         NOT NULL COMMENT '내용', -- 내용
-  noticeable             INTEGER      NOT NULL DEFAULT 0 COMMENT '공지사항 여부(운영자)', -- 공지사항 여부(운영자)
-  create_date            DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  create_date            DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
+  view_count             INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수' -- 조회수
 )
 COMMENT '소통게시글';
 
@@ -353,14 +354,17 @@ ALTER TABLE nm_alram
 
 -- 일정
 CREATE TABLE nm_plan (
-  plan_no    INTEGER      NOT NULL COMMENT '일정번호', -- 일정번호
-  group_no   INTEGER      NULL     COMMENT '모임번호', -- 모임번호
-  plan_date  DATE         NOT NULL COMMENT '일자', -- 일자
-  title      VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  place_name VARCHAR(255) NULL     COMMENT '장소명', -- 장소명
-  address    VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
-  latitude   INTEGER      NULL     COMMENT '위도', -- 위도
-  longitude  INTEGER      NULL     COMMENT '경도' -- 경도
+  plan_no     INTEGER      NOT NULL COMMENT '일정번호', -- 일정번호
+  group_no    INTEGER      NULL     COMMENT '모임번호', -- 모임번호
+  plan_date   DATE         NOT NULL COMMENT '일자', -- 일자
+  title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  subtitle    VARCHAR(255) NOT NULL COMMENT '소제목', -- 소제목
+  thumbnail   VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
+  place_name  VARCHAR(255) NULL     COMMENT '장소명', -- 장소명
+  address     VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
+  latitude    INTEGER      NULL     COMMENT '위도', -- 위도
+  longitude   INTEGER      NULL     COMMENT '경도', -- 경도
+  create_date DATETIME     NULL     DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '일정';
 
@@ -402,7 +406,9 @@ CREATE TABLE nm_feed (
   group_no    INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content     TEXT         NOT NULL COMMENT '내용', -- 내용
-  create_date DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  create_date DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
+  view_count  INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+  thumbnail   VARCHAR(255) NOT NULL COMMENT '썸네일' -- 썸네일
 )
 COMMENT '피드게시글';
 
@@ -528,13 +534,14 @@ CREATE TABLE nm_member (
   gender         VARCHAR(10)  NOT NULL COMMENT '성별', -- 성별
   email          VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
   tel            VARCHAR(30)  NOT NULL COMMENT '휴대폰번호', -- 휴대폰번호
-  password       VARCHAR(20)  NOT NULL COMMENT '비밀번호', -- 비밀번호
+  password       VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
   intro          TEXT         NOT NULL COMMENT '한줄소개', -- 한줄소개
-  interest       INTEGER      NOT NULL COMMENT '관심사', -- 관심사
+  interest       VARCHAR(20)  NOT NULL COMMENT '관심사', -- 관심사
   nickname       VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
-  account_status INTEGER      NOT NULL DEFAULT 1 COMMENT '상태', -- 상태
-  withdraw       INTEGER      NOT NULL COMMENT '회원탈퇴', -- 회원탈퇴
-  sns            VARCHAR(255) NULL     COMMENT 'sns' -- sns
+  account_status VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '상태', -- 상태
+  withdraw       VARCHAR(20)  NOT NULL COMMENT '회원탈퇴', -- 회원탈퇴
+  sns            VARCHAR(255) NULL     COMMENT 'sns', -- sns
+  create_date    DATETIME     NULL     DEFAULT now() COMMENT '가입일' -- 가입일
 )
 COMMENT '회원';
 

@@ -4,7 +4,7 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>일정 입력(JSP)</h1>
+<h1>일정 등록하기</h1>
 <form action='add' method='post' >
 일정: <input name='planDate' type='date'><br>
 제목: <input name='title' type='text'/><br/>

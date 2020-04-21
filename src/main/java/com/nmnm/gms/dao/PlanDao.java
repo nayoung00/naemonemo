@@ -15,4 +15,6 @@ public interface PlanDao {
 
   int delete(int planBoardNo) throws Exception;
 
+  List<Plan> findByKeyword(String keyword) throws Exception;
+
 }

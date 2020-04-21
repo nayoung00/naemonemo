@@ -1,4 +1,4 @@
-<%@page import="com.nmnm.gms.domain.Member"%>\
+<%@page import="com.nmnm.gms.domain.Member"%>
 <%@page import="com.nmnm.gms.domain.Plan"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

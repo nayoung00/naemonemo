@@ -1,6 +1,5 @@
 package com.nmnm.gms.web;
 
-import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +12,6 @@ import com.nmnm.gms.service.PlanService;
 @Controller
 @RequestMapping("/plan")
 public class PlanController {
-
-  @Autowired
-  ServletContext servletContext;
 
 
   @Autowired
@@ -50,6 +46,11 @@ public class PlanController {
   @GetMapping("list")
   public void list(Model model) throws Exception {
     model.addAttribute("list", planService.list());
+  }
+
+  @GetMapping("search")
+  public void search(String keyword, Model model) throws Exception {
+    model.addAttribute("list", planService.search(keyword));
   }
 
   @PostMapping("update")

@@ -71,6 +71,18 @@
       plan_no=#{planBoardNo}
   </update>
   
+   <select id="findByKeyword" resultMap="PlanMap"
+    parameterType="string">
+        <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+        select
+        plan_no,
+           title
+        from nm_plan
+        where     
+          plan_no like #{keywordPattern}
+          or title like #{keywordPattern}
+    </select>
+  
     <delete id="delete" parameterType="int">
     delete 
     from nm_plan

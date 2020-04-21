@@ -42,4 +42,8 @@ public class PlanServiceImpl implements PlanService {
     return planDao.update(plan);
   }
 
+  @Override
+  public List<Plan> search(String keyword) throws Exception {
+    return planDao.findByKeyword(keyword);
+  }
 }

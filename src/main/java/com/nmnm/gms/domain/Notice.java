@@ -1,4 +1,4 @@
-package com.nmnm.dto;
+package com.nmnm.gms.domain;
 
 import java.sql.Date;
 import java.util.List;

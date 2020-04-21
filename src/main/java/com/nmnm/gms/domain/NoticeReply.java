@@ -1,4 +1,4 @@
-package com.nmnm.dto;
+package com.nmnm.gms.domain;
 
 public class NoticeReply {
 

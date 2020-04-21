@@ -39,7 +39,7 @@ public class AppWebApplicationInitializer
 
   @Override
   protected String getServletName() {
-    return "app1";
+    return "app";
   }
 
 

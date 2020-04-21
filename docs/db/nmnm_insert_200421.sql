@@ -1,4 +1,4 @@
--- CREATE DATABASE nmnm DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+-- CREATE DATABASE nmnmdb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 -- utf8로 database 생성
 
 -- 모임 예제
@@ -14,7 +14,7 @@ bank_no,
 account_holder)
 values('번개 모임',
 '번개 모임입니다.',
-1,
+'소셜',
 'thunder.gif',
 '강남',
 50,
@@ -34,7 +34,7 @@ bank_no,
 account_holder)
 values('코딩 모임',
 '코딩하는 모임입니다.',
-3,
+'IT',
 '연봉1억.gif',
 '비트캠프 강남',
 26,
@@ -88,7 +88,7 @@ intro,
 interest,     
 nickname,      
 withdraw,
-sns) 
+sns,) 
 values('오승우',
 'abc.jpg',
 '1998-10-20',
@@ -262,11 +262,13 @@ INSERT INTO nm_plan
 (group_no,
 plan_date,
 title,
+subtitle,
+thumbnail,
 place_name,
 address,
 latitude,
 longitude)
-VALUES(1,'2020-04-09','프로젝트','비트캠프 강남센터','주소',11,22);
+VALUES(1,'2020-04-09','프로젝트', '그룹프로젝트입니다', 'bit.jpg', '비트캠프 강남센터','주소',11,22);
 
 -- 일정 참여자 & 일정이 먼저
 
@@ -278,11 +280,11 @@ INSERT INTO nm_plan_member(plan_no,member_no,group_no,attend)
 
 -- 피드 게시글 예제
 
-INSERT INTO nm_feed(member_no,group_no,title,content)
-  values(1,1,'어제 번개 사진','다음에 한번 더 해요');
+INSERT INTO nm_feed(member_no,group_no,title,content,thumbnail)
+  values(1,1,'어제 번개 사진','다음에 한번 더 해요', 'aa.jpg');
   
-INSERT INTO nm_feed(member_no,group_no,title,content)
-  values(2,1,'저번 모임 사진','재밋었어요');
+INSERT INTO nm_feed(member_no,group_no,title,content,thumbnail)
+  values(2,1,'저번 모임 사진','재밋었어요', 'aa.jpg');
   
 -- 게시물 사진(피드(?)) 예제
 

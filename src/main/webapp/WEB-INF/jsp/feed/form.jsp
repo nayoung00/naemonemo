@@ -8,7 +8,7 @@
 <h1>피드 변경</h1>
 
 <form action='update' method='post'>
-번호: <input name='feedNo' readonly type='text' value='${feed.feedNo}'><br>
+번호: ${feed.feedNo}<br>
 제목: <input name='name' type='text' value='${feed.title}'><br>
 내용:<br>
 <textarea name='title' rows='5' cols='60'>${feed.content}</textarea><br>

@@ -23,8 +23,8 @@
   <tr>
     <td>${item.feedNo}</td> 
     <td><a href='detail?no=${item.feedNo}'>=> ${item.title}</a></td> 
-    <td>${item.content}</td> 
     <td>${item.createDate}</td> 
+    <td>${item.content}</td> 
     <td>${item.memberNo}</td>
     <td>${item.groupNo}</td>
   </tr>

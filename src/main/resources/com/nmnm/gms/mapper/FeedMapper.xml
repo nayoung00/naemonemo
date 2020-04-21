@@ -3,69 +3,83 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.nmnm.gms.domain.FeedDao">
+<mapper namespace="com.nmnm.gms.dao.FeedDao">
 
   <resultMap type="Feed" id="FeedMap">
-    <id column="feed_id"   property="feedNo"/>
-    <result column="membno" property="memberNo"/>
-    <result column="grpno"    property="groupNo"/>
-    <result column="titl"  property="title"/>
-    <result column="conts"  property="content"/>
-    <result column="cdt"    property="creatDate"/>
+    <id column="feed_no"   property="feedNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="group_no"    property="groupNo"/>
+    <result column="title"  property="title"/>
+    <result column="content"  property="content"/>
+    <result column="create_date"    property="creatDate"/>
   </resultMap>
   
-  <sql id="select1">
-    select 
-      feed_id, 
-      membno,
-      grpno,
-      titl, 
-      conts, 
-      cdt
-  </sql>
-  
   <insert id="insert" parameterType="Feed">
-    insert into gms_feed(
-      titl, 
-      conts)
+    insert into nm_feed(
+      title, 
+      content)
     values(
       #{title}, 
       #{content})
   </insert>
   
-  <select id="findAll" resultMap="FeedMap" parameterType="map">
-    <include refid="select1"/>
-    from gms_feed
+  <sql id="select1">
+    select
+      feed_no,
+      title,
+      create_date,
+      content,
+      member_no,
+      group_no
+    from 
+      nm_feed
+  </sql>
+  
+  <select id="findAll" resultMap="FeedMap">
+    select
+      feed_no,
+      title,
+      create_date,
+      content,
+      member_no,
+      group_no
+    from 
+      nm_feed
   </select>
 
   
   <select id="findByNo" resultMap="FeedMap" parameterType="int">
     <include refid="select1"/>,
-      conts, 
-      day_hr
+    select
+      feed_no,
+      title,
+      create_date,
+      content,
+      member_no,
+      group_no
     from 
-      gms_feed
-    where 
-      feed_id=#{feedNo}
+      nm_feed
+    where
+      feed_no=#{feedNo}
   </select>
   
   <update id="update" parameterType="Feed">
-    update gms_feed
+    update nm_feed
     <set>
-      <if test="title != null and title != ''">titl=#{title},</if>
-      <if test="description != null and description != ''">conts=#{content},</if>
+      <if test="title != null and title != ''">title=#{title},</if>
+      <if test="content != null and content != ''">content=#{content},</if>
     </set>
-    where feed_id=#{feedNo}
+    where feed_no=#{feedNo}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from gms_feed
-    where feed_id=#{feedNo}
+    delete from nm_feed
+    where feed_no=#{feedNo}
   </delete>
   
   <select id="findByKeyword" resultMap="FeedMap" parameterType="map">
     <include refid="select1"/>
-    from gms_feed
+    from nm_feed
     <where>
       <if test="title != null">titl like concat('%', #{title}, '%')</if>
       <if test="memberNo != null">and sdt >= #{startDate}</if>

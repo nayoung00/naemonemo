@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.PlanDao">
+
+<resultMap type="Plan" id="PlanMap">
+    <id column="plan_no"  property="planBoardNo"/>
+    <result column="group_no" property="groupNo"/>
+    <result column="plan_date" property="planDate"/>
+    <result column="title" property="title"/>
+    <result column="place_name" property="placeName"/>
+    <result column="address" property="address"/> 
+    <result column="latitude" property="latitude"/>
+    <result column="longitude" property="longitude"/>
+</resultMap>
+
+<insert id="insert" parameterType="Plan">
+  insert into nm_plan(
+    plan_date, 
+    title, 
+    place_name, 
+    address, 
+    latitude,
+    longitude
+    ) values(  
+      #{planDate},
+      #{title},
+      #{placeName},
+      #{address},
+      #{latitude},
+      #{longitude}) 
+</insert>
+
+   <select id="findAll" resultMap="PlanMap">
+    select
+     plan_no,
+     title
+    from
+     nm_plan
+   </select>
+   
+    <select id="findByNo" resultMap="PlanMap" parameterType="int">
+    select 
+      plan_no,
+      plan_date,
+      title,
+      place_name,
+      address,
+      latitude,
+      longitude
+    from 
+      nm_plan
+    where 
+      plan_no=#{planBoardNo}
+  </select>
+   
+   
+   <update id="update" parameterType="Plan">
+    update nm_plan 
+    <set>
+      <if test="planDate != null">plan_date=#{planDate},</if>
+      <if test="title != null and title != ''">title=#{title},</if> 
+      <if test="placeName != null and placeName != ''">place_name=#{placeName},</if>
+      <if test="address != null and address != ''">address=#{address},</if>
+      <if test="latitude != null and latitude != ''">latitude=#{latitude},</if>
+      <if test="longitude != null and longitude != ''">longitude=#{longitude}</if>
+    </set>
+    where 
+      plan_no=#{planBoardNo}
+  </update>
+  
+    <delete id="delete" parameterType="int">
+    delete 
+    from nm_plan
+    where 
+    plan_no=#{planBoardNo}
+  </delete>
+
+</mapper>

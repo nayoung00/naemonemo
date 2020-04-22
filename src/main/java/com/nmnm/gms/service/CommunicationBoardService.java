@@ -14,4 +14,6 @@ public interface CommunicationBoardService {
   CommunicationBoard get(int no) throws Exception;
 
   int update(CommunicationBoard communicationboard) throws Exception;
+
+  List<CommunicationBoard> search(String keyword) throws Exception;
 }

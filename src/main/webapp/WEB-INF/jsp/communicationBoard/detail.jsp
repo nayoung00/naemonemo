@@ -25,3 +25,4 @@ ${communicationBoard.content}<br>
 </c:if>
 
 <jsp:include page="../footer.jsp"/>
+    

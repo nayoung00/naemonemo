@@ -16,7 +16,7 @@
 관심사: <label><input name='interest' type='radio' value='1'/>1</label>
       <label><input name='interest' type='radio' value='2'/>2</label><br/>
 암호: <input name='password' type='password'><br>
-사진: <input name='photo' type='file'><br>
+사진: <input name='photoFile' type='file'><br>
 전화: <input name='tel' type='tel'><br>
 SNS: <input name='sns' type='text'><br/>
 <input type='submit' value='upload'/><br>

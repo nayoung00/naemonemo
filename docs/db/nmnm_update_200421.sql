@@ -539,7 +539,7 @@ CREATE TABLE nm_member (
   interest       VARCHAR(20)  NOT NULL COMMENT '관심사', -- 관심사
   nickname       VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
   account_status VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '상태', -- 상태
-  withdraw       VARCHAR(20)  NOT NULL COMMENT '회원탈퇴', -- 회원탈퇴
+  withdraw       VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '회원탈퇴', -- 회원탈퇴
   sns            VARCHAR(255) NULL     COMMENT 'sns', -- sns
   create_date    DATETIME     NULL     DEFAULT now() COMMENT '가입일' -- 가입일
 )

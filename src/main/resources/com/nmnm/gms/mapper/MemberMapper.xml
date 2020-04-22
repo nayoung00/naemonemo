@@ -19,6 +19,7 @@
     <result column="account_status" property="accountStatus"/>
     <result column="withdraw" property="withdraw"/>
     <result column="sns" property="sns"/>
+    <result column="create_date" property="createDate"/>
   </resultMap>
   
   <insert id="insert" parameterType="Member">
@@ -32,7 +33,8 @@
       tel,
       intro,
       interest,
-      nickname
+      nickname,
+      sns
     ) values(
       #{name},
       password(#{password}),
@@ -43,7 +45,8 @@
       #{tel},
       #{intro},
       #{interest},
-      #{nickname})
+      #{nickname},
+      #{sns})
   </insert>
   
   <select id="findAll" resultMap="MemberMap">
@@ -67,8 +70,11 @@
       birthday,
       gender,
       email,
+      id_photo,
       tel,
-      intro
+      intro,
+      sns,
+      create_date
     from 
       nm_member
     where 
@@ -98,13 +104,16 @@
     parameterType="string">
         <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
         select
-            member_name
+        member_no,
+            member_name,
             nickname,
+            gender,
             tel
         from nm_member
         where     
             member_name like #{keywordPattern}
             or nickname like #{keywordPattern}
+            or gender  like #{keywordPattern}
             or tel  like #{keywordPattern}
     </select>
   

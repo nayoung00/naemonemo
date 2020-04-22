@@ -13,18 +13,21 @@ public class Member {
   private String tel;
   private String password;
   private String intro;
-  private int interest;
+  private String interest;
   private String nickname;
   private int accountStatus;
   private int withdraw;
   private String sns;
+  private Date createDate;
+
 
   @Override
   public String toString() {
     return "Member [no=" + no + ", name=" + name + ", photo=" + photo + ", birthday=" + birthday
         + ", gender=" + gender + ", email=" + email + ", tel=" + tel + ", password=" + password
-        + ", intro=" + intro + ", interest=" + interest + ", nickname=" + nickname + ", status="
-        + accountStatus + ", withdraw=" + withdraw + ", sns=" + sns + "]";
+        + ", intro=" + intro + ", interest=" + interest + ", nickname=" + nickname
+        + ", accountStatus=" + accountStatus + ", withdraw=" + withdraw + ", sns=" + sns
+        + ", createDate=" + createDate + "]";
   }
 
   public int getNo() {
@@ -100,12 +103,21 @@ public class Member {
     this.intro = intro;
   }
 
-  public int getInterest() {
+
+  public String getInterest() {
     return interest;
   }
 
-  public void setInterest(int interest) {
+  public void setInterest(String interest) {
     this.interest = interest;
+  }
+
+  public Date getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
   }
 
   public String getNickname() {

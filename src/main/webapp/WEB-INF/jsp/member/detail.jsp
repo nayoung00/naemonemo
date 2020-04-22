@@ -14,10 +14,10 @@
 별명: <input name='nickname' type='text' value='${member.nickname}'><br>
 자기소개: <input name='intro' type='text' value='${member.intro}'><br>
 이메일: <input name='email' type='email' value='${member.email}'><br>
-암호: <input name='password' type='password'><br>
-사진: <input name='photoFile' type='file'><br>
+사진: <input name='photoFile' type='file' value='${member.photo}'><br>
 전화: <input name='tel' type='tel' value='${member.tel}'><br>
 SNS: <input name='sns' type='text' value='${member.sns}'><br>
+가입일: <input name='createDate' readonly type='date' value='${member.createDate}'><br>
 <p><button>변경</button>
 <a href='delete?no=${member.no}'>삭제</a></p>
 </form>

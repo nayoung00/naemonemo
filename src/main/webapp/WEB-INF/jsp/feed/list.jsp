@@ -17,6 +17,8 @@
     <th>내용</th>
     <th>회원번호</th>
     <th>모임번호</th>
+    <th>조회수</th>
+    <th>섬네일</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
@@ -27,6 +29,8 @@
     <td>${item.content}</td> 
     <td>${item.memberNo}</td>
     <td>${item.groupNo}</td>
+    <td>${item.viewCount}</td>
+    <td>${item.thumbnail}</td>
   </tr>
 </c:forEach>
 

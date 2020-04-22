@@ -17,4 +17,3 @@
 <button>변경</button>
 </form>
 <jsp:include page="../footer.jsp"/>
-    

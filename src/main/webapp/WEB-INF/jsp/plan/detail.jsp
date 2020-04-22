@@ -24,4 +24,3 @@
 <p>해당 일정이 없습니다.</p>
 </c:if>
 <jsp:include page="../footer.jsp"/>
-    

@@ -5,8 +5,7 @@
 
 <jsp:include page="../header.jsp"/>
 
-  <h1>소통게시판(JSP + EL + JSTL)</h1>
-  <a href='form'>새 글</a><br>
+  <h1>게시판 검색 결과(JSP + EL + JSTL)</h1>
   <table border='1'>
   <tr>
     <th>번호</th>
@@ -15,6 +14,7 @@
     <th>작성일</th>
     <th>조회수</th>
   </tr>
+
 <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.communicationBoardNo}</td> 
@@ -25,7 +25,7 @@
   </tr>
 </c:forEach>
 
-</table>
+  </table>
 <hr>
 <form action='search' method='get'>
 검색어: <input name='keyword' type='text'>

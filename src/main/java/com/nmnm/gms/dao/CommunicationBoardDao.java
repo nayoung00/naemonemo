@@ -17,6 +17,8 @@ public interface CommunicationBoardDao {
   public int update(CommunicationBoard communicationBoard) throws Exception;
 
   public int delete(int communicationBoardNo) throws Exception;
+
+  public List<CommunicationBoard> findByKeyword(String keyword) throws Exception;
 }
 
 

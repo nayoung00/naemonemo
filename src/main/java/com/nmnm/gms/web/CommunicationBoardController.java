@@ -69,4 +69,9 @@ public class CommunicationBoardController {
           + " " + communicationBoard.getTitle());
     }
   }
+
+  @GetMapping("search")
+  public void search(String keyword, Model model) throws Exception {
+    model.addAttribute("list", communicationBoardService.search(keyword));
+  }
 }

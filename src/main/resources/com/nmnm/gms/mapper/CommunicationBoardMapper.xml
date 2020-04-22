@@ -65,4 +65,27 @@
     delete from nm_communication_board
     where communication_board_no=#{communicationBoardNo}
   </delete>
+  
+      <select id="findByKeyword" 
+    resultMap="CommunicationBoardMap" 
+    parameterType="string">
+    <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select 
+      communication_board_no, 
+      member_no, 
+      title, 
+      create_date, 
+      view_count 
+    from nm_communication_board 
+    where     
+      title like #{keywordPattern} 
+      or content like #{keywordPattern} 
+  </select>
 </mapper>
+
+
+
+
+
+
+

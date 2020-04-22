@@ -11,16 +11,20 @@
     <result column="group_no"    property="groupNo"/>
     <result column="title"  property="title"/>
     <result column="content"  property="content"/>
-    <result column="create_date"    property="creatDate"/>
+    <result column="create_date"    property="createDate"/>
+    <result column="view_count"    property="viewCount"/>
+    <result column="thumbnail"    property="thumbnail"/>
   </resultMap>
   
   <insert id="insert" parameterType="Feed">
     insert into nm_feed(
       title, 
-      content)
+      content,
+      thumbnail)
     values(
       #{title}, 
-      #{content})
+      #{content}
+      #{thumbnail})
   </insert>
   
   <sql id="select1">
@@ -30,7 +34,9 @@
       create_date,
       content,
       member_no,
-      group_no
+      group_no,
+      view_count,
+      thumbnail
     from 
       nm_feed
   </sql>
@@ -42,7 +48,9 @@
       create_date,
       content,
       member_no,
-      group_no
+      group_no,
+      view_count,
+      thumbnail
     from 
       nm_feed
   </select>
@@ -56,7 +64,9 @@
       create_date,
       content,
       member_no,
-      group_no
+      group_no,
+      view_count,
+      thumbnail
     from 
       nm_feed
     where

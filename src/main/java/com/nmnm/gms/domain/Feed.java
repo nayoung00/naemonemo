@@ -10,11 +10,14 @@ public class Feed {
   private String title; // VARCHAR(255) NN
   private String content; // text NN
   private Date createDate; // DATETIME default=now() NN
+  private int viewCount;
+  private String thumbnail;
 
   @Override
   public String toString() {
     return "Feed [feedNo=" + feedNo + ", memberNo=" + memberNo + ", groupNo=" + groupNo + ", title="
-        + title + ", content=" + content + ", createDate=" + createDate + "]";
+        + title + ", content=" + content + ", createDate=" + createDate + ", viewCount=" + viewCount
+        + ", thumbnail=" + thumbnail + "]";
   }
 
   public int getFeedNo() {
@@ -64,4 +67,22 @@ public class Feed {
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
+
+  public int getViewCount() {
+    return viewCount;
+  }
+
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
+  }
+
+  public String getThumbnail() {
+    return thumbnail;
+  }
+
+  public void setThumbnail(String thumbnail) {
+    this.thumbnail = thumbnail;
+  }
+
+
 }

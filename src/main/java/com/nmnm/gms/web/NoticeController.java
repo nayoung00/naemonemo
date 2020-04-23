@@ -1,7 +1,6 @@
 package com.nmnm.gms.web;
 
 import java.util.List;
-import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,8 @@ import com.nmnm.gms.service.NoticeService;
 public class NoticeController {
 
   static Logger logger = LogManager.getLogger(NoticeController.class);
-  
-  //W@Autowired
-  ServletContext servletContext;
-  
-  //@Autowired
+ 
+  @Autowired
   NoticeService noticeService;
 
   public NoticeController() {
@@ -44,7 +40,7 @@ public class NoticeController {
     if (noticeService.delete(noticeBoardNo) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("삭제할 공지사항 게시물 번호가 유효하지 않습니다.");
+      throw new Exception("삭제할 공지사항 번호가 유효하지 않습니다.");
     }
   }
 
@@ -56,7 +52,8 @@ public class NoticeController {
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
-    model.addAttribute("list", noticeService.list());
+    List<Notice> notices = noticeService.list();
+    model.addAttribute("list", notices);
   }
 
   @GetMapping("updateForm")
@@ -69,8 +66,14 @@ public class NoticeController {
     if (noticeService.update(notice) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다.");
+      throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다." + notice.getNoticeBoardNo()
+      + " " + notice.getTitle());
     }
   }
+  
+    @GetMapping("search")
+    public void search(String keyword, Model model) throws Exception {
+      model.addAttribute("list", noticeService.search(keyword));
+    }
   
 }

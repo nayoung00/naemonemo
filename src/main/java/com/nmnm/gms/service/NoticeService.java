@@ -14,4 +14,6 @@ public interface NoticeService {
   Notice get(int noticeBoardNo) throws Exception;
 
   int update(Notice notice) throws Exception;
+  
+  List<Notice> search(String keyword) throws Exception;
 }

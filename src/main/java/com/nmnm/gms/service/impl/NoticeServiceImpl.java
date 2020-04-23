@@ -1,10 +1,12 @@
 package com.nmnm.gms.service.impl;
 
 import java.util.List;
+import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.NoticeDao;
 import com.nmnm.gms.domain.Notice;
 import com.nmnm.gms.service.NoticeService;
 
+@Component
 public class NoticeServiceImpl implements NoticeService {
   
   NoticeDao noticeDao;
@@ -37,5 +39,11 @@ public class NoticeServiceImpl implements NoticeService {
   public int update(Notice notice) throws Exception {
     return noticeDao.update(notice);
   }
+
+  @Override
+  public List<Notice> search(String keyword) throws Exception {
+    return noticeDao.findByKeyword(keyword);
+  }
+
 
 }

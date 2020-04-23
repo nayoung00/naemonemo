@@ -13,19 +13,26 @@
     <th>제목</th>
     <th>내용</th>
     <th>등록일</th>
+    <th>조회수</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
   <tr>
-    <td>${item.no}</td> 
-    <td><a href='detail?no=${item.noticeBoardNo}'>${item.title}</a></td> 
-    <td>${item.title}</td> 
+    <td>${item.noticeBoardNo}</td> 
+    <td><a href='detail?noticeBoardNo=${item.noticeBoardNo}'>=> ${item.title}</a></td> 
     <td>${item.content}</td>
-       <td>${item.createDate}</td>
+    <td>${item.createDate}</td>
+    <td>${item.viewCount}</td>
   </tr>
 </c:forEach>
 
 </table>
+
+<hr>
+<form action='search' method='get'>
+검색어: <input name='keyword' type='text'>
+<button>검색</button>
+</form>
 
 <jsp:include page="../footer.jsp"/>
     

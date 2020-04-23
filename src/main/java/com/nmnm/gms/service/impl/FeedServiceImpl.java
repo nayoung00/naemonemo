@@ -40,4 +40,9 @@ public class FeedServiceImpl implements FeedService {
     return feedDao.update(feed);
   }
 
+  @Override
+  public List<Feed> search(String keyword) throws Exception {
+    return feedDao.findByKeyword(keyword);
+  }
+
 }

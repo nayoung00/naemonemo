@@ -15,4 +15,6 @@ public interface FeedService {
 
   int update(Feed feed) throws Exception;
 
+  List<Feed> search(String keyword) throws Exception;
+
 }

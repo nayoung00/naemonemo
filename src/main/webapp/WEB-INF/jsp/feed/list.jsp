@@ -24,7 +24,7 @@
 <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.feedNo}</td> 
-    <td><a href='detail?no=${item.feedNo}'>=> ${item.title}</a></td> 
+    <td><a href='detail?feedNo=${item.feedNo}'>=> ${item.title}</a></td> 
     <td>${item.createDate}</td> 
     <td>${item.content}</td> 
     <td>${item.memberNo}</td>
@@ -35,5 +35,10 @@
 </c:forEach>
 
 </table>
+<hr>
+<form action='search' method='get'>
+검색어: <input name='keyword' type='text'>
+<button>검색</button>
+</form>
 
 <jsp:include page="../footer.jsp"/>

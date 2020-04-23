@@ -18,4 +18,6 @@ public interface FeedDao {
   int update(Feed feed) throws Exception;
 
   int delete(int feedNo) throws Exception;
+
+  List<Feed> findByKeyword(String keyword) throws Exception;
 }

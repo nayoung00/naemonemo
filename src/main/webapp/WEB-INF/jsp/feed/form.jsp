@@ -7,13 +7,11 @@
 
 <h1>피드 변경</h1>
 
-<form action='update' method='post'>
-번호: ${feed.feedNo}<br>
-제목: <input name='name' type='text' value='${feed.title}'><br>
+<form action='add' method='post' enctype='multipart/form-data'>
+제목: <input name='title' type='text' value='${feed.title}'><br>
+사진: <input name='thumbnail' type='file' value='${feed.thumbnail}'><br>
 내용:<br>
-<textarea name='title' rows='5' cols='60'>${feed.content}</textarea><br>
-등록일: ${board.date}<br>
-조회수: ${board.viewCount}<br>
+<textarea name='content' rows='5' cols='60'>${feed.content}</textarea><br>
 <button>변경</button>
 </form>
 <jsp:include page="../footer.jsp"/>

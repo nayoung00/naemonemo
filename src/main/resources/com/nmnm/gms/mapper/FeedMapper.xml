@@ -27,20 +27,6 @@
       #{thumbnail})
   </insert>
   
-  <sql id="select1">
-    select
-      feed_no,
-      title,
-      create_date,
-      content,
-      member_no,
-      group_no,
-      view_count,
-      thumbnail
-    from 
-      nm_feed
-  </sql>
-  
   <select id="findAll" resultMap="FeedMap">
     select
       feed_no,
@@ -57,7 +43,6 @@
 
   
   <select id="findByNo" resultMap="FeedMap" parameterType="int">
-    <include refid="select1"/>,
     select
       feed_no,
       title,
@@ -78,6 +63,8 @@
     <set>
       <if test="title != null and title != ''">title=#{title},</if>
       <if test="content != null and content != ''">content=#{content},</if>
+      <if test="title != null and title != ''">title=#{title},</if>
+      <if test="thumbnail != null and thumbnail != ''">thumbnail=#{thumbnail}</if>
     </set>
     where feed_no=#{feedNo}
   </update>
@@ -87,15 +74,21 @@
     where feed_no=#{feedNo}
   </delete>
   
-  <select id="findByKeyword" resultMap="FeedMap" parameterType="map">
-    <include refid="select1"/>
-    from nm_feed
-    <where>
-      <if test="title != null">titl like concat('%', #{title}, '%')</if>
-      <if test="memberNo != null">and sdt >= #{startDate}</if>
-      <if test="endDate != null">and edt &lt;= #{endDate}</if>
-      <if test="totalHours != null">and tot_hr &lt;= #{totalHours}</if>
-      <if test="dayHours != null">and day_hr &lt;= #{dayHours}</if>
-    </where>
+  <select id="findByKeyword" resultMap="FeedMap" parameterType="string">
+  <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select
+      feed_no,
+      title,
+      create_date,
+      member_no,
+      group_no
+    from 
+      nm_feed
+    where
+      feed_no like #{feedNo}
+      or title like #{title}
+      or create_date like #{createDate}
+      or member_no like #{memberNo}
+      or group_no like #{groupNo}
   </select>
 </mapper>

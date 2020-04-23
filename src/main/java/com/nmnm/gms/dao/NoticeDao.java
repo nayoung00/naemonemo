@@ -4,13 +4,15 @@ import java.util.List;
 import com.nmnm.gms.domain.Notice;
 
 public interface NoticeDao {
-  public int insert(Notice notice) throws Exception;
+   int insert(Notice notice) throws Exception;
 
-  public List<Notice> findAll() throws Exception;
+   List<Notice> findAll() throws Exception;
 
-  public Notice findByNo(int noticeBoardNo) throws Exception;
+   Notice findByNo(int noticeBoardNo) throws Exception;
 
-  public int update(Notice board) throws Exception;
+   int update(Notice notice) throws Exception;
 
-  public int delete(int noticeBoardNo) throws Exception;
+   int delete(int noticeBoardNo) throws Exception;
+   
+   List<Notice> findByKeyword(String keyword) throws Exception;
 }

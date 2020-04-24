@@ -10,12 +10,14 @@
   <tr>
     <th>번호</th> 
     <th>제목</th>
+    <th>작성일</th>
   </tr>
 
 <c:forEach items="${list}" var="item">
   <tr>
   <td>${item.planBoardNo}</td> 
   <td><a href='detail?planBoardNo=${item.planBoardNo}'>${item.title}</a></td> 
+   <td>${item.createDate}</td>
   </tr>
 </c:forEach>
 

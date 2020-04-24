@@ -38,9 +38,13 @@
   
    <insert id="insert" parameterType="Notice">
     insert into nm_notice_board(
+    group_no,
+    member_no, 
     title,
     content) 
     values(
+    #{groupNo},
+    #{memberNo},
     #{title},
     #{content})
   </insert>
@@ -55,6 +59,8 @@
   
   <update id="update" parameterType="Notice">
     update nm_notice_board set
+    group_no=#{groupNo},
+    member_no=#{memberNo},
       title=#{title},
       content=#{content}
     where 

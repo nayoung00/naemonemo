@@ -10,35 +10,50 @@
     <result column="group_no" property="groupNo"/>
     <result column="plan_date" property="planDate"/>
     <result column="title" property="title"/>
+    <result column="subtitle" property="subtitle"/>
+      <result column="thumbnail" property="thumbnail"/>
+       <result column="content" property="content"/>
     <result column="place_name" property="placeName"/>
     <result column="address" property="address"/> 
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
+    <result column="create_date" property="createDate"/>
+    
 </resultMap>
 
 <insert id="insert" parameterType="Plan">
   insert into nm_plan(
     plan_date, 
     title, 
+    thumbnail,
+    content,
     place_name, 
     address, 
+    subtitle,
+    content,
     latitude,
     longitude
     ) values(  
       #{planDate},
       #{title},
+      #{thumbnail},
+      #{content},
       #{placeName},
       #{address},
+      #{subtitle},
+      #{content},
       #{latitude},
-      #{longitude}) 
+      #{longitude})
 </insert>
 
    <select id="findAll" resultMap="PlanMap">
     select
      plan_no,
-     title
+     title,
+     create_date
     from
      nm_plan
+      order by plan_no desc
    </select>
    
     <select id="findByNo" resultMap="PlanMap" parameterType="int">
@@ -46,10 +61,13 @@
       plan_no,
       plan_date,
       title,
+      content,
+      thumbnail,
       place_name,
       address,
       latitude,
-      longitude
+      longitude,
+      create_date
     from 
       nm_plan
     where 
@@ -62,8 +80,10 @@
     <set>
       <if test="planDate != null">plan_date=#{planDate},</if>
       <if test="title != null and title != ''">title=#{title},</if> 
+       <if test="thumbnail != null and thumbnail != ''">thumbnail=#{thumbnail},</if> 
       <if test="placeName != null and placeName != ''">place_name=#{placeName},</if>
       <if test="address != null and address != ''">address=#{address},</if>
+      <if test= "content != null and content != ''">content=#{content},</if>
       <if test="latitude != null and latitude != ''">latitude=#{latitude},</if>
       <if test="longitude != null and longitude != ''">longitude=#{longitude}</if>
     </set>

@@ -42,13 +42,15 @@ public class AuthController {
     Member member = memberService.get(email, password);
     if (member != null) {
       session.setAttribute("loginUser", member);
-      model.addAttribute("refreshUrl", "2;url=../../index.html");
+      System.out.println(member);
+      return "redirect:../../index.html";
+
     } else {
       session.invalidate();
-      model.addAttribute("refreshUrl", "2;url=form");
+      System.out.println(member);
+      return "auth/form";
     }
 
-    return "auth/login";
   }
 
   @GetMapping("logout")

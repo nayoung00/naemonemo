@@ -121,11 +121,11 @@
     resultMap="MemberMap" 
     parameterType="map">
     select 
-      member_no, 
-      nickname
+      email, 
+      password
     from nm_member
     where 
       email=#{email} 
-      and pwd=password(#{password})
+      and password=password(#{password})
   </select>
 </mapper>

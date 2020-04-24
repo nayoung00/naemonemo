@@ -4,7 +4,7 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>로그인(JSP + EL + JSTL)</h1>
+<h1>로그인</h1>
 <form action='login' method='post'>
 이메일: <input name='email' type='email' value='${cookie.email.value}'>
 <input type='checkbox' name='saveEmail'> 이메일 저장해두기<br>

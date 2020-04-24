@@ -1,5 +1,6 @@
--- CREATE DATABASE nmnmdb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
--- utf8로 database 생성
+DROP DATABASE nmnmdb;
+CREATE DATABASE nmnmdb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+use nmnmdb;
 
 -- 모임 예제
 INSERT INTO nm_group
@@ -8,38 +9,33 @@ group_info,
 category,
 group_photo,
 city,
-max_people_no,
-bank,
-bank_no,
-account_holder)
+max_people_no)
 values('번개 모임',
 '번개 모임입니다.',
 '소셜',
 'thunder.gif',
 '강남',
-50,
-'하나은행',
-'2020-01-1',
-'이건희');
+50);
 
 INSERT INTO nm_group
 (group_name,
 group_info,
 category,
 group_photo,
-city,
-bank,
-bank_no,
-account_holder)
+city)
 values('코딩 모임',
 '코딩하는 모임입니다.',
 'IT',
 '연봉1억.gif',
-'비트캠프 강남',
-'기업은행',
-'20191202',
-'엄진영');
+'비트캠프 강남');
 
+-- 모임 계좌 예제
+INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
+	VALUES('123456',1,'우리 은행','홍길동');
+
+INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
+	VALUES('789',2,'기업 은행','임꺽정');	
+	
 -- 등급 예제
 insert into nm_grade(grade_no, grade_name)
   values(4, '모임장');  
@@ -261,12 +257,13 @@ INSERT INTO nm_plan
 plan_date,
 title,
 subtitle,
+content,
 thumbnail,
 place_name,
 address,
 latitude,
 longitude)
-VALUES(1,'2020-04-09','프로젝트', '그룹프로젝트입니다', 'bit.jpg', '비트캠프 강남센터','주소',11,22);
+VALUES(1,'2020-04-09','프로젝트', '그룹프로젝트입니다','내용이랍니다', 'bit.jpg', '비트캠프 강남센터','주소',11,22);
 
 -- 일정 참여자 & 일정이 먼저
 
@@ -335,31 +332,32 @@ INSERT INTO nm_communication_photo(photo_file,communication_board_no)
 INSERT INTO nm_communication_board_like(member_no,communication_board_no)
   values(1,1);
   
- -- 회계 유형
-
-INSERT INTO nm_account_type(account_type_no,account_type_name)
- values(1,'생일 케이크 값');
- 
- INSERT INTO nm_account_type(account_type_no,account_type_name)
- values(2,'음료수 값');
- 
- INSERT INTO nm_account_type(account_type_no,account_type_name)
- values(3,'교통비');
- 
-  INSERT INTO nm_account_type(account_type_no,account_type_name)
- values(4,'비상금');
- 
 -- 회계 예제
 
 INSERT INTO nm_account
-(assets,
+(bank_no,
+account_type_no,
+account_type_name,
 group_no,
+assets,
 amount,
 payment_date,
-account_type_no,
 remarks,
 receipt_photo)
- values(190000,1,3000000,'2020-04-09',1,'케잌값','20200409.jpg');
+ values('123456',1,'유류비',1,100000,150000,'2020-04-24','비고','receipt.jpg');
+ 
+ 
+INSERT INTO nm_account
+(bank_no,
+account_type_no,
+account_type_name,
+group_no,
+assets,
+amount,
+payment_date,
+remarks,
+receipt_photo)
+ values('789',1,'술값',1,100000,150000,'2020-04-24','비고','receipt.jpg');
  
 -- 알림 예제
 

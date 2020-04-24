@@ -1,4 +1,73 @@
 -- 공지권한
+DROP TABLE IF EXISTS `nm_notice_authority` RESTRICT;
+
+-- 공지사항게시글
+DROP TABLE IF EXISTS `nm_notice_board` RESTRICT;
+
+-- 공지사항댓글
+DROP TABLE IF EXISTS `nm_notice_reply` RESTRICT;
+
+-- 공지사항사진
+DROP TABLE IF EXISTS `nm_notice_photo` RESTRICT;
+
+-- 등급
+DROP TABLE IF EXISTS `nm_grade` RESTRICT;
+
+-- 메시지
+DROP TABLE IF EXISTS `nm_message` RESTRICT;
+
+-- 모임
+DROP TABLE IF EXISTS `nm_group` RESTRICT;
+
+-- 모임회원
+DROP TABLE IF EXISTS `nm_meeting_member` RESTRICT;
+
+-- 사용권한
+DROP TABLE IF EXISTS `nm_write_authority` RESTRICT;
+
+-- 소통게시글
+DROP TABLE IF EXISTS `nm_communication_board` RESTRICT;
+
+-- 소통게시글댓글
+DROP TABLE IF EXISTS `nm_communication_reply` RESTRICT;
+
+-- 소통게시글사진
+DROP TABLE IF EXISTS `nm_communication_photo` RESTRICT;
+
+-- 소통게시판좋아요
+DROP TABLE IF EXISTS `nm_communication_board_like` RESTRICT;
+
+-- 알림
+DROP TABLE IF EXISTS `nm_alram` RESTRICT;
+
+-- 일정
+DROP TABLE IF EXISTS `nm_plan` RESTRICT;
+
+-- 일정참여자
+DROP TABLE IF EXISTS `nm_plan_member` RESTRICT;
+
+-- 피드게시글
+DROP TABLE IF EXISTS `nm_feed` RESTRICT;
+
+-- 피드게시글댓글
+DROP TABLE IF EXISTS `nm_feed_reply` RESTRICT;
+
+-- 피드게시글사진
+DROP TABLE IF EXISTS `nm_feed_photo` RESTRICT;
+
+-- 회계
+DROP TABLE IF EXISTS `nm_account` RESTRICT;
+
+-- 회계권한
+DROP TABLE IF EXISTS `nm_account_authority` RESTRICT;
+
+-- 회원
+DROP TABLE IF EXISTS `nm_member` RESTRICT;
+
+-- 모임 계좌
+DROP TABLE IF EXISTS `nm_group_account` RESTRICT;
+
+-- 공지권한
 CREATE TABLE `nm_notice_authority` (
 	`notice_authority_no` INTEGER NOT NULL COMMENT '공지권한번호', -- 공지권한번호
 	`authority_no`        INTEGER NOT NULL COMMENT '사용권한번호', -- 사용권한번호
@@ -123,16 +192,14 @@ ALTER TABLE `nm_message`
 
 -- 모임
 CREATE TABLE `nm_group` (
-	`group_no`       INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
-	`group_name`     VARCHAR(255) NOT NULL COMMENT '모임명', -- 모임명
-	`group_info`     TEXT         NOT NULL COMMENT '모임 설명', -- 모임 설명
-	`category`       VARCHAR(20)  NOT NULL COMMENT '모임 분류', -- 모임 분류
-	`group_photo`    VARCHAR(255) NULL     COMMENT '대표이미지', -- 대표이미지
-	`city`           VARCHAR(255) NULL     COMMENT '지역', -- 지역
-	`max_people_no`  INTEGER      NOT NULL DEFAULT 30 COMMENT '최대인원', -- 최대인원
-	`bank`           VARCHAR(255) NOT NULL COMMENT '은행', -- 은행
-	`bank_no`        VARCHAR(20)  NOT NULL COMMENT '계좌번호', -- 계좌번호
-	`account_holder` VARCHAR(50)  NOT NULL COMMENT '예금주' -- 예금주
+	`group_no`      INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
+	`group_name`    VARCHAR(255) NOT NULL COMMENT '모임명', -- 모임명
+	`group_info`    TEXT         NOT NULL COMMENT '모임 설명', -- 모임 설명
+	`category`      VARCHAR(20)  NOT NULL COMMENT '모임 분류', -- 모임 분류
+	`group_photo`   VARCHAR(255) NULL     COMMENT '대표이미지', -- 대표이미지
+	`city`          VARCHAR(255) NULL     COMMENT '지역', -- 지역
+	`max_people_no` INTEGER      NOT NULL DEFAULT 30 COMMENT '최대인원', -- 최대인원
+	`create_date`   DATETIME     NULL     DEFAULT now() COMMENT '모임 생성일' -- 모임 생성일
 )
 COMMENT '모임';
 
@@ -159,7 +226,7 @@ ALTER TABLE `nm_group`
 CREATE TABLE `nm_meeting_member` (
 	`group_no`  INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
 	`member_no` INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	`grade_no`  INTEGER NOT NULL COMMENT '등급번호' -- 등급번호
+	`grade_no`  INTEGER NOT NULL DEFAULT 1 COMMENT '등급번호' -- 등급번호
 )
 COMMENT '모임회원';
 
@@ -290,6 +357,7 @@ CREATE TABLE `nm_plan` (
 	`plan_date`   DATE         NOT NULL COMMENT '일자', -- 일자
 	`title`       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	`subtitle`    VARCHAR(255) NOT NULL COMMENT '소제목', -- 소제목
+	`content`     TEXT         NULL     COMMENT '내용', -- 내용
 	`thumbnail`   VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
 	`place_name`  VARCHAR(255) NULL     COMMENT '장소명', -- 장소명
 	`address`     VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
@@ -401,13 +469,16 @@ ALTER TABLE `nm_feed_photo`
 
 -- 회계
 CREATE TABLE `nm_account` (
-	`assets`          INTEGER      NOT NULL COMMENT '잔액', -- 잔액
-	`group_no`        INTEGER      NULL     COMMENT '모임번호', -- 모임번호
-	`amount`          INTEGER      NOT NULL COMMENT '금액', -- 금액
-	`payment_date`    DATE         NOT NULL COMMENT '거래일', -- 거래일
-	`account_type_no` INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
-	`remarks`         TEXT         NULL     COMMENT '비고', -- 비고
-	`receipt_photo`   VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
+	`account_no`        INTEGER      NOT NULL COMMENT '회계 번호', -- 회계 번호
+	`bank_no`           VARCHAR(50)  NOT NULL COMMENT '계좌번호', -- 계좌번호
+	`group_no`          INTEGER      NULL     COMMENT '모임번호', -- 모임번호
+	`account_type_no`   INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
+	`account_type_name` VARCHAR(255) NOT NULL COMMENT '계좌명', -- 계좌명
+	`assets`            INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 잔액
+	`amount`            INTEGER      NOT NULL COMMENT '금액', -- 금액
+	`payment_date`      DATE         NOT NULL COMMENT '거래일', -- 거래일
+	`remarks`           TEXT         NULL     COMMENT '비고', -- 비고
+	`receipt_photo`     VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
 )
 COMMENT '회계';
 
@@ -415,12 +486,18 @@ COMMENT '회계';
 ALTER TABLE `nm_account`
 	ADD CONSTRAINT `PK_nm_account` -- 회계 기본키
 		PRIMARY KEY (
-			`assets` -- 잔액
+			`account_no` -- 회계 번호
 		);
+
+ALTER TABLE `nm_account`
+	MODIFY COLUMN `account_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT '회계 번호';
+
+ALTER TABLE `nm_account`
+	AUTO_INCREMENT = 1;
 
 -- 회계권한
 CREATE TABLE `nm_account_authority` (
-	`account_authority_no` INTEGER NOT NULL COMMENT '회계권한번호', -- 회계권한번호
+	`account_authority_no` INTEGER NOT NULL DEFAULT 3 COMMENT '회계권한번호', -- 회계권한번호
 	`group_no`             INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
 	`authority_no`         INTEGER NOT NULL COMMENT '사용권한번호', -- 사용권한번호
 	`grade_no`             INTEGER NOT NULL COMMENT '등급번호' -- 등급번호
@@ -441,20 +518,6 @@ CREATE UNIQUE INDEX `UIX_nm_account_authority`
 		`authority_no` ASC, -- 사용권한번호
 		`grade_no` ASC      -- 등급번호
 	);
-
--- 회계유형
-CREATE TABLE `nm_account_type` (
-	`account_type_no`   INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
-	`account_type_name` VARCHAR(255) NOT NULL COMMENT '유형명' -- 유형명
-)
-COMMENT '회계유형';
-
--- 회계유형
-ALTER TABLE `nm_account_type`
-	ADD CONSTRAINT `PK_nm_account_type` -- 회계유형 기본키
-		PRIMARY KEY (
-			`account_type_no` -- 회계유형번호
-		);
 
 -- 회원
 CREATE TABLE `nm_member` (
@@ -494,6 +557,22 @@ ALTER TABLE `nm_member`
 
 ALTER TABLE `nm_member`
 	AUTO_INCREMENT = 1;
+
+-- 모임 계좌
+CREATE TABLE `nm_group_account` (
+	`bank_no`        VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
+	`group_no`       INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
+	`bank`           VARCHAR(50) NOT NULL COMMENT '은행', -- 은행
+	`account_holder` VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
+)
+COMMENT '모임 계좌';
+
+-- 모임 계좌
+ALTER TABLE `nm_group_account`
+	ADD CONSTRAINT `PK_nm_group_account` -- 모임 계좌 기본키
+		PRIMARY KEY (
+			`bank_no` -- 계좌번호
+		);
 
 -- 공지권한
 ALTER TABLE `nm_notice_authority`
@@ -813,22 +892,22 @@ ALTER TABLE `nm_feed_photo`
 
 -- 회계
 ALTER TABLE `nm_account`
-	ADD CONSTRAINT `FK_nm_account_type_TO_nm_account` -- 회계유형 -> 회계
-		FOREIGN KEY (
-			`account_type_no` -- 회계유형번호
-		)
-		REFERENCES `nm_account_type` ( -- 회계유형
-			`account_type_no` -- 회계유형번호
-		);
-
--- 회계
-ALTER TABLE `nm_account`
 	ADD CONSTRAINT `FK_nm_group_TO_nm_account` -- 모임 -> 회계
 		FOREIGN KEY (
 			`group_no` -- 모임번호
 		)
 		REFERENCES `nm_group` ( -- 모임
 			`group_no` -- 모임번호
+		);
+
+-- 회계
+ALTER TABLE `nm_account`
+	ADD CONSTRAINT `FK_nm_group_account_TO_nm_account` -- 모임 계좌 -> 회계
+		FOREIGN KEY (
+			`bank_no` -- 계좌번호
+		)
+		REFERENCES `nm_group_account` ( -- 모임 계좌
+			`bank_no` -- 계좌번호
 		);
 
 -- 회계권한
@@ -859,4 +938,14 @@ ALTER TABLE `nm_account_authority`
 		)
 		REFERENCES `nm_grade` ( -- 등급
 			`grade_no` -- 등급번호
+		);
+
+-- 모임 계좌
+ALTER TABLE `nm_group_account`
+	ADD CONSTRAINT `FK_nm_group_TO_nm_group_account` -- 모임 -> 모임 계좌
+		FOREIGN KEY (
+			`group_no` -- 모임번호
+		)
+		REFERENCES `nm_group` ( -- 모임
+			`group_no` -- 모임번호
 		);

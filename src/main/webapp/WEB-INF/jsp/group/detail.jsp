@@ -5,25 +5,21 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>회원 상세정보(JSP + EL + JSTL)</h1>
-<c:if test="${not empty member}">
+<h1>모임 상세정보(JSP + EL + JSTL)</h1>
+<c:if test="${not empty group}">
 <form action='update' method='post' enctype='multipart/form-data'>
-<img src='${pageContext.servletContext.contextPath}/upload/member/${member.photo}' height='80'><br>
-번호: <input name='no' type='text' readonly value='${member.no}'><br>
-이름: <input name='name' type='text' value='${member.name}'><br>
-별명: <input name='nickname' type='text' value='${member.nickname}'><br>
-자기소개: <input name='intro' type='text' value='${member.intro}'><br>
-이메일: <input name='email' type='email' value='${member.email}'><br>
-사진: <input name='photoFile' type='file' value='${member.photo}'><br>
-전화: <input name='tel' type='tel' value='${member.tel}'><br>
-SNS: <input name='sns' type='text' value='${member.sns}'><br>
-가입일: <input name='createDate' readonly type='date' value='${member.createDate}'><br>
+<img src='${pageContext.servletContext.contextPath}/upload/group/${group.photo}' height='80'><br>
+번호: <input name='groupNo' type='text' readonly value='${group.groupNo}'><br>
+이름: <input name='name' type='text' value='${group.name}'><br>
+소개: <input name='info' type='text' value='${group.info}'><br>
+사진: <input name='photoFile' type='file' value='${group.photo}'><br>
+도시: <input name='city' type='text' value='${group.city}'><br>
+생성일: <input name='createDate' readonly type='date' value='${group.createDate}'><br>
 <p><button>변경</button>
-<a href='delete?no=${member.no}'>삭제</a></p>
+<a href='delete?no=${group.groupNo}'>삭제</a></p>
 </form>
 </c:if>
-
-<c:if test="${empty member}">
-<p>해당 회원이 없습니다.</p>
+<c:if test="${empty group}">
+<p>해당  모임이 없습니다.</p>
 </c:if>
 <jsp:include page="../footer.jsp"/>

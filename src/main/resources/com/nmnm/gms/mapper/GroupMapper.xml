@@ -6,131 +6,86 @@
 <mapper namespace="com.nmnm.gms.dao.GroupDao">
 
   <resultMap type="Group" id="GroupMap">
-    <id column="group_no"  property="no"/>
+    <id column="group_no"  property="groupNo"/>
     <result column="group_name" property="name"/>
-    <result column="group_info" property="info"/>
+    <result column="group_info" property="info"/> 
+    <result column="category" property="category"/> 
     <result column="group_photo" property="photo"/>
     <result column="city" property="city"/>
     <result column="max_people_no" property="maxPeopleNo"/>
-    <result column="bank" property="bank"/>
-    <result column="bank_no" property="bankNo"/>
-    <result column="account_holder" property="accountHolder"/>
+    <result column="create_date" property="createDate"/>
   </resultMap>
-  | group_no       | int(11)      | NO   | PRI | NULL    | auto_increment |
-| group_name     | varchar(255) | NO   | UNI | NULL    |                |
-| group_info     | text         | NO   |     | NULL    |       |
-| category       | varchar(20)  | NO   |     | NULL    |                |
-| group_photo    | varchar(255) | YES  |     | NULL    |                |
-| city           | varchar(255) | YES  |     | NULL    |                |
-| max_people_no  | varchar(20)  | NO   |     | NULL    |                |
-| bank           | varchar(255) | NO   |     | NULL    |                |
-| bank_no        | varchar(20)  | NO   |     | NULL    |                |
-| account_holder | varchar(50)  | NO   |     | NULL    |      
   
-  <insert id="insert" parameterType="Member">
-    insert into nm_member(
-      member_name,
-      password, 
-      id_photo, 
-      birthday, 
-      gender, 
-      email,
-      tel,
-      intro,
-      interest,
-      nickname,
-      sns
+  <insert id="insert" parameterType="Group">
+    insert into nm_group(
+    group_name,
+    group_info,
+    category,
+    group_photo,
+    city
     ) values(
       #{name},
-      password(#{password}),
+      #{info},
+      #{category},
       #{photo},
-      #{birthday},
-      #{gender},
-      #{email},
-      #{tel},
-      #{intro},
-      #{interest},
-      #{nickname},
-      #{sns})
+      #{city})
   </insert>
   
-  <select id="findAll" resultMap="MemberMap">
+  <select id="findAll" resultMap="GroupMap">
     select
-      member_no,
-      member_name,
-      nickname,
-      gender,
-      email,
-      tel
+      group_no,
+      group_name,
+      group_info,
+      city
     from 
-      nm_member
+      nm_group
   </select>
 
   
-  <select id="findByNo" resultMap="MemberMap" parameterType="int">
+  <select id="findByNo" resultMap="GroupMap" parameterType="int">
     select 
-      member_no,
-      member_name,
-      nickname,
-      birthday,
-      gender,
-      email,
-      id_photo,
-      tel,
-      intro,
-      sns,
-      create_date
+    group_no,
+    group_name,
+    group_info,
+    group_photo,
+    city,
+    create_date
     from 
-      nm_member
+      nm_group
     where 
-      member_no=#{no}
+      group_no=#{groupNo}
   </select>
   
-  <update id="update" parameterType="Member">
-    update nm_member
+  <update id="update" parameterType="Group">
+    update nm_group
     <set>
-      <if test="name != null and name != ''">member_name=#{name},</if>
-      <if test="nickname != null and nickname != ''">nickname=#{nickname},</if>
-      <if test="email != null and email != ''">email=#{email},</if> 
-      <if test="password != null and password != ''">password=password(#{password}),</if>
-      <if test="tel != null and tel != ''">tel=#{tel},</if>
-      <if test="photo != null and photo != ''">id_photo=#{photo}</if>
+      <if test="name != null and name != ''">group_name=#{name},</if>
+      <if test="info != null and info != ''">group_info=#{info},</if>
+      <if test="photo != null and photo != ''">group_photo=#{photo},</if> 
+      <if test="city != null and city != ''">city=#{city}</if>
     </set>
     where 
-      member_no=#{no}
+      group_no=#{groupNo}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from nm_member
-    where member_no=#{no}
+    delete from nm_group
+    where group_no=#{groupNo}
   </delete>
   
-  <select id="findByKeyword" resultMap="MemberMap"
+  <select id="findByKeyword" resultMap="GroupMap"
     parameterType="string">
         <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
         select
-        member_no,
-            member_name,
-            nickname,
-            gender,
-            tel
-        from nm_member
+       group_no,
+      group_name,
+      info,
+      city
+        from nm_group
         where     
-            member_name like #{keywordPattern}
-            or nickname like #{keywordPattern}
-            or gender  like #{keywordPattern}
-            or tel  like #{keywordPattern}
+            group_no like #{keywordPattern}
+            or group_name like #{keywordPattern}
+            or info  like #{keywordPattern}
+            or city  like #{keywordPattern}
     </select>
-  
-  <select id="findByEmailAndPassword" 
-    resultMap="MemberMap" 
-    parameterType="map">
-    select 
-      member_no, 
-      nickname
-    from nm_member
-    where 
-      email=#{email} 
-      and pwd=password(#{password})
-  </select>
 </mapper>

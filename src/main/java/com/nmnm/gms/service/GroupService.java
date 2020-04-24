@@ -13,8 +13,6 @@ public interface GroupService {
 
   Group get(int no) throws Exception;
 
-  Group get(String email, String password) throws Exception;
-
   int update(Group group) throws Exception;
 
   List<Group> search(String keyword) throws Exception;

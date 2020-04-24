@@ -46,6 +46,9 @@ div.container {
     <li class='nav-item'>
       <a class='nav-link' href='../member/list'>회원</a>
     </li>
+        <li class='nav-item'>
+      <a class='nav-link' href='../group/list'>모임</a>
+    </li>
   </ul>
 <c:if test="${not empty loginUser}">
   <span class='navbar-text'>${loginUser.name}</span>

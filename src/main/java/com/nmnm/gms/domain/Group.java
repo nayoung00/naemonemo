@@ -1,40 +1,45 @@
 package com.nmnm.gms.domain;
 
+import java.sql.Date;
+
 public class Group {
 
-  private int no; // pk, auto
+  private int groupNo; // pk, auto
   private String name;
   private String info;
-  private int category;
+  private String category;
   private String photo;
   private String city;
   private int maxPeopleNo;
-  private String bank;
-  private String bankNo;
-  private String accountHolder;
+  private Date createDate;
 
 
   @Override
   public String toString() {
-    return "Group [no=" + no + ", name=" + name + ", info=" + info + ", category=" + category
-        + ", photo=" + photo + ", city=" + city + ", maxPeopleNo=" + maxPeopleNo + ", bank=" + bank
-        + ", bankNo=" + bankNo + ", accountHolder=" + accountHolder + ", getClass()=" + getClass()
-        + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+    return "Group [groupNo=" + groupNo + ", name=" + name + ", info=" + info + ", category="
+        + category + ", photo=" + photo + ", city=" + city + ", maxPeopleNo=" + maxPeopleNo
+        + ", createDate=" + createDate + "]";
   }
-
-
-  public int getNo() {
-    return no;
-  }
-
-
-  public void setNo(int no) {
-    this.no = no;
-  }
-
 
   public String getName() {
     return name;
+  }
+
+  public int getGroupNo() {
+    return groupNo;
+  }
+
+
+  public Date getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
+  }
+
+  public void setGroupNo(int groupNo) {
+    this.groupNo = groupNo;
   }
 
 
@@ -52,15 +57,14 @@ public class Group {
     this.info = info;
   }
 
-
-  public int getCategory() {
+  public String getCategory() {
     return category;
   }
 
-
-  public void setCategory(int category) {
+  public void setCategory(String category) {
     this.category = category;
   }
+
 
 
   public String getPhoto() {
@@ -91,37 +95,6 @@ public class Group {
   public void setMaxPeopleNo(int maxPeopleNo) {
     this.maxPeopleNo = maxPeopleNo;
   }
-
-
-  public String getBank() {
-    return bank;
-  }
-
-
-  public void setBank(String bank) {
-    this.bank = bank;
-  }
-
-
-  public String getBankNo() {
-    return bankNo;
-  }
-
-
-  public void setBankNo(String bankNo) {
-    this.bankNo = bankNo;
-  }
-
-
-  public String getAccountHolder() {
-    return accountHolder;
-  }
-
-
-  public void setAccountHolder(String accountHolder) {
-    this.accountHolder = accountHolder;
-  }
-
-
-
 }
+
+

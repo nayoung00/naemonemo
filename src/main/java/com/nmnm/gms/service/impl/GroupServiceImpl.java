@@ -1,6 +1,5 @@
 package com.nmnm.gms.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.GroupDao;
@@ -36,13 +35,6 @@ public class GroupServiceImpl implements GroupService {
     return groupDao.findByNo(no);
   }
 
-  @Override
-  public Group get(String email, String password) throws Exception {
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("email", email);
-    params.put("password", password);
-    return groupDao.findByEmailAndPassword(params);
-  }
 
   @Override
   public int update(Group group) throws Exception {

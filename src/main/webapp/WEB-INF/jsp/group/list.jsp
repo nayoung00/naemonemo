@@ -5,26 +5,22 @@
 
 <jsp:include page="../header.jsp"/>
 
-  <h1>회원(JSP + EL + JSTL)</h1>
-  <a href='form'>새 회원</a><br>
+  <h1>그룹(JSP + EL + JSTL)</h1>
+  <a href='form'>그룹 생성</a><br>
   <table border='1'>
   <tr>
     <th>번호</th>
     <th>이름</th>
-    <th>닉네임</th>
-    <th>성별</th>
-    <th>이메일</th>
-    <th>전화</th>
+    <th>소개</th>
+    <th>지역</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
   <tr>
-    <td>${item.no}</td> 
-    <td><a href='detail?no=${item.no}'>${item.name}</a></td> 
-    <td>${item.nickname}</td> 
-    <td>${item.gender}</td> 
-    <td>${item.email}</td> 
-    <td>${item.tel}</td>
+    <td>${item.groupNo}</td> 
+    <td><a href='detail?no=${item.groupNo}'>${item.name}</a></td> 
+    <td>${item.info}</td> 
+    <td>${item.city}</td>
   </tr>
 </c:forEach>
 

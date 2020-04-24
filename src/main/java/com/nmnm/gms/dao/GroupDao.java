@@ -1,7 +1,6 @@
 package com.nmnm.gms.dao;
 
 import java.util.List;
-import java.util.Map;
 import com.nmnm.gms.domain.Group;
 
 // 데이터를 저장하고 꺼내는 방식(파일, 클라우드저장소, DB 등)에 상관없이
@@ -21,6 +20,4 @@ public interface GroupDao {
   int delete(int no) throws Exception;
 
   List<Group> findByKeyword(String keyword) throws Exception;
-
-  Group findByEmailAndPassword(Map<String, Object> params) throws Exception;
 }

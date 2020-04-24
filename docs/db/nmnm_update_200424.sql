@@ -356,7 +356,7 @@ CREATE TABLE nm_plan (
   group_no    INTEGER      NULL     COMMENT '모임번호', -- 모임번호
   plan_date   DATE         NOT NULL COMMENT '일자', -- 일자
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  subtitle    VARCHAR(255) NOT NULL COMMENT '소제목', -- 소제목
+  subtitle    VARCHAR(255) NULL COMMENT '소제목', -- 소제목
   content     TEXT         NULL     COMMENT '내용', -- 내용
   thumbnail   VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
   place_name  VARCHAR(255) NULL     COMMENT '장소명', -- 장소명

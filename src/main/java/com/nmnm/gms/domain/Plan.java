@@ -8,16 +8,23 @@ public class Plan {
   private int groupNo; // nm_group PK/ FK N
   private Date planDate; // DATE NN
   private String title; // VARCHAR(255) NN
+  private String subtitle;
+  private String thumbnail;
+  private String content;
   private String placeName; // VARCHAR(255) N
   private String address; // VARCHAR(255) NN
   private int latitude; // 위도 N
   private int longitude; // 경도 N
+  private String createDate;
+
+
 
   @Override
   public String toString() {
     return "Plan [planBoardNo=" + planBoardNo + ", groupNo=" + groupNo + ", planDate=" + planDate
-        + ", title=" + title + ", placeName=" + placeName + ", address=" + address + ", latitude="
-        + latitude + ", longitude=" + longitude + "]";
+        + ", title=" + title + ", subtitle=" + subtitle + ", thumbnail=" + thumbnail + ", content="
+        + content + ", placeName=" + placeName + ", address=" + address + ", latitude=" + latitude
+        + ", longitude=" + longitude + ", createDate=" + createDate + "]";
   }
 
   public int getPlanBoardNo() {
@@ -83,4 +90,38 @@ public class Plan {
   public void setLongitude(int longitude) {
     this.longitude = longitude;
   }
+
+  public String getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(String createDate) {
+    this.createDate = createDate;
+  }
+
+  public String getSubtitle() {
+    return subtitle;
+  }
+
+  public void setSubtitle(String subtitle) {
+    this.subtitle = subtitle;
+  }
+
+  public String getThumbnail() {
+    return thumbnail;
+  }
+
+  public void setThumbnail(String thumbnail) {
+    this.thumbnail = thumbnail;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+
 }

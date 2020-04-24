@@ -54,7 +54,7 @@
   </select>
   
   <update id="update" parameterType="Notice">
-    update lms_board set
+    update nm_notice_board set
       title=#{title},
       content=#{content}
     where 

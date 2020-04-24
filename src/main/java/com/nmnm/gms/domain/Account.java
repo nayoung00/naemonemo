@@ -3,9 +3,9 @@ package com.nmnm.gms.domain;
 import java.sql.Date;
 
 public class Account {
-  private int asset; // pk
+  private int account_no; // pk
+  private int bank_no; // fk from 모임 계좌
   private int groupNo; // fk from 모임, 자동증가
-  private int amount;
   private Date paymentDate;
   private int accountTypeNo; // fk from 회계유형
   private String remark;

@@ -335,7 +335,9 @@ INSERT INTO nm_communication_board_like(member_no,communication_board_no)
 -- 회계 예제
 
 INSERT INTO nm_account
-(bank_no,
+(
+
+bank_no,
 account_type_no,
 account_type_name,
 group_no,
@@ -348,7 +350,9 @@ receipt_photo)
  
  
 INSERT INTO nm_account
-(bank_no,
+(
+
+bank_no,
 account_type_no,
 account_type_name,
 group_no,

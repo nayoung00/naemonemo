@@ -30,7 +30,6 @@
     place_name, 
     address, 
     subtitle,
-    content,
     latitude,
     longitude
     ) values(  
@@ -41,7 +40,6 @@
       #{placeName},
       #{address},
       #{subtitle},
-      #{content},
       #{latitude},
       #{longitude})
 </insert>

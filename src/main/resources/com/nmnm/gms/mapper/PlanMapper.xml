@@ -94,7 +94,8 @@
         <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
         select
         plan_no,
-           title
+           title,
+           create_date
         from nm_plan
         where     
           plan_no like #{keywordPattern}

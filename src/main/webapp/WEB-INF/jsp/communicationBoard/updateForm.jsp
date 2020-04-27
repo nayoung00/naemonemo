@@ -8,6 +8,18 @@
 
 <form action='update' method='post'>
 번호: <input name='communicationBoardNo' readonly type='text' value='${communicationBoard.communicationBoardNo}'><br>
+
+<div>
+      글 분류:<select name="category">
+        <option value="공지">공지</option>
+        <option value="홍보">홍보</option>
+        <option value="구인">구인</option>
+        <option value="대여">대여</option>
+      </select>
+            
+    </div>
+<br>
+
 회원번호: <input name='memberNo' readonly type='text' value='${communicationBoard.memberNo}'><br>
 제목:<input name='title' type='text' value='${communicationBoard.title}'><br>
 내용:<br>

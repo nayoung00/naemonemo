@@ -6,12 +6,14 @@
 <jsp:include page="../header.jsp"/>
 
   <h1>게시판 검색 결과(JSP + EL + JSTL)</h1>
-    <a href='list'>전체</a>
-  <a href='list'>공지</a>
-  <a href='list'>홍보</a>
-  <a href='list'>구인</a>
-  <a href='list'>대여</a><br>
+  <form action='categorySearch' method='get'  id='keyword2'>
+  <a href='list'>전체</a>
+  <a href='categorySearch' id='공지' type='text'>공지</a>
+  <a href='categorySearch' id='홍보' type='text'>홍보</a>
+  <a href='categorySearch' id='구인' type='text'>구인</a>
+  <a href='categorySearch' id='대여' type='text'>대여</a><br>
   <br>
+ </form>
  
   <a href='form'>새 글</a><br>
   <table border='1'>

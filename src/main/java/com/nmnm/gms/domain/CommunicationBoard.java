@@ -4,11 +4,22 @@ import java.util.Date;
 
 public class CommunicationBoard {
   private int communicationBoardNo; // PK
+  private String category;
   private int memberNo; // FK
   private String title;
   private String content;
   private Date createDate;
   private int viewCount;
+
+
+
+  public String getCategory() {
+    return category;
+  }
+
+  public void setCategory(String category) {
+    this.category = category;
+  }
 
   public int getViewCount() {
     return viewCount;

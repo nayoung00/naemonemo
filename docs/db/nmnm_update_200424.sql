@@ -255,6 +255,7 @@ ALTER TABLE nm_write_authority
 -- 소통게시글
 CREATE TABLE nm_communication_board (
   communication_board_no INTEGER      NOT NULL COMMENT '소통게시글번호', -- 소통게시글번호
+  communication_board_category VARCHAR(40)       NULL COMMENT '소통게시판 분류', -- 소통게시판 분류
   member_no              INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   title                  VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content                TEXT         NOT NULL COMMENT '내용', -- 내용

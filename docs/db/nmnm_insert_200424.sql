@@ -300,14 +300,14 @@ INSERT INTO nm_feed_reply(content,feed_no,member_no)
   
 -- 소통 게시판 예제
 
-INSERT INTO nm_communication_board(member_no,title,content)
- values(1,'테스트 게시물입니다.','테스트 게시물입니다.');
+INSERT INTO nm_communication_board(communication_board_category,member_no,title,content)
+ values(공지,1,'테스트 게시물입니다.','테스트 게시물입니다.');
  
-INSERT INTO nm_communication_board(member_no,title,content)
- values(2,'내일 시간 되시는분','댓글 남겨주세요');
+INSERT INTO nm_communication_board(communication_board_category,member_no,title,content)
+ values(홍보,2,'내일 시간 되시는분','댓글 남겨주세요');
  
-INSERT INTO nm_communication_board(member_no,title,content)
- values(2,'저희 회비 얼마인가요?','이번에 들어와서 모르겠네요');
+INSERT INTO nm_communication_board(communication_board_category,member_no,title,content)
+ values(구인,2,'저희 회비 얼마인가요?','이번에 들어와서 모르겠네요');
  
 -- 소통 게시판 댓글 예제
 

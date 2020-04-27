@@ -44,4 +44,9 @@ public class CommunicationBoardServiceImpl implements CommunicationBoardService 
   public List<CommunicationBoard> search(String keyword) throws Exception {
     return communicationBoardDao.findByKeyword(keyword);
   }
+
+  @Override
+  public List<CommunicationBoard> categorySearch(String keyword2) throws Exception {
+    return communicationBoardDao.findByCategory(keyword2);
+  }
 }

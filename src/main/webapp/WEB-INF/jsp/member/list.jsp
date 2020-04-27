@@ -25,6 +25,7 @@
     <td>${item.gender}</td> 
     <td>${item.email}</td> 
     <td>${item.tel}</td>
+    <td><a href='sendForm?no=${item.no}'>쪽지 보내기</a></td> 
   </tr>
 </c:forEach>
 

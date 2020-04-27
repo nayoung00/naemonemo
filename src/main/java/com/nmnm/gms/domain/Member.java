@@ -1,6 +1,7 @@
 package com.nmnm.gms.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Member {
 
@@ -20,6 +21,16 @@ public class Member {
   private String sns;
   private Date createDate;
 
+  private List<Message> message;
+
+
+  public List<Message> getMessage() {
+    return message;
+  }
+
+  public void setMessage(List<Message> message) {
+    this.message = message;
+  }
 
   @Override
   public String toString() {

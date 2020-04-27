@@ -2,6 +2,7 @@ package com.nmnm.gms.service;
 
 import java.util.List;
 import com.nmnm.gms.domain.Member;
+import com.nmnm.gms.domain.Message;
 
 public interface MemberService {
 
@@ -18,4 +19,8 @@ public interface MemberService {
   int update(Member member) throws Exception;
 
   List<Member> search(String keyword) throws Exception;
+
+  int send(Message message) throws Exception;
+
+  Member sender(int no) throws Exception;
 }

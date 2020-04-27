@@ -3,6 +3,8 @@ package com.nmnm.gms.web;
 import java.io.File;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Member;
+import com.nmnm.gms.domain.Message;
 import com.nmnm.gms.service.MemberService;
 
 @Controller
@@ -25,6 +28,12 @@ public class MemberController {
 
   @GetMapping("form")
   public void form() {}
+
+  @GetMapping("sendForm")
+  public void sendForm(int no, Model message, HttpServletRequest request) throws Exception {
+    message.addAttribute("receiver", memberService.sender(no));
+    message.addAttribute("sender", request.getSession().getAttribute("loginUser"));
+  }
 
   @PostMapping("add")
   public String add( //
@@ -84,6 +93,16 @@ public class MemberController {
       return "redirect:list";
     } else {
       throw new Exception("변경할 회원 번호가 유효하지 않습니다.");
+    }
+  }
+
+  @PostMapping("send")
+  public String send(Member loginUser, Message message, HttpSession session) throws Exception {
+    loginUser = (Member) session.getAttribute("loginUser");
+    if (memberService.send(message) > 0) {
+      return "redirect:list";
+    } else {
+      throw new Exception("쪽지를 보낼 수 없습니다.");
     }
   }
 }

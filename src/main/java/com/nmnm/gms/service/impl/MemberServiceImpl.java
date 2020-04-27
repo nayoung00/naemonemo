@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.MemberDao;
 import com.nmnm.gms.domain.Member;
+import com.nmnm.gms.domain.Message;
 import com.nmnm.gms.service.MemberService;
 
 @Component
@@ -52,5 +53,15 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public List<Member> search(String keyword) throws Exception {
     return memberDao.findByKeyword(keyword);
+  }
+
+  @Override
+  public int send(Message message) throws Exception {
+    return memberDao.send(message);
+  }
+
+  @Override
+  public Member sender(int no) throws Exception {
+    return memberDao.sender(no);
   }
 }

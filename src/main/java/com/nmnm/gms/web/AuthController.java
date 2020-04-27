@@ -44,7 +44,6 @@ public class AuthController {
       session.setAttribute("loginUser", member);
       System.out.println(member);
       return "redirect:../../index.html";
-
     } else {
       session.invalidate();
       System.out.println(member);

@@ -8,8 +8,8 @@ public class Message {
   private int receiver; // fk from 회원
   private String title;
   private String content;
-  private Date createdDate; // default now()
-  private Date readDate; // default now()
+  private Date createdDate; // default now() 발신일
+  private Date readDate; // default now() 읽은날
 
 
   public int getMessageNo() {

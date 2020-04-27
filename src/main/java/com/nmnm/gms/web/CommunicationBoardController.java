@@ -74,4 +74,9 @@ public class CommunicationBoardController {
   public void search(String keyword, Model model) throws Exception {
     model.addAttribute("list", communicationBoardService.search(keyword));
   }
+
+  @GetMapping("categorySearch")
+  public void categorySearch(String keyword2, Model model) throws Exception {
+    model.addAttribute("list", communicationBoardService.categorySearch(keyword2));
+  }
 }

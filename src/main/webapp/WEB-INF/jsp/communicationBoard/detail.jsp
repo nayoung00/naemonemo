@@ -10,6 +10,7 @@
 <c:if test="${not empty communicationBoard}">
 <form action='update' method='post'>
 번호: ${communicationBoard.communicationBoardNo}<br>
+글 분류: ${communicationBoard.category}<br>
 회원번호: ${communicationBoard.memberNo}<br>
 제목: ${communicationBoard.title}<br>
 내용: <br>
@@ -19,6 +20,8 @@ ${communicationBoard.content}<br>
 </form>
 </c:if>
 <a href='updateForm?communicationBoardNo=${communicationBoard.communicationBoardNo}'><input type="submit" value='변경'/></a> 
+
+
 <a href='delete?communicationBoardNo=${communicationBoard.communicationBoardNo}'>삭제</a>
 <c:if test="${empty communicationBoard}">
 <p>해당 글이 없습니다.</p>

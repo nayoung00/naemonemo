@@ -5,7 +5,7 @@
 
 <jsp:include page="../header.jsp"/>
 
-  <h1>게시판 검색 결과(JSP + EL + JSTL)</h1>
+  <h1>게시판 검색 결과</h1>
     <a href='list'>전체</a>
   <a href='list'>공지</a>
   <a href='list'>홍보</a>

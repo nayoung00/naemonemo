@@ -7,10 +7,10 @@
 
   <h1>소통 게시판 </h1>
   <form action='categorySearch' method='get'>
-  <label><input type='checkbox' name='keyword2' value='공지'/>공지</label>
-  <label><input type='checkbox' name='keyword2' value='홍보'/>홍보</label>
-  <label><input type='checkbox' name='keyword2' value='구인'/>구인</label>
-  <label><input type='checkbox' name='keyword2' value='대여'/>대여</label>
+  <label><input type='radio' name='keyword2' value='공지'/>공지</label>
+  <label><input type='radio' name='keyword2' value='홍보'/>홍보</label>
+  <label><input type='radio' name='keyword2' value='구인'/>구인</label>
+  <label><input type='radio' name='keyword2' value='대여'/>대여</label>
   <br>
   <button>전송</button>
 <!--   <a href='list'>전체</a>

@@ -94,7 +94,7 @@
     <bind name="keyword2Pattern" value="'%' + _parameter + '%'"/>
     <include refid="select1"/>
     where 
-      category like #{keyword2Pattern} 
+      communication_board_category like #{keyword2Pattern} 
   </select>
 </mapper>
 

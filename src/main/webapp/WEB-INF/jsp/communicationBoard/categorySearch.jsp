@@ -5,13 +5,19 @@
 
 <jsp:include page="../header.jsp"/>
 
-  <h1>게시판 검색 결과(JSP + EL + JSTL)</h1>
-  <form action='categorySearch' method='get'  id='keyword2'>
-  <a href='list'>전체</a>
-  <a href='categorySearch' id='공지' type='text'>공지</a>
+  <h1>게시판 검색 결과</h1>
+  <form action='categorySearch' method='get'>
+  <label><input type='checkbox' name='keyword2' value='공지'/>공지</label>
+  <label><input type='checkbox' name='keyword2' value='홍보'/>홍보</label>
+  <label><input type='checkbox' name='keyword2' value='구인'/>구인</label>
+  <label><input type='checkbox' name='keyword2' value='대여'/>대여</label>
+  <br>
+  <button>전송</button>
+<!--   <a href='list'>전체</a>
+  <a href='' id='공지' type='text'>공지</a>
   <a href='categorySearch' id='홍보' type='text'>홍보</a>
   <a href='categorySearch' id='구인' type='text'>구인</a>
-  <a href='categorySearch' id='대여' type='text'>대여</a><br>
+  <a href='categorySearch' id='대여' type='text'>대여</a><br> -->
   <br>
  </form>
  

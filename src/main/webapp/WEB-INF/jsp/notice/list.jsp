@@ -5,6 +5,7 @@
 
 <jsp:include page="../header.jsp"/>
 
+
   <h1>공지사항 게시글(JSP + EL + JSTL)</h1>
   <a href='form'>새 글</a><br>
   <table border='1'>

@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <head>
 <meta charset='UTF-8'>
 <c:if test="${not empty refreshUrl}">
@@ -14,12 +15,15 @@
 <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
 <style>
 body {
-  background-color: LightGray;
+	background-color: LightGray;
 }
+
 div.container {
-  background: white;
-  border: 1px solid gray;
-  width: 600px;
+
+	background: white;
+	border: 1px solid gray;
+	width: 1000px;
+	
 }
 </style>
 </head>
@@ -49,7 +53,6 @@ div.container {
         <li class='nav-item'>
       <a class='nav-link' href='../group/list'>모임</a>
     </li>
-     </li>
         <li class='nav-item'>
       <a class='nav-link' href='../account/list'>회계</a>
     </li>

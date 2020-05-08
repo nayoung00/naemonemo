@@ -21,6 +21,7 @@ public interface CommunicationBoardDao {
   public List<CommunicationBoard> findByKeyword(String keyword) throws Exception;
 
   public List<CommunicationBoard> findByCategory(String keyword2) throws Exception;
+
 }
 
 

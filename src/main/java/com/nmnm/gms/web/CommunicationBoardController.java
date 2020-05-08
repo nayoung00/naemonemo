@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.nmnm.gms.Criteria;
 import com.nmnm.gms.domain.CommunicationBoard;
 import com.nmnm.gms.service.CommunicationBoardService;
 
@@ -79,4 +80,10 @@ public class CommunicationBoardController {
   public void categorySearch(String keyword2, Model model) throws Exception {
     model.addAttribute("list", communicationBoardService.categorySearch(keyword2));
   }
+
+  @GetMapping("/communicationBoard") // 게시판 호출(게시판글 리스트와 페이징정보)
+  public void getCommunicationBoardPage(Criteria cri, Model model) {
+
+  }
+
 }

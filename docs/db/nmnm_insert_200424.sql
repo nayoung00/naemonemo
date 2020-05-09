@@ -1,31 +1,33 @@
 
-
 -- 모임 예제
-INSERT INTO nm_group
-(group_name,
-group_info,
-category,
-group_photo,
-city,
-max_people_no)
-values('번개 모임',
-'번개 모임입니다.',
-'소셜',
-'thunder.gif',
-'강남',
-50);
 
 INSERT INTO nm_group
 (group_name,
 group_info,
-category,
-group_photo,
-city)
+group_form,
+group_interest,
+city,
+grade_name)
+values('등산 모임',
+'등산하는 모임입니다.',
+'오프라인',
+'등산 실력 향샹',
+'등산캠프 강남',
+'홍길동');
+
+INSERT INTO nm_group
+(group_name,
+group_info,
+group_form,
+group_interest,
+city,
+grade_name)
 values('코딩 모임',
 '코딩하는 모임입니다.',
-'IT',
-'연봉1억.gif',
-'비트캠프 강남');
+'오프라인',
+'개발 실력 향샹',
+'비트캠프 강남',
+'복붙 개발자');
 
 -- 모임 계좌 예제
 INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)

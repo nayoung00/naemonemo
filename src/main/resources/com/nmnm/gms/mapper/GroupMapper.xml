@@ -7,11 +7,13 @@
 
   <resultMap type="Group" id="GroupMap">
     <id column="group_no"  property="groupNo"/>
-    <result column="group_name" property="name"/>
-    <result column="group_info" property="info"/> 
-    <result column="category" property="category"/> 
-    <result column="group_photo" property="photo"/>
+    <result column="group_name" property="groupName"/>
+    <result column="group_info" property="groupInfo"/> 
+    <result column="group_form" property="groupForm"/> 
+    <result column="group_interest" property="groupInterest"/> 
+    <result column="group_photo" property="groupPhoto"/>
     <result column="city" property="city"/>
+    <result column="grade_name" property="gradeName"/>
     <result column="max_people_no" property="maxPeopleNo"/>
     <result column="create_date" property="createDate"/>
   </resultMap>
@@ -20,22 +22,26 @@
     insert into nm_group(
     group_name,
     group_info,
-    category,
+    group_form,
+    group_interest,
     group_photo,
-    city
+    city,
+    grade_name
     ) values(
-      #{name},
-      #{info},
-      #{category},
-      #{photo},
-      #{city})
+      #{groupName},
+      #{groupInfo},
+      #{groupForm},
+      #{groupInterest},
+      #{groupPhoto},
+      #{city},
+      #{gradeName})
   </insert>
   
   <select id="findAll" resultMap="GroupMap">
     select
       group_no,
       group_name,
-      group_info,
+      group_form,
       city
     from 
       nm_group
@@ -44,10 +50,12 @@
   
   <select id="findByNo" resultMap="GroupMap" parameterType="int">
     select 
+    group_photo,
     group_no,
     group_name,
+    group_form,
     group_info,
-    group_photo,
+    group_interest,
     city,
     create_date
     from 
@@ -59,9 +67,12 @@
   <update id="update" parameterType="Group">
     update nm_group
     <set>
-      <if test="name != null and name != ''">group_name=#{name},</if>
-      <if test="info != null and info != ''">group_info=#{info},</if>
-      <if test="photo != null and photo != ''">group_photo=#{photo},</if> 
+      <if test="groupName != null and groupName != ''">group_name=#{groupName},</if>
+      <if test="groupForm != null and groupForm != ''">group_form=#{groupForm},</if>
+      <if test="groupInfo != null and groupInfo != ''">group_info=#{groupInfo},</if>
+      <if test="groupPhoto != null and groupPhoto != ''">group_photo=#{groupPhoto},</if> 
+      <if test="groupInterest != null and groupInterest != ''">group_interest=#{groupInterest},</if> 
+      <if test="maxPeopleNo >= 0">max_people_no=#{maxPeopleNo},</if> 
       <if test="city != null and city != ''">city=#{city}</if>
     </set>
     where 
@@ -79,13 +90,13 @@
         select
        group_no,
       group_name,
-      info,
+      group_form,
       city
         from nm_group
         where     
             group_no like #{keywordPattern}
             or group_name like #{keywordPattern}
-            or info  like #{keywordPattern}
+            or group_form like #{keywordPattern}
             or city  like #{keywordPattern}
     </select>
 </mapper>

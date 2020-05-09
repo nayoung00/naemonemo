@@ -5,17 +5,19 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>모임 상세정보(JSP + EL + JSTL)</h1>
+<h1>모임 상세정보</h1>
 <c:if test="${not empty group}">
-<form action='update' method='post' enctype='multipart/form-data'>
-<img src='${pageContext.servletContext.contextPath}/upload/group/${group.photo}' height='80'><br>
-번호: <input name='groupNo' type='text' readonly value='${group.groupNo}'><br>
-이름: <input name='name' type='text' value='${group.name}'><br>
-소개: <input name='info' type='text' value='${group.info}'><br>
-사진: <input name='photoFile' type='file' value='${group.photo}'><br>
-도시: <input name='city' type='text' value='${group.city}'><br>
-생성일: <input name='createDate' readonly type='date' value='${group.createDate}'><br>
-<p><button>변경</button>
+<form>
+<img src='${pageContext.servletContext.contextPath}/upload/group/${group.groupPhoto}' height='80'><br>
+<p>번호: ${group.groupNo}</p>
+<p>이름:${group.groupName}</p>
+<p>소개: ${group.groupInfo}</p>
+<p>형태: ${group.groupForm}</p>
+<p>관심사: ${group.groupInterest}</p>
+사진: <input name='photoFile' type='file' value='${group.groupPhoto}'><br>
+<p>도시: ${group.city}</p>
+<p>생성일: ${group.createDate}</p>
+<p><a href='updateForm?no=${group.groupNo}'>변경</a>
 <a href='delete?no=${group.groupNo}'>삭제</a></p>
 </form>
 </c:if>

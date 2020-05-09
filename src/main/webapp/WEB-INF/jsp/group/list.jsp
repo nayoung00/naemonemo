@@ -5,21 +5,21 @@
 
 <jsp:include page="../header.jsp"/>
 
-  <h1>그룹(JSP + EL + JSTL)</h1>
-  <a href='form'>그룹 생성</a><br>
+  <h1>모임</h1>
+  <a href='form'>모임 생성</a><br>
   <table border='1'>
   <tr>
     <th>번호</th>
     <th>이름</th>
-    <th>소개</th>
+    <th>모임 형태</th>
     <th>지역</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.groupNo}</td> 
-    <td><a href='detail?no=${item.groupNo}'>${item.name}</a></td> 
-    <td>${item.info}</td> 
+    <td><a href='detail?no=${item.groupNo}'>${item.groupName}</a></td> 
+    <td>${item.groupForm}</td> 
     <td>${item.city}</td>
   </tr>
 </c:forEach>

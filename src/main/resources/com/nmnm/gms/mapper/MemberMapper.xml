@@ -22,16 +22,6 @@
     <result column="create_date" property="createDate"/>
   </resultMap>
   
-  <resultMap type="Message" id="MessageMap">
-    <id column="message_no" property="messageNo"/>
-    <result column="sender" property="sender"/>
-    <result column="receiver" property="receiver"/>
-    <result column="title" property="title"/>
-    <result column="content" property="content"/>
-    <result column="create_date" property="createDate"/>
-    <result column="read_date" property="readDate"/>
-  </resultMap>
-  
   <insert id="insert" parameterType="Member">
     insert into nm_member(
       member_name,
@@ -138,25 +128,5 @@
     where 
       email=#{email} 
       and password=password(#{password})
-  </select>
-  <insert id="send" parameterType="Message">
-    insert into nm_message(
-    sender,
-    receiver,
-    title,
-    content
-    ) values (
-    #{sender},
-    #{receiver},
-    #{title},
-    #{content}
-    )
-  </insert>
-  <select id="sender" resultMap="MemberMap" parameterType="int">
-    select 
-        member_no,
-        member_name
-     from nm_member
-     where member_no=#{no}
   </select>
 </mapper>

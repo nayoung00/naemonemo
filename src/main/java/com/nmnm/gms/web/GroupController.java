@@ -23,6 +23,11 @@ public class GroupController {
   @Autowired
   GroupService groupService;
 
+  @GetMapping("updateForm")
+  public void updateForm(int no, Model model) throws Exception {
+    model.addAttribute("group", groupService.get(no));
+  }
+
   @GetMapping("form")
   public void form() {}
 
@@ -34,7 +39,7 @@ public class GroupController {
       String dirPath = servletContext.getRealPath("/upload/group");
       String filename = UUID.randomUUID().toString();
       photoFile.transferTo(new File(dirPath + "/" + filename));
-      group.setPhoto(filename);
+      group.setGroupPhoto(filename);
     }
 
     if (groupService.add(group) > 0) {
@@ -77,7 +82,7 @@ public class GroupController {
       String dirPath = servletContext.getRealPath("/upload/group");
       String filename = UUID.randomUUID().toString();
       photoFile.transferTo(new File(dirPath + "/" + filename));
-      group.setPhoto(filename);
+      group.setGroupPhoto(filename);
     }
 
     if (groupService.update(group) > 0) {

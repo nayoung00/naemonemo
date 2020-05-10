@@ -33,13 +33,6 @@ values(
 );
 
 
--- 모임계좌 예제
-INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
-	VALUES('123-4567-7890',1,'우리은행','홍길동');
-
-INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
-	VALUES('789-765433-12345',2,'기업은행','임꺽정');	
-	
 -- 등급 예제
 insert into nm_grade(grade_no, grade_name)
   values(4, '모임장');  
@@ -301,9 +294,20 @@ INSERT INTO nm_co_photo(co_photo_file,co_no)
 INSERT INTO nm_co_like(like_count,member_no,co_no)
   values(1,1,1);
   
+-- 알림 예제
+INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
+  values(1,1,1,1);
+  
+INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
+  values(2,1,1,1); 
+ 
+  
+  
+  
 -- 회계 예제***********8회계insert가 안돼 도와줘 친구드ㄹ아*****
 INSERT INTO nm_account
 (bank_no,
+group_no,
 account_type_no,
 account_type_name,
 assets,
@@ -315,7 +319,9 @@ receipt_photo)
  
  -- 회계 예제***********8회계insert가 안돼 도와줘 친구드ㄹ아*****
 INSERT INTO nm_account
-(bank_no,
+(
+bank_no,
+group_no,
 account_type_no,
 account_type_name,
 assets,
@@ -323,12 +329,15 @@ amount,
 payment_date,
 remarks,
 receipt_photo)
- values('222',2,'술값',100000,150000,'2020-04-24','비고','receipt.jpg');
+ values('222',1,2,'술값',100000,150000,'2020-04-24','비고','receipt.jpg');
  
--- 알림 예제
-INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
-  values(1,1,1,1);
+ 
+ 
+-- 모임계좌 예제
+INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
+  VALUES('123-4567-7890',1,'우리은행','홍길동');
+
+INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
+  VALUES('789-765433-12345',2,'기업은행','임꺽정');  
   
-INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
-  values(2,1,1,1); 
  

@@ -200,7 +200,7 @@ ALTER TABLE nm_group
 
 -- 모임계좌
 CREATE TABLE nm_group_account (
-  bank_no        VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
+  bank_no        VARCHAR(50) NOT NULL COMMENT '계좌번호', -- 계좌번호
   group_no       INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   bank           VARCHAR(50) NOT NULL COMMENT '은행', -- 은행
   account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
@@ -816,6 +816,7 @@ ALTER TABLE nm_feed_photo
       feed_no -- 피드번호
     );
 
+    ---여기 밑에는 빼고 하시오====
 -- 회계
 ALTER TABLE nm_account
   ADD CONSTRAINT FK_nm_group_TO_nm_account -- 모임 -> 회계

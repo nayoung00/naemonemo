@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS nm_group_member RESTRICT;
 -- 소통
 DROP TABLE IF EXISTS nm_co RESTRICT;
 
--- 소통사진
-DROP TABLE IF EXISTS nm_co_photo RESTRICT;
-
 -- 소통댓글
 DROP TABLE IF EXISTS nm_co_reply RESTRICT;
+
+-- 소통사진
+DROP TABLE IF EXISTS nm_co_photo RESTRICT;
 
 -- 소통좋아요
 DROP TABLE IF EXISTS nm_co_like RESTRICT;
@@ -46,11 +46,14 @@ DROP TABLE IF EXISTS nm_plan_member RESTRICT;
 -- 피드
 DROP TABLE IF EXISTS nm_feed RESTRICT;
 
--- 피드게시글댓글
+-- 피드댓글
 DROP TABLE IF EXISTS nm_feed_reply RESTRICT;
 
--- 피드게시글사진
+-- 피드사진
 DROP TABLE IF EXISTS nm_feed_photo RESTRICT;
+
+-- 피드좋아요
+DROP TABLE IF EXISTS nm_feed_like RESTRICT;
 
 -- 회계
 DROP TABLE IF EXISTS nm_account RESTRICT;
@@ -200,10 +203,11 @@ ALTER TABLE nm_group
 
 -- 모임계좌
 CREATE TABLE nm_group_account (
-  bank_no        VARCHAR(50) NOT NULL COMMENT '계좌번호', -- 계좌번호
-  group_no       INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
-  bank           VARCHAR(50) NOT NULL COMMENT '은행', -- 은행
-  account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
+  bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
+  group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
+  bank                VARCHAR(50) NOT NULL COMMENT '은행', -- 은행
+  bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임계좌';
 
@@ -211,7 +215,7 @@ COMMENT '모임계좌';
 ALTER TABLE nm_group_account
   ADD CONSTRAINT PK_nm_group_account -- 모임계좌 기본키
     PRIMARY KEY (
-      bank_no -- 계좌번호
+      bank_info_id -- 모임계좌아이디
     );
 
 -- 모임회원
@@ -255,27 +259,6 @@ ALTER TABLE nm_co
 ALTER TABLE nm_co
   AUTO_INCREMENT = 1;
 
--- 소통사진
-CREATE TABLE nm_co_photo (
-  co_photo_no   INTEGER      NOT NULL COMMENT '소통사진번호', -- 소통사진번호
-  co_photo_file VARCHAR(255) NOT NULL COMMENT '사진파일', -- 사진파일
-  co_no         INTEGER      NOT NULL COMMENT '소통번호' -- 소통번호
-)
-COMMENT '소통사진';
-
--- 소통사진
-ALTER TABLE nm_co_photo
-  ADD CONSTRAINT PK_nm_co_photo -- 소통사진 기본키
-    PRIMARY KEY (
-      co_photo_no -- 소통사진번호
-    );
-
-ALTER TABLE nm_co_photo
-  MODIFY COLUMN co_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '소통사진번호';
-
-ALTER TABLE nm_co_photo
-  AUTO_INCREMENT = 1;
-
 -- 소통댓글
 CREATE TABLE nm_co_reply (
   co_reply_no INTEGER NOT NULL COMMENT '소통댓글번호', -- 소통댓글번호
@@ -296,6 +279,27 @@ ALTER TABLE nm_co_reply
   MODIFY COLUMN co_reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '소통댓글번호';
 
 ALTER TABLE nm_co_reply
+  AUTO_INCREMENT = 1;
+
+-- 소통사진
+CREATE TABLE nm_co_photo (
+  co_photo_no   INTEGER      NOT NULL COMMENT '소통사진번호', -- 소통사진번호
+  co_photo_file VARCHAR(255) NOT NULL COMMENT '사진파일', -- 사진파일
+  co_no         INTEGER      NOT NULL COMMENT '소통번호' -- 소통번호
+)
+COMMENT '소통사진';
+
+-- 소통사진
+ALTER TABLE nm_co_photo
+  ADD CONSTRAINT PK_nm_co_photo -- 소통사진 기본키
+    PRIMARY KEY (
+      co_photo_no -- 소통사진번호
+    );
+
+ALTER TABLE nm_co_photo
+  MODIFY COLUMN co_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '소통사진번호';
+
+ALTER TABLE nm_co_photo
   AUTO_INCREMENT = 1;
 
 -- 소통좋아요
@@ -404,18 +408,18 @@ ALTER TABLE nm_feed
 ALTER TABLE nm_feed
   AUTO_INCREMENT = 1;
 
--- 피드게시글댓글
+-- 피드댓글
 CREATE TABLE nm_feed_reply (
   feed_reply_no INTEGER NOT NULL COMMENT '피드댓글번호', -- 피드댓글번호
   content       TEXT    NOT NULL COMMENT '댓글내용', -- 댓글내용
   feed_no       INTEGER NOT NULL COMMENT '피드번호', -- 피드번호
   member_no     INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
 )
-COMMENT '피드게시글댓글';
+COMMENT '피드댓글';
 
--- 피드게시글댓글
+-- 피드댓글
 ALTER TABLE nm_feed_reply
-  ADD CONSTRAINT PK_nm_feed_reply -- 피드게시글댓글 기본키
+  ADD CONSTRAINT PK_nm_feed_reply -- 피드댓글 기본키
     PRIMARY KEY (
       feed_reply_no -- 피드댓글번호
     );
@@ -426,17 +430,17 @@ ALTER TABLE nm_feed_reply
 ALTER TABLE nm_feed_reply
   AUTO_INCREMENT = 1;
 
--- 피드게시글사진
+-- 피드사진
 CREATE TABLE nm_feed_photo (
   feed_photo_no   INTEGER      NOT NULL COMMENT '피드사진번호', -- 피드사진번호
   feed_photo_file VARCHAR(255) NOT NULL COMMENT '사진파일', -- 사진파일
   feed_no         INTEGER      NULL     COMMENT '피드번호' -- 피드번호
 )
-COMMENT '피드게시글사진';
+COMMENT '피드사진';
 
--- 피드게시글사진
+-- 피드사진
 ALTER TABLE nm_feed_photo
-  ADD CONSTRAINT PK_nm_feed_photo -- 피드게시글사진 기본키
+  ADD CONSTRAINT PK_nm_feed_photo -- 피드사진 기본키
     PRIMARY KEY (
       feed_photo_no -- 피드사진번호
     );
@@ -447,11 +451,28 @@ ALTER TABLE nm_feed_photo
 ALTER TABLE nm_feed_photo
   AUTO_INCREMENT = 1;
 
+-- 피드좋아요
+CREATE TABLE nm_feed_like (
+  like_count INTEGER NOT NULL COMMENT '좋아요수', -- 좋아요수
+  member_no  INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  feed_no    INTEGER NOT NULL COMMENT '피드번호' -- 피드번호
+)
+COMMENT '피드좋아요';
+
+-- 피드좋아요
+ALTER TABLE nm_feed_like
+  ADD CONSTRAINT PK_nm_feed_like -- 피드좋아요 기본키
+    PRIMARY KEY (
+      like_count, -- 좋아요수
+      member_no,  -- 회원번호
+      feed_no     -- 피드번호
+    );
+
 -- 회계
 CREATE TABLE nm_account (
-  account_no        INTEGER      NOT NULL COMMENT '회계 번호', -- 회계 번호
-  bank_no           VARCHAR(50)  NOT NULL COMMENT '계좌번호', -- 계좌번호
+  account_no        INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
   group_no          INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_info_id      INTEGER      NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
   account_type_no   INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
   account_type_name VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
   assets            INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 잔액
@@ -466,11 +487,11 @@ COMMENT '회계';
 ALTER TABLE nm_account
   ADD CONSTRAINT PK_nm_account -- 회계 기본키
     PRIMARY KEY (
-      account_no -- 회계 번호
+      account_no -- 회계번호
     );
 
 ALTER TABLE nm_account
-  MODIFY COLUMN account_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회계 번호';
+  MODIFY COLUMN account_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회계번호';
 
 ALTER TABLE nm_account
   AUTO_INCREMENT = 1;
@@ -642,16 +663,6 @@ ALTER TABLE nm_co
       member_no -- 회원번호
     );
 
--- 소통사진
-ALTER TABLE nm_co_photo
-  ADD CONSTRAINT FK_nm_co_TO_nm_co_photo -- 소통 -> 소통사진
-    FOREIGN KEY (
-      co_no -- 소통번호
-    )
-    REFERENCES nm_co ( -- 소통
-      co_no -- 소통번호
-    );
-
 -- 소통댓글
 ALTER TABLE nm_co_reply
   ADD CONSTRAINT FK_nm_co_TO_nm_co_reply -- 소통 -> 소통댓글
@@ -670,6 +681,16 @@ ALTER TABLE nm_co_reply
     )
     REFERENCES nm_member ( -- 회원
       member_no -- 회원번호
+    );
+
+-- 소통사진
+ALTER TABLE nm_co_photo
+  ADD CONSTRAINT FK_nm_co_TO_nm_co_photo -- 소통 -> 소통사진
+    FOREIGN KEY (
+      co_no -- 소통번호
+    )
+    REFERENCES nm_co ( -- 소통
+      co_no -- 소통번호
     );
 
 -- 소통좋아요
@@ -786,9 +807,9 @@ ALTER TABLE nm_feed
       member_no  -- 회원번호
     );
 
--- 피드게시글댓글
+-- 피드댓글
 ALTER TABLE nm_feed_reply
-  ADD CONSTRAINT FK_nm_feed_TO_nm_feed_reply -- 피드 -> 피드게시글댓글
+  ADD CONSTRAINT FK_nm_feed_TO_nm_feed_reply -- 피드 -> 피드댓글
     FOREIGN KEY (
       feed_no -- 피드번호
     )
@@ -796,9 +817,9 @@ ALTER TABLE nm_feed_reply
       feed_no -- 피드번호
     );
 
--- 피드게시글댓글
+-- 피드댓글
 ALTER TABLE nm_feed_reply
-  ADD CONSTRAINT FK_nm_member_TO_nm_feed_reply -- 회원 -> 피드게시글댓글
+  ADD CONSTRAINT FK_nm_member_TO_nm_feed_reply -- 회원 -> 피드댓글
     FOREIGN KEY (
       member_no -- 회원번호
     )
@@ -806,9 +827,9 @@ ALTER TABLE nm_feed_reply
       member_no -- 회원번호
     );
 
--- 피드게시글사진
+-- 피드사진
 ALTER TABLE nm_feed_photo
-  ADD CONSTRAINT FK_nm_feed_TO_nm_feed_photo -- 피드 -> 피드게시글사진
+  ADD CONSTRAINT FK_nm_feed_TO_nm_feed_photo -- 피드 -> 피드사진
     FOREIGN KEY (
       feed_no -- 피드번호
     )
@@ -816,7 +837,26 @@ ALTER TABLE nm_feed_photo
       feed_no -- 피드번호
     );
 
-    ---여기 밑에는 빼고 하시오====
+-- 피드좋아요
+ALTER TABLE nm_feed_like
+  ADD CONSTRAINT FK_nm_member_TO_nm_feed_like -- 회원 -> 피드좋아요
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES nm_member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 피드좋아요
+ALTER TABLE nm_feed_like
+  ADD CONSTRAINT FK_nm_feed_TO_nm_feed_like -- 피드 -> 피드좋아요
+    FOREIGN KEY (
+      feed_no -- 피드번호
+    )
+    REFERENCES nm_feed ( -- 피드
+      feed_no -- 피드번호
+    );
+
 -- 회계
 ALTER TABLE nm_account
   ADD CONSTRAINT FK_nm_group_TO_nm_account -- 모임 -> 회계
@@ -831,8 +871,8 @@ ALTER TABLE nm_account
 ALTER TABLE nm_account
   ADD CONSTRAINT FK_nm_group_account_TO_nm_account -- 모임계좌 -> 회계
     FOREIGN KEY (
-      bank_no -- 계좌번호
+      bank_info_id -- 모임계좌아이디
     )
     REFERENCES nm_group_account ( -- 모임계좌
-      bank_no -- 계좌번호
+      bank_info_id -- 모임계좌아이디
     );

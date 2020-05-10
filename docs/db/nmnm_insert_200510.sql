@@ -1,3 +1,11 @@
+-- MySQL 데이터베이스 생성
+  CREATE DATABASE nmnmdb
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
+-- 데이터베이스 삭제
+DROP DATABASE nmnmdb;
+
 
 -- 모임 예제
 INSERT INTO nm_group(
@@ -266,6 +274,10 @@ INSERT INTO nm_feed_reply(content,feed_no,member_no)
 INSERT INTO nm_feed_reply(content,feed_no,member_no)
   values('다음엔 저도 갈게요',1,2);  
   
+  -- 피드좋아요 예제
+INSERT INTO nm_feed_like(like_count,member_no,feed_no)
+  values(1,1,1);
+  
 -- 소통예제
 INSERT INTO nm_co(member_no,co_category,title,content)
  values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
@@ -301,43 +313,44 @@ INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
 INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
   values(2,1,1,1); 
  
-  
-  
-  
--- 회계 예제***********8회계insert가 안돼 도와줘 친구드ㄹ아*****
-INSERT INTO nm_account
-(bank_no,
-group_no,
-account_type_no,
-account_type_name,
-assets,
-amount,
-payment_date,
-remarks,
-receipt_photo)
- values('111',1,'유류비',100000,150000,'2020-04-24','비고','receipt.jpg');
- 
- -- 회계 예제***********8회계insert가 안돼 도와줘 친구드ㄹ아*****
-INSERT INTO nm_account
-(
-bank_no,
-group_no,
-account_type_no,
-account_type_name,
-assets,
-amount,
-payment_date,
-remarks,
-receipt_photo)
- values('222',1,2,'술값',100000,150000,'2020-04-24','비고','receipt.jpg');
- 
- 
  
 -- 모임계좌 예제
-INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
-  VALUES('123-4567-7890',1,'우리은행','홍길동');
+INSERT INTO nm_group_account(bank_info_id,bank_account_no,group_no,bank,bank_account_holder)
+  VALUES(1,'123-4567-7890',1,'우리은행','홍길동');
 
-INSERT INTO nm_group_account(bank_no,group_no,bank,account_holder)
-  VALUES('789-765433-12345',2,'기업은행','임꺽정');  
+INSERT INTO nm_group_account(bank_info_id,bank_account_no,group_no,bank,bank_account_holder)
+  VALUES(2,'789-765433-12345',2,'기업은행','임꺽정');   
+  
+  
+-- 회계 예제
+INSERT INTO nm_account
+(
+group_no,
+bank_info_id,
+account_type_no,
+account_type_name,
+assets,
+amount,
+payment_date,
+remarks,
+receipt_photo)
+ values(1,1,1,'유류비',100000,150000,'2020-04-24','비고','receipt.jpg');
+ 
+ -- 회계 예제
+INSERT INTO nm_account
+(
+group_no,
+bank_info_id,
+account_type_no,
+account_type_name,
+assets,
+amount,
+payment_date,
+remarks,
+receipt_photo)
+ values(1,1,2,'술값',100000,150000,'2020-04-24','비고','receipt.jpg');
+ 
+ 
+ 
   
  

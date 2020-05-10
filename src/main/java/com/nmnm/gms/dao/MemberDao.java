@@ -19,6 +19,7 @@ public interface MemberDao {
 
   int update(Member member) throws Exception;
 
+
   int delete(int no) throws Exception;
 
   List<Member> findByKeyword(String keyword) throws Exception;
@@ -28,4 +29,10 @@ public interface MemberDao {
   int send(Message message) throws Exception;
 
   Member sender(int no) throws Exception;
+
+
+  int checkEmail(String email) throws Exception;
+
+  void insertMember(Member member) throws Exception;
+
 }

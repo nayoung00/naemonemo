@@ -1,6 +1,7 @@
 package com.nmnm.gms.service;
 
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
 
@@ -11,6 +12,7 @@ public interface MemberService {
   int delete(int no) throws Exception;
 
   int add(Member member) throws Exception;
+
 
   Member get(int no) throws Exception;
 
@@ -23,4 +25,9 @@ public interface MemberService {
   int send(Message message) throws Exception;
 
   Member sender(int no) throws Exception;
+
+  public void checkEmail(String email, HttpServletResponse response) throws Exception;
+
+
+  int insertMember(Member member, HttpServletResponse response) throws Exception;
 }

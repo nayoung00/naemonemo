@@ -162,4 +162,8 @@ public class Member {
   public void setSns(String sns) {
     this.sns = sns;
   }
+
+  public void insertMember(Member member) {
+    this.insertMember(member);
+  }
 }

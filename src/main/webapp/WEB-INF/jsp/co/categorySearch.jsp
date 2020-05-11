@@ -43,7 +43,7 @@
       <td align="center">${item.category}</td>
       <td align="center">${item.memberNo}</td>
       <td><a
-        href='detail?communicationBoardNo=${item.coNo}'>
+        href='detail?coNo=${item.coNo}'>
           ${item.title}</a></td>
       <td align="center">${item.createDate}</td>
       <td align="center">${item.viewCount}</td>

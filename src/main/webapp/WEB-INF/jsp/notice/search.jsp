@@ -5,10 +5,8 @@
 
 <jsp:include page="../header.jsp"/>
 
-
-  <h1>공지사항 게시글(JSP + EL + JSTL)</h1>
-  <a href='form'>새 글</a><br>
-  <table border='1'>
+  <h1>게시판 검색 결과</h1>
+ <table border='1'>
   <tr>
     <th>번호</th>
     <th>제목</th>
@@ -27,12 +25,10 @@
 </c:forEach>
 
 </table>
-
 <hr>
 <form action='search' method='get'>
 검색어: <input name='keyword' type='text'>
 <button>검색</button>
 </form>
-
 <jsp:include page="../footer.jsp"/>
     

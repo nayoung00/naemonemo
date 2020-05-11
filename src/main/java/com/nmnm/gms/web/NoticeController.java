@@ -66,7 +66,7 @@ public class NoticeController {
     if (noticeService.update(notice) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다." + notice.getNoticeBoardNo()
+      throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다." + notice.getNoticeNo()
       + " " + notice.getTitle());
     }
   }

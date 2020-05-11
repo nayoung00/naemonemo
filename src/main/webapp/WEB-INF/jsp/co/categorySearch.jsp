@@ -39,11 +39,11 @@
   </tr>
   <c:forEach items="${list}" var="item">
     <tr>
-      <td align="center">${item.communicationBoardNo}</td>
+      <td align="center">${item.coNo}</td>
       <td align="center">${item.category}</td>
       <td align="center">${item.memberNo}</td>
       <td><a
-        href='detail?communicationBoardNo=${item.communicationBoardNo}'>
+        href='detail?communicationBoardNo=${item.coNo}'>
           ${item.title}</a></td>
       <td align="center">${item.createDate}</td>
       <td align="center">${item.viewCount}</td>

@@ -6,7 +6,7 @@
 <mapper namespace="com.nmnm.gms.dao.NoticeDao">
 
   <resultMap type="Notice" id="NoticeMap">
-    <id column="notice_board_no"   property="noticeBoardNo"/>
+    <id column="notice_no"   property="noticeNo"/>
     <result column="group_no"  property="groupNo"/>
     <result column="member_no"    property="memberNo"/>
     <result column="title" property="title"/>
@@ -17,7 +17,7 @@
   
    <sql id="select1">
     select 
-      notice_board_no, 
+      notice_no, 
       group_no,
       member_no, 
       title, 
@@ -25,19 +25,19 @@
       create_date, 
       view_count
     from 
-      nm_notice_board
+      nm_notice
   </sql>
   
   
   <select id="findAll" resultMap="NoticeMap">
    <include refid="select1"/>
    order by
-    notice_board_no desc
+    notice_no desc
   </select>
   
   
    <insert id="insert" parameterType="Notice">
-    insert into nm_notice_board(
+    insert into nm_notice(
     group_no,
     member_no, 
     title,
@@ -54,22 +54,23 @@
   <select id="findByNo" resultMap="NoticeMap" parameterType="int">
     <include refid="select1"/>
     where 
-      notice_board_no=#{noticeBoardNo}
+      notice_no=#{noticeNo}
   </select>
   
   <update id="update" parameterType="Notice">
-    update nm_notice_board set
-    group_no=#{groupNo},
-    member_no=#{memberNo},
+    update nm_notice
+    set
+      group_no=#{groupNo},
+      member_no=#{memberNo},
       title=#{title},
       content=#{content}
     where 
-      notice_board_no=#{noticeBoardNo}
+      notice_no=#{noticeNo}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from nm_notice_board
-    where notice_board_no=#{noticeBoardNo}
+    delete from nm_notice
+    where notice_no=#{noticeNo}
   </delete>
   
   <select id="findByKeyword" 
@@ -77,12 +78,13 @@
     parameterType="string">
     <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
     select 
-      notice_board_no, 
+      notice_no, 
       member_no, 
       title, 
+      content,
       create_date, 
       view_count 
-    from nm_notice_board 
+    from nm_notice
     where     
       title like #{keywordPattern} 
       or content like #{keywordPattern} 

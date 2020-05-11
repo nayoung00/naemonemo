@@ -1,22 +1,27 @@
 package com.nmnm.gms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Notice {
+public class Notice implements Serializable{
 
-  private int noticeBoardNo; // PK_nm_notice_board, auto 
-  private int groupNo; // FK_nm_group
-  private int memberNo; // FK_nm_meeting_member
-  private String title; //
-  private String content; //
-  private Date createDate; // now()
-  private int viewCount;
   
-  public int getNoticeBoardNo() {
-    return noticeBoardNo;
+  static final long serialVersionUID = 1L;
+  
+  int noticeNo; // PK_nm_notice, auto 
+  int groupNo; // FK_nm_group
+  int memberNo; // FK_nm_group_member
+  String title; //
+  String content; //
+  Date createDate; // now()
+  int viewCount;
+  
+
+  public int getNoticeNo() {
+    return noticeNo;
   }
-  public void setNoticeBoardNo(int noticeBoardNo) {
-    this.noticeBoardNo = noticeBoardNo;
+  public void setNoticeNo(int noticeNo) {
+    this.noticeNo = noticeNo;
   }
   public int getGroupNo() {
     return groupNo;

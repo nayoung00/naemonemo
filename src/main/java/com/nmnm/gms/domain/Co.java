@@ -2,13 +2,13 @@ package com.nmnm.gms.domain;
 
 import java.util.Date;
 
-public class CommunicationBoard {
-  private int communicationBoardNo; // PK
+public class Co {
+  private int coNo; // PK
   private String category;
   private int memberNo; // FK
   private String title;
   private String content;
-  private Date createDate;
+  private Date createDate; //now()
   private int viewCount;
 
 
@@ -29,12 +29,12 @@ public class CommunicationBoard {
     this.viewCount = viewCount;
   }
 
-  public int getCommunicationBoardNo() {
-    return communicationBoardNo;
+  public int getCoNo() {
+    return coNo;
   }
 
-  public void setCommunicationBoardNo(int communicationBoardNo) {
-    this.communicationBoardNo = communicationBoardNo;
+  public void setCoNo(int communicationBoardNo) {
+    this.coNo = communicationBoardNo;
   }
 
   public int getMemberNo() {

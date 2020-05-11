@@ -280,6 +280,70 @@ INSERT INTO nm_co(member_no,co_category,title,content)
 INSERT INTO nm_co(member_no,co_category,title,content)
  values(3,'구인','일요일 가드 구함','3시 장충동');
  
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(2,'홍보','내일 시간 되시는분','댓글 남겨주세요');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(3,'구인','일요일 가드 구함','3시 장충동');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(2,'홍보','내일 시간 되시는분','댓글 남겨주세요');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(3,'구인','일요일 가드 구함','3시 장충동');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(2,'홍보','내일 시간 되시는분','댓글 남겨주세요');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(3,'구인','일요일 가드 구함','3시 장충동');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(2,'홍보','내일 시간 되시는분','댓글 남겨주세요');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(3,'구인','일요일 가드 구함','3시 장충동');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(2,'홍보','내일 시간 되시는분','댓글 남겨주세요');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(3,'구인','일요일 가드 구함','3시 장충동');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(2,'홍보','내일 시간 되시는분','댓글 남겨주세요');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(3,'구인','일요일 가드 구함','3시 장충동');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(1,'공지','테스트 게시물입니다.','테스트 게시물입니다.');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(2,'홍보','내일 시간 되시는분','댓글 남겨주세요');
+ 
+INSERT INTO nm_co(member_no,co_category,title,content)
+ values(3,'구인','일요일 가드 구함','3시 장충동');
+ 
+ 
 -- 소통댓글 예제
 insert into nm_co_reply(content,co_no,member_no)
 values('무슨 테스트인가요?',1,1);

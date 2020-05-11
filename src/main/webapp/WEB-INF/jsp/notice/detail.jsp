@@ -8,14 +8,14 @@
 
 <c:if test="${not empty notice}">
 <form action='update' method='post'>
-번호: ${notice.noticeBoardNo}<br>
+번호: ${notice.noticeNo}<br>
 제목: ${notice.title}<br>
 내용: <br>
 ${notice.content}<br>
-등록일: ${notice.createDate}<br>
+작성일: ${notice.createDate}<br>
 조회수: ${notice.viewCount}<br>
-<p><a href='delete?noticeBoardNo=${notice.noticeBoardNo}'>삭제</a> 
-<a href='updateForm?noticeBoardNo=${notice.noticeBoardNo}'>변경</a></p>
+<p><a href='delete?noticeNo=${notice.noticeNo}'>삭제</a> 
+<a href='updateForm?noticeNo=${notice.noticeNo}'>변경</a></p>
 </form>
 </c:if>
 

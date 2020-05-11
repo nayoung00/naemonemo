@@ -26,10 +26,10 @@
 
 <c:forEach items="${list}" var="item">
   <tr>
-    <td>${item.communicationBoardNo}</td> 
+    <td>${item.coNo}</td> 
     <td>${item.category}</td> 
     <td>${item.memberNo}</td> 
-    <td><a href='detail?communicationBoardNo=${item.communicationBoardNo}'>=> ${item.title}</a></td>
+    <td><a href='detail?coNo=${item.coNo}'>=> ${item.title}</a></td>
     <td>${item.createDate}</td> 
     <td>${item.viewCount}</td>
   </tr>

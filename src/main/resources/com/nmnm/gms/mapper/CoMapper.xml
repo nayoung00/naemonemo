@@ -3,13 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nmnm.gms.dao.CommunicationBoardDao">
+<mapper namespace="com.nmnm.gms.dao.CoDao">
 
-	<resultMap type="CommunicationBoard"
-		id="CommunicationBoardMap">
-		<id column="communication_board_no" property="communicationBoardNo" />
-		<result column="communication_board_category"
-			property="category" />
+	<resultMap type="Co"
+		id="CoMap">
+		<id column="co_no" property="coNo" />
+		<result column="co_category" property="category" />
 		<result column="member_no" property="memberNo" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
@@ -19,35 +18,35 @@
 
 	<sql id="select1">
 		select
-		communication_board_no,
-		communication_board_category,
+		co_no,
+		co_category,
 		member_no,
 		title,
 		content,
 		create_date,
 		view_count
 		from
-		nm_communication_board
+		nm_co
 	</sql>
 
-	<select id="findAll" resultMap="CommunicationBoardMap">
+	<select id="findAll" resultMap="CoMap">
 		<include refid="select1" />
 		order by
-		communication_board_no desc
+		co_no desc
 	</select>
 
-	<insert id="insert" parameterType="CommunicationBoard">
+	<insert id="insert" parameterType="Co">
 		insert into
-		nm_communication_board(
-		communication_board_no,
-		communication_board_category,
+		nm_co(
+		co_no,
+		co_category,
 		member_no,
 		title,
 		content,
 		view_count
 		)
 		values(
-		#{communicationBoardNo},
+		#{coNo},
 		#{category},
 		#{memberNo},
 		#{title},
@@ -56,52 +55,52 @@
 		)
 	</insert>
 
-	<select id="findByNo" resultMap="CommunicationBoardMap"
+	<select id="findByNo" resultMap="CoMap"
 		parameterType="int">
 		<include refid="select1" />
 		where
-		communication_board_no=#{communicationBoardNo}
+		co_no=#{coNo}
 	</select>
 
-	<update id="update" parameterType="CommunicationBoard">
-		update nm_communication_board
+	<update id="update" parameterType="Co">
+		update nm_co
 		set
-		communication_board_category=#{category},
+		co_category=#{category},
 		title=#{title},
 		content=#{content}
-		where communication_board_no=#{communicationBoardNo}
+		where co_no=#{coNo}
 	</update>
 
 	<delete id="delete" parameterType="int">
 		delete from
-		nm_communication_board
+		nm_co
 		where
-		communication_board_no=#{communicationBoardNo}
+		co_no=#{coNo}
 	</delete>
 
-	<select id="findByKeyword" resultMap="CommunicationBoardMap"
+	<select id="findByKeyword" resultMap="CoMap"
 		parameterType="string">
 		<bind name="keywordPattern" value="'%' + _parameter + '%'" />
 		select
-		communication_board_no,
-		communication_board_category,
+		co_no,
+		co_category,
 		member_no,
 		title,
 		create_date,
 		view_count
-		from nm_communication_board
+		from nm_co
 		where
 		title like
 		#{keywordPattern}
 		or content like #{keywordPattern}
 	</select>
 
-	<select id="findByCategory" resultMap="CommunicationBoardMap"
+	<select id="findByCategory" resultMap="CoMap"
 		parameterType="string">
 		<bind name="keyword2Pattern" value="'%' + _parameter + '%'" />
 		<include refid="select1" />
 		where
-		communication_board_category like #{keyword2Pattern}
+		co_category like #{keyword2Pattern}
 	</select>
 
 
@@ -122,13 +121,13 @@
 
 
 
-	<select id="selectboardList" resultType="communicationBoard">
+	<select id="selectboardList" resultType="co">
 		select *
 		from (
 		select rownum rno, content.*
 		from content
 		<include refid="criteria"></include>
-		order by communication_board_no desc )
+		order by co_no desc )
 		where rno
 		between
 		(#{pageNum}-1)*#{amount}+1 and (#{pageNum})*#{amount}

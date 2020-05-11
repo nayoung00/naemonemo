@@ -1,11 +1,3 @@
--- MySQL 데이터베이스 생성
-  CREATE DATABASE nmnmdb
-  DEFAULT CHARACTER SET utf8
-  DEFAULT COLLATE utf8_general_ci;
-
--- 데이터베이스 삭제
-DROP DATABASE nmnmdb;
-
 
 -- 모임 예제
 INSERT INTO nm_group(

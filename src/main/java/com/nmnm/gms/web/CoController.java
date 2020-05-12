@@ -1,6 +1,5 @@
 package com.nmnm.gms.web;
 
-import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.nmnm.gms.Criteria;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.service.CoService;
 
@@ -50,10 +50,24 @@ public class CoController {
     model.addAttribute("co", co);
   }
 
+  // @GetMapping("list")
+  // public void list(Model model) throws Exception {
+  // List<Co> cos = coService.list();
+  // model.addAttribute("list", cos);
+  // }
+
   @GetMapping("list")
-  public void list(Model model) throws Exception {
-    List<Co> cos = coService.list();
-    model.addAttribute("list", cos);
+  public void list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+      @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+
+    // 전체 게시글 갯수
+    int listCnt = coService.listCnt();
+
+    // Pagination 객체생성
+    Pagination pagination = new Pagination();
+    pagination.pageInfo(page, range, listCnt);
+    model.addAttribute("pagination", pagination);
+    model.addAttribute("list", coService.list(pagination));
   }
 
   @GetMapping("updateForm")
@@ -66,8 +80,7 @@ public class CoController {
     if (coService.update(co) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("변경할 게시물 번호가 유효하지 않습니다." + co.getCoNo()
-          + " " + co.getTitle());
+      throw new Exception("변경할 게시물 번호가 유효하지 않습니다." + co.getCoNo() + " " + co.getTitle());
     }
   }
 
@@ -80,10 +93,4 @@ public class CoController {
   public void categorySearch(String keyword2, Model model) throws Exception {
     model.addAttribute("list", coService.categorySearch(keyword2));
   }
-
-  @GetMapping("/co") // 게시판 호출(게시판글 리스트와 페이징정보)
-  public void getCommunicationBoardPage(Criteria cri, Model model) {
-
-  }
-
 }

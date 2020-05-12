@@ -2,6 +2,7 @@ package com.nmnm.gms.service.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
+import com.nmnm.gms.Pagination;
 import com.nmnm.gms.dao.CoDao;
 import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.service.CoService;
@@ -23,6 +24,16 @@ public class CoServiceImpl implements CoService {
   @Override
   public List<Co> list() throws Exception {
     return coDao.findAll();
+  }
+
+  @Override
+  public List<Co> list(Pagination pagination) throws Exception {
+    return coDao.findAll(pagination);
+  }
+
+  @Override
+  public int listCnt() throws Exception {
+    return coDao.listCnt();
   }
 
   @Override
@@ -49,4 +60,15 @@ public class CoServiceImpl implements CoService {
   public List<Co> categorySearch(String keyword2) throws Exception {
     return coDao.findByCategory(keyword2);
   }
+
+  // 페이징
+  @Override
+  public Co getCoContent(int bid) throws Exception {
+    Co co = new Co();
+    coDao.updateViewCnt(bid);
+    return co;
+  }
+
+
+
 }

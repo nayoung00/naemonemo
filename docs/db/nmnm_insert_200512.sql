@@ -388,9 +388,10 @@ account_type_name,
 assets,
 amount,
 payment_date,
+account_connection,
 remarks,
 receipt_photo)
- values(1,1,1,'유류비',100000,150000,'2020-04-24','비고','receipt.jpg');
+ values(1,1,1,'유류비',100000,150000,'2020-04-24','여비교통비', '비고','receipt.jpg');
  
  -- 회계 예제
 INSERT INTO nm_account
@@ -402,9 +403,10 @@ account_type_name,
 assets,
 amount,
 payment_date,
+account_connection
 remarks,
 receipt_photo)
- values(1,1,2,'술값',100000,150000,'2020-04-24','비고','receipt.jpg');
+ values(1,1,2,'술값',100000,150000,'2020-04-24','회의비', '비고','receipt.jpg');
  
  
  

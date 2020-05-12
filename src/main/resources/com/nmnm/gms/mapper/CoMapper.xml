@@ -31,9 +31,18 @@
 
 	<select id="findAll" resultMap="CoMap">
 		<include refid="select1" />
-		order by
-		co_no desc
+		order by 
+		co_no desc 
+		limit #{startList}, #{listSize}
 	</select>
+	
+	<select id="listCnt" resultType="int">
+    select 
+      count(*) as listCnt 
+    from 
+      nm_co
+  </select>
+
 
 	<insert id="insert" parameterType="Co">
 		insert into
@@ -103,40 +112,5 @@
 		co_category like #{keyword2Pattern}
 	</select>
 
-
-
-	<sql id="criteria">
-		<trim prefix="and(" suffix=") " prefixOverrides="OR">
-			<foreach item='type' collection="typeArr">
-				<trim prefix="OR">
-					<choose>
-						<when test="type== 'T'.toString()"> post_title like '%' || #{keyword}||'%' </when>
-						<when test="type== 'C'.toString()"> post_content like '%' || #{keyword}||'%' </when>
-						<when test="type== 'W'.toString()"> post_writer like '%' || #{keyword}||'%' </when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-	</sql>
-
-
-
-	<select id="selectboardList" resultType="co">
-		select *
-		from (
-		select rownum rno, content.*
-		from content
-		<include refid="criteria"></include>
-		order by co_no desc )
-		where rno
-		between
-		(#{pageNum}-1)*#{amount}+1 and (#{pageNum})*#{amount}
-	</select>
-
-	<select id="countTotal" resultType="int">
-		select count(*) 
-		from content 
-		<include refid="criteria"></include>
-	</select>
 
 </mapper>

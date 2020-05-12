@@ -9,6 +9,9 @@ DROP DATABASE nmnmdb;
 USE nmnmdb;
 
 
+
+
+
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
@@ -481,16 +484,17 @@ ALTER TABLE nm_feed_like
 
 -- 회계
 CREATE TABLE nm_account (
-  account_no        INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
-  group_no          INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
-  bank_info_id      INTEGER      NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
-  account_type_no   INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
-  account_type_name VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
-  assets            INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 잔액
-  amount            INTEGER      NOT NULL COMMENT '금액', -- 금액
-  payment_date      DATE         NOT NULL COMMENT '거래일', -- 거래일
-  remarks           TEXT         NULL     COMMENT '비고', -- 비고
-  receipt_photo     VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
+  account_no         INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
+  group_no           INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_info_id       INTEGER      NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
+  account_type_no    INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
+  account_type_name  VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
+  assets             INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 잔액
+  amount             INTEGER      NOT NULL COMMENT '금액', -- 금액
+  payment_date       DATE         NOT NULL COMMENT '거래일', -- 거래일
+  account_connection TEXT         NOT NULL COMMENT '거래처', -- 거래처
+  remarks            TEXT         NULL     COMMENT '비고', -- 비고
+  receipt_photo      VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
 )
 COMMENT '회계';
 

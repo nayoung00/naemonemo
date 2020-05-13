@@ -49,128 +49,122 @@ INSERT INTO nm_member(
 member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
-sns) 
+sns,
+address) 
 values(
 '오승우',
 'abc.jpg',
 '1998-10-20',
-'남자',
 'fivewincow@gmail.com',
-'010-3002-0169',
 '1111',
 '열심히',
 '코딩',
 '오승우',1,
-'페이스북');
+'페이스북', 
+'강남구 비트캠프');
 
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
-sns) 
-values('손진영',
-'a.jpg',
-'1993-11-11',
-'남자',
-'mrHand@gmail.com',
-'010-2222-0119',
+sns,
+address) 
+values(
+'손진영',
+'abc.jpg',
+'1998-10-20',
+'jyson19@gmail.com',
 '1111',
 '열심히',
-'업종/직무',
-'손타쿠',1,
-'인스타그램');
+'코딩',
+'손진영',1,
+'페이스북', 
+'강남구 비트캠프');
 
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
-sns) 
-values('신나라', 
-'photo.jpg', 
-'1988-4-9', 
-'여자', 
-'test@gmail.com', 
-'010-6823-5479', 
-'1111', 
-'곰비둘기입니다.', 
-'게임/오락', 
-'곰비둘기',1,
-'instagram.com/gramrabbitbear');
+sns,
+address) 
+values(
+'신나라',
+'abc.jpg',
+'1998-10-20',
+'narashin547@gmail.com',
+'1111',
+'열심히',
+'코딩',
+'신나라',1,
+'페이스북', 
+'강남구 비트캠프');
  
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
-sns) 
-values('김나영', 
+sns,
+address) 
+values(
+'김나영', 
 'photo1.jpg', 
-'2000-4-9', 
-'여자', 
+'2000-2-2',
 'test1@gmail.com', 
-'010-1111-1111', 
 '2222', 
 '김나영입니다.', 
 '댄스/무용', 
 '나사김',1,
-'instagram.com/test');
+'instagram.com/test',
+'강남구 비트캠프');
 
 
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
-sns) 
-values('이선경', 
+sns,
+address) 
+values(
+'이선경', 
 'photo3.jpg', 
 '2000-2-2', 
-'여자', 
 'test3@gmail.com', 
-'010-1113-1111', 
 '4444', 
 '이선경입니다.', 
 '공예/만들기', 
 '선경삼',1,
-'instagram.com/test4');
+'instagram.com/test4',
+'강남구 비트캠프');
 
   
 

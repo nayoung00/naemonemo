@@ -22,7 +22,7 @@ div.container {
 
 	background: white;
 	border: 1px solid gray;
-	width: 1000px;
+	width: 2000px;
 	
 }
 </style>

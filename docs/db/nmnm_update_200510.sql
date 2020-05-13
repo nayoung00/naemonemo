@@ -6,8 +6,8 @@ DROP DATABASE nmnmdb;
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 
+-- 데이터베이스 사용
 USE nmnmdb;
-
 
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
@@ -513,9 +513,7 @@ CREATE TABLE nm_member (
   member_name    VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
   id_photo       VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
   birthday       DATE         NOT NULL COMMENT '생년월일', -- 생년월일
-  gender         VARCHAR(10)  NOT NULL COMMENT '성별', -- 성별
   email          VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-  tel            VARCHAR(30)  NOT NULL COMMENT '휴대폰번호', -- 휴대폰번호
   password       VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
   intro          TEXT         NULL     COMMENT '한줄소개', -- 한줄소개
   interest       VARCHAR(20)  NOT NULL COMMENT '관심사', -- 관심사
@@ -523,7 +521,8 @@ CREATE TABLE nm_member (
   account_status VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '상태', -- 상태
   withdraw       VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '회원탈퇴', -- 회원탈퇴
   sns            VARCHAR(255) NULL     COMMENT 'sns', -- sns
-  create_date    DATETIME     NOT NULL DEFAULT now() COMMENT '가입일' -- 가입일
+  create_date    DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
+  address        VARCHAR(255) NOT NULL COMMENT '주소' -- 주소
 )
 COMMENT '회원';
 
@@ -534,16 +533,16 @@ ALTER TABLE nm_member
       member_no -- 회원번호
     );
 
--- 회원 유니크 인덱스
-CREATE UNIQUE INDEX UIX_nm_member
-  ON nm_member ( -- 회원
-    tel ASC -- 휴대폰번호
-  );
-
--- 회원 유니크 인덱스2
+-- 회원 유니크 닉네임
 CREATE UNIQUE INDEX UIX_nm_member2
   ON nm_member ( -- 회원
     nickname ASC -- 닉네임
+  );
+
+-- 회원 유니크 이메일
+CREATE UNIQUE INDEX UIX_nm_member
+  ON nm_member ( -- 회원
+    email ASC -- 이메일
   );
 
 ALTER TABLE nm_member

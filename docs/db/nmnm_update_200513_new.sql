@@ -218,11 +218,7 @@ CREATE TABLE nm_group_account (
   bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
   group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
-<<<<<<< HEAD:docs/db/nmnm_update_200512.sql
   bank_name                VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
-=======
-  bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
->>>>>>> upstream/master:docs/db/nmnm_update_200513_new.sql
   bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임계좌';

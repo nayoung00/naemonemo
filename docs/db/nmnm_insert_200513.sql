@@ -55,8 +55,7 @@ intro,
 interest,     
 nickname,      
 withdraw,
-sns,
-address) 
+sns) 
 values(
 '오승우',
 'abc.jpg',
@@ -66,8 +65,7 @@ values(
 '열심히',
 '코딩',
 '오승우',1,
-'페이스북', 
-'강남구 비트캠프');
+'페이스북');
 
 INSERT INTO nm_member(
 member_name, 
@@ -79,8 +77,7 @@ intro,
 interest,     
 nickname,      
 withdraw,
-sns,
-address) 
+sns) 
 values(
 '손진영',
 'abc.jpg',
@@ -90,8 +87,7 @@ values(
 '열심히',
 '코딩',
 '손진영',1,
-'페이스북', 
-'강남구 비트캠프');
+'페이스북');
 
 INSERT INTO nm_member(
 member_name, 
@@ -103,8 +99,7 @@ intro,
 interest,     
 nickname,      
 withdraw,
-sns,
-address) 
+sns) 
 values(
 '신나라',
 'abc.jpg',
@@ -114,8 +109,7 @@ values(
 '열심히',
 '코딩',
 '신나라',1,
-'페이스북', 
-'강남구 비트캠프');
+'페이스북');
  
 INSERT INTO nm_member(
 member_name, 
@@ -127,19 +121,17 @@ intro,
 interest,     
 nickname,      
 withdraw,
-sns,
-address) 
+sns) 
 values(
 '김나영', 
 'photo1.jpg', 
 '2000-2-2',
-'test1@gmail.com', 
+'invin1201@gmail.com', 
 '2222', 
 '김나영입니다.', 
 '댄스/무용', 
 '나사김',1,
-'instagram.com/test',
-'강남구 비트캠프');
+'instagram.com/test');
 
 
 INSERT INTO nm_member(
@@ -152,21 +144,39 @@ intro,
 interest,     
 nickname,      
 withdraw,
-sns,
-address) 
+sns) 
 values(
 '이선경', 
 'photo3.jpg', 
 '2000-2-2', 
-'test3@gmail.com', 
+'esun1801@naver.com', 
 '4444', 
 '이선경입니다.', 
 '공예/만들기', 
 '선경삼',1,
-'instagram.com/test4',
-'강남구 비트캠프');
+'instagram.com/test4');
 
-  
+INSERT INTO nm_member(
+member_name, 
+id_photo, 
+birthday,     
+email,       
+password,      
+intro,      
+interest,     
+nickname,      
+withdraw,
+sns) 
+values(
+'김티모', 
+'teemo.jpg', 
+'2000-2-2', 
+'test@test.com', 
+'1111', 
+'정찰대입니다.', 
+'격투', 
+'티모',1,
+'instagram.com/test');
 
 -- 모임 회원 예제
 INSERT INTO nm_group_member(group_no,member_no,grade_no)

@@ -9,6 +9,7 @@ DROP DATABASE nmnmdb;
 -- 데이터베이스 사용
 USE nmnmdb;
 
+
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
@@ -521,8 +522,7 @@ CREATE TABLE nm_member (
   account_status VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '상태', -- 상태
   withdraw       VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '회원탈퇴', -- 회원탈퇴
   sns            VARCHAR(255) NULL     COMMENT 'sns', -- sns
-  create_date    DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
-  address        VARCHAR(255) NOT NULL COMMENT '주소' -- 주소
+  create_date    DATETIME     NOT NULL DEFAULT now() COMMENT '가입일' -- 가입일
 )
 COMMENT '회원';
 

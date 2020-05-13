@@ -7,15 +7,17 @@ import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Account;
 import com.nmnm.gms.service.AccountService;
 
-// @Controller
-// @RequestMapping("/account")
+@Controller
+@RequestMapping("/account")
 public class AccountController {
 
   static Logger logger = LogManager.getLogger(AccountController.class);

@@ -6,7 +6,7 @@
 
 <h1>회계 입력(JSP)</h1>
 <form action='add' method='post' enctype='multipart/form-data'>
-계좌번호: <input name='bankNo' type='text'><br>
+계좌번호: <input name='bankInfoNo' type='text'><br>
 회계유형명: <input name='accountTypeName' type='text'><br>
 거래일: <input name='paymentDate' type='date'><br>
 금액: <input name='amount' type='text'><br>

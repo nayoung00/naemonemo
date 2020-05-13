@@ -7,8 +7,8 @@
 
   <resultMap type="Account" id="AccountMap">
     <id column="account_no"   property="accountNo"/>
-    <result column="bank_no"  property="bankNo"/>
     <result column="group_no"    property="groupNo"/>
+    <result column="bank_info_id"  property="bankInfoId"/>
     <result column="account_type_no" property="accountTypeNo"/>
     <result column="account_type_name" property="accountTypeName"/>
     <result column="assets" property="assets"/>
@@ -22,14 +22,15 @@
    <sql id="select1">
     select 
       account_no, 
-      bank_no,
       group_no, 
+      bank_info_id, 
       account_type_no, 
       account_type_name, 
       assets, 
-      amount,
-      payment_date,
-      remarks,
+      amount, 
+      payment_date, 
+      account_connection, 
+      remarks, 
       receipt_photo
     from 
       nm_account
@@ -45,21 +46,27 @@
   
    <insert id="insert" parameterType="Account">
     insert into nm_account(
-      bank_no,
+      group_no, 
+      bank_info_id, 
+      account_type_no, 
       account_type_name, 
       assets, 
-      amount,
-      payment_date,
-      remarks,
+      amount, 
+      payment_date, 
+      account_connection, 
+      remarks, 
       receipt_photo) 
     values(
-    #{bankNo},
-    #{accountTypeName},
-    #{assets},
-    #{amount},
-    #{paymentDate},
-    #{remarks},
-    #{receiptPhoto})
+      #{groupNo}, 
+      #{bankInfoId}, 
+      #{accountTypeNo}, 
+      #{accountTypeName}, 
+      #{assets}, 
+      #{amount}, 
+      #{paymentDate}, 
+      #{accountConnection}, 
+      #{remarks}, 
+      #{receiptPhoto})
   </insert>
   
  
@@ -72,12 +79,13 @@
   
   <update id="update" parameterType="Account">
     update nm_account set
-    
-      bank_no=#{bankNo},
+      bank_info_no=#{bankInfoNo},
+      account_type_no=#{accountTypeNo},
       account_type_name=#{accountTypeName},
       assets=#{assets},
       amount=#{amount},
       payment_date=#{paymentDate},
+      account_connection=#{accountConnection},
       remarks=#{remarks},
       receipt_photo=#{receiptPhoto} 
     where 
@@ -93,22 +101,11 @@
     resultMap="AccountMap" 
     parameterType="string">
     <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
-     select 
-      account_no, 
-      bank_no,
-      group_no, 
-      account_type_no, 
-      account_type_name, 
-      assets, 
-      amount,
-      payment_date,
-      remarks,
-      receipt_photo
-    from 
-      nm_account
+  <include refid="select1"/>
     where     
       account_type_name like #{keywordPattern} 
-      or remark like #{keywordPattern} 
+      or account_connection like #{keywordPattern}
+      or remarks like #{keywordPattern} 
   </select>
   
 </mapper>

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Group {
 
-  private int groupNo; // pk, auto 모임 번호
+  public int groupNo; // pk, auto 모임 번호
   private String groupName; // 모임 이름
   private String groupInfo; // 모임 설명
   private String groupForm; // 모임 형태 (온라인 or 오프라인)

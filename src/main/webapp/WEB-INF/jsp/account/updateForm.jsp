@@ -8,13 +8,13 @@
 
 <form action='update' method='post'>
 번호: <input name='accountNo' type='text' readonly value='${account.accountNo}'><br>
-계좌번호: <input name='bankNo' type='text'><br>
-회계유형명: <input name='accountTypeName' type='text'}'><br>
-거래일: <input name='paymentDate' type='text'}'><br>
+계좌번호: <input name='bankInfoNo' type='text'><br>
+회계유형명: <input name='accountTypeName' type='text'><br>
+거래일: <input name='paymentDate' type='text'><br>
 금액: <input name='amount' type='text'><br>
 비고: <input name='remarks' type='text'><br>
 잔액: <input name='assets' type='text'><br>
-영수증: <input name='receiptPhoto' type='file''><br>
+영수증: <input name='receiptPhoto' type='file'><br>
 <p><button>변경</button>
 <input type='submit' value='upload'/><br>
 </form>

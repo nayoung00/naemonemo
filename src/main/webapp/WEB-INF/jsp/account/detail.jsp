@@ -10,7 +10,7 @@
 <form action='update' method='post' enctype='multipart/form-data'>
 <img src='${pageContext.servletContext.contextPath}/upload/accoutphoto/${account.receiptPhoto}' height='80'><br>
 번호: <input name='accountNo' type='text' readonly value='${account.accountNo}'><br>
-계좌번호: <input name='bankNo' type='text' value='${account.bankNo}'><br>
+계좌번호: <input name='bankInfoNo' type='text' value='${account.bankNo}'><br>
 회계유형명: <input name='accountTypeName' type='text' value='${account.accountTypeName}'><br>
 거래일: <input name='paymentDate' type='text' value='${account.paymentDate}'><br>
 금액: <input name='amount' type='text' value='${account.amount}'><br>

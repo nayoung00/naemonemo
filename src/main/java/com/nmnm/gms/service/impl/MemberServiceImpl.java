@@ -2,7 +2,6 @@ package com.nmnm.gms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.MemberDao;
 import com.nmnm.gms.domain.Member;
@@ -12,7 +11,6 @@ import com.nmnm.gms.service.MemberService;
 @Component
 public class MemberServiceImpl implements MemberService {
 
-  private SqlSession session;
 
   MemberDao memberDao;
 

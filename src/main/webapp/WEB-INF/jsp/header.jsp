@@ -45,7 +45,7 @@ div.container {
       <a class='nav-link' href='../feed/list'>피드</a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='../communicationBoard/list'>소통게시판</a>
+      <a class='nav-link' href='../co/list'>소통게시판</a>
     </li>
     <li class='nav-item'>
       <a class='nav-link' href='../member/list'>회원</a>

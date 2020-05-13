@@ -49,9 +49,7 @@ INSERT INTO nm_member(
 member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
@@ -62,84 +60,73 @@ values(
 '오승우',
 'abc.jpg',
 '1998-10-20',
-'남자',
 'fivewincow@gmail.com',
-'010-3002-0169',
 '1111',
 '열심히',
 '코딩',
 '오승우',1,
 '페이스북');
 
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
 sns) 
-values('손진영',
-'a.jpg',
-'1993-11-11',
-'남자',
-'mrHand@gmail.com',
-'010-2222-0119',
+values(
+'손진영',
+'abc.jpg',
+'1998-10-20',
+'jyson19@gmail.com',
 '1111',
 '열심히',
-'업종/직무',
-'손타쿠',1,
-'인스타그램');
+'코딩',
+'손진영',1,
+'페이스북');
 
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
 sns) 
-values('신나라', 
-'photo.jpg', 
-'1988-4-9', 
-'여자', 
-'test@gmail.com', 
-'010-6823-5479', 
-'1111', 
-'곰비둘기입니다.', 
-'게임/오락', 
-'곰비둘기',1,
-'instagram.com/gramrabbitbear');
+values(
+'신나라',
+'abc.jpg',
+'1998-10-20',
+'narashin547@gmail.com',
+'1111',
+'열심히',
+'코딩',
+'신나라',1,
+'페이스북');
  
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
 sns) 
-values('김나영', 
+values(
+'김나영', 
 'photo1.jpg', 
-'2000-4-9', 
-'여자', 
-'test1@gmail.com', 
-'010-1111-1111', 
+'2000-2-2',
+'invin1201@gmail.com', 
 '2222', 
 '김나영입니다.', 
 '댄스/무용', 
@@ -147,32 +134,50 @@ values('김나영',
 'instagram.com/test');
 
 
-INSERT INTO nm_member
-(member_name, 
+INSERT INTO nm_member(
+member_name, 
 id_photo, 
 birthday,     
-gender,     
 email,       
-tel,        
 password,      
 intro,      
 interest,     
 nickname,      
 withdraw,
 sns) 
-values('이선경', 
+values(
+'이선경', 
 'photo3.jpg', 
 '2000-2-2', 
-'여자', 
-'test3@gmail.com', 
-'010-1113-1111', 
+'esun1801@naver.com', 
 '4444', 
 '이선경입니다.', 
 '공예/만들기', 
 '선경삼',1,
 'instagram.com/test4');
 
-  
+INSERT INTO nm_member(
+member_name, 
+id_photo, 
+birthday,     
+email,       
+password,      
+intro,      
+interest,     
+nickname,      
+withdraw,
+sns) 
+values(
+'김티모', 
+'teemo.jpg', 
+'2000-2-2', 
+'test@test.com', 
+'1111', 
+'정찰대입니다.', 
+'격투', 
+'티모',1,
+'instagram.com/test');
+
 
 -- 모임 회원 예제
 INSERT INTO nm_group_member(group_no,member_no,grade_no)
@@ -374,9 +379,13 @@ INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
 INSERT INTO nm_group_account(bank_info_id,group_no,bank_account_no,bank_name,bank_account_holder)
   VALUES(1,1,'123-4567-7890','우리은행','홍길동');
 
+
 INSERT INTO nm_group_account(bank_info_id,group_no,bank_account_no,bank_name,bank_account_holder)
   VALUES(2,1,'789-765433-12345','기업은행','임꺽정');   
-  
+ 
+
+
+
   
 -- 회계 예제
 INSERT INTO nm_account
@@ -393,7 +402,7 @@ remarks,
 receipt_photo)
  values(1,1,1,'유류비',100000,150000,'2020-04-24','강남주유소', '비고','receipt.jpg');
  
- -- 회계 예제
+-- 회계 예제
 INSERT INTO nm_account
 (
 group_no,
@@ -408,7 +417,22 @@ remarks,
 receipt_photo)
  values(1,1,2,'술값',100000,150000,'2020-04-24','금문도', '비고','receipt.jpg');
  
+
  
+ -- 회계 예제
+INSERT INTO nm_account
+(
+group_no,
+bank_info_id,
+account_type_no,
+account_type_name,
+assets,
+amount,
+payment_date,
+account_connection, 
+remarks,
+receipt_photo)
+ values(1,1,2,'술값',100000,150000,'2020-04-24','금문도', '비고','receipt.jpg');
  
   
  

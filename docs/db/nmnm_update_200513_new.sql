@@ -10,8 +10,6 @@ USE nmnmdb;
 
 
 
-
-
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
@@ -220,7 +218,11 @@ CREATE TABLE nm_group_account (
   bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
   group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
+<<<<<<< HEAD:docs/db/nmnm_update_200512.sql
   bank_name                VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
+=======
+  bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
+>>>>>>> upstream/master:docs/db/nmnm_update_200513_new.sql
   bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임계좌';
@@ -517,9 +519,7 @@ CREATE TABLE nm_member (
   member_name    VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
   id_photo       VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
   birthday       DATE         NOT NULL COMMENT '생년월일', -- 생년월일
-  gender         VARCHAR(10)  NOT NULL COMMENT '성별', -- 성별
   email          VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-  tel            VARCHAR(30)  NOT NULL COMMENT '휴대폰번호', -- 휴대폰번호
   password       VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
   intro          TEXT         NULL     COMMENT '한줄소개', -- 한줄소개
   interest       VARCHAR(20)  NOT NULL COMMENT '관심사', -- 관심사
@@ -541,7 +541,7 @@ ALTER TABLE nm_member
 -- 회원 유니크 인덱스
 CREATE UNIQUE INDEX UIX_nm_member
   ON nm_member ( -- 회원
-    tel ASC -- 휴대폰번호
+    email ASC -- 이메일
   );
 
 -- 회원 유니크 인덱스2

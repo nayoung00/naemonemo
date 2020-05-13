@@ -1,48 +1,42 @@
 package com.nmnm.gms.domain;
 
 public class GroupAccount {
-  String bankNo; // 계좌 번호 PK
-  int groupNo; // 모임 번호 fk
-  String bank; // 은행 이름
-  String accountHolder; // 예금주
 
-  @Override
-  public String toString() {
-    return "GroupAccount [bankNo=" + bankNo + ", groupNo=" + groupNo + ", bank=" + bank
-        + ", accountHolder=" + accountHolder + "]";
+  private int bankInfoId; // 모임계좌아이디, 모임회계pk
+  private String bankAccountNo; // 계좌번호
+  private String bankName; // 은행명
+  private String bankAccountHolder; // 예금주
+
+
+  public int getBankInfoId() {
+    return bankInfoId;
   }
 
-  public String getBankNo() {
-    return bankNo;
+  public void setBankInfoId(int bankInfoId) {
+    this.bankInfoId = bankInfoId;
   }
 
-  public void setBankNo(String bankNo) {
-    this.bankNo = bankNo;
+  public String getBankAccountNo() {
+    return bankAccountNo;
   }
 
-  public int getGroupNo() {
-    return groupNo;
+  public void setBankAccountNo(String bankAccountNo) {
+    this.bankAccountNo = bankAccountNo;
   }
 
-  public void setGroupNo(int groupNo) {
-    this.groupNo = groupNo;
+  public String getBankName() {
+    return bankName;
   }
 
-  public String getBank() {
-    return bank;
+  public void setBankName(String bankName) {
+    this.bankName = bankName;
   }
 
-  public void setBank(String bank) {
-    this.bank = bank;
+  public String getBankAccountHolder() {
+    return bankAccountHolder;
   }
 
-  public String getAccountHolder() {
-    return accountHolder;
+  public void setBankAccountHolder(String bankAccountHolder) {
+    this.bankAccountHolder = bankAccountHolder;
   }
-
-  public void setAccountHolder(String accountHolder) {
-    this.accountHolder = accountHolder;
-  }
-
-
 }

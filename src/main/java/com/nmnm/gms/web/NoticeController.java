@@ -36,8 +36,8 @@ public class NoticeController {
   }
   
   @GetMapping("delete")
-  public String delete(int noticeNo) throws Exception {
-    if (noticeService.delete(noticeNo) > 0) {
+  public String delete(int noticeBoardNo) throws Exception {
+    if (noticeService.delete(noticeBoardNo) > 0) {
       return "redirect:list";
     } else {
       throw new Exception("삭제할 공지사항 번호가 유효하지 않습니다.");
@@ -45,8 +45,8 @@ public class NoticeController {
   }
 
   @GetMapping("detail")
-  public void detail(int noticeNo, Model model) throws Exception {
-    Notice notice = noticeService.get(noticeNo);
+  public void detail(int noticeBoardNo, Model model) throws Exception {
+    Notice notice = noticeService.get(noticeBoardNo);
     model.addAttribute("notice", notice);
   }
 
@@ -57,8 +57,8 @@ public class NoticeController {
   }
 
   @GetMapping("updateForm")
-  public void updateForm(int noticeNo, Model model) throws Exception {
-    model.addAttribute("notice", noticeService.get(noticeNo));
+  public void updateForm(int noticeBoardNo, Model model) throws Exception {
+    model.addAttribute("notice", noticeService.get(noticeBoardNo));
   }
 
   @PostMapping("update")
@@ -66,7 +66,7 @@ public class NoticeController {
     if (noticeService.update(notice) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다." + notice.getNoticeNo()
+      throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다." + notice.getNoticeBoardNo()
       + " " + notice.getTitle());
     }
   }

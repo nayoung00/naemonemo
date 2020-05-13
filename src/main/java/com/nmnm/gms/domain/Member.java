@@ -9,37 +9,17 @@ public class Member {
   private String name;
   private String photo;
   private Date birthday;
-  private String gender;
   private String email;
-  private String tel;
   private String password;
   private String intro;
   private String interest;
   private String nickname;
+  private String address;
   private int accountStatus;
   private int withdraw;
   private String sns;
   private Date createDate;
-
   private List<Message> message;
-
-
-  public List<Message> getMessage() {
-    return message;
-  }
-
-  public void setMessage(List<Message> message) {
-    this.message = message;
-  }
-
-  @Override
-  public String toString() {
-    return "Member [no=" + no + ", name=" + name + ", photo=" + photo + ", birthday=" + birthday
-        + ", gender=" + gender + ", email=" + email + ", tel=" + tel + ", password=" + password
-        + ", intro=" + intro + ", interest=" + interest + ", nickname=" + nickname
-        + ", accountStatus=" + accountStatus + ", withdraw=" + withdraw + ", sns=" + sns
-        + ", createDate=" + createDate + "]";
-  }
 
   public int getNo() {
     return no;
@@ -48,7 +28,6 @@ public class Member {
   public void setNo(int no) {
     this.no = no;
   }
-
 
   public String getName() {
     return name;
@@ -74,28 +53,12 @@ public class Member {
     this.birthday = birthday;
   }
 
-  public String getGender() {
-    return gender;
-  }
-
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
-
   public String getEmail() {
     return email;
   }
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public String getTel() {
-    return tel;
-  }
-
-  public void setTel(String tel) {
-    this.tel = tel;
   }
 
   public String getPassword() {
@@ -114,21 +77,12 @@ public class Member {
     this.intro = intro;
   }
 
-
   public String getInterest() {
     return interest;
   }
 
   public void setInterest(String interest) {
     this.interest = interest;
-  }
-
-  public Date getCreateDate() {
-    return createDate;
-  }
-
-  public void setCreateDate(Date createDate) {
-    this.createDate = createDate;
   }
 
   public String getNickname() {
@@ -139,12 +93,20 @@ public class Member {
     this.nickname = nickname;
   }
 
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
   public int getAccountStatus() {
     return accountStatus;
   }
 
-  public void setAccountStatus(int status) {
-    this.accountStatus = status;
+  public void setAccountStatus(int accountStatus) {
+    this.accountStatus = accountStatus;
   }
 
   public int getWithdraw() {
@@ -163,7 +125,30 @@ public class Member {
     this.sns = sns;
   }
 
-  public void insertMember(Member member) {
-    this.insertMember(member);
+  public Date getCreateDate() {
+    return createDate;
   }
+
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
+  }
+
+  public List<Message> getMessage() {
+    return message;
+  }
+
+  public void setMessage(List<Message> message) {
+    this.message = message;
+  }
+
+
+  @Override
+  public String toString() {
+    return "Member [no=" + no + ", name=" + name + ", photo=" + photo + ", birthday=" + birthday
+        + ", email=" + email + ", password=" + password + ", intro=" + intro + ", interest="
+        + interest + ", nickname=" + nickname + ", address=" + address + ", accountStatus="
+        + accountStatus + ", withdraw=" + withdraw + ", sns=" + sns + ", createDate=" + createDate
+        + ", message=" + message + "]";
+  }
+
 }

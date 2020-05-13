@@ -219,6 +219,7 @@ CREATE TABLE nm_group_account (
   group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
   bank_name                VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
+  opening_balance   INTEGER NOT NULL COMMENT '기초잔액', -- 기초잔액
   bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임계좌';
@@ -487,7 +488,7 @@ CREATE TABLE nm_account (
   bank_info_id       INTEGER      NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
   account_type_no    INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
   account_type_name  VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
-  assets             INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 초기잔액
+  ending_balance     INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 잔액
   amount             INTEGER      NOT NULL COMMENT '금액', -- 금액
   payment_date       DATE         NOT NULL COMMENT '거래일', -- 거래일
   account_connection TEXT         NOT NULL COMMENT '거래처', -- 거래처

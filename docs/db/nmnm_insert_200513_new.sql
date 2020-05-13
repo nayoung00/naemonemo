@@ -376,12 +376,24 @@ INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
  
  
 -- 모임계좌 예제
-INSERT INTO nm_group_account(bank_info_id,group_no,bank_account_no,bank_name,bank_account_holder)
-  VALUES(1,1,'123-4567-7890','우리은행','홍길동');
+INSERT INTO nm_group_account(
+bank_info_id,
+group_no,
+bank_account_no,
+bank_name,
+opening_balance,
+bank_account_holder)
+  VALUES(1,1,'123-4567-7890','우리은행',1200000,'홍길동');
 
 
-INSERT INTO nm_group_account(bank_info_id,group_no,bank_account_no,bank_name,bank_account_holder)
-  VALUES(2,1,'789-765433-12345','기업은행','임꺽정');   
+INSERT INTO nm_group_account(
+bank_info_id,
+group_no,
+bank_account_no,
+bank_name,
+opening_balance,
+bank_account_holder)
+  VALUES(2,1,'789-765433-12345','기업은행',300000,'임꺽정');   
  
 
 
@@ -394,7 +406,7 @@ group_no,
 bank_info_id,
 account_type_no,
 account_type_name,
-assets,
+ending_balance,
 amount,
 payment_date,
 account_connection,
@@ -409,7 +421,7 @@ group_no,
 bank_info_id,
 account_type_no,
 account_type_name,
-assets,
+ending_balance,
 amount,
 payment_date,
 account_connection, 
@@ -426,7 +438,7 @@ group_no,
 bank_info_id,
 account_type_no,
 account_type_name,
-assets,
+ending_balance,
 amount,
 payment_date,
 account_connection, 

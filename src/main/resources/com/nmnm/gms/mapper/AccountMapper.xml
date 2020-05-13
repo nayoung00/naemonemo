@@ -11,9 +11,10 @@
     <result column="bank_info_id"  property="bankInfoId"/>
     <result column="account_type_no" property="accountTypeNo"/>
     <result column="account_type_name" property="accountTypeName"/>
-    <result column="assets" property="assets"/>
+    <result column="ending_balance" property="endingBalance"/>
     <result column="amount" property="amount"/>
     <result column="payment_date" property="paymentDate"/>
+    <result column="account_connection" property="accountConnection"/>
     <result column="remarks" property="remarks"/>
     <result column="receipt_photo" property="receiptPhoto"/>
     
@@ -26,7 +27,7 @@
       bank_info_id, 
       account_type_no, 
       account_type_name, 
-      assets, 
+      ending_balance, 
       amount, 
       payment_date, 
       account_connection, 
@@ -50,7 +51,7 @@
       bank_info_id, 
       account_type_no, 
       account_type_name, 
-      assets, 
+      ending_balance, 
       amount, 
       payment_date, 
       account_connection, 
@@ -61,7 +62,7 @@
       #{bankInfoId}, 
       #{accountTypeNo}, 
       #{accountTypeName}, 
-      #{assets}, 
+      #{endingBalance}, 
       #{amount}, 
       #{paymentDate}, 
       #{accountConnection}, 
@@ -82,7 +83,7 @@
       bank_info_no=#{bankInfoNo},
       account_type_no=#{accountTypeNo},
       account_type_name=#{accountTypeName},
-      assets=#{assets},
+      ending_balance=#{endingBalance},
       amount=#{amount},
       payment_date=#{paymentDate},
       account_connection=#{accountConnection},

@@ -8,7 +8,7 @@ public class Account {
   private int bankInfoId; // fk, 모임계좌아이디
   private int accountTypeNo; // 회계 유형 번호 nn
   private String accountTypeName; // 회계 유형명 nn
-  private int assets; // 초기잔액 nn
+  private int endingBalance; // 초기잔액 nn
   private int amount; // 금액 nn
   private Date paymentDate; // 거래일 nn
   private String accountConnection; // 거래처 null
@@ -56,12 +56,12 @@ public class Account {
     this.accountTypeName = accountTypeName;
   }
 
-  public int getAssets() {
-    return assets;
+  public int getEndingBalance() {
+    return endingBalance;
   }
 
-  public void setAssets(int assets) {
-    this.assets = assets;
+  public void setEndingBalance(int endingBalance) {
+    this.endingBalance = endingBalance;
   }
 
   public int getAmount() {

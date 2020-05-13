@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.GroupAccountDao">
+
+  <resultMap type="GroupAccount" id="GroupAccountMap">
+    <id column="bank_info_id"   property="bankInfoId"/>
+    <result column="group_no"    property="groupNo"/>
+    <result column="bank_account_no"  property="bankAccountNo"/>
+    <result column="bank_name" property="bankName"/>
+    <result column="opening_balance" property="openingBalance"/>
+    <result column="bank_account_holder" property="bankAccountHolder"/>
+    
+  </resultMap>
+  
+   <sql id="select1">
+    select 
+      bank_info_id, 
+      group_no, 
+      bank_account_no, 
+      bank_name, 
+      opening_balance, 
+      bank_account_holder
+    from 
+      nm_group_account
+  </sql>
+  
+  
+  <select id="findAll" resultMap="GroupAccountMap">
+   <include refid="select1"/>
+   order by
+    bank_info_id asc
+  </select>
+  
+  
+   <insert id="insert" parameterType="GroupAccount">
+    insert into nm_group_account(
+      bank_info_id, 
+      group_no, 
+      bank_account_no, 
+      bank_name, 
+      opening_balance, 
+      bank_account_holder) 
+    values(
+      #{bankInfoId}, 
+      #{groupNo}, 
+      #{bankAccountNo}, 
+      #{bankName}, 
+      #{openingBalance}, 
+      #{bankAccountHolder})
+  </insert>
+  
+ 
+  
+  <select id="findByNo" resultMap="GroupAccountMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      bank_info_id=#{bankInfoId}
+  </select>
+  
+  <update id="update" parameterType="GroupAccount">
+    update nm_group_account set
+      bank_info_id=#{bankInfoId}, 
+      group_no=#{groupNo}, 
+      bank_account_no=#{bankAccountNo}, 
+      bank_name=#{bankName}, 
+      opening_balance=#{openingBalance}, 
+      bank_account_holder=#{bankAccountHolder}
+    where 
+      bank_info_id=#{bankInfoId}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from nm_group_account
+    where bank_info_id=#{bankInfoId}
+  </delete>
+  
+  <select id="findByKeyword" 
+    resultMap="GroupAccountMap" 
+    parameterType="string">
+    <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+  <include refid="select1"/>
+    where     
+      bank_info_id like #{keywordPattern} 
+      or bank_account_no like #{keywordPattern} 
+  </select>
+  
+</mapper>

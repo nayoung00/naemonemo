@@ -178,6 +178,7 @@ values(
 '티모',1,
 'instagram.com/test');
 
+
 -- 모임 회원 예제
 INSERT INTO nm_group_member(group_no,member_no,grade_no)
  values(1,1,1);
@@ -375,12 +376,13 @@ INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
  
  
 -- 모임계좌 예제
-INSERT INTO nm_group_account(bank_info_id,bank_account_no,group_no,bank,bank_account_holder)
-  VALUES(1,'123-4567-7890',1,'우리은행','홍길동');
+INSERT INTO nm_group_account(bank_info_id,group_no,bank_account_no,bank_name,bank_account_holder)
+  VALUES(1,1,'123-4567-7890','우리은행','홍길동');
 
-INSERT INTO nm_group_account(bank_info_id,bank_account_no,group_no,bank,bank_account_holder)
-  VALUES(2,'789-765433-12345',2,'기업은행','임꺽정');   
-  
+INSERT INTO nm_group_account(bank_info_id,group_no,bank_account_no,bank_name,bank_account_holder)
+  VALUES(2,1,'789-765433-12345','기업은행','임꺽정');   
+
+
   
 -- 회계 예제
 INSERT INTO nm_account
@@ -392,9 +394,25 @@ account_type_name,
 assets,
 amount,
 payment_date,
+account_connection,
 remarks,
 receipt_photo)
- values(1,1,1,'유류비',100000,150000,'2020-04-24','비고','receipt.jpg');
+ values(1,1,1,'유류비',100000,150000,'2020-04-24','여비교통비', '비고','receipt.jpg');
+ 
+-- 회계 예제
+INSERT INTO nm_account
+(
+group_no,
+bank_info_id,
+account_type_no,
+account_type_name,
+assets,
+amount,
+payment_date,
+account_connection,
+remarks,
+receipt_photo)
+ values(1,1,1,'유류비',100000,150000,'2020-04-24','강남주유소', '비고','receipt.jpg');
  
  -- 회계 예제
 INSERT INTO nm_account
@@ -406,11 +424,10 @@ account_type_name,
 assets,
 amount,
 payment_date,
+account_connection, 
 remarks,
 receipt_photo)
- values(1,1,2,'술값',100000,150000,'2020-04-24','비고','receipt.jpg');
- 
- 
+ values(1,1,2,'술값',100000,150000,'2020-04-24','금문도', '비고','receipt.jpg');
  
   
  

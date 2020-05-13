@@ -26,13 +26,13 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
-  public int delete(int noticeNo) throws Exception {
-    return noticeDao.delete(noticeNo);
+  public int delete(int noticeBoardNo) throws Exception {
+    return noticeDao.delete(noticeBoardNo);
   }
 
   @Override
-  public Notice get(int noticeNo) throws Exception {
-    return noticeDao.findByNo(noticeNo);
+  public Notice get(int noticeBoardNo) throws Exception {
+    return noticeDao.findByNo(noticeBoardNo);
   }
 
   @Override

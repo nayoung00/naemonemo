@@ -167,10 +167,13 @@
         values(#{email}, (#{password}), #{name}, #{tel})
     </insert>    
     
-    <!-- 이메일 중복 검사 -->
-    <select id="emailCheck" parameterType="Member" resultType="int">
-        select count(*) from nm_member where email = #{email}
-    </select>
+ 
+ <select id="checkid" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM nm_member
+      WHERE
+          email = #{email}
+</select>
+ 
     
     
       

@@ -5,6 +5,7 @@ import com.nmnm.gms.domain.GroupAccount;
 
 public interface GroupAccountService {
   int add(GroupAccount groupAccount) throws Exception;
+  int add(Object[] groupAccount);
 
   List<GroupAccount> list() throws Exception;
 
@@ -15,4 +16,5 @@ public interface GroupAccountService {
   int update(GroupAccount groupAccount) throws Exception;
 
   List<GroupAccount> search(String keyword) throws Exception;
+
 }

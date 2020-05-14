@@ -13,10 +13,12 @@ public class GroupAccount {
   public GroupAccount() {}
 
   public GroupAccount(//
+  		int bankInfoId, //
       String bankAccountNo, //
       String bankName, //
       String openingBalance, //
       String bankAccountHolder) {
+  	this.bankInfoId = bankInfoId;
     this.bankAccountNo = bankAccountNo;
     this.bankName = bankName;
     this.openingBalance = openingBalance;

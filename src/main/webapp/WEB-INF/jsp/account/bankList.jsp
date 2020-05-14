@@ -70,12 +70,9 @@
 
           cell1.innerHTML = "<input type='text' name='bankInfoId'>";
           cell2.innerHTML = "<input type='text' name='bankAccountNo' value='123123'>";
-          cell3.innerHTML = "<input type='text' name='bankName' value='가나다'>";
+          cell3.innerHTML = "<input type='text' name='bankName' value='은행'>";
           cell4.innerHTML = "<input type='text' name='openingBalance' value='123'>";
-          cell5.innerHTML = "<input type='text' name='bankAccountHolder' value='가나'>";
-          
-          
-          
+          cell5.innerHTML = "<input type='text' name='bankAccountHolder' value='예금주'>";
         };
 
         

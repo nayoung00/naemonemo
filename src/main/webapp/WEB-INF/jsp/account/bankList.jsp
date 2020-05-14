@@ -22,6 +22,7 @@
 	</p>
 </div>
 <div style="text-align: center; margin: 0 auto;">
+  <form action='bankAdd' method='post' enctype='multipart/form-data'>
 	<h1>계좌 추가/제거</h1>
 	<table border='1' style="margin: auto;">
 		<tr>
@@ -46,10 +47,10 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<form action='bankAdd' method='post' enctype='multipart/form-data' onsubmit="fn_insert()">
+
 		<div>
 		<input type="button" value="계좌 추가" onclick="add_row()"> 
-		<input type="submit" name="bankbody" value="저장하기">
+		<input type="submit" value="저장하기">
 		</div>
 	</form>
 	<br>
@@ -67,7 +68,7 @@
           var cell4 = row.insertCell(3);
           var cell5 = row.insertCell(4);
 
-          cell1.innerHTML = "<input type='text' name='bankInfoId' value='3'>";
+          cell1.innerHTML = "<input type='text' name='bankInfoId'>";
           cell2.innerHTML = "<input type='text' name='bankAccountNo' value='123123'>";
           cell3.innerHTML = "<input type='text' name='bankName' value='가나다'>";
           cell4.innerHTML = "<input type='text' name='openingBalance' value='123'>";
@@ -77,36 +78,6 @@
           
         };
 
-        function delete_row() {
-          var bankbody = document.getElementById('bankbody');
-          if (bankbody.rows.length < 1)
-            return;
-          bankbody.deleteRow(0); // 상단부터 삭제
-          // my_tbody.deleteRow( my_tbody.rows.length-1 ); // 하단부터 삭제
-        };
-
-        function _submit(bankbody) {
-          var bankbody = document.getElementById('bankbody');
-          if (typeof(bankbody.cell1['bankInfoId'].length) != 'undefined')
-          for (i=0; i<bankbody.cell1['bankInfoId'].length; i++) {
-            if (bankbody.cell1['bankInfoId'][i]!="") {
-            	bankbody.cell1['bankInfoId'][i].disabled=true;
-            	bankbody.cell2['${item.bankAccountNo}'][i].disabled=true;
-            	bankbody.cell3['bankName'][i].disabled=true;
-            	bankbody.cell4['openingBalance'][i].disabled=true;
-            	bankbody.cell5['bankAccountHolder'][i].disabled=true;
-            }
-            
-          }
-          return true;
-        }
-        function fn_insert(){ 
-          var comSubmit = new comSubmit('bankbody');
-          comSubmit.setUrl("<c:url value='/bankAdd' />");  
-	                  comSubmit.submit();
-        
-        }
-        
         
       </script>
 

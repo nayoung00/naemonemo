@@ -34,9 +34,19 @@ public class GroupAccountController {
 
 
   @PostMapping("bankAdd")
-  public String add(GroupAccount groupAccount) throws Exception {
-    System.out.println("test : " + groupAccount.toString());
-    groupAccountService.add(groupAccount);
+  public String add(//
+      String bankAccountNo[], //
+      String bankName[], //
+      String openingBalance[], //
+      String bankAccountHolder[]) throws Exception {
+    System.out.println("포인트1");
+    for (String str : bankAccountHolder) {
+      System.out.println(str);
+    }
+    // GroupAccount groupAccount =
+    // new GroupAccount(bankAccountNo, bankName, openingBalance, bankAccountHolder);
+    System.out.println("포인트2");
+    // groupAccountService.add(groupAccount);
     return "redirect:bankList";
   }
 

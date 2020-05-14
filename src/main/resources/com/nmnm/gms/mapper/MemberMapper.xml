@@ -10,8 +10,7 @@
     <result column="member_name"       property="name"/>
     <result column="id_photo"  property="photo"/>
     <result column="birthday"    property="birthday"/>
-    <result column="gender"    property="gender"/>
-    <result column="tel" property="tel"/>
+    <result column="email" property="email"/> 
     <result column="password" property="password"/> 
     <result column="intro" property="intro"/>
     <result column="interest" property="interest"/>
@@ -28,9 +27,7 @@
       password, 
       id_photo, 
       birthday, 
-      gender, 
       email,
-      tel,
       intro,
       interest,
       nickname,
@@ -40,9 +37,7 @@
       password(#{password}),
       #{photo},
       #{birthday},
-      #{gender},
       #{email},
-      #{tel},
       #{intro},
       #{interest},
       #{nickname},
@@ -54,9 +49,7 @@
       member_no,
       member_name,
       nickname,
-      gender,
       email,
-      tel
     from 
       nm_member
   </select>
@@ -68,10 +61,8 @@
       member_name,
       nickname,
       birthday,
-      gender,
       email,
       id_photo,
-      tel,
       intro,
       sns,
       create_date
@@ -88,7 +79,6 @@
       <if test="nickname != null and nickname != ''">nickname=#{nickname},</if>
       <if test="email != null and email != ''">email=#{email},</if> 
       <if test="password != null and password != ''">password=password(#{password}),</if>
-      <if test="tel != null and tel != ''">tel=#{tel},</if>
       <if test="photo != null and photo != ''">id_photo=#{photo}</if>
     </set>
     where 
@@ -107,14 +97,10 @@
         member_no,
             member_name,
             nickname,
-            gender,
-            tel
         from nm_member
         where     
             member_name like #{keywordPattern}
             or nickname like #{keywordPattern}
-            or gender  like #{keywordPattern}
-            or tel  like #{keywordPattern}
     </select>
   
   <select id="findByEmailAndPassword" 
@@ -129,20 +115,6 @@
       email=#{email} 
       and password=password(#{password})
   </select>
-  
-  <!-- 회원가입 -->
-  <insert id="join" parameterType="Member">
-    insert into nm_member(
-      member_name,
-      password, 
-      email,
-      tel
-    ) values(
-      #{name},
-      password(#{password}),
-      #{email},
-      #{tel})
-  </insert>
   
   
   <!-- 로그인 -->
@@ -162,16 +134,17 @@
     </update>
       
     <!-- 회원 가입 -->
-    <insert id="insertMember" parameterType="member">
-        insert into nm_member  (email, password, member_name, tel)
-        values(#{email}, (#{password}), #{name}, #{tel})
+    <insert id="join" parameterType="Member">
+        insert into nm_member  (email, password, member_name, nickname, id_photo, birthday, interest, intro, sns)
+        values(#{email}, (#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro}, #{sns})
     </insert>    
     
-    <!-- 이메일 중복 검사 -->
-    <select id="emailCheck" parameterType="Member" resultType="int">
-        select count(*) from nm_member where email = #{email}
-    </select>
-    
+ 
+ <select id="checkid" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM nm_member
+      WHERE
+          email = #{email}
+</select>
     
       
 </mapper>

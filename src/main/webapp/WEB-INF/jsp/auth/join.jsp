@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <style>
 .virtual-box {
     margin-bottom: 120px;
@@ -23,7 +26,7 @@
                     <h2><span style="color: gray;">nmnm</span> 회원 가입</h2>
                 </div>
                 <div class="card-body">
-                    <form action="join" name="signup" id="signUpForm" method="post"
+                    <form action="join" name="signup" id="signUpForm" method="post" enctype='multipart/form-data'
                         style="margin-bottom: 0;">
                         
                         <!-- 권한은 일반회원으로 고정(나중에 라디오버튼으로 선택지를 주셔도됩니다.) -->
@@ -33,8 +36,11 @@
                             style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
                              <tr>
                                 <td style="text-align: left">
-                                    <p><strong>이메일을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="emailChk"></span></p>
+                                    <p><strong>이메일을 입력해주세요.
+                                <input type='button' id='idck' value="email중복확인" onclick='checkid()'>
+                                    </strong>&nbsp;&nbsp;&nbsp;<span id="emailChk"></span></p>
                                 </td>
+                                
                             </tr>
                             <tr>
                                 <td><input type="text" name="email" id="email" 
@@ -83,48 +89,76 @@
                             </tr>
                             <tr>
                                  <td style="text-align: left">
-                                    <p><strong>핸드폰번호를 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
+                                    <p><strong>닉네임을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="tel" id="tel"
+                                <td><input type="text" name="nickname" id="nickname"
+                                    class="form-control tooltipstered" maxlength="20"
+                                    required="required" aria-required="true"
+                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
+                                    placeholder="nickname"></td>
+                            </tr>
+                            <tr>
+                                 <td style="text-align: left">
+                                    <p><strong>이미지를 넣어주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="file" name="photoFile" id="tel"
                                     class="form-control tooltipstered" maxlength="20"
                                     required="required" aria-required="true"
                                     style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
                                     placeholder="ex) 010-1234-1234"></td>
                             </tr>
-                             
-                             
-                                <tr>
-                                <td style="text-align: left">
-                                    <p><strong>우편번호</strong>&nbsp;&nbsp;&nbsp;<span id="postCodeChk"></span></p>
+                            <tr>
+                                 <td style="text-align: left">
+                                    <p><strong>생일을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="button" name="name" id="sample6_postcode"  onclick="sample6_execDaumPostcode()" 
-                                    class="form-control tooltipstered" maxlength="5"
-                                    vlaue="우편번호 찾기"
-                                    aria-required="true"
-                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-                                    placeholder="우편번호"></td>
+                                <td><input type="date" name="birthday" id="birthday"
+                                    class="form-control tooltipstered" maxlength="20"
+                                    required="required" aria-required="true"
+                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"></td>
                             </tr>
-                             
-                    <label>Address</label>
-                    <form:input class="w3-input" id="sample6_address" path="m_address"
-                        placeholder="주소" readonly="true" />
-                    <font color="red"><form:errors path="m_address" /></font> <input
-                        class="w3-input" id="m_address" name="m_address"
-                        placeholder="상세주소" />
-                    <!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_address" id="m_address"> -->
-                    <div class=checkNick></div>
-                             
-                             
-                             
-                             
-                             
-                             
-                             
-                             
+                              <tr>
+                                 <td style="text-align: left">
+                                    <p><strong>관심사항을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="interest" id="interest"
+                                    class="form-control tooltipstered" maxlength="20"
+                                    required="required" aria-required="true"
+                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
+                                    placeholder="ex) 맛집탐방"></td>
+                            </tr>
+                            <tr>
+                                 <td style="text-align: left">
+                                    <p><strong>한줄소개를 해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="intro" id="intro"
+                                    class="form-control tooltipstered" maxlength="20"
+                                    required="required" aria-required="true"
+                                    style="margin-bottom: 25px; width: 100%; height: 100px; border: 1px solid #d9d9de"
+                                    ></td>
+                            </tr>
+                            <tr>
+                                 <td style="text-align: left">
+                                    <p><strong>sns를 입력 해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="sns" id="sns"
+                                    class="form-control tooltipstered" maxlength="20"
+                                    required="required" aria-required="true"
+                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
+                                    ></td>
+                            </tr>
+                            
                              
                             <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2;">
@@ -145,62 +179,45 @@
 
 <jsp:include page="../footer.jsp" />
 
+
+<script type="text/javascript">
+function checkid(){
+     $.ajax({
+       type: 'POST',
+       datatype: "json",
+       data: {email : $("#email").val()},
+       url: "checkid",
+       success : function(result){
+           if (result == 0){
+               console.log("넘어온 값 : " + result);
+               alert('사용가능합니다');
+           } else {
+               idck = 1;
+             console.log("넘어온 값 : " + result);
+               alert('중복입니다');
+           }
+       }
+       });
+     };
+     
+ 
+</script>
+
+
+
 <script>
 //start JQuery
 $(function() {
     
     //입력값 검증 정규표현식
-    var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
     const getPwCheck= RegExp(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
     const getName= RegExp(/^[가-힣]+$/);
-    const getTel= RegExp(/(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/);    
     //입력값 검증을 마칠 경우 true로 설정 
-    //(chk1 : 아이디검증, chk2 : 비번, chk3: 비번확인란, chk4: 이름, chk5: 이메일)
-    let chk1 = false, chk2 = false, chk3 = false, chk4 = false;
+    //(chk2 : 비번, chk3: 비번확인란, chk4: 이름, chk5: 이메일)
+    let chk2 = false, chk3 = false, chk4 = false;
     
     //회원가입 form DOM객체 저장.
     const regForm = $("#signUpForm");
-    
-/*     
-  //이메일 입력값 검증.
-    $('#email').on('keyup', function() {
-        //이메일값 공백 확인
-        if($("#email").val() == ""){
-            $('#email').css("background-color", "pink");
-            $('#emailChk').html('<b style="font-size:16px;color:red;">[이메일을 입력해주세요]</b>');
-            chk5 = false;
-        }                
-        //이메일값 유효성검사
-        else if(!getMail.test($("#email").val())){
-            $('#email').css("background-color", "pink");
-            $('#emailChk').html('<b style="font-size:16px;color:red;">[이메일 형식을 확인해주세요.]</b>');
-            chk5 = false;
-        } else {
-            
-        	//입력한 id를 읽어온다.
-            var id = $("#id").val();
-            //문자열을 ajax 요청을 통해서 서버에 전송
-            $.ajax({
-                method:"post",
-                url:"checkid.jsp",
-                data:{id:id},
-                success:function(data){
-                    if(data.response){//존재하는 아이디이면,
-                        alert("이미 사용하는 아이디입니다.");
-                        $("#id").val("");
-                        $("#id").focus();
-                    }else{//존재하지 않으면
-                        alert("사용가능한 아이디입니다.");
-                    }
-                    
-                    isCheckId = true;
-                }
-            });
-            
-            return false;// 안 해놓으면, signup.jsp 로 넘어간다.
-        });
- */
-    
     
     //패스워드 입력값 검증.
     $('#password').on('keyup', function() {
@@ -263,33 +280,11 @@ $(function() {
             chk4 = true;
         }
         
-        //전화번호 입력값 검증.
-        $('#tel').on('keyup', function() {
-            //전화번호 공백 확인
-            if($("#tel").val() === ""){
-                $('#tel').css("background-color", "pink");
-                $('#telChk').html('<b style="font-size:14px;color:red;">[전화번호를 입력해주세요.]</b>');
-                chk1 = false;
-            }                
-            //전화번호 유효성검사
-            else if(!getTel.test($("#tel").val())){
-                $('#tel').css("background-color", "pink");
-                $('#telChk').html('<b style="font-size:14px;color:red;">[형식이 틀렸습니다.]</b>');
-                chk1 = false;
-            } else {
-                $('#tel').css("background-color", "#b3ffb3");
-                $('#telChk').html('<b style="font-size:14px;color:green;"></b>');
-                chk1 = true;
-            }
-        });   
-        
     });
-    
-
     
     //회원가입 버튼 클릭 이벤트
     $('#signup-btn').click(function() {
-        if(chk1 && chk2 && chk3 && chk4) {
+        if(chk2 && chk3 && chk4) {
             regForm.submit(); //서버로 폼전송
         } else {
             alert("입력정보를 다시 확인하세요!");
@@ -299,6 +294,8 @@ $(function() {
 });//end JQuery
 
 </script>
+    
+
 
    <!--      <div class="input-group-over">
                             <div class="form-label-group mb-3">

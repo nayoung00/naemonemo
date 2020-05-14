@@ -27,7 +27,7 @@ public interface MemberService {
 
   Member sender(int no) throws Exception;
 
-  int emailCheck(String email) throws Exception;
+  Integer checkid(String email) throws Exception;
 
 
 

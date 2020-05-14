@@ -1,4 +1,4 @@
--- 데이터베이스 삭제
+-— 데이터베이스 삭제
 DROP DATABASE nmnmdb;
 
 -- MySQL 데이터베이스 생성

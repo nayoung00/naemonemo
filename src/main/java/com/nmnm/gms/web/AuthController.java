@@ -1,6 +1,8 @@
 package com.nmnm.gms.web;
 
 
+import java.io.File;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.service.KakaoAPI;
 import com.nmnm.gms.service.MemberService;
@@ -36,7 +41,13 @@ public class AuthController {
 
 
   @PostMapping("join")
-  public String join(Member member) throws Exception {
+  public String join(Member member, MultipartFile photoFile) throws Exception {
+    if (photoFile.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/member");
+      String filename = UUID.randomUUID().toString();
+      photoFile.transferTo(new File(dirPath + "/" + filename));
+      member.setPhoto(filename);
+    }
     if (memberService.join(member) > 0) {
       return "redirect:../../index.html";
     } else {
@@ -63,8 +74,14 @@ public class AuthController {
   // throw new Exception("회원을 추가할 수 없습니다.");
   // }
   // }
-
-
+  @ResponseBody
+  @RequestMapping(value = "checkid", method = RequestMethod.POST)
+  public int checkid(String email) throws Exception {
+    System.out.println(email);
+    int count = memberService.checkid(email);
+    System.out.println(count);
+    return count;
+  }
 
   @PostMapping("login")
   public String login( //

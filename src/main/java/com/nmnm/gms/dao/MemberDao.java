@@ -30,7 +30,8 @@ public interface MemberDao {
 
   Member sender(int no) throws Exception;
 
-  int emailCheck(String email) throws Exception;
+  // ID 중복체크
+  int checkid(String email) throws Exception;
 
   int selectMemberNo(String email) throws Exception;
 

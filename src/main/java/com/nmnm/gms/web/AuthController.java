@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.service.KakaoAPI;
 import com.nmnm.gms.service.MemberService;
@@ -63,8 +65,14 @@ public class AuthController {
   // throw new Exception("회원을 추가할 수 없습니다.");
   // }
   // }
-
-
+  @ResponseBody
+  @RequestMapping(value = "checkid", method = RequestMethod.POST)
+  public int checkid(String email) throws Exception {
+    System.out.println(email);
+    int count = memberService.checkid(email);
+    System.out.println(count);
+    return count;
+  }
 
   @PostMapping("login")
   public String login( //

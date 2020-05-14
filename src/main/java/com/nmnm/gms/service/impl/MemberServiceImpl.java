@@ -74,10 +74,10 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.sender(no);
   }
 
+
   @Override
-  public int emailCheck(String email) throws Exception {
-    int result = memberDao.emailCheck(email);
-    return result;
+  public Integer checkid(String inputId) throws Exception {
+    return memberDao.checkid(inputId);
   }
 
 

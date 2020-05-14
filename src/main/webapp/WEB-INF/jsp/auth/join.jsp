@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <style>
 .virtual-box {
     margin-bottom: 120px;
@@ -33,8 +36,11 @@
                             style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
                              <tr>
                                 <td style="text-align: left">
-                                    <p><strong>이메일을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="emailChk"></span></p>
+                                    <p><strong>이메일을 입력해주세요.
+                                <input type='button' id='idck' value="email중복확인" onclick='checkid()'>
+                                    </strong>&nbsp;&nbsp;&nbsp;<span id="emailChk"></span></p>
                                 </td>
+                                
                             </tr>
                             <tr>
                                 <td><input type="text" name="email" id="email" 
@@ -94,38 +100,6 @@
                                     placeholder="ex) 010-1234-1234"></td>
                             </tr>
                              
-                             
-                                <tr>
-                                <td style="text-align: left">
-                                    <p><strong>우편번호</strong>&nbsp;&nbsp;&nbsp;<span id="postCodeChk"></span></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" name="name" id="sample6_postcode"  onclick="sample6_execDaumPostcode()" 
-                                    class="form-control tooltipstered" maxlength="5"
-                                    vlaue="우편번호 찾기"
-                                    aria-required="true"
-                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-                                    placeholder="우편번호"></td>
-                            </tr>
-                             
-                    <label>Address</label>
-                    <form:input class="w3-input" id="sample6_address" path="m_address"
-                        placeholder="주소" readonly="true" />
-                    <font color="red"><form:errors path="m_address" /></font> <input
-                        class="w3-input" id="m_address" name="m_address"
-                        placeholder="상세주소" />
-                    <!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_address" id="m_address"> -->
-                    <div class=checkNick></div>
-                             
-                             
-                             
-                             
-                             
-                             
-                             
-                             
-                             
                             <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2;">
                                 <input
@@ -145,12 +119,38 @@
 
 <jsp:include page="../footer.jsp" />
 
+
+<script type="text/javascript">
+//아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
+function checkid(){
+     $.ajax({
+       type: 'POST',
+       datatype: "json",
+       data: {email : $("#email").val()},
+       url: "checkid",
+       success : function(result){
+           if (result == 0){
+               console.log("넘어온 값 : " + result);
+               alert('사용가능합니다');
+           } else {
+               idck = 1;
+             console.log("넘어온 값 : " + result);
+               alert('중복입니다');
+           }
+       }
+       });
+     };
+     
+ 
+</script>
+
+
+<!-- 
 <script>
 //start JQuery
 $(function() {
     
     //입력값 검증 정규표현식
-    var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
     const getPwCheck= RegExp(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
     const getName= RegExp(/^[가-힣]+$/);
     const getTel= RegExp(/(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/);    
@@ -160,7 +160,6 @@ $(function() {
     
     //회원가입 form DOM객체 저장.
     const regForm = $("#signUpForm");
-    
 /*     
   //이메일 입력값 검증.
     $('#email').on('keyup', function() {
@@ -168,13 +167,13 @@ $(function() {
         if($("#email").val() == ""){
             $('#email').css("background-color", "pink");
             $('#emailChk').html('<b style="font-size:16px;color:red;">[이메일을 입력해주세요]</b>');
-            chk5 = false;
+            chk1 = false;
         }                
         //이메일값 유효성검사
         else if(!getMail.test($("#email").val())){
             $('#email').css("background-color", "pink");
             $('#emailChk').html('<b style="font-size:16px;color:red;">[이메일 형식을 확인해주세요.]</b>');
-            chk5 = false;
+            chk1 = false;
         } else {
             
         	//입력한 id를 읽어온다.
@@ -198,8 +197,7 @@ $(function() {
             });
             
             return false;// 안 해놓으면, signup.jsp 로 넘어간다.
-        });
- */
+        }); */
     
     
     //패스워드 입력값 검증.
@@ -295,10 +293,10 @@ $(function() {
             alert("입력정보를 다시 확인하세요!");
         }
     });
-    
-});//end JQuery
-
 </script>
+    
+});//end JQuery -->
+
 
    <!--      <div class="input-group-over">
                             <div class="form-label-group mb-3">

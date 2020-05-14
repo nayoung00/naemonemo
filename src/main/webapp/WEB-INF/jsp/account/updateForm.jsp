@@ -13,7 +13,7 @@
 거래일: <input name='paymentDate' type='text'><br>
 금액: <input name='amount' type='text'><br>
 비고: <input name='remarks' type='text'><br>
-잔액: <input name='assets' type='text'><br>
+잔액: <input name='endingBalance' type='text'><br>
 영수증: <input name='receiptPhoto' type='file'><br>
 <p><button>변경</button>
 <input type='submit' value='upload'/><br>

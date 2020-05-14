@@ -15,7 +15,7 @@
 거래일: <input name='paymentDate' type='text' value='${account.paymentDate}'><br>
 금액: <input name='amount' type='text' value='${account.amount}'><br>
 비고: <input name='remarks' type='text' value='${account.remark}'><br>
-잔액: <input name='assets' type='text' value='${account.assets}'><br>
+잔액: <input name='endingBalance' type='text' value='${account.endingBalance}'><br>
 영수증: <input name='receiptPhotoFile' type='file' value='${account.receiptPhoto}'><br>
 <p><button>변경</button>
 <a href='delete?accountNo=${account.accountNo}'>삭제</a></p>

@@ -9,10 +9,7 @@ import com.nmnm.gms.domain.Message;
 // DAO 사용법을 통일하기 위해
 // 메서드 호출 규칙을 정의한다.
 public interface MemberDao {
-
   int insert(Member member) throws Exception;
-
-  int join(Member member) throws Exception;
 
   List<Member> findAll() throws Exception;
 
@@ -26,6 +23,10 @@ public interface MemberDao {
 
   Member findByEmailAndPassword(Map<String, Object> params) throws Exception;
 
+  int login(Member member) throws Exception;
+
+  int join(Member member) throws Exception;
+
   int send(Message message) throws Exception;
 
   Member sender(int no) throws Exception;
@@ -37,6 +38,10 @@ public interface MemberDao {
   int checknick(String nickname) throws Exception;
 
   int selectMemberNo(String email) throws Exception;
+
+  int putKey(Map<String, Object> params) throws Exception;
+
+  int alterKey(Map<String, Object> params) throws Exception;
 
 
 }

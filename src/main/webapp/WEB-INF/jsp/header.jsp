@@ -1,162 +1,69 @@
+<%@page import="com.nmnm.gms.domain.Member"%>
+<%@page import="com.nmnm.gms.domain.Plan"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+<meta charset='UTF-8'>
+<c:if test="${not empty refreshUrl}">
+<meta http-equiv="Refresh" content="${refreshUrl}">
+</c:if>
+<title>네모내모</title>
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+<style>
+body {
+	background-color: LightGray;
+}
 
-    <head>
-        <!-- meta data -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+div.container {
 
-        <!--font-family-->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-        
-        <!-- title of site -->
-        <title>네모내모</title>
-
-        <!-- For favicon png <link rel="shortcut icon" type="image/icon" href="/logo/#"/> 파비콘 파일이아직없음-->
-         
-        <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="../../css/font-awesome.min.css">
-
-        <!--linear icon css-->
-        <link rel="stylesheet" href="../../css/linearicons.css">
-
-        <!--animate.css-->
-        <link rel="stylesheet" href="../../css/animate.css">
-
-        <!--owl.carousel.css -->
-        <link rel="stylesheet" href="../../css/owl.carousel.min.css">
-        <link rel="stylesheet" href="../../css/owl.theme.default.min.css">
-      
-        <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    
-        <!-- bootsnav -->
-        <link rel="stylesheet" href="../../css/bootsnav.css" >  
-        
-        <!--style.css-->
-        <link rel="stylesheet" href="../../css/style.css">
-        
-        <!--responsive.css-->
-        <link rel="stylesheet" href="../../css/responsive.css">
-        
-    </head>
-  
-  <body>
-  
-    <!--Welcome-hero start -->
-    <header id="home" class="Welcome-hero">
-
-      <!-- top-area Start -->
-      <div class="top-area">
-        <div class="header-area">
-
-          <!-- Start Navigation -->
-            <nav class="navbar navbar-default bootsnav  navbar-sticky"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
-              <div class="container">     
-
-                    <!-- Start Atribute Navigation -->
-                    <div class="attr-nav">
-                      <ul>
-                        <li class="dropdown">
-                                <a href="###app/alarm" class="dropdown-toggle" data-toggle="dropdown" >
-                                    <span class="lnr lnr-alarm"></span>
-                                    <span class="badge badge-bg-1">3</span>
-                                </a>
-                                <ul class="dropdown-menu cart-list s-cate">
-                                    <li class="single-cart-list">
-                                        <a href="#" class="photo"><img src="../../images/collection/arrivals1.jpg" class="cart-thumb" alt="image" /></a>
-                                        <div class="cart-list-txt">
-                                          <h6><a href="#">알림1</a></h6>
-                                        </div><!--/.cart-list-txt-->
-                                        <div class="cart-close">
-                                          <span class="lnr lnr-cross"></span>
-                                        </div><!--/.cart-close-->
-                                    </li><!--/.single-cart-list -->
-                                    <li class="single-cart-list">
-                                        <a href="#" class="photo"><img src="../../images/collection/arrivals2.jpg" class="cart-thumb" alt="image" /></a>
-                                        <div class="cart-list-txt">
-                                          <h6><a href="#">알림2</a></h6>  
-                                        </div><!--/.cart-list-txt-->
-                                        <div class="cart-close">
-                                          <span class="lnr lnr-cross"></span>
-                                        </div><!--/.cart-close-->
-                                    </li><!--/.single-cart-list -->
-                                    <li class="single-cart-list">
-                                        <a href="#" class="photo"><img src="../../images/collection/arrivals3.jpg" class="cart-thumb" alt="image" /></a>
-                                        <div class="cart-list-txt">
-                                          <h6><a href="#">알림3</a></h6>    
-                                        </div><!--/.cart-list-txt-->
-                                        <div class="cart-close">
-                                          <span class="lnr lnr-cross"></span>
-                                        </div><!--/.cart-close-->
-                                    </li><!--/.single-cart-list -->
-                                </ul>
-                        </li><!--/.dropdown(알림)-->
-                        
-                        <li class="###app/message?"><!--.message-->
-                          <a href="#"><span class="lnr lnr-envelope"></span></a>
-                        </li><!--/.message-->
-                      
-                        <li class="profile"><!--.profile-->
-                          <a href="###app/mypage?" class="dropdown-toggle" data-toggle="dropdown" >
-                              <span class="lnr lnr-user"></span>
-                          </a>
-                        </li><!--/.profile-->
-
-                      </ul>
-                    </div><!--/.attr-nav-->
-                    <!-- End Atribute Navigation -->
-
-                    <!-- Start Header Navigation -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <a class="navbar-brand" href="index.html">네모내모</a>
-
-                    </div><!--/.navbar-header-->
-                    <!-- End Header Navigation -->
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-                        <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li><a href="intro.html">intro</a></li>
-                            <li><a href="app/group/list">moim</a></li>
-                            <li><a href="app/group/search">search</a></li>
-                            <li><a href="app/co/list">forum</a></li>
-                            <li><a href="app/notice/list">notice</a></li>
-                            <li><a href="app/plan/list">plan</a></li>
-                            <li><a href="app/feed/list">feed</a></li>
-                            <li><a href="app/account/list">account</a></li>
-                            <li><a href="app/member/list">member</a></li>
-                        </ul><!--/.nav -->
-                    </div><!-- /.navbar-collapse -->
-                </div><!--/.container-->
-            </nav><!--/nav-->
-            <!-- End Navigation -->
-        </div><!--/.header-area-->
-          <div class="clearfix"></div>
-
-      </div><!-- /.top-area-->
-      <!-- top-area End -->
-
-    </header><!--/.Welcome-hero-->
-    <!--Welcome-hero end -->
-
-
-
-  
-
-    <!--내용 start -->
-    <section id="blog" class="blog">
-      <div class="container">
-    <br>
-        <br>
-            <br>
-
-                    
+	background: white;
+	border: 1px solid gray;
+	width: 1000px;
+	
+}
+</style>
+</head>
+<body>
+<nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+<a class='navbar-brand' href='../../index.html'>네모내모</a>
+<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+  <span class='navbar-toggler-icon'></span>
+</button>
+<div class='collapse navbar-collapse' id='navbarNav'>
+  <ul class='navbar-nav mr-auto'>
+    <li class='nav-item'>
+      <a class='nav-link' href='../notice/list'>공지사항</span></a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='../plan/list'>일정</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='../feed/list'>피드</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='../co/list'>소통게시판</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='../member/list'>회원</a>
+    </li>
+        <li class='nav-item'>
+      <a class='nav-link' href='../group/list'>모임</a>
+    </li>
+        <li class='nav-item'>
+      <a class='nav-link' href='../account/list'>회계</a>
+    </li>
+  </ul>
+<c:if test="${not empty loginUser}">
+  <span class='navbar-text'>${loginUser.name}</span>
+  <a href='../auth/logout' class='btn btn-success btn-sm'>로그아웃</a>
+</c:if>
+<c:if test="${empty loginUser}">
+  <a href='../auth/login' class='btn btn-success btn-sm'>로그인</a>
+</c:if> 
+</div>
+</nav>
+<div class='container'>

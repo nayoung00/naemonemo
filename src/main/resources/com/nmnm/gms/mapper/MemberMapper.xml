@@ -103,13 +103,10 @@
             or nickname like #{keywordPattern}
     </select>
   
-  <select id="findByEmailAndPassword" 
+ <select id="findByEmailAndPassword" 
     resultMap="MemberMap" 
     parameterType="map">
-    select 
-      email,
-      member_name, 
-      password
+    select *
     from nm_member
     where 
       email=#{email} 
@@ -117,11 +114,11 @@
   </select>
   
   
-  <!-- 로그인 -->
+<!-- 로그인 
     <select id="login" parameterType="String" resultType="member">
         select * from nm_member where member_no = #{no}
-    </select>
-    
+    </select> 
+-->
   
   
     <!-- 회원 인증키(난수) 생성 -->
@@ -136,7 +133,7 @@
     <!-- 회원 가입 -->
     <insert id="join" parameterType="Member">
         insert into nm_member  (email, password, member_name, nickname, id_photo, birthday, interest, intro, sns)
-        values(#{email}, (#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro}, #{sns})
+        values(#{email}, password(#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro}, #{sns})
     </insert>    
     
  

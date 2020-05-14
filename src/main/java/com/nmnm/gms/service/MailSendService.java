@@ -11,6 +11,4 @@ public interface MailSendService {
   int alterUserKey(String email, String key);
 
   void findPassword(String email) throws Exception;
-
-
 }

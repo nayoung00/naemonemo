@@ -7,9 +7,25 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <style>
+h2 { text-align: center; }
+
 .virtual-box {
     margin-bottom: 120px;
 }
+
+.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0px auto; 
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 </style>
 </head>
 <body>
@@ -24,16 +40,24 @@
                     <h2><span style="color: gray;">nmnm</span> 회원 가입</h2>
                 </div>
                 <div class="card-body">
+                
                     <form action="join" name="signup" id="signUpForm" method="post" enctype='multipart/form-data'
                         style="margin-bottom: 0;">
                         
-                        <!-- 권한은 일반회원으로 고정(나중에 라디오버튼으로 선택지를 주셔도됩니다.) -->
+                        
+                    <div class="box" style="background: #BDBDBD;">
+                         <img  class="profile" id="blah" src="#"/>
+                    </div>
+                                <input type="file" name="photoFile" id="form1" onchange="readURL(this);"
+                                    required="required" aria-required="true">
+                           
+                        
                         <input type="hidden" name="auth" value="common">
                         
                         <table
                             style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
                              <tr>
-                                <td style="text-align: left">
+                                <td style="text-align: left"><br>
                                     <p><strong>이메일을 입력해주세요.
                                 <input type='button' id='idck' value="email중복확인" onclick='checkid()'>
                                     </strong>&nbsp;&nbsp;&nbsp;<span id="emailChk"></span></p>
@@ -100,18 +124,7 @@
                                     placeholder="nickname"></td>
                                     
                             </tr>
-                            <tr>
-                                 <td style="text-align: left">
-                                    <p><strong>이미지를 넣어주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="file" name="photoFile" id="tel"
-                                    class="form-control tooltipstered" maxlength="20"
-                                    required="required" aria-required="true"
-                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-                                    placeholder="ex) 010-1234-1234"></td>
-                            </tr>
+                          
                             <tr>
                                  <td style="text-align: left">
                                     <p><strong>생일을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
@@ -177,7 +190,19 @@
         </div>
     </div>
 
-<jsp:include page="../footer.jsp" />
+<script type="text/javascript">
+function readURL(input) {
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+reader.onload = function (e) {
+$('#blah').attr('src', e.target.result);
+}
+reader.readAsDataURL(input.files[0]);
+}
+}
+</script>
+
+
 
 
 <script type="text/javascript">

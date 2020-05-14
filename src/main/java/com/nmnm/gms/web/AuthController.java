@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Member;
+import com.nmnm.gms.service.MailSendService;
 import com.nmnm.gms.service.MemberService;
 
 @Controller
@@ -28,6 +29,9 @@ public class AuthController {
 
   @Autowired
   MemberService memberService;
+
+  @Autowired
+  private MailSendService mailsender;
 
 
   @GetMapping("login")
@@ -55,22 +59,7 @@ public class AuthController {
   @GetMapping("generalJoin")
   public void addForm() {}
 
-  // @PostMapping("generalJoin")
-  // public ModelAndView add(Member member, GeneralMember generalMember, HttpServletRequest request,
-  // Model model) throws Exception {
-  //
-  // if (memberService.add(member, generalMember) > 0) {
-  // ModelAndView mv = new ModelAndView();
-  // mv.addObject("message1", "입력하신 이메일로 이메일 인증 메일을 발송하였습니다.");
-  // mv.addObject("message2", "인증 후 로그인하실 수 있습니다.");
-  // mv.setViewName("messageView");
-  // // 인증 메일 보내기 메서드
-  // mailsender.mailSendWithUserKey(member.getEmail(), member.getId(), member.getName(), request);
-  // return mv;
-  // } else {
-  // throw new Exception("회원을 추가할 수 없습니다.");
-  // }
-  // }
+
   @ResponseBody
   @RequestMapping(value = "checkid", method = RequestMethod.POST)
   public int checkid(String email) throws Exception {
@@ -87,13 +76,8 @@ public class AuthController {
   }
 
   @PostMapping("login")
-  public String login( //
-      String email, //
-      String password, //
-      String saveEmail, //
-      HttpServletResponse response, //
-      HttpSession session, //
-      Model model) throws Exception {
+  public String login(String email, String password, String saveEmail, HttpServletResponse response,
+      HttpSession session, Model model) throws Exception {
     Cookie cookie = new Cookie("email", email);
     if (saveEmail != null) {
       cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -118,5 +102,22 @@ public class AuthController {
   public String logout(HttpSession session) {
     session.invalidate();
     return "redirect:../../index.html";
+  }
+
+  @GetMapping("findPassword")
+  public void findPasswordForm() {}
+
+  @PostMapping("findPassword")
+  public String findPassword(String email, Model model) throws Exception {
+    String userEmail = memberService.getEmailByEmail(email);
+
+    if (userEmail != null) {
+      model.addAttribute("email", email);
+      mailsender.findPassword(email);
+      return "redirect:/";
+    } else {
+      model.addAttribute("error", "해당 이메일은 가입된 이메일이 아닙니다.");
+      return "redirect:./";
+    }
   }
 }

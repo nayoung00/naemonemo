@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+ <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style type="text/css">
     .login-form {
         width: 340px;
@@ -48,6 +49,38 @@
     <form action='login' method='post'> 
         <h2 class="text-center">네모네모</h2>   
         <div class="form-group">
+        <div id="kakao">
+    <a id="kakao-login-btn"></a>
+        <a href="http://developers.kakao.com/logout"></a>
+        <script type='text/javascript'>
+            //<![CDATA[
+            // 사용할 앱의 JavaScript 키를 설정해 주세요.
+            Kakao.init('44dc488bb7ee1b14cd2765f0530ea05b');
+            // 카카오 로그인 버튼을 생성합니다.
+            Kakao.Auth.createLoginButton({
+                container: '#kakao-login-btn',
+                success: function(authObj) {
+                    Kakao.API.request({
+                        url:'/v1/user/me',
+                        success:function(res){
+                            /* alert(res.id+'님 카카오톡 로그인 완료.'); */
+                            
+                            location.href="./kakao.member?id="+res.id;
+                        },
+                        fail:function(error){
+                            alert(JSON.stringify(error));
+                        }
+                    });
+                },
+                fail: function(err){
+                    alert(JSON.stringify(err));
+                }
+            });
+        </script>
+</div>
+        
+        
+        <br>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input name='email' type='email' class="form-control" value='${cookie.email.value}' placeholder="user@test.com" required="required">

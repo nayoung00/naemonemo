@@ -19,8 +19,8 @@
   
 <c:forEach items="${list}" var="item">
   <tr>
-    <td>${item.noticeBoardNo}</td> 
-    <td><a href='detail?noticeBoardNo=${item.noticeBoardNo}'>=> ${item.title}</a></td> 
+    <td>${item.noticeNo}</td> 
+    <td><a href='detail?noticeNo=${item.noticeNo}'> ${item.title}</a></td> 
     <td>${item.content}</td>
     <td>${item.createDate}</td>
     <td>${item.viewCount}</td>

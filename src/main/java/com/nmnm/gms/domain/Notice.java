@@ -1,10 +1,15 @@
 package com.nmnm.gms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Notice {
+public class Notice implements Serializable {
 
-  private int noticeBoardNo; // PK_nm_notice_board, auto 
+
+  private static final long serialVersionUID = 1L;
+  
+  
+  private int noticeNo; // PK_nm_notice_board, auto 
   private int groupNo; // FK_nm_group
   private int memberNo; // FK_nm_meeting_member
   private String title; //
@@ -12,11 +17,22 @@ public class Notice {
   private Date createDate; // now()
   private int viewCount;
   
-  public int getNoticeBoardNo() {
-    return noticeBoardNo;
+  
+  
+  
+  @Override
+  public String toString() {
+    return "Notice [noticeNo=" + noticeNo + ", groupNo=" + groupNo + ", memberNo=" + memberNo
+        + ", title=" + title + ", content=" + content + ", createDate=" + createDate
+        + ", viewCount=" + viewCount + "]";
   }
-  public void setNoticeBoardNo(int noticeBoardNo) {
-    this.noticeBoardNo = noticeBoardNo;
+  
+  
+  public int getNoticeNo() {
+    return noticeNo;
+  }
+  public void setNoticeNo(int noticeNo) {
+    this.noticeNo = noticeNo;
   }
   public int getGroupNo() {
     return groupNo;
@@ -54,6 +70,8 @@ public class Notice {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  
+  
   
   
   

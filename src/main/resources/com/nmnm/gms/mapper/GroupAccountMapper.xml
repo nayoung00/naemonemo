@@ -31,7 +31,7 @@
   <select id="findAll" resultMap="GroupAccountMap">
    <include refid="select1"/>
    order by
-    bank_info_id asc
+    bank_info_id desc
   </select>
   
   

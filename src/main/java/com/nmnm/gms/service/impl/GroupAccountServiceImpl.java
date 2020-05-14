@@ -27,8 +27,8 @@ public class GroupAccountServiceImpl implements GroupAccountService {
   }
 
   @Override
-  public int delete(int GroupAccountNo) throws Exception {
-    return groupAccountDao.delete(GroupAccountNo);
+  public int delete(int bankInfoId) throws Exception {
+    return groupAccountDao.delete(bankInfoId);
   }
 
   @Override

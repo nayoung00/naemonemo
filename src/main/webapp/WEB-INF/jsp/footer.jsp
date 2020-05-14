@@ -1,11 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< Updated upstream
-</div>
-=======
->>>>>>> Stashed changes
-<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
-<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous'></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- sweet Alert -->
-</body>
+
+    </div><!--/.container-->
+      
+    </section>
+    
+  <!--footer start-->
+    <footer id="footer"  class="footer">
+      <div class="container">
+        <div class="hm-footer-copyright text-center">
+          <p>
+            &copy;copyright. designed and developed by <a href="#">네모내모</a>
+          </p><!--/p-->
+        </div><!--/.text-center-->
+      </div><!--/.container-->
+
+      <div id="scroll-Top">
+        <div class="return-to-top">
+          <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+        </div>
+        
+      </div><!--/.scroll-Top-->
+      
+        </footer><!--/.footer-->
+    <!--footer end-->
+    
+
+    <!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+    <script src="../../js/jquery.js"></script>
+        
+    <!--modernizr.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    
+    <!--bootstrap.min.js-->
+    <script src="../../js/bootstrap.min.js"></script>
+    
+    <!-- bootsnav js -->
+    <script src="../../js/bootsnav.js"></script>
+
+    <!--owl.carousel.js--> 
+    <script src="../../js/owl.carousel.min.js"></script>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    
+        
+        <!--Custom JS-->
+        <script src="../../js/custom.js"></script>
+        
+    </body>
+  
 </html>

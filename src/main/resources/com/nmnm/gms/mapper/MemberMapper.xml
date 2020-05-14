@@ -146,5 +146,10 @@
           email = #{email}
 </select>
     
+<select id="checknick" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM nm_member
+      WHERE
+          nickname = #{nickname}
+</select>
       
 </mapper>

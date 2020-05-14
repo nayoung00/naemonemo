@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Member;
-import com.nmnm.gms.service.KakaoAPI;
 import com.nmnm.gms.service.MemberService;
 
 @Controller
@@ -30,8 +29,6 @@ public class AuthController {
   @Autowired
   MemberService memberService;
 
-  @Autowired
-  private KakaoAPI kakao;
 
   @GetMapping("login")
   public void login() {}
@@ -77,11 +74,18 @@ public class AuthController {
   @ResponseBody
   @RequestMapping(value = "checkid", method = RequestMethod.POST)
   public int checkid(String email) throws Exception {
-    System.out.println(email);
     int count = memberService.checkid(email);
-    System.out.println(count);
     return count;
   }
+
+  @ResponseBody
+  @RequestMapping(value = "checknick", method = RequestMethod.POST)
+  public int checknick(String nickname) throws Exception {
+    System.out.println(nickname);
+    int count = memberService.checknick(nickname);
+    return count;
+  }
+
 
   @PostMapping("login")
   public String login( //

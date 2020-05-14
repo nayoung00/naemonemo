@@ -17,8 +17,6 @@
 
 <!-- 회원가입 양식 -->
 
-<div class="virtual-box"></div>
-<div class="container">
     <div class="row">
         <div class="offset-md-2 col-md-4">
             <div class="card" style="width:200%;">
@@ -89,15 +87,18 @@
                             </tr>
                             <tr>
                                  <td style="text-align: left">
-                                    <p><strong>닉네임을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
+                                    <p><strong>닉네임을 입력해주세요.
+                                     <input type='button' id='nickck' value="중복확인" onclick='checknick()'>
+                                    </strong>&nbsp;&nbsp;&nbsp;<span id="nicChk"></span></p>
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="nickname" id="nickname"
+                                <td><input type="text" name="nickname" id="nickname" 
                                     class="form-control tooltipstered" maxlength="20"
                                     required="required" aria-required="true"
                                     style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
                                     placeholder="nickname"></td>
+                                    
                             </tr>
                             <tr>
                                  <td style="text-align: left">
@@ -175,7 +176,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <jsp:include page="../footer.jsp" />
 
@@ -200,6 +200,25 @@ function checkid(){
        });
      };
      
+     function checknick(){
+         $.ajax({
+           type: 'POST',
+           datatype: "json",
+           data: {nickname : $("#nickname").val()},
+           url: "checknick",
+           success : function(result){
+               if (result == 0){
+                   console.log("넘어온 값 : " + result);
+                   alert('사용가능합니다');
+               } else {
+                   nickck = 1;
+                 console.log("넘어온 값 : " + result);
+                   alert('중복입니다');
+               }
+           }
+           });
+         };
+
  
 </script>
 

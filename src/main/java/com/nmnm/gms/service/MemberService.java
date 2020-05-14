@@ -29,6 +29,8 @@ public interface MemberService {
 
   Integer checkid(String email) throws Exception;
 
+  Integer checknick(String nickname) throws Exception;
+
 
 
 }

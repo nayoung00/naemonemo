@@ -31,6 +31,8 @@ public interface MemberService {
 
   Integer checknick(String nickname) throws Exception;
 
+  int updatePassword(int memberNo, String newPassword, String password) throws Exception;
 
+  String getEmailByEmail(String email);
 
 }

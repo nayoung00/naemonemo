@@ -1,5 +1,6 @@
 package com.nmnm.gms.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.nmnm.gms.domain.Member;
@@ -39,9 +40,11 @@ public interface MemberDao {
 
   int selectMemberNo(String email) throws Exception;
 
-  int putKey(Map<String, Object> params) throws Exception;
+  int putKey(Map<String, Object> params);
 
-  int alterKey(Map<String, Object> params) throws Exception;
+  int alterKey(Map<String, Object> params);
+
+  void updatePassword(HashMap<String, Object> params) throws Exception;
 
 
 }

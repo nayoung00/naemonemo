@@ -86,7 +86,6 @@ public class AuthController {
     return count;
   }
 
-
   @PostMapping("login")
   public String login( //
       String email, //
@@ -95,7 +94,6 @@ public class AuthController {
       HttpServletResponse response, //
       HttpSession session, //
       Model model) throws Exception {
-
     Cookie cookie = new Cookie("email", email);
     if (saveEmail != null) {
       cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -107,14 +105,13 @@ public class AuthController {
     Member member = memberService.get(email, password);
     if (member != null) {
       session.setAttribute("loginUser", member);
-      System.out.println(member);
-      return "redirect:../../index.html";
+      model.addAttribute("refreshUrl", "2;url=../../index.html");
     } else {
       session.invalidate();
-      System.out.println(member);
-      return "auth/login";
+      model.addAttribute("refreshUrl", "2;url=login");
     }
 
+    return "auth/loginForm";
   }
 
   @GetMapping("logout")

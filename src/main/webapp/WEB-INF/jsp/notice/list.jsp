@@ -6,7 +6,7 @@
 <jsp:include page="../header.jsp"/>
 
 
-  <h1>공지사항 게시글(JSP + EL + JSTL)</h1>
+  <h1>공지사항</h1>
   <a href='form'>새 글</a><br>
   <table border='1'>
   <tr>
@@ -19,8 +19,8 @@
   
 <c:forEach items="${list}" var="item">
   <tr>
-    <td>${item.noticeBoardNo}</td> 
-    <td><a href='detail?noticeBoardNo=${item.noticeBoardNo}'>=> ${item.title}</a></td> 
+    <td>${item.noticeNo}</td> 
+    <td><a href='detail?noticeNo=${item.noticeNo}'> ${item.title}</a></td> 
     <td>${item.content}</td>
     <td>${item.createDate}</td>
     <td>${item.viewCount}</td>

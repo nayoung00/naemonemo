@@ -21,10 +21,6 @@ public class GroupAccountServiceImpl implements GroupAccountService {
     return groupAccountDao.insert(groupAccount);
   }
   
-	@Override
-	public int add(Object[] groupAccount) {
-		return groupAccountDao.insert(groupAccount);
-	}
 
   @Override
   public List<GroupAccount> list() throws Exception {
@@ -50,8 +46,6 @@ public class GroupAccountServiceImpl implements GroupAccountService {
   public List<GroupAccount> search(String keyword) throws Exception {
     return groupAccountDao.findByKeyword(keyword);
   }
-
-
 
 
 

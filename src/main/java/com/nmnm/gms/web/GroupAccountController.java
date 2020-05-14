@@ -48,14 +48,20 @@ public class GroupAccountController {
 			String bankAccountHolder[]
 			) throws Exception {
 		System.out.println("포인트1");
+		System.out.println(bankInfoId);
 			List<Object> arr = Arrays.asList(bankInfoId, bankAccountNo, //
 			bankName, //
 			openingBalance, //
 			bankAccountHolder);
-			for(Object groupAccount : arr){
-				groupAccountService.add((GroupAccount) groupAccount);
+			System.out.println(bankInfoId);
+			for(Object arrAdd : arr){
+				GroupAccount groupAccount = (GroupAccount) arrAdd;
+				System.out.println("포인트2");
+				System.out.println(bankInfoId);
+				groupAccountService.add(groupAccount);
+				System.out.println("포인트3");
 			}
-			System.out.println("포인트2");
+			System.out.println("포인트4");
 			return "redirect:bankList";
 	}
 

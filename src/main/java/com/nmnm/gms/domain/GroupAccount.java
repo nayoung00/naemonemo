@@ -10,20 +10,14 @@ public class GroupAccount {
   private String bankAccountHolder; // 예금주
 
 
-  public GroupAccount() {}
-
-  public GroupAccount(//
-  		int bankInfoId, //
-      String bankAccountNo, //
-      String bankName, //
-      String openingBalance, //
-      String bankAccountHolder) {
-  	this.bankInfoId = bankInfoId;
-    this.bankAccountNo = bankAccountNo;
-    this.bankName = bankName;
-    this.openingBalance = openingBalance;
-    this.bankAccountHolder = bankAccountHolder;
+//  public GroupAccount() {}
+  public GroupAccount(int bankInfoId[], //
+			String bankAccountNo[], //
+			String bankName[], //
+			String openingBalance[], //
+			String bankAccountHolder[]) {
   }
+
 
   public String getOpeningBalance() {
     return openingBalance;

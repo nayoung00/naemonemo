@@ -1,60 +1,294 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>네모내모</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
-<body>
+<!doctype html>
+<html class="no-js" lang="en">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="index.html">네모내모</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="app/notice/list">공지사항</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/plan/list">일정</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/feed/list">피드</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/co/list">소통게시판</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/member/list">회원</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/group/list">모임</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/account/list">회계</a>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          접속하기
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="app/auth/login">로그인</a>
-          <a class="dropdown-item" href="#">로그아웃</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="app/auth/join">회원가입</a>
-        </div>
-      </li>
-      </ul>
-  </div>
-</nav>
+    <head>
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<h1>네모내모 - 모임 관리 시스템</h1>
+        <!--font-family-->
+		    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+        
+        <!-- title of site -->
+        <title>네모내모</title>
 
+        <!-- For favicon png <link rel="shortcut icon" type="image/icon" href="/logo/#"/> 파비콘 파일이아직없음-->
+	       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
+        <!--linear icon css-->
+	    	<link rel="stylesheet" href="css/linearicons.css">
+
+	    	<!--animate.css-->
+        <link rel="stylesheet" href="css/animate.css">
+
+        <!--owl.carousel.css -->
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+	    	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	    
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+		
+	    	<!-- bootsnav -->
+    		<link rel="stylesheet" href="css/bootsnav.css" >	
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="css/responsive.css">
+        
+    </head>
+	
+	<body>
+	
+		<!--Welcome-hero start -->
+		<header id="home" class="Welcome-hero">
+
+		  <!-- top-area Start -->
+			<div class="top-area">
+				<div class="header-area">
+
+					<!-- Start Navigation -->
+				    <nav class="navbar navbar-default bootsnav  navbar-sticky"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+			        <div class="container">     
+
+				            <!-- Start Atribute Navigation -->
+				            <div class="attr-nav">
+				              <ul>
+			                  <li class="dropdown">
+				                        <a href="###app/alarm" class="dropdown-toggle" data-toggle="dropdown" >
+				                            <span class="lnr lnr-alarm"></span>
+							   			            	<span class="badge badge-bg-1">3</span>
+				                        </a>
+				                        <ul class="dropdown-menu cart-list s-cate">
+				                            <li class="single-cart-list">
+				                                <a href="#" class="photo"><img src="images/collection/arrivals1.jpg" class="cart-thumb" alt="image" /></a>
+				                                <div class="cart-list-txt">
+				                                	<h6><a href="#">알림1</a></h6>
+				                                </div><!--/.cart-list-txt-->
+				                                <div class="cart-close">
+				                                	<span class="lnr lnr-cross"></span>
+				                                </div><!--/.cart-close-->
+				                            </li><!--/.single-cart-list -->
+				                            <li class="single-cart-list">
+				                                <a href="#" class="photo"><img src="images/collection/arrivals2.jpg" class="cart-thumb" alt="image" /></a>
+				                                <div class="cart-list-txt">
+				                                	<h6><a href="#">알림2</a></h6> 	
+				                                </div><!--/.cart-list-txt-->
+				                                <div class="cart-close">
+				                                	<span class="lnr lnr-cross"></span>
+				                                </div><!--/.cart-close-->
+				                            </li><!--/.single-cart-list -->
+				                            <li class="single-cart-list">
+				                                <a href="#" class="photo"><img src="images/collection/arrivals3.jpg" class="cart-thumb" alt="image" /></a>
+				                                <div class="cart-list-txt">
+				                                	<h6><a href="#">알림3</a></h6>   	
+				                                </div><!--/.cart-list-txt-->
+				                                <div class="cart-close">
+				                                	<span class="lnr lnr-cross"></span>
+				                                </div><!--/.cart-close-->
+				                            </li><!--/.single-cart-list -->
+				                        </ul>
+												</li><!--/.dropdown(알림)-->
+												
+												<li class="###app/message?"><!--.message-->
+													<a href="#"><span class="lnr lnr-envelope"></span></a>
+												</li><!--/.message-->
+											
+												<li class="profile"><!--.profile-->
+													<a href="###app/mypage?" class="dropdown-toggle" data-toggle="dropdown" >
+															<span class="lnr lnr-user"></span>
+													</a>
+												</li><!--/.profile-->
+
+				              </ul>
+				            </div><!--/.attr-nav-->
+				            <!-- End Atribute Navigation -->
+
+				            <!-- Start Header Navigation -->
+				            <div class="navbar-header">
+				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+				                    <i class="fa fa-bars"></i>
+				                </button>
+				                <a class="navbar-brand" href="index.html">네모내모</a>
+
+				            </div><!--/.navbar-header-->
+				            <!-- End Header Navigation -->
+
+				            <!-- Collect the nav links, forms, and other content for toggling -->
+				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+				                <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
+				                    <li><a href="#home">home</a></li>
+				                    <li><a href="app/group/list">moim</a></li>
+				                    <li><a href="app/group/search">search</a></li>
+														<li><a href="app/co/list">forum</a></li>
+														<li><a href="app/notice/list">notice</a></li>
+														<li><a href="app/plan/list">plan</a></li>
+														<li><a href="app/feed/list">feed</a></li>
+														<li><a href="app/account/list">account</a></li>
+														<li><a href="app/member/list">member</a></li>
+				                </ul><!--/.nav -->
+				            </div><!-- /.navbar-collapse -->
+				        </div><!--/.container-->
+				    </nav><!--/nav-->
+				    <!-- End Navigation -->
+				</div><!--/.header-area-->
+			    <div class="clearfix"></div>
+
+			</div><!-- /.top-area-->
+			<!-- top-area End -->
+
+		</header><!--/.Welcome-hero-->
+		<!--Welcome-hero end -->
+
+	
+
+		<!--썸네일 start -->
+		<section id="blog" class="blog">
+			<div class="container">
+				<div class="section-header">
+					<br>
+					<br>
+					<h2>내가 가입한 모임 썸네일 이미지가 뜸</h2>
+					<br>
+					<br>
+				</div><!--/.section-header-->
+				<div class="blog-content">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="single-blog">
+								<div class="single-blog-img">
+									<img src="images/blog/b1.jpg" alt="blog image">
+									<div class="single-blog-img-overlay"></div>
+								</div>
+								<div class="single-blog-txt">
+									<h2><a href="#">모임1</a></h2>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-sm-4">
+							<div class="single-blog">
+								<div class="single-blog-img">
+									<img src="images/blog/b2.jpg" alt="blog image">
+									<div class="single-blog-img-overlay"></div>
+								</div>
+								<div class="single-blog-txt">
+									<h2><a href="#">모임2</a></h2>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="single-blog">
+								<div class="single-blog-img">
+									<img src="images/blog/b3.jpg" alt="blog image">
+									<div class="single-blog-img-overlay"></div>
+								</div>
+								<div class="single-blog-txt">
+									<h2><a href="#">모임3</a></h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!--/.container-->
+
+			<div class="container">
+				<div class="section-header">
+					<br>
+				</div><!--/.section-header-->
+				<div class="blog-content">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="single-blog">
+								<div class="single-blog-img">
+									<img src="images/blog/b1.jpg" alt="blog image">
+									<div class="single-blog-img-overlay"></div>
+								</div>
+								<div class="single-blog-txt">
+									<h2><a href="#">모임4</a></h2>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-sm-4">
+							<div class="single-blog">
+								<div class="single-blog-img">
+									<img src="images/blog/b2.jpg" alt="blog image">
+									<div class="single-blog-img-overlay"></div>
+								</div>
+								<div class="single-blog-txt">
+									<h2><a href="#">모임5</a></h2>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="single-blog">
+								<div class="single-blog-img">
+									<img src="images/blog/b3.jpg" alt="blog image">
+									<div class="single-blog-img-overlay"></div>
+								</div>
+								<div class="single-blog-txt">
+									<h2><a href="#">모임6</a></h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!--/.container-->
+			
+		</section><!--/.blog-->
+		<!--blog end -->
+
+		
+
+		<!--footer start-->
+		<footer id="footer"  class="footer">
+			<div class="container">
+				<div class="hm-footer-copyright text-center">
+					<p>
+						&copy;copyright. designed and developed by <a href="#">네모내모</a>
+					</p><!--/p-->
+				</div><!--/.text-center-->
+			</div><!--/.container-->
+
+			<div id="scroll-Top">
+				<div class="return-to-top">
+					<i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+				</div>
+				
+			</div><!--/.scroll-Top-->
+			
+        </footer><!--/.footer-->
+		<!--footer end-->
+		
+
+		<!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+		<script src="js/jquery.js"></script>
+        
+    <!--modernizr.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		
+		<!--bootstrap.min.js-->
+    <script src="js/bootstrap.min.js"></script>
+		
+		<!-- bootsnav js -->
+		<script src="js/bootsnav.js"></script>
+
+		<!--owl.carousel.js--> 
+		<script src="js/owl.carousel.min.js"></script>
+        
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+		
+        
+        <!--Custom JS-->
+        <script src="js/custom.js"></script>
+        
+    </body>
+	
 </html>

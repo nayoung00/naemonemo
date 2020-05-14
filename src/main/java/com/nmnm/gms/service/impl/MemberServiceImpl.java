@@ -78,6 +78,11 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.checkid(inputId);
   }
 
+  @Override
+  public Integer checknick(String nickname) throws Exception {
+    return memberDao.checknick(nickname);
+  }
+
 
 
 }

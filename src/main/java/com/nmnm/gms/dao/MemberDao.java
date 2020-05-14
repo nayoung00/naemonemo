@@ -33,6 +33,9 @@ public interface MemberDao {
   // ID 중복체크
   int checkid(String email) throws Exception;
 
+  // nickname 중복체크
+  int checknick(String nickname) throws Exception;
+
   int selectMemberNo(String email) throws Exception;
 
 

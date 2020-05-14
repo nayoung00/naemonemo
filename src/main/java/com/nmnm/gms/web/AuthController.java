@@ -5,7 +5,6 @@ import java.io.File;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.service.MailSendService;
 import com.nmnm.gms.service.MemberService;
@@ -44,26 +42,18 @@ public class AuthController {
 
 
   @PostMapping("join")
-  public ModelAndView join(Member member, HttpServletRequest request, MultipartFile photoFile)
-      throws Exception {
+  public String join(Member member, MultipartFile photoFile) throws Exception {
     if (photoFile.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/member");
       String filename = UUID.randomUUID().toString();
       photoFile.transferTo(new File(dirPath + "/" + filename));
       member.setPhoto(filename);
     }
-    if (memberService.add(member) > 0) {
-      ModelAndView mv = new ModelAndView();
-      mv.addObject("message1", "입력하신 이메일로 이메일 인증 메일을 발송하였습니다.");
-      mv.addObject("message2", "인증 후 로그인하실 수 있습니다.");
-      mv.setViewName("messageView");
-      // 인증 메일 보내기 메서드
-      mailsender.mailSendWithKey(member.getEmail(), member.getName(), request);
-      return mv;
+    if (memberService.join(member) > 0) {
+      return "redirect:../../index.html";
     } else {
-      throw new Exception("회원을 추가할 수 없습니다.");
+      throw new Exception("회원가입 실패");
     }
-
   }
 
   @GetMapping("generalJoin")

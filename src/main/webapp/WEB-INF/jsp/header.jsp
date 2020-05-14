@@ -15,15 +15,13 @@
 <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
 <style>
 body {
-	background-color: LightGray;
+   background-color: LightGray;
 }
-
 div.container {
-
-	background: white;
-	border: 1px solid gray;
-	width: 1000px;
-	
+   background: white;
+   border: 1px solid gray;
+   width: 1000px;
+   
 }
 </style>
 </head>
@@ -62,7 +60,7 @@ div.container {
   <a href='../auth/logout' class='btn btn-success btn-sm'>로그아웃</a>
 </c:if>
 <c:if test="${empty loginUser}">
-  <a href='../auth/login' class='btn btn-success btn-sm'>로그인</a>
+  <a href='../auth/form' class='btn btn-success btn-sm'>로그인</a>
 </c:if> 
 </div>
 </nav>

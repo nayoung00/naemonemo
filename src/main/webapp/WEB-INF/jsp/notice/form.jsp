@@ -4,7 +4,7 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>공지사항 입력(JSP)</h1>
+<h1>공지사항 입력</h1>
 <form action='add' method='post' enctype='multipart/form-data'>
 모임번호: <input name='groupNo' type='text'><br>
 그룹번호: <input name='memberNo' type='text'><br>

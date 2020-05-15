@@ -3,55 +3,64 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
+  
 <mapper namespace="com.nmnm.gms.dao.FeedDao">
 
   <resultMap type="Feed" id="FeedMap">
     <id column="feed_no"   property="feedNo"/>
-    <result column="member_no" property="memberNo"/>
     <result column="group_no"    property="groupNo"/>
+    <result column="member_no" property="memberNo"/>
     <result column="title"  property="title"/>
     <result column="content"  property="content"/>
     <result column="create_date"    property="createDate"/>
     <result column="view_count"    property="viewCount"/>
-    <result column="thumbnail"    property="thumbnail"/>
   </resultMap>
+  
+  <sql id="select1">
+    select
+      feed_no,
+      member_no,
+      group_no,
+      title,
+      content,
+      create_date,
+      view_count
+    from 
+      nm_feed 
+  </sql>
+  
   
   <insert id="insert" parameterType="Feed">
     insert into nm_feed(
+      group_no,
+      member_no, 
       title, 
-      content,
-      thumbnail)
+      content
+      )
     values(
+      #{groupNo},
+      #{memberNo},
       #{title}, 
       #{content}
-      #{thumbnail})
+      )
   </insert>
   
   <select id="findAll" resultMap="FeedMap">
-    select
-      feed_no,
-      title,
-      create_date,
-      content,
-      member_no,
-      group_no,
-      view_count,
-      thumbnail
-    from 
-      nm_feed
+    <include refid="select1"/>
+    order by
+      feed_no desc
   </select>
 
   
   <select id="findByNo" resultMap="FeedMap" parameterType="int">
     select
       feed_no,
-      title,
-      create_date,
-      content,
       member_no,
       group_no,
-      view_count,
-      thumbnail
+      title,
+      content,
+      create_date,
+      view_count
     from 
       nm_feed
     where
@@ -59,14 +68,13 @@
   </select>
   
   <update id="update" parameterType="Feed">
-    update nm_feed
-    <set>
-      <if test="title != null and title != ''">title=#{title},</if>
-      <if test="content != null and content != ''">content=#{content},</if>
-      <if test="title != null and title != ''">title=#{title},</if>
-      <if test="thumbnail != null and thumbnail != ''">thumbnail=#{thumbnail}</if>
-    </set>
-    where feed_no=#{feedNo}
+    update nm_feed set
+      group_no=#{groupNo},
+      member_no=#{memberNo},
+      title=#{title},
+      content=#{content}
+    where 
+      feed_no=#{feedNo}
   </update>
   
   <delete id="delete" parameterType="int">
@@ -78,17 +86,15 @@
   <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
     select
       feed_no,
+      member_no, 
       title,
       create_date,
-      member_no,
-      group_no
+      view_count  
     from 
       nm_feed
     where
-      feed_no like #{feedNo}
-      or title like #{title}
-      or create_date like #{createDate}
-      or member_no like #{memberNo}
-      or group_no like #{groupNo}
+      title like #{title}
+      or content like #{content}
   </select>
+  
 </mapper>

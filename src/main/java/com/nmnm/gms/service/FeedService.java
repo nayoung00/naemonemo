@@ -5,11 +5,11 @@ import com.nmnm.gms.domain.Feed;
 
 public interface FeedService {
 
+  int add(Feed feed) throws Exception;
+
   List<Feed> list() throws Exception;
 
   int delete(int feedNo) throws Exception;
-
-  int add(Feed feed) throws Exception;
 
   Feed get(int feedNo) throws Exception;
 

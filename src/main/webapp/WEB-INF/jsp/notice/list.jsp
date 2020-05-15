@@ -12,7 +12,6 @@
   <tr>
     <th>번호</th>
     <th>제목</th>
-    <th>내용</th>
     <th>등록일</th>
     <th>조회수</th>
   </tr>
@@ -21,7 +20,6 @@
   <tr>
     <td>${item.noticeNo}</td> 
     <td><a href='detail?noticeNo=${item.noticeNo}'> ${item.title}</a></td> 
-    <td>${item.content}</td>
     <td>${item.createDate}</td>
     <td>${item.viewCount}</td>
   </tr>

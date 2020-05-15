@@ -11,7 +11,6 @@ public class Group {
   private String groupInterest; // 모임 관심사 (춤, 노래, 음식 ....)
   private String groupPhoto; // 모임 썸네일
   private String city; // 모임 지역
-  private String gradeName; // 등급 명칭
   private int maxPeopleNo; // 모임 최대인원
   private Date createDate; // 모임 생성일
 
@@ -19,8 +18,8 @@ public class Group {
   public String toString() {
     return "Group [groupNo=" + groupNo + ", groupName=" + groupName + ", groupInfo=" + groupInfo
         + ", groupForm=" + groupForm + ", groupInterest=" + groupInterest + ", groupPhoto="
-        + groupPhoto + ", city=" + city + ", gradeName=" + gradeName + ", maxPeopleNo="
-        + maxPeopleNo + ", createDate=" + createDate + "]";
+        + groupPhoto + ", city=" + city + ", maxPeopleNo=" + maxPeopleNo + ", createDate="
+        + createDate + "]";
   }
 
   public int getGroupNo() {
@@ -77,14 +76,6 @@ public class Group {
 
   public void setCity(String city) {
     this.city = city;
-  }
-
-  public String getGradeName() {
-    return gradeName;
-  }
-
-  public void setGradeName(String gradeName) {
-    this.gradeName = gradeName;
   }
 
   public int getMaxPeopleNo() {

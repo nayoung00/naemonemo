@@ -13,7 +13,6 @@
     <result column="group_interest" property="groupInterest"/> 
     <result column="group_photo" property="groupPhoto"/>
     <result column="city" property="city"/>
-    <result column="grade_name" property="gradeName"/>
     <result column="max_people_no" property="maxPeopleNo"/>
     <result column="create_date" property="createDate"/>
   </resultMap>
@@ -25,16 +24,14 @@
     group_form,
     group_interest,
     group_photo,
-    city,
-    grade_name
+    city
     ) values(
       #{groupName},
       #{groupInfo},
       #{groupForm},
       #{groupInterest},
       #{groupPhoto},
-      #{city},
-      #{gradeName})
+      #{city})
   </insert>
   
   <select id="findAll" resultMap="GroupMap">

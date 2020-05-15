@@ -11,16 +11,16 @@
     </div><br/>
    <table id='add_group' align="center" border="3" cellspacing="0">
        <tr>
-          <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;">회원기본정보</td>
+          <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;">모임기본정보</td>
         </tr>
         <tr> 
           <td align="left">이름</td>
-          <td colspan="4"><input type="text" name="groupName" maxlength="12" id="grName" placeholder="이름 " > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
+          <td colspan="4"><input type="text" name="groupName" maxlength="12" id="grName" placeholder="이름 " > 4~12자리</td>
        </tr>
     
        <tr>
           <td >소개</td>
-           <td colspan="4"><input type="text" name='groupInfo' maxlength="12" id="grInfo" placeholder="모임소개 " > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
+           <td colspan="4"><input type="text" name='groupInfo' maxlength="12" id="grInfo" placeholder="모임소개 " > 4~12자리 간단한 모임소개</td>
        </tr>
         <tr>
           <td>형태</td>
@@ -31,8 +31,7 @@
        </tr>
        <tr class="interest">
           <td align='left'>카테고리</td>
-          <td colspan='3'><input type="text" name="groupInterest" id='grInterest' placeholder="카테고리 ">
-          <button type="button" class="interestPopup" onclick="showPopup();">목록</button></td>
+          <td colspan='4'><input type="text" name="groupInterest" id='grInterest' placeholder="카테고리 "></td>
           <!-- <button type="button" class="addBtn">항목추가</button> -->
           <!-- <td colspan='1'><button type="button" class="delBtn">삭제</button></td> -->
         </tr>
@@ -48,10 +47,8 @@
             <input type="text" name='city' id="sample5_address" style='width: 400px;' placeholder="주소">
             <input type="button" onclick="sample5_execDaumPostcode();" value="주소 검색"><br>
             <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-       <tr>
-          <td>등급 명칭</td>
-          <td colspan="4"><input type="text" name="gradeName" id="grGradeName"></td>
-        </tr>           
+            </td>
+            </tr>
  </table>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 <script>
@@ -147,7 +144,7 @@ $(document).ready(function(){
 function checkz() {
     var getIntro = $("#grInfo").val().replace(/\s|/gi,'');
     var getgrInfo = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-    var getName= RegExp(/^[가-힣]+$/);
+    var getName= RegExp(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]+$/);
     var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
 
     // 이름 공백 확인
@@ -197,7 +194,7 @@ function checkz() {
       return false;
     }
 
-    // 관심 분야 유효성 검사
+/*     // 관심 분야 유효성 검사
     if(getgrInfo==""){
 		swal({
 			  text: "관심 분야 제대로 입력해주세요.",
@@ -208,19 +205,7 @@ function checkz() {
         $("#grInterest").focus();
         return false;
       }
-    
-    // 등급 명칭의 유효성 검사
-    if(!getName.test($("#grGradeName").val())){
-		swal({
-			  text: "등급 명칭을 제대로 입력해주세요.",
-			  icon: "error",
-			  button: "닫기",
-			});
-      $("#grGradeName").val("");
-      $("#grGradeName").focus();
-      return false;
-    }
-
+ */    
 }
 </script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

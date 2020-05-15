@@ -1,5 +1,6 @@
 package com.nmnm.gms.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Co {
@@ -8,9 +9,23 @@ public class Co {
   private int memberNo; // FK
   private String title;
   private String content;
-  private Date createDate; //now()
+  private String createDate; // now()
   private int viewCount;
 
+
+
+  public String getCreateDate() {
+    Date cDate = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String createDate = sdf.format(cDate);
+    return createDate;
+  }
+
+
+  public void setCreateDate(String createDate) {
+
+    this.createDate = createDate;
+  }
 
 
   public String getCategory() {
@@ -61,13 +76,6 @@ public class Co {
     this.content = content;
   }
 
-  public Date getCreateDate() {
-    return createDate;
-  }
-
-  public void setCreateDate(Date createDate) {
-    this.createDate = createDate;
-  }
 
 
 }

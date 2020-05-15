@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Member;
@@ -42,23 +44,36 @@ public class AuthController {
 
 
   @PostMapping("join")
-  public String join(Member member, MultipartFile photoFile) throws Exception {
+  public String join(Member member, MultipartFile photoFile, HttpServletRequest request,
+      Model model) throws Exception {
     if (photoFile.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/member");
       String filename = UUID.randomUUID().toString();
       photoFile.transferTo(new File(dirPath + "/" + filename));
       member.setPhoto(filename);
     }
+
     if (memberService.join(member) > 0) {
+      // 인증 메일 보내기 메서드
+      mailsender.mailSendWithKey(member.getEmail(), member.getName(), request);
       return "redirect:../../index.html";
     } else {
-      throw new Exception("회원가입 실패");
+      throw new Exception("회원을 추가할 수 없습니다.");
     }
   }
 
-  @GetMapping("generalJoin")
-  public void addForm() {}
+  @GetMapping("regSuccess")
+  public void regSuccess() {}
 
+
+  @GetMapping(value = "keyalter")
+  public String keyalterConfirm(@RequestParam("email") String email,
+      @RequestParam("key") String key) {
+
+    mailsender.alterUserKey(email, key); // mailsender의 경우 @Autowired
+
+    return "redirect:regSuccess";
+  }
 
   @ResponseBody
   @RequestMapping(value = "checkid", method = RequestMethod.POST)
@@ -104,20 +119,20 @@ public class AuthController {
     return "redirect:../../index.html";
   }
 
-  @GetMapping("findPassword")
-  public void findPasswordForm() {}
-
-  @PostMapping("findPassword")
-  public String findPassword(String email, Model model) throws Exception {
-    String userEmail = memberService.getEmailByEmail(email);
-
-    if (userEmail != null) {
-      model.addAttribute("email", email);
-      mailsender.findPassword(email);
-      return "redirect:/";
-    } else {
-      model.addAttribute("error", "해당 이메일은 가입된 이메일이 아닙니다.");
-      return "redirect:./";
-    }
-  }
+  // @GetMapping("findPassword")
+  // public void findPasswordForm() {}
+  //
+  // @PostMapping("findPassword")
+  // public String findPassword(String email, Model model) throws Exception {
+  // String memberEmail = memberService.getEmailByEmail(email);
+  //
+  // if (memberEmail != null) {
+  // model.addAttribute("email", email);
+  // mailsender.findPassword(email);
+  // return "redirect:/";
+  // } else {
+  // model.addAttribute("error", "해당 이메일은 가입된 이메일이 아닙니다.");
+  // return "redirect:./";
+  // }
+  // }
 }

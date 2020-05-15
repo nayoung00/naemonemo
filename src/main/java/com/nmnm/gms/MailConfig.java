@@ -31,8 +31,8 @@ public class MailConfig {
     mailSender.setJavaMailProperties(mailProperties);
     mailSender.setHost("smtp.gmail.com");
     mailSender.setPort(587);
-    mailSender.setUsername("1d2f.portfoli@gmail.com");
-    mailSender.setPassword("1d2f!12020609");
+    mailSender.setUsername("nemonaemo0@gmail.com");
+    mailSender.setPassword("nmnm5315");
     mailSender.setDefaultEncoding("utf-8");
     return mailSender;
   }

@@ -42,7 +42,7 @@
 
 </table>
 </div>
-  <a href='form' style="float:right;margin-right:200px;">사용내역 추가(예정)</a><br>
+  <a href='form' style="float:right;margin-right:200px;">사용내역 추가</a><br>
 <br>
 <hr>
 <div style="text-align: center; margin: 0 auto;"> 

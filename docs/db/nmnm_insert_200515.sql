@@ -404,7 +404,6 @@ INSERT INTO nm_account
 (
 group_no,
 bank_info_id,
-account_type_no,
 account_type_name,
 ending_balance,
 amount,
@@ -419,7 +418,6 @@ INSERT INTO nm_account
 (
 group_no,
 bank_info_id,
-account_type_no,
 account_type_name,
 ending_balance,
 amount,
@@ -436,7 +434,6 @@ INSERT INTO nm_account
 (
 group_no,
 bank_info_id,
-account_type_no,
 account_type_name,
 ending_balance,
 amount,

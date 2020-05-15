@@ -40,9 +40,9 @@ public interface MemberDao {
 
   int selectMemberNo(String email) throws Exception;
 
-  int putKey(Map<String, Object> params);
+  int alterKey(Map<String, Object> params); // 유저 인증키 생성 메서드
 
-  int alterKey(Map<String, Object> params);
+  int alterUserkey(Map<String, Object> params); // 유저 인증키 Y로 바꿔주는 메서드
 
   void updatePassword(HashMap<String, Object> params) throws Exception;
 

@@ -65,11 +65,11 @@ public class MailSendServiceImpl implements MailSendService {
     params.put("email", email);
     params.put("key", key);
 
-    if (memberDao.putKey(params) > 0) {
+    if (memberDao.alterKey(params) > 0) {
       MimeMessage mail = mailSender.createMimeMessage();
       String htmlStr = "<h2>안녕하세요. nmnm에 가입해주셔서 감사합니다!</h2><br><br>" + "<h3>" + name + "님</h3>"
-          + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " + "<a href='http://localhost:9999"
-          + request.getContextPath() + "/app/member/keyalter?email=" + email + "&key=" + key
+          + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " + "<a href='http://localhost:8080"
+          + request.getContextPath() + "/app/auth/keyalter?email=" + email + "&key=" + key
           + "'>인증하기</a></p>" + "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
       try {
         mail.setSubject(String.format("[본인인증] nmnm: %s님의 인증메일입니다", name), "utf-8");

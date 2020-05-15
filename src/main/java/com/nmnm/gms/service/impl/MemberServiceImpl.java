@@ -88,6 +88,20 @@ public class MemberServiceImpl implements MemberService {
   }
 
 
+  @Override
+  public int updatePassword(int memberNo, String newPassword, String password) throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+
+  @Override
+  public String getEmailByEmail(String email) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
 
 }
 

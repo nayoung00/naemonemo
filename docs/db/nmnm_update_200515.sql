@@ -9,7 +9,6 @@ DROP DATABASE nmnmdb;
 USE nmnmdb;
 
 
-
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
@@ -218,8 +217,8 @@ CREATE TABLE nm_group_account (
   bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
   group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
-  bank_name                VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
-  opening_balance   INTEGER NOT NULL COMMENT '기초잔액', -- 기초잔액
+  bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
+  opening_balance     INTEGER     NOT NULL COMMENT '기초잔액', -- 기초잔액
   bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임계좌';
@@ -512,19 +511,20 @@ ALTER TABLE nm_account
 
 -- 회원
 CREATE TABLE nm_member (
-  member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  member_name    VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
-  id_photo       VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
-  birthday       DATE         NOT NULL COMMENT '생년월일', -- 생년월일
-  email          VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-  password       VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
-  intro          TEXT         NULL     COMMENT '한줄소개', -- 한줄소개
-  interest       VARCHAR(20)  NOT NULL COMMENT '관심사', -- 관심사
-  nickname       VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
-  account_status VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '상태', -- 상태
-  withdraw       VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '회원탈퇴', -- 회원탈퇴
-  sns            VARCHAR(255) NULL     COMMENT 'sns', -- sns
-  create_date    DATETIME     NOT NULL DEFAULT now() COMMENT '가입일' -- 가입일
+  member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  member_name VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  id_photo    VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
+  birthday    DATE         NOT NULL COMMENT '생년월일', -- 생년월일
+  email       VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+  password    VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
+  intro       TEXT         NULL     COMMENT '한줄소개', -- 한줄소개
+  interest    VARCHAR(20)  NOT NULL COMMENT '관심사', -- 관심사
+  nickname    VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
+  authstatus  VARCHAR(20)  NOT NULL DEFAULT 0 COMMENT '상태', -- 상태
+  withdraw    VARCHAR(20)  NOT NULL DEFAULT 1 COMMENT '회원탈퇴', -- 회원탈퇴
+  sns         VARCHAR(255) NULL     COMMENT 'sns', -- sns
+  create_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
+  alterkey    VARCHAR(50)  NULL     COMMENT '인증키' -- 인증키
 )
 COMMENT '회원';
 

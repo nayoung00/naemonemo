@@ -11,7 +11,6 @@ import com.nmnm.gms.domain.GroupAccount;
 public interface GroupAccountDao {
 
   int insert(GroupAccount groupAccount) throws Exception;
-  //int insert(Object[] groupAccount);
 
   List<GroupAccount> findAll() throws Exception;
 
@@ -22,5 +21,5 @@ public interface GroupAccountDao {
   int delete(int bankInfoId) throws Exception;
 
   List<GroupAccount> findByKeyword(String keyword) throws Exception;
-	
+
 }

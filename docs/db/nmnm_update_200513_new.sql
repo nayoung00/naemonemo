@@ -218,8 +218,8 @@ CREATE TABLE nm_group_account (
   bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
   group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
-  bank_name                VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
-  opening_balance   INTEGER NOT NULL COMMENT '기초잔액', -- 기초잔액
+  bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
+  opening_balance     INTEGER     NOT NULL COMMENT '기초잔액', -- 기초잔액
   bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
 )
 COMMENT '모임계좌';
@@ -230,6 +230,12 @@ ALTER TABLE nm_group_account
     PRIMARY KEY (
       bank_info_id -- 모임계좌아이디
     );
+    
+    ALTER TABLE nm_group_account
+  MODIFY COLUMN bank_info_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '모임계좌아이디';
+
+ALTER TABLE nm_group_account
+  AUTO_INCREMENT = 1;
 
 -- 모임회원
 CREATE TABLE nm_group_member (

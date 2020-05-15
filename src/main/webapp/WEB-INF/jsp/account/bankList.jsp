@@ -22,23 +22,26 @@
 	</p>
 </div>
 <div style="text-align: center; margin: 0 auto;">
-  <form action='bankAdd' method='post' enctype='multipart/form-data'>
 	<h1>계좌 추가/제거</h1>
+  <form action='bankAdd' method='post' enctype='multipart/form-data'>
+		<div>
 	<table border='1' style="margin: auto;">
 		<tr>
 			<th>모임계좌아이디</th>
+			<th>모임번호</th>
 			<th>계좌번호</th>
 			<th>은행명</th>
 			<th>기초잔액</th>
 			<th>예금주</th>
 
 		</tr>
-
 		<tbody id="bankbody"></tbody>
+
 
 		<c:forEach items="${bankList}" var="item">
 			<tr>
 				<td>${item.bankInfoId}</td>
+				<td>${item.groupNo}</td>
 				<td>${item.bankAccountNo}</td>
 				<td>${item.bankName}</td>
 				<td>${item.openingBalance}</td>
@@ -48,7 +51,6 @@
 		</c:forEach>
 	</table>
 
-		<div>
 		<input type="button" value="계좌 추가" onclick="add_row()"> 
 		<input type="submit" value="저장하기">
 		</div>
@@ -67,12 +69,14 @@
           var cell3 = row.insertCell(2);
           var cell4 = row.insertCell(3);
           var cell5 = row.insertCell(4);
+          var cell6 = row.insertCell(5);
 
-          cell1.innerHTML = "<input type='text' name='bankInfoId'>";
-          cell2.innerHTML = "<input type='text' name='bankAccountNo' value='123123'>";
-          cell3.innerHTML = "<input type='text' name='bankName' value='은행'>";
-          cell4.innerHTML = "<input type='text' name='openingBalance' value='123'>";
-          cell5.innerHTML = "<input type='text' name='bankAccountHolder' value='예금주'>";
+          cell1.innerHTML = "<input name='bankInfoId'>";
+          cell2.innerHTML = "<input name='groupNo' type='text' value='1'>";
+          cell3.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
+          cell4.innerHTML = "<input type='text' name='bankName' value=''>";
+          cell5.innerHTML = "<input type='text' name='openingBalance' value=''>";
+          cell6.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
         };
 
         

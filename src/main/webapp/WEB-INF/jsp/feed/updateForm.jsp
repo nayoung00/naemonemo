@@ -4,23 +4,23 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>공지사항 변경</h1>
+<h1>피드 변경</h1>
 
 <form action='update' method='post'>
 
-번호: <input name='noticeNo' readonly type='text' value='${notice.noticeNo}'><br>
+번호: <input name='feedNo'  readonly type='text' value='${feed.feedNo}'><br>
+제목: <input name='title' type='text' value='${feed.title}'><br>
+내용: <br>
+<textarea name='content' rows='5' cols='60'>${feed.content}</textarea><br>
+
 모임번호: <input name='groupNo' type='text'><br>
 그룹번호: <input name='memberNo' type='text'><br>
-제목:<br>
-<input name='title' type='text' value='${notice.title}'><br>
-내용:<br>
-<textarea name='content' rows='5' cols='60'>${notice.content}</textarea><br>
-등록일: ${notice.createDate}<br>
-조회수: ${notice.viewCount}<br>
+
+등록일: ${feed.createDate}<br>
+조회수: ${feed.viewCount}<br>
 
 <p><button>변경</button>
 
 </form>
-
 <jsp:include page="../footer.jsp"/>
     

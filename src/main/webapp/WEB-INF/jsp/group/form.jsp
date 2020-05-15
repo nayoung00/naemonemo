@@ -4,25 +4,27 @@
 
 <jsp:include page="../header.jsp"/>
 
-<form onsubmit="return checkz()" method="post" action="add" enctype="multipart/form-data" > 
+<form name='addForm' onsubmit="return checkz()" method="post" action="add" enctype="multipart/form-data" > 
 <h2 align="center">모임 생성</h2>
- 
+    <div class="box" style="background: #BDBDBD;">
+        <img  class="profile" id="blah" src="#"/>
+    </div><br/>
    <table id='add_group' align="center" border="3" cellspacing="0">
        <tr>
           <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;">회원기본정보</td>
         </tr>
         <tr> 
           <td align="left">이름:</td>
-          <td colspan="4"><input type="text" name="groupName" maxlength="12" id="grName" > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
+          <td colspan="4"><input type="text" name="groupName" maxlength="12" id="grName" placeholder="이름 " > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
        </tr>
     
        <tr>
           <td >소개:</td>
-           <td colspan="4"><input type="text" name='groupInfo' maxlength="12" id="grInfo" > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
+           <td colspan="4"><input type="text" name='groupInfo' maxlength="12" id="grInfo" placeholder="모임소개 " > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
        </tr>
         <tr>
           <td>형태: </td>
-          <td colspan="4"><select id='form_check' name='groupForm' id='grForm'>
+          <td colspan="4"><select id='form_check' name='groupForm' id='grForm' >
                <option>온라인
                <option>오프라인
       </select><br>
@@ -34,7 +36,8 @@
         </tr>
         <tr>
           <td>사진:</td>
-          <td colspan="4"><input type="file" name="photoFile" id="grPhoto">
+          <td colspan="4"><input type="file" name="photoFile" id="grPhoto" onchange="readURL(this);"
+                                    required="required" aria-required="true">
        </tr>
  
        <tr>
@@ -48,13 +51,26 @@
           <td colspan="4"><input type="text" name="gradeName" id="grGradeName"></td>
         </tr>           
  </table>
-
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 <script>
+$(".box").click(function(){
+    $("input[name='photoFile']").click();
+});
+
+// 이미지 업로드시 나타게
+function readURL(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+	reader.onload = function (e) {
+	$('#blah').attr('src', e.target.result);
+	}
+	reader.readAsDataURL(input.files[0]);
+	}
+	}
+            
 var count = 1;
 var fullcount = 3;
 $(document).ready(function(){
-    // 항목추가 버튼 클릭시
     $(".addBtn").live("click", function(){
         var clickedRow = $(this).parent().parent();
         var cls = clickedRow.attr("class");
@@ -72,6 +88,7 @@ $(document).ready(function(){
 		if (count > 1) {        
         // tr 복사해서 마지막에 추가
         var newrow = clickedRow.clone();
+        newrow.find("#grInterest").val("");
         newrow.find("td:eq(0)").remove();
         newrow.insertAfter($("#add_group ."+cls+":last"));
 

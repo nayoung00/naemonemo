@@ -25,7 +25,20 @@ div.container {
    background: white;
    border: 1px solid gray;
    width: 1000px;
-   
+}
+
+.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0px auto; 
+}
+
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>
 </head>

@@ -15,4 +15,5 @@ public interface GroupAccountService {
   int update(GroupAccount groupAccount) throws Exception;
 
   List<GroupAccount> search(String keyword) throws Exception;
+
 }

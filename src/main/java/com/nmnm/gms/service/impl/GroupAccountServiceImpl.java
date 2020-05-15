@@ -21,14 +21,15 @@ public class GroupAccountServiceImpl implements GroupAccountService {
     return groupAccountDao.insert(groupAccount);
   }
 
+
   @Override
   public List<GroupAccount> list() throws Exception {
     return groupAccountDao.findAll();
   }
 
   @Override
-  public int delete(int GroupAccountNo) throws Exception {
-    return groupAccountDao.delete(GroupAccountNo);
+  public int delete(int bankInfoId) throws Exception {
+    return groupAccountDao.delete(bankInfoId);
   }
 
   @Override
@@ -45,5 +46,4 @@ public class GroupAccountServiceImpl implements GroupAccountService {
   public List<GroupAccount> search(String keyword) throws Exception {
     return groupAccountDao.findByKeyword(keyword);
   }
-
 }

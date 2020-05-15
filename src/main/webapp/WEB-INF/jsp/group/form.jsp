@@ -14,45 +14,53 @@
           <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;">회원기본정보</td>
         </tr>
         <tr> 
-          <td align="left">이름:</td>
+          <td align="left">이름</td>
           <td colspan="4"><input type="text" name="groupName" maxlength="12" id="grName" placeholder="이름 " > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
        </tr>
     
        <tr>
-          <td >소개:</td>
+          <td >소개</td>
            <td colspan="4"><input type="text" name='groupInfo' maxlength="12" id="grInfo" placeholder="모임소개 " > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
        </tr>
         <tr>
-          <td>형태: </td>
+          <td>형태</td>
           <td colspan="4"><select id='form_check' name='groupForm' id='grForm' >
                <option>온라인
                <option>오프라인
       </select><br>
        </tr>
        <tr class="interest">
-          <td align='left'>관심 분야:</td>
-          <td colspan='3'><input type="text" name="groupInterest" id='grInterest' placeholder="관심분야 "><button type="button" class="addBtn">항목추가</button></td>
-          <td colspan='1'><button type="button" class="delBtn">삭제</button></td>
+          <td align='left'>카테고리</td>
+          <td colspan='3'><input type="text" name="groupInterest" id='grInterest' placeholder="카테고리 ">
+          <button type="button" class="interestPopup" onclick="showPopup();">목록</button></td>
+          <!-- <button type="button" class="addBtn">항목추가</button> -->
+          <!-- <td colspan='1'><button type="button" class="delBtn">삭제</button></td> -->
         </tr>
         <tr>
-          <td>사진:</td>
+          <td>사진</td>
           <td colspan="4"><input type="file" name="photoFile" id="grPhoto" onchange="readURL(this);"
                                     required="required" aria-required="true">
        </tr>
  
        <tr>
-          <td algin='left'>지역:</td>
+          <td algin='left'>지역</td>
           <td colspan='4'>
             <input type="text" name='city' id="sample5_address" style='width: 400px;' placeholder="주소">
             <input type="button" onclick="sample5_execDaumPostcode();" value="주소 검색"><br>
             <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
        <tr>
-          <td>등급 명칭:</td>
+          <td>등급 명칭</td>
           <td colspan="4"><input type="text" name="gradeName" id="grGradeName"></td>
         </tr>           
  </table>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 <script>
+// 카테고리 선택 관련 팝업
+/* function showPopup() 
+{
+	window.open("../../group_category/category_popup.html", "a", "width=400, height=300, left=100, top=50");
+} */
+
 $(".box").click(function(){
     $("input[name='photoFile']").click();
 });
@@ -68,7 +76,8 @@ function readURL(input) {
 	}
 	}
             
-var count = 1;
+            // 관심사 항목 추가/삭제
+/* var count = 1;
 var fullcount = 3;
 $(document).ready(function(){
     $(".addBtn").live("click", function(){
@@ -133,7 +142,7 @@ $(document).ready(function(){
         var rowspan = $("."+cls).length;
         $("."+cls+":first td:eq(0)").attr("rowspan", rowspan);
     }
-});
+}); */
 
 function checkz() {
     var getIntro = $("#grInfo").val().replace(/\s|/gi,'');

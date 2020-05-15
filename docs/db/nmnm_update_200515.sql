@@ -1,4 +1,4 @@
--— 데이터베이스 삭제
+-- 데이터베이스 삭제
 DROP DATABASE nmnmdb;
 
 -- MySQL 데이터베이스 생성
@@ -214,7 +214,7 @@ ALTER TABLE nm_group
 
 -- 모임계좌
 CREATE TABLE nm_group_account (
-  bank_info_id        INTEGER     NOT NULL DEFAULT 1 COMMENT '모임계좌아이디', -- 모임계좌아이디
+  bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
   group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
   bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
@@ -229,12 +229,6 @@ ALTER TABLE nm_group_account
     PRIMARY KEY (
       bank_info_id -- 모임계좌아이디
     );
-    
-    ALTER TABLE nm_group_account
-  MODIFY COLUMN bank_info_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '모임계좌아이디';
-
-ALTER TABLE nm_group_account
-  AUTO_INCREMENT = 1;
 
 -- 모임회원
 CREATE TABLE nm_group_member (

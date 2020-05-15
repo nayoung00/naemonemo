@@ -13,15 +13,15 @@ public interface MemberService {
 
   int add(Member member) throws Exception;
 
-  int join(Member member) throws Exception;
-
   Member get(int no) throws Exception;
 
   Member get(String email, String password) throws Exception;
 
+  List<Member> search(String keyword) throws Exception;
+
   int update(Member member) throws Exception;
 
-  List<Member> search(String keyword) throws Exception;
+  int join(Member member) throws Exception;
 
   int send(Message message) throws Exception;
 
@@ -29,6 +29,10 @@ public interface MemberService {
 
   Integer checkid(String email) throws Exception;
 
+  Integer checknick(String nickname) throws Exception;
 
+  int updatePassword(int memberNo, String newPassword, String password) throws Exception;
+
+  String getEmailByEmail(String email);
 
 }

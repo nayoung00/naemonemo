@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Feed;
+import com.nmnm.gms.domain.Notice;
 import com.nmnm.gms.service.FeedService;
 
 @Controller
 @RequestMapping("/feed")
 public class FeedController {
-
-  @Autowired
-  ServletContext servletContext;
 
   @Autowired
   FeedService feedService;
@@ -61,19 +59,14 @@ public class FeedController {
   }
 
   @PostMapping("update")
-  public String update(Feed feed, MultipartFile thumbnail) throws Exception {
-
-    if (thumbnail.getSize() > 0) {
-      String dirPath = servletContext.getRealPath("/upload/feed");
-      String filename = UUID.randomUUID().toString();
-      thumbnail.transferTo(new File(dirPath + "/" + filename));
-      feed.setThumbnail(filename);
-    }
-
-    if (feedService.update(feed) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("변경할 피드 번호가 유효하지 않습니다.");
-    }
+  public String update(Feed feed) throws Exception {
+  if (feedService.update(feed) > 0) {
+    return "redirect:list";
+  } else {
+    throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다." + feed.getFeedNo()
+    + " " + feed.getTitle());
   }
+}
+
+  
 }

@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <head>
 <meta charset='UTF-8'>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- sweetAlert CDN -->
 <c:if test="${not empty refreshUrl}">
 <meta http-equiv="Refresh" content="${refreshUrl}">
 </c:if>
@@ -15,15 +19,26 @@
 <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
 <style>
 body {
-	background-color: LightGray;
+   background-color: LightGray;
+}
+div.container {
+   background: white;
+   border: 1px solid gray;
+   width: 1000px;
 }
 
-div.container {
+.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0px auto; 
+}
 
-	background: white;
-	border: 1px solid gray;
-	width: 1000px;
-	
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>
 </head>
@@ -62,7 +77,7 @@ div.container {
   <a href='../auth/logout' class='btn btn-success btn-sm'>로그아웃</a>
 </c:if>
 <c:if test="${empty loginUser}">
-  <a href='../auth/form' class='btn btn-success btn-sm'>로그인</a>
+  <a href='../auth/login' class='btn btn-success btn-sm'>로그인</a>
 </c:if> 
 </div>
 </nav>

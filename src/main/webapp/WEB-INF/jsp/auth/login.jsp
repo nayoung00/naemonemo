@@ -49,7 +49,7 @@
     <form action='login' method='post'> 
         <h2 class="text-center">네모네모</h2>   
         <div class="form-group">
-        <div id="kakao">
+<!--         <div id="kakao">
     <a id="kakao-login-btn"></a>
         <a href="http://developers.kakao.com/logout"></a>
         <script type='text/javascript'>
@@ -76,10 +76,7 @@
                     alert(JSON.stringify(err));
                 }
             });
-        </script>
-</div>
-        
-        
+        </script> -->
         <br>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -98,9 +95,27 @@
         <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox" name='saveEmail'> Remember me</label>
             <a href="#" class="pull-right">Forgot Password?</a>
+            
+            <% 
+            // 아이디, 비밀번호가 틀릴경우 화면에 메시지 표시
+            // LoginPro.jsp에서 로그인 처리 결과에 따른 메시지를 보낸다.
+            String msg=request.getParameter("msg");
+            
+            if(msg!=null && msg.equals("0")) 
+            {
+                out.println("<br>");
+                out.println("<font color='red' size='5'>비밀번호를 확인해 주세요.</font>");
+            }
+            else if(msg!=null && msg.equals("-1"))
+            {    
+                out.println("<br>");
+                out.println("<font color='red' size='5'>아이디를 확인해 주세요.</font>");
+            }
+        %>    
+
         </div>        
     </form>
-    <p class="text-center small">Don't have an account! <a href="#">Sign up here</a>.</p>
+    <p class="text-center small">Don't have an account! <a href="join">Sign up here</a>.</p>
 </div>
 </body>
 </html>                            

@@ -8,11 +8,11 @@ public interface NoticeDao {
 
    List<Notice> findAll() throws Exception;
 
-   Notice findByNo(int noticeBoardNo) throws Exception;
+   Notice findByNo(int noticeNo) throws Exception;
 
    int update(Notice notice) throws Exception;
 
-   int delete(int noticeBoardNo) throws Exception;
+   int delete(int noticeNo) throws Exception;
    
    List<Notice> findByKeyword(String keyword) throws Exception;
 }

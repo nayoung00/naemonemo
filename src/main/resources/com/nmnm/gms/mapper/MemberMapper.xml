@@ -19,6 +19,7 @@
     <result column="withdraw" property="withdraw"/>
     <result column="sns" property="sns"/>
     <result column="create_date" property="createDate"/>
+    <result column="alterkey" property="alterkey"/>
   </resultMap>
   
   <insert id="insert" parameterType="Member">
@@ -103,13 +104,10 @@
             or nickname like #{keywordPattern}
     </select>
   
-  <select id="findByEmailAndPassword" 
+ <select id="findByEmailAndPassword" 
     resultMap="MemberMap" 
     parameterType="map">
-    select 
-      email,
-      member_name, 
-      password
+    select *
     from nm_member
     where 
       email=#{email} 
@@ -117,26 +115,21 @@
   </select>
   
   
-  <!-- 로그인 -->
-    <select id="login" parameterType="String" resultType="member">
-        select * from nm_member where member_no = #{no}
-    </select>
-    
-  
-  
-    <!-- 회원 인증키(난수) 생성 -->
-    <insert id="GetKey" parameterType="Map">
-        update nm_member set user_key = #{param2} where user_id = #{param1}
-    </insert>
     <!-- 회원 인증키(난수) Y로 변경 -->
-    <update id="alter_userKey" parameterType="Map">
-        update nm_member set user_key = 'Y' where user_id = #{param1} and user_key = #{param2}
+    <update id="alterUserKey" parameterType="Map">
+        update nm_member set alterkey = 'Y' where email = #{email} and alterkey = #{key}
     </update>
+      
+     
+    <update id="alterKey" parameterType="map">
+        update nm_member set alterkey = #{alterkey} where email = #{email}
+    </update> 
+      
       
     <!-- 회원 가입 -->
     <insert id="join" parameterType="Member">
         insert into nm_member  (email, password, member_name, nickname, id_photo, birthday, interest, intro, sns)
-        values(#{email}, (#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro}, #{sns})
+        values(#{email}, password(#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro}, #{sns})
     </insert>    
     
  
@@ -146,5 +139,18 @@
           email = #{email}
 </select>
     
-      
+<select id="checknick" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM nm_member
+      WHERE
+          nickname = #{nickname}
+</select>
+
+
+<!-- <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+        SELECT member_no, member_name, email
+        FROM pf_members
+        WHERE (email=#{email}) AND password=password(#{password})
+        WHERE (email=#{email}) AND password=password(#{password}) AND alterkey='Y'
+    </select>
+       -->
 </mapper>

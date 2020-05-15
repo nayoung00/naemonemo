@@ -59,8 +59,8 @@
   
   <update id="update" parameterType="Notice">
     update nm_notice set
-    group_no=#{groupNo},
-    member_no=#{memberNo},
+      group_no=#{groupNo},
+      member_no=#{memberNo},
       title=#{title},
       content=#{content}
     where 

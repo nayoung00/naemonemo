@@ -485,7 +485,6 @@ CREATE TABLE nm_account (
   account_no         INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
   group_no           INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
   bank_info_id       INTEGER      NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
-  account_type_no    INTEGER      NOT NULL COMMENT '회계유형번호', -- 회계유형번호
   account_type_name  VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
   ending_balance     INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 잔액
   amount             INTEGER      NOT NULL COMMENT '금액', -- 금액

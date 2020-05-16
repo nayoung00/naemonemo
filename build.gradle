@@ -92,7 +92,9 @@ dependencies {
   
   implementation 'org.springframework:spring-context-support:5.2.6.RELEASE'
   
- implementation 'javax.mail:mailapi:1.4.3'
+  implementation 'javax.mail:mailapi:1.4.3'
+ 
+  // Tiles 라이브러리 
+  implementation 'org.apache.tiles:tiles-jsp:3.0.8'
   
 }
-

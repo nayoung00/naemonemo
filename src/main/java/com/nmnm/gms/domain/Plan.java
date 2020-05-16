@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Plan {
 
-  private int planBoardNo; // nm_plan PK auto_increment default=1 NN
+  private int planNo; // nm_plan PK auto_increment default=1 NN
   private int groupNo; // nm_group PK/ FK N
   private Date planDate; // DATE NN
   private String title; // VARCHAR(255) NN
@@ -16,23 +16,21 @@ public class Plan {
   private int latitude; // 위도 N
   private int longitude; // 경도 N
   private String createDate;
-
-
-
+  
   @Override
   public String toString() {
-    return "Plan [planBoardNo=" + planBoardNo + ", groupNo=" + groupNo + ", planDate=" + planDate
-        + ", title=" + title + ", subtitle=" + subtitle + ", thumbnail=" + thumbnail + ", content="
-        + content + ", placeName=" + placeName + ", address=" + address + ", latitude=" + latitude
+    return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", planDate=" + planDate + ", title="
+        + title + ", subtitle=" + subtitle + ", thumbnail=" + thumbnail + ", content=" + content
+        + ", placeName=" + placeName + ", address=" + address + ", latitude=" + latitude
         + ", longitude=" + longitude + ", createDate=" + createDate + "]";
   }
 
-  public int getPlanBoardNo() {
-    return planBoardNo;
+  public int getPlanNo() {
+    return planNo;
   }
 
-  public void setPlanBoardNo(int planBoardNo) {
-    this.planBoardNo = planBoardNo;
+  public void setPlanNo(int planNo) {
+    this.planNo = planNo;
   }
 
   public int getGroupNo() {
@@ -57,6 +55,30 @@ public class Plan {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public String getSubtitle() {
+    return subtitle;
+  }
+
+  public void setSubtitle(String subtitle) {
+    this.subtitle = subtitle;
+  }
+
+  public String getThumbnail() {
+    return thumbnail;
+  }
+
+  public void setThumbnail(String thumbnail) {
+    this.thumbnail = thumbnail;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
   }
 
   public String getPlaceName() {
@@ -99,29 +121,6 @@ public class Plan {
     this.createDate = createDate;
   }
 
-  public String getSubtitle() {
-    return subtitle;
-  }
-
-  public void setSubtitle(String subtitle) {
-    this.subtitle = subtitle;
-  }
-
-  public String getThumbnail() {
-    return thumbnail;
-  }
-
-  public void setThumbnail(String thumbnail) {
-    this.thumbnail = thumbnail;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content;
-  }
 
 
 }

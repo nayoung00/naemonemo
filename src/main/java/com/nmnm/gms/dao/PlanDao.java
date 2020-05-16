@@ -9,11 +9,11 @@ public interface PlanDao {
 
   List<Plan> findAll() throws Exception;
 
-  Plan findByNo(int planBoardNo) throws Exception;
+  Plan findByNo(int planNo) throws Exception;
 
   int update(Plan plan) throws Exception;
 
-  int delete(int planBoardNo) throws Exception;
+  int delete(int planNo) throws Exception;
 
   List<Plan> findByKeyword(String keyword) throws Exception;
 

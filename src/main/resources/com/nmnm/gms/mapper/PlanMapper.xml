@@ -6,7 +6,7 @@
 <mapper namespace="com.nmnm.gms.dao.PlanDao">
 
 <resultMap type="Plan" id="PlanMap">
-    <id column="plan_no"  property="planBoardNo"/>
+    <id column="plan_no"  property="planNo"/>
     <result column="group_no" property="groupNo"/>
     <result column="plan_date" property="planDate"/>
     <result column="title" property="title"/>

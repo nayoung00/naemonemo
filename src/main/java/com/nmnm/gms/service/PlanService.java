@@ -4,11 +4,11 @@ import java.util.List;
 import com.nmnm.gms.domain.Plan;
 
 public interface PlanService {
-  Plan get(int planBoardNo) throws Exception;
+  Plan get(int planNo) throws Exception;
 
   int add(Plan plan) throws Exception;
 
-  int delete(int planBoardNo) throws Exception;
+  int delete(int planNo) throws Exception;
 
   List<Plan> list() throws Exception;
 

@@ -17,8 +17,8 @@ public class PlanServiceImpl implements PlanService {
   }
 
   @Override
-  public Plan get(int planBoardNo) throws Exception {
-    return planDao.findByNo(planBoardNo);
+  public Plan get(int planNo) throws Exception {
+    return planDao.findByNo(planNo);
   }
 
   @Override
@@ -27,8 +27,8 @@ public class PlanServiceImpl implements PlanService {
   }
 
   @Override
-  public int delete(int planBoardNo) throws Exception {
-    return planDao.delete(planBoardNo);
+  public int delete(int planNo) throws Exception {
+    return planDao.delete(planNo);
   }
 
   @Override

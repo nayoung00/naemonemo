@@ -57,8 +57,8 @@ public class PlanController {
   }
 
   @GetMapping("delete")
-  public String delete(int planBoardNo) throws Exception {
-    if (planService.delete(planBoardNo) > 0) { // 삭제했다면,
+  public String delete(int planNo) throws Exception {
+    if (planService.delete(planNo) > 0) { // 삭제했다면,
       return "redirect:list";
     } else {
       throw new Exception("삭제할 일정 번호가 유효하지 않습니다.");
@@ -66,8 +66,8 @@ public class PlanController {
   }
 
   @GetMapping("detail")
-  public void detail(int planBoardNo, Model model) throws Exception {
-    model.addAttribute("plan", planService.get(planBoardNo));
+  public void detail(int planNo, Model model) throws Exception {
+    model.addAttribute("plan", planService.get(planNo));
   }
 
   @GetMapping("list")

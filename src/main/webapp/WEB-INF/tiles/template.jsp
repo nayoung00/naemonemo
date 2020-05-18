@@ -41,8 +41,8 @@
 
 
   <!--   Core JS Files   -->
-  <script src="js/jquery.3.2.1.min.js" type="text/javascript"></script>
-  <script src="js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="${pageContext.servletContext.getContextPath()}/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+  <script src="${pageContext.servletContext.getContextPath()}/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
 	
 	<!-- sweetAlert CDN -->

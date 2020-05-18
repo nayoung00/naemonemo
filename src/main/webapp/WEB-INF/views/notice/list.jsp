@@ -8,9 +8,6 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-
-
-
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
@@ -21,7 +18,7 @@
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
                                     <thead>
-                                        <th style="width: 10%">번호</th>
+                                      <th style="width: 10%">번호</th>
                                       <th style="width: 50%">제목</th>
                                       <th style="width: 10%">작성자</th>
                                       <th style="width: 10%">작성일</th>

@@ -1,44 +1,111 @@
-<%@page import="com.nmnm.gms.domain.Member"%>
-<%@page import="com.nmnm.gms.domain.Plan"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-<a class='navbar-brand' href='../../index.html'>네모내모</a>
-<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
-  <span class='navbar-toggler-icon'></span>
-</button>
-<div class='collapse navbar-collapse' id='navbarNav'>
-  <ul class='navbar-nav mr-auto'>
-    <li class='nav-item'>
-      <a class='nav-link' href='../notice/list'>공지사항</span></a>
-    </li>
-    <li class='nav-item'>
-      <a class='nav-link' href='../plan/list'>일정</a>
-    </li>
-    <li class='nav-item'>
-      <a class='nav-link' href='../feed/list'>피드</a>
-    </li>
-    <li class='nav-item'>
-      <a class='nav-link' href='../co/list'>소통게시판</a>
-    </li>
-    <li class='nav-item'>
-      <a class='nav-link' href='../member/list'>회원</a>
-    </li>
-        <li class='nav-item'>
-      <a class='nav-link' href='../group/list'>모임</a>
-    </li>
-        <li class='nav-item'>
-      <a class='nav-link' href='../account/list'>회계</a>
-    </li>
-  </ul>
-<c:if test="${not empty loginUser}">
-  <span class='navbar-text'>${loginUser.name}</span>
-  <a href='../auth/logout' class='btn btn-success btn-sm'>로그아웃</a>
-</c:if>
-<c:if test="${empty loginUser}">
-  <a href='../auth/login' class='btn btn-success btn-sm'>로그인</a>
-</c:if> 
-</div>
-</nav>
+<div class="wrapper">
+   <div class="sidebar" data-color="orange" data-image="#">
+
+      <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+      <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                                    모임명
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <li class="active">
+                    <a href="app/notice/list">
+                        <i class="pe-7s-bell"></i>
+                        <p>공지사항</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pe-7s-user"></i>
+                        <p>신규회원</p>
+                    </a>
+                </li>
+                <li> 
+                    <a href="#">
+                        <i class="pe-7s-note"></i>
+                        <p>투표하기</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pe-7s-graph"></i>
+                        <p>모임통계</p>
+                    </a>
+                </li>
+                <li>
+                <a href="../../index.html" class="simple-text">
+                 (임시)나가기
+                </a>
+                </li>
+            </ul>
+      </div>
+    </div>
+    
+<div class="main-panel">
+<nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../../moim-index.html">모임홈</a>
+                    <a class="navbar-brand" href="../notice/list">공지</a>
+                    <a class="navbar-brand" href="../plan/list">일정</a>
+                    <a class="navbar-brand" href="../account/list">회계</a>
+                    <a class="navbar-brand" href="../feed/list">피드</a>
+                    <a class="navbar-brand" href="../member/list">회원</a>
+                </div>
+                <div class="collapse navbar-collapse">
+
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell"></i>
+                                <b class="caret hidden-sm hidden-xs"></b>
+                                <span class="notification hidden-sm hidden-xs">4</span>
+                                <p class="hidden-lg hidden-md">
+                                    5 알림
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <ul class="dropdown-menu">
+                            <li><a href="#">알림 1</a> </li>
+                            <li><a href="#">알림 2</a></li>
+                            <li><a href="#">알림 3</a></li>
+                            <li><a href="#">알림 4</a></li>
+                            <li><a href="#">전체알림보기</a></li>
+                            </ul>
+                         </li>
+                         <li class="message">
+                           <a href="#">
+                            <i class="fa fa-envelope"></i>
+                           </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">마이페이지</a></li>
+                                <li><a href="#">로그아웃</a></li>
+                              </ul>
+                        </li>
+            <li class="separator hidden-lg hidden-md"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>

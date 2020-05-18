@@ -3,8 +3,19 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <h1>모임 상세정보</h1>
+<c:if test="${not empty loginUser}">
+<form action="add" method="get">
+<input type="hidden" name="groupNo" value="${group.groupNo}"/>
+<input type="hidden" name="memberNo" value="${loginUser.memberNo}"/>
+<input type="button" value="가입신청"/>
+</form>
+</c:if>
+<c:if test="${empty loginUser}">
+<c:redirect url="${pageContext.servletContext.contextPath}/auth/login"/>
+<p>로그인 해야 가입가능합니다.</p>
+<p>${pageContext.servletContext.contextPath}</p>
+</c:if>
 <c:if test="${not empty group}">
 <form>
 <c:if test='${not empty group.groupPhoto}'>
@@ -71,3 +82,5 @@ geocoder.addressSearch(document.getElementById("address").value, function(result
 <c:if test="${empty group}">
 <p>해당  모임이 없습니다.</p>
 </c:if>
+
+

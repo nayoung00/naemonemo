@@ -72,4 +72,16 @@ geocoder.addressSearch(document.getElementById("address").value, function(result
 <c:if test="${empty group}">
 <p>해당  모임이 없습니다.</p>
 </c:if>
+<c:if test="${not empty loginUser}">
+<form action="../../grmember/add">
+<input type="hidden" name="groupNo" value="${group.groupNo}"/>
+<input type="hidden" name="memberNo" value="${loginUser.memberNo}"/>
+<input type="button" value="가입신청"/>
+</form>
+</c:if>
+<c:if test="${empty loginUser}">
+<p>로그인 하시기 바랍니다.</p>
+<c:redirect url="../../auth/login.jsp"/>
+</c:if>
+하하하하하하
 <jsp:include page="../footer.jsp"/>

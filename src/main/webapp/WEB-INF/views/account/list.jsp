@@ -44,11 +44,13 @@
   <a href='form' style="float:right;margin-right:200px;">사용내역 추가</a><br>
 <br>
 <hr>
+<!--
 <div style="text-align: center; margin: 0 auto;"> 
 <form action='search' method='get'>
 검색어: <input name='keyword' type='text'>
 <button>검색</button>
 </form>
 </div>
+-->
 <br>
     

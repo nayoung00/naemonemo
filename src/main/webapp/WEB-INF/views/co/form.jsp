@@ -3,7 +3,7 @@
     trimDirectiveWhitespaces="true"%>
 
 
-<h1>소통게시물 입력(JSP)</h1>
+<h1>소통게시물 입력</h1>
 <form action='add' method='post' enctype='multipart/form-data'>
 회원번호:<input name='memberNo' type='text'><br>
 <br>

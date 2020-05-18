@@ -35,9 +35,21 @@ public class AccountController {
   @GetMapping("form")
   public void form() throws Exception {}
 
+  // @PostMapping("add")
+  // public String add(Account account) throws Exception {
+  // System.out.println("point 1");
+  //
+  //
+  // return "redirect:list";
+  //
+  // }
+
+
 
   @PostMapping("add")
-  public String add(Account account, MultipartFile receiptPhotoFile) throws Exception {
+  public String add( //
+      Account account, //
+      MultipartFile receiptPhotoFile) throws Exception {
     if (receiptPhotoFile.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/account");
       String filename = UUID.randomUUID().toString();
@@ -47,7 +59,7 @@ public class AccountController {
     if (accountService.add(account) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("회계를 추가할 수 없습니다.");
+      throw new Exception("내역을 추가할 수 없습니다.");
     }
   }
 

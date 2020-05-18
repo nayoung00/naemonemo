@@ -37,14 +37,12 @@
   
    <insert id="insert" parameterType="GroupAccount">
     insert into nm_group_account(
-      bank_info_id, 
       group_no, 
       bank_account_no, 
       bank_name, 
       opening_balance, 
       bank_account_holder) 
     values(
-      #{bankInfoId}, 
       #{groupNo}, 
       #{bankAccountNo}, 
       #{bankName}, 

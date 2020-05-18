@@ -4,7 +4,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
-<jsp:include page="../header.jsp" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -71,7 +70,6 @@
 		var cell5 = row.insertCell(4);
 		var cell6 = row.insertCell(5);
 
-		cell1.innerHTML = "<input name='bankInfoId' value=''>";
 		cell2.innerHTML = "<input name='groupNo' type='text' value='1'>";
 		cell3.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
 		cell4.innerHTML = "<input type='text' name='bankName' value=''>";
@@ -79,6 +77,7 @@
 		cell6.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
 	};
 
+	// 미적용
 	function delete_row() {
 		var table = document.getElementById("reqList");
 
@@ -97,6 +96,8 @@
 </script>
 
 
+
+
 <br>
 <br>
 <hr>
@@ -107,4 +108,3 @@
 	</form>
 </div>
 <br>
-<jsp:include page="../footer.jsp" />

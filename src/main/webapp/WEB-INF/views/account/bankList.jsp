@@ -44,7 +44,6 @@
 						<td>${item.bankName}</td>
 						<td>${item.bankAccountHolder}</td>
 						<td>${item.endingBalance}</td>
-
 					</tr>
 				</c:forEach>
 			</table>
@@ -74,7 +73,7 @@
 		cell3.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
 		cell4.innerHTML = "<input type='text' name='bankName' value=''>";
 		cell5.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
-		cell6.innerHTML = "<input type='text' name='openingBalance' value=''>";
+		cell6.innerHTML = "<input type='text' name='endingBalance' value=''>";
 	};
 
 	function delete_row() {

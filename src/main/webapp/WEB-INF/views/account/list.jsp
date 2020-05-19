@@ -58,12 +58,12 @@
 								</c:forEach>
 							</tbody>
 						</table>
+	<a href='form' style="float: right; margin-right: 200px;">사용내역 추가</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<a href='form' style="float: right; margin-right: 200px;">사용내역 추가</a>
 	<!--
 <div style="text-align: center; margin: 0 auto;"> 
 <form action='search' method='get'>

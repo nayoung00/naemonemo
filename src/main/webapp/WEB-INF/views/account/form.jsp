@@ -8,8 +8,8 @@
 모임번호: <input name='groupNo' type='text' value='1'><br>
 모임계좌아이디: <input name='bankInfoId' type='text' value='1~5'><br>
 회계유형명: <input name='accountTypeName' type='text' value='ex) 회의비'><br>
-잔액: <input name='endingBalance' type='text'><br>
-금액: <input name='amount' type='text'><br>
+입금: <input name='deposit' type='text'><br>
+출금: <input name='withdraw' type='text'><br>
 거래일: <input name='paymentDate' type='date'><br>
 거래처: <input name='accountConnection' type='text'><br>
 비고: <input name='remarks' type='text'><br>

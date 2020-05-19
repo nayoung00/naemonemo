@@ -11,8 +11,8 @@
 ${account.accountNo}<br>
 <input name='bankInfoId' type='hidden' value='${account.bankInfoId}'>
 <input name='accountTypeName' type='hidden' value='${account.accountTypeName}'>
-<input name='endingBalance' type='hidden'  value='${account.endingBalance}'>
-<input name='amount' type='hidden' value='${account.amount}'>
+<input name='deposit' type='hidden'  value='${account.deposit}'>
+<input name='withdraw' type='hidden' value='${account.withdraw}'>
 <input name='paymentDate' type='hidden' value='${account.paymentDate}'>
 <input name='accountConnection' type='hidden' value='${account.accountConnection}'>
 <input name='remarks' type='hidden' value='${account.remarks}'>

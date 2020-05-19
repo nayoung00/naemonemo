@@ -61,22 +61,6 @@
 <br>
 <br>
 
-<div class="w3-center">
-<div class="w3-bar w3-border w3-round" style="margin:auto;">
-  <a href="#" class="w3-bar-item w3-button w3-hover-red">&laquo;</a>
-  <a href="#" class="w3-button w3-hover-teal">1</a>
-  <a href="#" class="w3-button w3-hover-teal">2</a>
-  <a href="#" class="w3-button w3-hover-teal">3</a>
-  <a href="#" class="w3-button w3-hover-teal">4</a>
-  <a href="#" class="w3-button w3-hover-teal">5</a>
-  <a href="#" class="w3-button w3-hover-teal">6</a>
-  <a href="#" class="w3-button w3-hover-teal">7</a>
-  <a href="#" class="w3-button w3-hover-teal">8</a>
-  <a href="#" class="w3-button w3-hover-teal">9</a>
-  <a href="#" class="w3-button w3-hover-teal">10</a>
-  <a href="#" class="w3-button w3-hover-teal">&raquo;&raquo;</a>
-</div>
-</div>
 
 <br>
 <br>

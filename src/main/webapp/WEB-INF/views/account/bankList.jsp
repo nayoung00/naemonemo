@@ -29,8 +29,8 @@
 					<th>모임번호</th>
 					<th>계좌번호</th>
 					<th>은행명</th>
-					<th>기초잔액</th>
 					<th>예금주</th>
+					<th>잔액</th>
 
 				</tr>
 				<tbody id="bankbody"></tbody>
@@ -42,8 +42,8 @@
 						<td>${item.groupNo}</td>
 						<td>${item.bankAccountNo}</td>
 						<td>${item.bankName}</td>
-						<td>${item.openingBalance}</td>
 						<td>${item.bankAccountHolder}</td>
+						<td>${item.endingBalance}</td>
 
 					</tr>
 				</c:forEach>
@@ -73,8 +73,8 @@
 		cell2.innerHTML = "<input name='groupNo' type='text' value='1'>";
 		cell3.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
 		cell4.innerHTML = "<input type='text' name='bankName' value=''>";
-		cell5.innerHTML = "<input type='text' name='openingBalance' value=''>";
-		cell6.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
+		cell5.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
+		cell6.innerHTML = "<input type='text' name='openingBalance' value=''>";
 	};
 
 	function delete_row() {

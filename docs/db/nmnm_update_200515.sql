@@ -221,8 +221,8 @@ CREATE TABLE nm_group_account (
     group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
     bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
     bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
-    opening_balance     INTEGER     NOT NULL COMMENT '기초잔액', -- 기초잔액
-    bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
+    bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주', -- 예금주
+    ending_balance     INTEGER      NULL     DEFAULT 0 COMMENT '잔액' -- 잔액
 )
 COMMENT '모임계좌';
 
@@ -487,16 +487,17 @@ ALTER TABLE nm_feed_like
 
 -- 회계
 CREATE TABLE nm_account (
-    account_no         INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
-    group_no           INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
-    bank_info_id       INTEGER      NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
-    account_type_name  VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
-    ending_balance     INTEGER      NOT NULL DEFAULT 0 COMMENT '잔액', -- 잔액
-    amount             INTEGER      NOT NULL COMMENT '금액', -- 금액
-    payment_date       DATE         NOT NULL COMMENT '거래일', -- 거래일
-    account_connection TEXT         NOT NULL COMMENT '거래처', -- 거래처
-    remarks            TEXT         NULL     COMMENT '비고', -- 비고
-    receipt_photo      VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
+  account_no         INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
+  group_no           INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_info_id       INTEGER      NULL     COMMENT '모임계좌아이디', -- 모임계좌아이디
+  account_type_name  VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
+  deposit            INTEGER      NULL     DEFAULT 0 COMMENT '입금', -- 입금
+  withdraw           INTEGER      NULL     DEFAULT 0 COMMENT '출금', -- 출금
+  
+  payment_date       DATE         NOT NULL COMMENT '거래일', -- 거래일
+  account_connection TEXT         NOT NULL COMMENT '거래처', -- 거래처
+  remarks            TEXT         NULL     COMMENT '비고', -- 비고
+  receipt_photo      VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
 )
 COMMENT '회계';
 

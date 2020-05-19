@@ -31,6 +31,7 @@ public class PlanController {
     logger.debug("PlanController 생성됨!");
   }
 
+
   @GetMapping("form")
   public void form() {
     System.out.println("form 호출==================================================");

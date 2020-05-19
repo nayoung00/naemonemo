@@ -76,7 +76,8 @@
   
   <update id="update" parameterType="Account">
     update nm_account set
-      bank_info_no=#{bankInfoNo},
+      account_no=#{accountNo}, 
+      bank_info_id=#{bankInfoId},
       account_type_name=#{accountTypeName},
       ending_balance=#{endingBalance},
       amount=#{amount},

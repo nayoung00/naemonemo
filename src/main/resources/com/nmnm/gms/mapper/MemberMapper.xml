@@ -20,6 +20,9 @@
     <result column="sns" property="sns"/>
     <result column="create_date" property="createDate"/>
     <result column="alterkey" property="alterkey"/>
+  <association property="group" javaType="Group">
+    <result column="group_name" property="groupName"/>
+  </association>
   </resultMap>
   
   <insert id="insert" parameterType="Member">
@@ -145,7 +148,16 @@
           nickname = #{nickname}
 </select>
 
-
+<!-- 회원이 속해 있는 그룹 회원번호로 조회 -->
+  <select id="findgrmember" parameterType="int" resultMap="MemberMap"> 
+    select m.*, g.group_name
+     from nm_member m
+     join nm_group_member gm on
+     gm.member_no = m.member_no
+     join nm_group g on
+    g.group_no = gm.group_no   
+    where gm.member_no = #{memberNo}
+  </select>
 <!-- <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
         SELECT member_no, member_name, email
         FROM pf_members

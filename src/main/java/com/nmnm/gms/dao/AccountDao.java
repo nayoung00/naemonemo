@@ -9,13 +9,13 @@ import com.nmnm.gms.domain.Account;
 //
 public interface AccountDao {
 
-  int insert(Account Account) throws Exception;
+  int insert(Account account) throws Exception;
 
   List<Account> findAll() throws Exception;
 
   Account findByNo(int accountNo) throws Exception;
 
-  int update(Account Account) throws Exception;
+  int update(Account account) throws Exception;
 
   int delete(int accountNo) throws Exception;
 

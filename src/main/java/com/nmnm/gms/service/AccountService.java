@@ -4,7 +4,8 @@ import java.util.List;
 import com.nmnm.gms.domain.Account;
 
 public interface AccountService {
-  int add(Account Account) throws Exception;
+
+  int add(Account account) throws Exception;
 
   List<Account> list() throws Exception;
 
@@ -12,7 +13,7 @@ public interface AccountService {
 
   Account get(int accountNo) throws Exception;
 
-  int update(Account Account) throws Exception;
+  int update(Account account) throws Exception;
 
   List<Account> search(String keyword) throws Exception;
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +36,34 @@ public class AccountController {
   @GetMapping("form")
   public void form() throws Exception {}
 
+  // @PostMapping("add")
+  // public String add(Account account) throws Exception {
+  // System.out.println("point 1");
+  //
+  //
+  // return "redirect:list";
+  //
+  // }
+
+
 
   @PostMapping("add")
-  public String add(Account account, MultipartFile receiptPhotoFile) throws Exception {
+  public String add( //
+      Account account, //
+      MultipartFile receiptPhotoFile) throws Exception {
     if (receiptPhotoFile.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/account");
       String filename = UUID.randomUUID().toString();
       receiptPhotoFile.transferTo(new File(dirPath + "/" + filename));
+      String ext = FilenameUtils.getExtension(receiptPhotoFile.getOriginalFilename());
+      String filenamed = FilenameUtils.getBaseName(receiptPhotoFile.getOriginalFilename());
+      filename = filenamed + "." + ext;
       account.setReceiptPhoto(filename);
     }
     if (accountService.add(account) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("회계를 추가할 수 없습니다.");
+      throw new Exception("내역을 추가할 수 없습니다.");
     }
   }
 
@@ -74,15 +90,30 @@ public class AccountController {
 
   @GetMapping("updateForm")
   public void updateForm(int accountNo, Model model) throws Exception {
-    model.addAttribute("notice", accountService.get(accountNo));
+    model.addAttribute("account", accountService.get(accountNo));
+  }
+
+  @GetMapping("updatePhotoForm")
+  public void updatePhotoForm(int accountNo, Model model) throws Exception {
+    model.addAttribute("account", accountService.get(accountNo));
   }
 
   @PostMapping("update")
-  public String update(Account account) throws Exception {
+  public String update(Account account, //
+      MultipartFile receiptPhotoFile) throws Exception {
+    if (receiptPhotoFile.getSize() > 0) {
+      String dirPath = servletContext.getRealPath("/upload/account");
+      String filename = UUID.randomUUID().toString();
+      receiptPhotoFile.transferTo(new File(dirPath + "/" + filename));
+      String ext = FilenameUtils.getExtension(receiptPhotoFile.getOriginalFilename());
+      String filenamed = FilenameUtils.getBaseName(receiptPhotoFile.getOriginalFilename());
+      filename = filenamed + "." + ext;
+      account.setReceiptPhoto(filename);
+    }
     if (accountService.update(account) > 0) {
       return "redirect:list";
     } else {
-      throw new Exception("변경할 공지사항 게시물 번호가 유효하지 않습니다." + account.getAccountNo() + " "
+      throw new Exception("변경할 회계 게시물 번호가 유효하지 않습니다." + account.getAccountNo() + " "
           + account.getAccountTypeName());
     }
   }

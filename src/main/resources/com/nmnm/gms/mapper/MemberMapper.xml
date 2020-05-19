@@ -53,7 +53,7 @@
       member_no,
       member_name,
       nickname,
-      email,
+      email
     from 
       nm_member
   </select>
@@ -100,7 +100,7 @@
         select
         member_no,
             member_name,
-            nickname,
+            nickname
         from nm_member
         where     
             member_name like #{keywordPattern}

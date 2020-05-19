@@ -37,8 +37,8 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public int update(Account Account) throws Exception {
-    return accountDao.update(Account);
+  public int update(Account account) throws Exception {
+    return accountDao.update(account);
   }
 
   @Override

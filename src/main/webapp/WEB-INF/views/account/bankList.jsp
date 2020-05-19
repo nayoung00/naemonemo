@@ -70,7 +70,6 @@
 		var cell5 = row.insertCell(4);
 		var cell6 = row.insertCell(5);
 
-		cell1.innerHTML = "<input name='bankInfoId' value=''>";
 		cell2.innerHTML = "<input name='groupNo' type='text' value='1'>";
 		cell3.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
 		cell4.innerHTML = "<input type='text' name='bankName' value=''>";
@@ -99,10 +98,4 @@
 <br>
 <br>
 <hr>
-<div style="text-align: center; margin: 0 auto;">
-	<form action='search' method='get'>
-		검색어: <input name='keyword' type='text'>
-		<button>검색</button>
-	</form>
-</div>
 <br>

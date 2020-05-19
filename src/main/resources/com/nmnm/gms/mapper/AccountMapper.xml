@@ -9,7 +9,6 @@
     <id column="account_no"   property="accountNo"/>
     <result column="group_no"    property="groupNo"/>
     <result column="bank_info_id"  property="bankInfoId"/>
-    <result column="account_type_no" property="accountTypeNo"/>
     <result column="account_type_name" property="accountTypeName"/>
     <result column="ending_balance" property="endingBalance"/>
     <result column="amount" property="amount"/>
@@ -25,7 +24,6 @@
       account_no, 
       group_no, 
       bank_info_id, 
-      account_type_no, 
       account_type_name, 
       ending_balance, 
       amount, 
@@ -49,7 +47,6 @@
     insert into nm_account(
       group_no, 
       bank_info_id, 
-      account_type_no, 
       account_type_name, 
       ending_balance, 
       amount, 
@@ -60,7 +57,6 @@
     values(
       #{groupNo}, 
       #{bankInfoId}, 
-      #{accountTypeNo}, 
       #{accountTypeName}, 
       #{endingBalance}, 
       #{amount}, 
@@ -80,8 +76,8 @@
   
   <update id="update" parameterType="Account">
     update nm_account set
-      bank_info_no=#{bankInfoNo},
-      account_type_no=#{accountTypeNo},
+      account_no=#{accountNo}, 
+      bank_info_id=#{bankInfoId},
       account_type_name=#{accountTypeName},
       ending_balance=#{endingBalance},
       amount=#{amount},

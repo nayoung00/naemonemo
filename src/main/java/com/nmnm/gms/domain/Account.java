@@ -6,7 +6,6 @@ public class Account {
   private int accountNo; // pk, 자동증가, nn
   private int groupNo; // fk, 모임번호
   private int bankInfoId; // fk, 모임계좌아이디
-  private int accountTypeNo; // 회계 유형 번호 nn
   private String accountTypeName; // 회계 유형명 nn
   private int endingBalance; // 초기잔액 nn
   private int amount; // 금액 nn
@@ -15,6 +14,15 @@ public class Account {
   private String remarks; // 비고 null
   private String receiptPhoto; // 영수증 사진 null
 
+
+
+  @Override
+  public String toString() {
+    return "Account [accountNo=" + accountNo + ", groupNo=" + groupNo + ", bankInfoId=" + bankInfoId
+        + ", accountTypeName=" + accountTypeName + ", endingBalance=" + endingBalance + ", amount="
+        + amount + ", paymentDate=" + paymentDate + ", accountConnection=" + accountConnection
+        + ", remarks=" + remarks + ", receiptPhoto=" + receiptPhoto + "]";
+  }
 
   public int getGroupNo() {
     return groupNo;
@@ -38,14 +46,6 @@ public class Account {
 
   public void setAccountNo(int accountNo) {
     this.accountNo = accountNo;
-  }
-
-  public int getAccountTypeNo() {
-    return accountTypeNo;
-  }
-
-  public void setAccountTypeNo(int accountTypeNo) {
-    this.accountTypeNo = accountTypeNo;
   }
 
   public String getAccountTypeName() {

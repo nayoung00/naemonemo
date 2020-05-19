@@ -62,14 +62,14 @@
 </head>
 
 <body>
-<div class="wrapper">
-  <tiles:insertAttribute name="side"/>
 
-<div class="main-panel">
-  <tiles:insertAttribute name="header"/>
-  <tiles:insertAttribute name="body"/>
-  <tiles:insertAttribute name="footer"/>
+<tiles:insertAttribute name="header"/>
+
+<tiles:insertAttribute name="body"/>
 </div>
 </div>
+
+<tiles:insertAttribute name="footer"/>
+
 </body>
 </html>

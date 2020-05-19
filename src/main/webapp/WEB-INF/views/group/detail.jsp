@@ -5,12 +5,14 @@
 
 <h1>모임 상세정보</h1>
 
-<form action="../grmember/addgrmember" method="POST">
+<form action="addgrmember" method="GET">
 <input type="hidden" name="groupNo" value="${group.groupNo}"/>
 <input type="hidden" name="memberNo" value="${loginUser.no}"/>
 <input type="hidden" name="gradeNo" value="1"/>
-<input type="submit" value="가입하기"/>
+<button id="addGrMember" type="button"  onclick="popup()">가입하기</button>
 </form>
+
+
 
 <form action="../grmember/search" method="GET">
     <input type="text" name="memberNo" placeholder="검색할 회원 번호"/>
@@ -87,5 +89,30 @@ geocoder.addressSearch(document.getElementById("address").value, function(result
 <c:if test="${empty group}">
 <p>해당  모임이 없습니다.</p>
 </c:if>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 

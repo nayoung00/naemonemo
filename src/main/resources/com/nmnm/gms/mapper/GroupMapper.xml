@@ -68,7 +68,6 @@
     from nm_group_member gm, nm_group g, nm_member m
     where gm.group_no = g.group_no and gm.member_no = m.member_no
   </select>
-
     
   <select id="findByNo" resultMap="GroupMap" parameterType="int">
     select 
@@ -110,15 +109,16 @@
     parameterType="string">
         <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
         select
-       group_no,
+      group_no,
       group_name,
       group_form,
       city
         from nm_group
-        where     
+        where
             group_no like #{keywordPattern}
             or group_name like #{keywordPattern}
             or group_form like #{keywordPattern}
             or city  like #{keywordPattern}
     </select>
+    
 </mapper>

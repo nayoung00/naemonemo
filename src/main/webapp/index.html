@@ -180,7 +180,11 @@
           <br />
           <h2>내가 가입한 모임 썸네일 이미지가 뜸</h2>
           <br />
-          <div><input type="text" name="groupName" placeholder="모임 이름" /></div>
+          <div><p>검색 하시오</p><form action="app/group/search" method="GET">
+          <input type="text" name="keyword" placeholder="모임 이름" />
+          <input type="submit" value="전송"/>
+          </form>
+          </div>
           <br />
         </div>
         <!--/.section-header-->

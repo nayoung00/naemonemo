@@ -35,4 +35,6 @@ public interface MemberService {
 
   String getEmailByEmail(String email);
 
+  Member searchGrMember(int grMemberNo) throws Exception;
+
 }

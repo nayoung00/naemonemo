@@ -46,5 +46,6 @@ public interface MemberDao {
 
   void updatePassword(HashMap<String, Object> params) throws Exception;
 
+  Member findgrmember(int grMemberNo) throws Exception; // 그룹 멤버 조회
 
 }

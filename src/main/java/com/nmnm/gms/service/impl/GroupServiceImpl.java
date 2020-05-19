@@ -48,7 +48,7 @@ public class GroupServiceImpl implements GroupService {
   }
 
   @Override
-  public int add(GroupMember grMember) throws Exception {
-    return groupDao.insert(grMember);
+  public int addgrmember(GroupMember grMember) throws Exception {
+    return groupDao.insertGrMember(grMember);
   }
 }

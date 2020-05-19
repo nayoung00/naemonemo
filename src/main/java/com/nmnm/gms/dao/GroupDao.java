@@ -23,7 +23,7 @@ public interface GroupDao {
   List<Group> findByKeyword(String keyword) throws Exception;
 
   // 그룹 회원 추가
-  int insert(GroupMember grMember) throws Exception;
+  int insertGrMember(GroupMember grMember) throws Exception;
 
   List<GroupMember> findByGrMembmer(int grMemberNo) throws Exception;
 }

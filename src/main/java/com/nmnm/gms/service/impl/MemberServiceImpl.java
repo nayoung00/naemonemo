@@ -14,7 +14,6 @@ public class MemberServiceImpl implements MemberService {
 
   MemberDao memberDao;
 
-
   public MemberServiceImpl(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
@@ -101,6 +100,9 @@ public class MemberServiceImpl implements MemberService {
     return null;
   }
 
-
+  @Override
+  public Member searchGrMember(int grMemberNo) throws Exception {
+    return memberDao.findgrmember(grMemberNo);
+  }
 
 }

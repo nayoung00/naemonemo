@@ -18,5 +18,5 @@ public interface GroupService {
 
   List<Group> search(String keyword) throws Exception;
 
-  int add(GroupMember grMember) throws Exception; // 그룹 회원 추가
+  int addgrmember(GroupMember grMember) throws Exception; // 그룹 회원 추가
 }

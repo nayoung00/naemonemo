@@ -10,8 +10,8 @@
     <result column="group_no"    property="groupNo"/>
     <result column="bank_info_id"  property="bankInfoId"/>
     <result column="account_type_name" property="accountTypeName"/>
-    <result column="ending_balance" property="endingBalance"/>
-    <result column="amount" property="amount"/>
+    <result column="deposit" property="deposit"/>
+    <result column="withdraw" property="withdraw"/>
     <result column="payment_date" property="paymentDate"/>
     <result column="account_connection" property="accountConnection"/>
     <result column="remarks" property="remarks"/>
@@ -25,8 +25,8 @@
       group_no, 
       bank_info_id, 
       account_type_name, 
-      ending_balance, 
-      amount, 
+      deposit, 
+      withdraw, 
       payment_date, 
       account_connection, 
       remarks, 
@@ -48,8 +48,8 @@
       group_no, 
       bank_info_id, 
       account_type_name, 
-      ending_balance, 
-      amount, 
+      deposit, 
+      withdraw, 
       payment_date, 
       account_connection, 
       remarks, 
@@ -58,8 +58,8 @@
       #{groupNo}, 
       #{bankInfoId}, 
       #{accountTypeName}, 
-      #{endingBalance}, 
-      #{amount}, 
+      #{deposit}, 
+      #{withdraw}, 
       #{paymentDate}, 
       #{accountConnection}, 
       #{remarks}, 
@@ -79,8 +79,8 @@
       account_no=#{accountNo}, 
       bank_info_id=#{bankInfoId},
       account_type_name=#{accountTypeName},
-      ending_balance=#{endingBalance},
-      amount=#{amount},
+      deposit=#{deposit}, 
+      withdraw=#{withdraw}, 
       payment_date=#{paymentDate},
       account_connection=#{accountConnection},
       remarks=#{remarks},
@@ -99,7 +99,7 @@
     parameterType="string">
     <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
   <include refid="select1"/>
-    where     
+    where 
       account_type_name like #{keywordPattern} 
       or account_connection like #{keywordPattern}
       or remarks like #{keywordPattern} 

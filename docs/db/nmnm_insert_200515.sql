@@ -333,9 +333,8 @@ bank_info_id,
 group_no,
 bank_account_no,
 bank_name,
-opening_balance,
 bank_account_holder)
-  VALUES(1,1,'123-4567-7890','우리은행',1200000,'홍길동');
+  VALUES(1,1,'123-4567-7890','우리은행','홍길동');
 
 
 INSERT INTO nm_group_account(
@@ -343,9 +342,16 @@ bank_info_id,
 group_no,
 bank_account_no,
 bank_name,
-opening_balance,
 bank_account_holder)
-  VALUES(2,1,'789-765433-12345','기업은행',300000,'임꺽정');   
+  VALUES(2,1,'789-765433-12345','기업은행','임꺽정');   
+  
+INSERT INTO nm_group_account(
+bank_info_id,
+group_no,
+bank_account_no,
+bank_name,
+bank_account_holder)
+VALUES(3,1,'111-222-333333','신한은행','가각간');  
  
   
 -- 회계 예제
@@ -354,13 +360,12 @@ INSERT INTO nm_account
 group_no,
 bank_info_id,
 account_type_name,
-ending_balance,
-amount,
+deposit,
 payment_date,
 account_connection,
 remarks,
 receipt_photo)
- values(1,1,'유류비',100000,150000,'2020-04-24','강남주유소', '비고','receipt.jpg');
+ values(1,1,'유류비',250000,'2020-04-24','강남주유소', '비고','receipt.jpg');
  
 -- 회계 예제
 INSERT INTO nm_account
@@ -368,13 +373,13 @@ INSERT INTO nm_account
 group_no,
 bank_info_id,
 account_type_name,
-ending_balance,
-amount,
+deposit,
+
 payment_date,
 account_connection, 
 remarks,
 receipt_photo)
- values(1,2,'술값',100000,150000,'2020-04-24','금문도', '비고','receipt.jpg');
+ values(1,1,'술값',100000,'2020-04-24','금문도', '비고','receipt.jpg');
  
 
  
@@ -384,13 +389,68 @@ INSERT INTO nm_account
 group_no,
 bank_info_id,
 account_type_name,
-ending_balance,
-amount,
+withdraw, 
 payment_date,
 account_connection, 
 remarks,
 receipt_photo)
- values(1,2,'술값',100000,150000,'2020-04-24','금문도', '비고','receipt.jpg');
+ values(1,1,'술값',50000,'2020-04-24','금문도', '비고','receipt.jpg');
+ 
+-- 회계 예제
+INSERT INTO nm_account
+(
+group_no,
+bank_info_id,
+account_type_name,
+deposit,
+
+payment_date,
+account_connection, 
+remarks,
+receipt_photo)
+ values(1,2,'술값',100000,'2020-04-24','금문도', '비고','receipt.jpg');
+ 
+
+ 
+ -- 회계 예제
+INSERT INTO nm_account
+any(
+group_no,
+bank_info_id,
+account_type_name,
+withdraw, 
+payment_date,
+account_connection, 
+remarks,
+receipt_photo)
+ values(1,2,'술값',50000,'2020-04-24','금문도', '비고','receipt.jpg');
  
   
+-- 회계 예제
+INSERT INTO nm_account
+(
+group_no,
+bank_info_id,
+account_type_name,
+deposit,
+payment_date,
+account_connection, 
+remarks,
+receipt_photo)
+ values(1,3,'술값',100000,'2020-04-24','금문도', '비고','receipt.jpg');
+ 
+
+ 
+ -- 회계 예제
+INSERT INTO nm_account
+(
+group_no,
+bank_info_id,
+account_type_name,
+withdraw, 
+payment_date,
+account_connection, 
+remarks,
+receipt_photo)
+ values(1,3,'술값',50000,'2020-04-24','금문도', '비고','receipt.jpg');
  

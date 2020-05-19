@@ -10,8 +10,8 @@
     <result column="group_no"    property="groupNo"/>
     <result column="bank_account_no"  property="bankAccountNo"/>
     <result column="bank_name" property="bankName"/>
-    <result column="opening_balance" property="openingBalance"/>
     <result column="bank_account_holder" property="bankAccountHolder"/>
+    <result column="ending_balance" property="endingBalance"/>
     
   </resultMap>
   
@@ -21,8 +21,8 @@
       group_no, 
       bank_account_no, 
       bank_name, 
-      opening_balance, 
-      bank_account_holder
+      bank_account_holder, 
+      ending_balance
     from 
       nm_group_account
   </sql>
@@ -40,14 +40,14 @@
       group_no, 
       bank_account_no, 
       bank_name, 
-      opening_balance, 
-      bank_account_holder) 
+      bank_account_holder, 
+      ending_balance)
     values(
       #{groupNo}, 
       #{bankAccountNo}, 
       #{bankName}, 
-      #{openingBalance}, 
-      #{bankAccountHolder})
+      #{bankAccountHolder}, 
+      #{endingBalance})
   </insert>
   
  
@@ -64,8 +64,8 @@
       group_no=#{groupNo}, 
       bank_account_no=#{bankAccountNo}, 
       bank_name=#{bankName}, 
-      opening_balance=#{openingBalance}, 
-      bank_account_holder=#{bankAccountHolder}
+      bank_account_holder=#{bankAccountHolder}, 
+      ending_balance=#{endingBalance}
     where 
       bank_info_id=#{bankInfoId}
   </update>

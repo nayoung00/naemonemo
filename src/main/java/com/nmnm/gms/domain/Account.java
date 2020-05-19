@@ -7,21 +7,27 @@ public class Account {
   private int groupNo; // fk, 모임번호
   private int bankInfoId; // fk, 모임계좌아이디
   private String accountTypeName; // 회계 유형명 nn
-  private int endingBalance; // 초기잔액 nn
-  private int amount; // 금액 nn
+  private int deposit; // 입금
+  private int withdraw; // 출금
   private Date paymentDate; // 거래일 nn
   private String accountConnection; // 거래처 null
   private String remarks; // 비고 null
   private String receiptPhoto; // 영수증 사진 null
 
-
-
   @Override
   public String toString() {
     return "Account [accountNo=" + accountNo + ", groupNo=" + groupNo + ", bankInfoId=" + bankInfoId
-        + ", accountTypeName=" + accountTypeName + ", endingBalance=" + endingBalance + ", amount="
-        + amount + ", paymentDate=" + paymentDate + ", accountConnection=" + accountConnection
-        + ", remarks=" + remarks + ", receiptPhoto=" + receiptPhoto + "]";
+        + ", accountTypeName=" + accountTypeName + ", deposit=" + deposit + ", withdraw=" + withdraw
+        + ", paymentDate=" + paymentDate + ", accountConnection=" + accountConnection + ", remarks="
+        + remarks + ", receiptPhoto=" + receiptPhoto + "]";
+  }
+
+  public int getAccountNo() {
+    return accountNo;
+  }
+
+  public void setAccountNo(int accountNo) {
+    this.accountNo = accountNo;
   }
 
   public int getGroupNo() {
@@ -40,14 +46,6 @@ public class Account {
     this.bankInfoId = bankInfoId;
   }
 
-  public int getAccountNo() {
-    return accountNo;
-  }
-
-  public void setAccountNo(int accountNo) {
-    this.accountNo = accountNo;
-  }
-
   public String getAccountTypeName() {
     return accountTypeName;
   }
@@ -56,20 +54,20 @@ public class Account {
     this.accountTypeName = accountTypeName;
   }
 
-  public int getEndingBalance() {
-    return endingBalance;
+  public int getDeposit() {
+    return deposit;
   }
 
-  public void setEndingBalance(int endingBalance) {
-    this.endingBalance = endingBalance;
+  public void setDeposit(int deposit) {
+    this.deposit = deposit;
   }
 
-  public int getAmount() {
-    return amount;
+  public int getWithdraw() {
+    return withdraw;
   }
 
-  public void setAmount(int amount) {
-    this.amount = amount;
+  public void setWithdraw(int withdraw) {
+    this.withdraw = withdraw;
   }
 
   public Date getPaymentDate() {

@@ -11,9 +11,8 @@
     <th>번호</th>
     <th>이름</th>
     <th>닉네임</th>
-    <th>성별</th>
     <th>이메일</th>
-    <th>전화</th>
+
   </tr>
   
 <c:forEach items="${list}" var="item">
@@ -21,9 +20,8 @@
     <td>${item.no}</td> 
     <td><a href='detail?no=${item.no}'>${item.name}</a></td> 
     <td>${item.nickname}</td> 
-    <td>${item.gender}</td> 
     <td>${item.email}</td> 
-    <td>${item.tel}</td>
+
     <td><a href='sendForm?no=${item.no}'>쪽지 보내기</a></td> 
   </tr>
 </c:forEach>

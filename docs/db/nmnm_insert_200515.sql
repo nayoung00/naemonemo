@@ -53,9 +53,8 @@ email,
 password,      
 intro,      
 interest,     
-nickname,      
-withdraw,
-sns) 
+nickname  
+) 
 values(
 '오승우',
 'abc.jpg',
@@ -64,8 +63,7 @@ values(
 '1111',
 '열심히',
 '코딩',
-'오승우',1,
-'페이스북');
+'오승우');
 
 INSERT INTO nm_member(
 member_name, 
@@ -75,9 +73,8 @@ email,
 password,      
 intro,      
 interest,     
-nickname,      
-withdraw,
-sns) 
+nickname
+) 
 values(
 '손진영',
 'abc.jpg',
@@ -86,8 +83,8 @@ values(
 '1111',
 '열심히',
 '코딩',
-'손진영',1,
-'페이스북');
+'손진영'
+);
 
 INSERT INTO nm_member(
 member_name, 
@@ -97,9 +94,8 @@ email,
 password,      
 intro,      
 interest,     
-nickname,      
-withdraw,
-sns) 
+nickname 
+) 
 values(
 '신나라',
 'abc.jpg',
@@ -108,8 +104,8 @@ values(
 '1111',
 '열심히',
 '코딩',
-'신나라',1,
-'페이스북');
+'신나라'
+);
  
 INSERT INTO nm_member(
 member_name, 
@@ -119,9 +115,8 @@ email,
 password,      
 intro,      
 interest,     
-nickname,      
-withdraw,
-sns) 
+nickname
+) 
 values(
 '김나영', 
 'photo1.jpg', 
@@ -130,53 +125,9 @@ values(
 '2222', 
 '김나영입니다.', 
 '댄스/무용', 
-'나사김',1,
-'instagram.com/test');
+'나사김'
+);
 
-
-INSERT INTO nm_member(
-member_name, 
-id_photo, 
-birthday,     
-email,       
-password,      
-intro,      
-interest,     
-nickname,      
-withdraw,
-sns) 
-values(
-'이선경', 
-'photo3.jpg', 
-'2000-2-2', 
-'esun1801@naver.com', 
-'4444', 
-'이선경입니다.', 
-'공예/만들기', 
-'선경삼',1,
-'instagram.com/test4');
-
-INSERT INTO nm_member(
-member_name, 
-id_photo, 
-birthday,     
-email,       
-password,      
-intro,      
-interest,     
-nickname,      
-withdraw,
-sns) 
-values(
-'김티모', 
-'teemo.jpg', 
-'2000-2-2', 
-'test@test.com', 
-'1111', 
-'정찰대입니다.', 
-'격투', 
-'티모',1,
-'instagram.com/test');
 
 
 -- 모임 회원 예제
@@ -229,7 +180,8 @@ INSERT INTO nm_notice_reply(content,notice_no,member_no)
 -- 일정 예제 데이터
 INSERT INTO nm_plan
 (group_no,
-plan_date,
+start_date,
+end_date,
 title,
 subtitle,
 content,
@@ -238,7 +190,7 @@ place_name,
 address,
 latitude,
 longitude)
-VALUES(1,'2020-04-09','프로젝트', '그룹프로젝트입니다','내용이랍니다', 'bit.jpg', '비트캠프 강남센터','주소',11,22);
+VALUES(1,'2020-03-02','2020-04-02','프로젝트', '그룹프로젝트입니다','내용이랍니다', 'bit.jpg', '비트캠프 강남센터','주소',11,22);
 
 -- 일정 참여자 & 일정이 먼저
 INSERT INTO nm_plan_member(plan_no,member_no,group_no,attend)
@@ -395,9 +347,6 @@ opening_balance,
 bank_account_holder)
   VALUES(2,1,'789-765433-12345','기업은행',300000,'임꺽정');   
  
-
-
-
   
 -- 회계 예제
 INSERT INTO nm_account

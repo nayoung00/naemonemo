@@ -32,6 +32,17 @@
       #{groupInterest},
       #{groupPhoto},
       #{city})
+  </insert> 
+  
+  <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">
+    insert into nm_group_member(
+    group_no,
+    member_no,
+    grade_no)
+    values(
+    #{groupNo},
+    #{memberNo},
+    #{gradeNo})
   </insert>
   
   <select id="findAll" resultMap="GroupMap">
@@ -43,8 +54,22 @@
     from 
       nm_group
   </select>
-
   
+  <!-- 관리자 게시판 용 모든 그룹 회원 조회 -->
+  <select id="grlist" resultMap="GroupMap"> 
+    select
+     gm.group_no,
+     gm.member_no,
+     gm.grade_no,
+     g.group_no,
+     g.group_name,
+     m.member_no,
+     m.member_name
+    from nm_group_member gm, nm_group g, nm_member m
+    where gm.group_no = g.group_no and gm.member_no = m.member_no
+  </select>
+
+    
   <select id="findByNo" resultMap="GroupMap" parameterType="int">
     select 
     group_photo,

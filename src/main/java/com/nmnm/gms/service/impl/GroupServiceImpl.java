@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.GroupDao;
 import com.nmnm.gms.domain.Group;
+import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.service.GroupService;
 
 @Component
@@ -44,5 +45,10 @@ public class GroupServiceImpl implements GroupService {
   @Override
   public List<Group> search(String keyword) throws Exception {
     return groupDao.findByKeyword(keyword);
+  }
+
+  @Override
+  public int addgrmember(GroupMember grMember) throws Exception {
+    return groupDao.insertGrMember(grMember);
   }
 }

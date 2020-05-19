@@ -4,31 +4,49 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-  <h1>공지사항</h1>
-  <a href='form'>새 글</a><br>
-  <table border='1'>
-  <tr>
-    <th>번호</th>
-    <th>제목</th>
-    <th>등록일</th>
-    <th>조회수</th>
-  </tr>
-  
-<c:forEach items="${list}" var="item">
-  <tr>
-    <td>${item.noticeNo}</td> 
-    <td><a href='detail?noticeNo=${item.noticeNo}'> ${item.title}</a></td> 
-    <td>${item.createDate}</td>
-    <td>${item.viewCount}</td>
-  </tr>
-</c:forEach>
+  <!--content-->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="header">
+                                <h4 class="title">공지사항</h4>
+                                <p class="category">모임의 공지가 올라오는 게시판</p>
+                                  <a href='form'>새 글</a><br>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                      <th style="width: 10%">번호</th>
+                                      <th style="width: 50%">제목</th>
+                                      <th style="width: 10%">작성자</th>
+                                      <th style="width: 10%">작성일</th>
+                                      <th style="width: 10%">조회수</th>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${list}" var="item">
+                                        <tr>
+                                          <td>${item.noticeNo}</td>
+                                          <td><a href='detail?noticeNo=${item.noticeNo}'> ${item.title}</a></td>
+                                          <td>${item.memberNo}</td>
+                                          <td>${item.createDate}</td>
+                                          <td>${item.viewCount}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form action='search' method='get'>
+                           검색어: <input name='keyword' type='text'>
+            <button>검색</button>
+            </form>
+        </div>
 
-</table>
 
-<hr>
-<form action='search' method='get'>
-검색어: <input name='keyword' type='text'>
-<button>검색</button>
-</form>
 
     

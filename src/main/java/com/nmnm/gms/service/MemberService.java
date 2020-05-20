@@ -1,6 +1,7 @@
 package com.nmnm.gms.service;
 
 import java.util.List;
+import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
 
@@ -36,5 +37,9 @@ public interface MemberService {
   String getEmailByEmail(String email);
 
   Member searchGrMember(int grMemberNo) throws Exception;
+
+  int addGrMember(GroupMember grMember) throws Exception; // 그룹 회원 추가
+
+  int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
 
 }

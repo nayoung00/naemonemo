@@ -3,6 +3,7 @@ package com.nmnm.gms.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
 
@@ -47,5 +48,9 @@ public interface MemberDao {
   void updatePassword(HashMap<String, Object> params) throws Exception;
 
   Member findgrmember(int grMemberNo) throws Exception; // 그룹 멤버 조회
+
+  int insertGrMember(GroupMember grMember) throws Exception; // 그룹 가입신청
+
+  int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
 
 }

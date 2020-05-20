@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.MemberDao;
+import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
 import com.nmnm.gms.service.MemberService;
@@ -105,4 +106,13 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.findgrmember(grMemberNo);
   }
 
+  @Override
+  public int addGrMember(GroupMember grMember) throws Exception {
+    return memberDao.insertGrMember(grMember);
+  }
+
+  @Override
+  public int approvalGrMember(GroupMember grMember) throws Exception {
+    return memberDao.approvalGrMember(grMember);
+  }
 }

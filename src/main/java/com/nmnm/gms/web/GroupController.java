@@ -31,6 +31,9 @@ public class GroupController {
   @GetMapping("form")
   public void form() {}
 
+  @GetMapping("register")
+  public void register() {}
+
   @PostMapping("add")
   public String add( //
       Group group, //

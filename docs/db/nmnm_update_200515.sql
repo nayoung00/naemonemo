@@ -217,21 +217,21 @@ ALTER TABLE nm_group
 
 -- 모임계좌
 CREATE TABLE nm_group_account (
-	bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
-	group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
-	bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
-	bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
-	bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주', -- 예금주
-	ending_balance      INTEGER     NULL     DEFAULT 0 COMMENT '잔액' -- 잔액
+    bank_info_id        INTEGER     NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
+    group_no            INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
+    bank_account_no     VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '계좌번호', -- 계좌번호
+    bank_name           VARCHAR(50) NOT NULL COMMENT '은행명', -- 은행명
+    bank_account_holder VARCHAR(50) NOT NULL COMMENT '예금주' -- 예금주
+
 )
 COMMENT '모임계좌';
 
 -- 모임계좌
 ALTER TABLE nm_group_account
-	ADD CONSTRAINT PK_nm_group_account -- 모임계좌 기본키
-		PRIMARY KEY (
-			bank_info_id -- 모임계좌아이디
-		);
+    ADD CONSTRAINT PK_nm_group_account -- 모임계좌 기본키
+        PRIMARY KEY (
+            bank_info_id -- 모임계좌아이디
+        );
 
 -- 모임회원
 CREATE TABLE nm_group_member (
@@ -488,31 +488,32 @@ ALTER TABLE nm_feed_like
 
 -- 회계
 CREATE TABLE nm_account (
-	account_no         INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
-	group_no           INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
-	bank_info_id       INTEGER      NULL     COMMENT '모임계좌아이디', -- 모임계좌아이디
-	account_type_name  VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
-	deposit            INTEGER      NULL     DEFAULT 0 COMMENT '입금', -- 입금
-	withdraw           INTEGER      NULL     DEFAULT 0 COMMENT '출금', -- 출금
-	payment_date       DATE         NOT NULL COMMENT '거래일', -- 거래일
-	account_connection TEXT         NOT NULL COMMENT '거래처', -- 거래처
-	remarks            TEXT         NULL     COMMENT '비고', -- 비고
-	receipt_photo      VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
+  account_no         INTEGER      NOT NULL COMMENT '회계번호', -- 회계번호
+  group_no           INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_info_id       INTEGER      NULL     COMMENT '모임계좌아이디', -- 모임계좌아이디
+  account_type_name  VARCHAR(255) NOT NULL COMMENT '회계유형명', -- 회계유형명
+  deposit            INTEGER      NULL     DEFAULT 0 COMMENT '입금', -- 입금
+  withdraw           INTEGER      NULL     DEFAULT 0 COMMENT '출금', -- 출금
+  ending_balance     INTEGER      NULL     DEFAULT 0 COMMENT '잔액', -- 잔액
+  payment_date       DATE         NOT NULL COMMENT '거래일', -- 거래일
+  account_connection TEXT         NOT NULL COMMENT '거래처', -- 거래처
+  remarks            TEXT         NULL     COMMENT '비고', -- 비고
+  receipt_photo      VARCHAR(255) NULL     COMMENT '영수증사진' -- 영수증사진
 )
 COMMENT '회계';
 
 -- 회계
 ALTER TABLE nm_account
-	ADD CONSTRAINT PK_nm_account -- 회계 기본키
-		PRIMARY KEY (
-			account_no -- 회계번호
-		);
+    ADD CONSTRAINT PK_nm_account -- 회계 기본키
+        PRIMARY KEY (
+            account_no -- 회계번호
+        );
 
 ALTER TABLE nm_account
-	MODIFY COLUMN account_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회계번호';
+    MODIFY COLUMN account_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회계번호';
 
 ALTER TABLE nm_account
-	AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
 -- 회원
 CREATE TABLE nm_member (

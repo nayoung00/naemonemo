@@ -4,22 +4,6 @@
 
 
 
-
-
-<div style="border: 1px solid white; float: left;">
-	<p>
-		<a href="list">모임 계좌 조회</a>
-	</p>
-	<p>일별 사용 내역(예정)</p>
-	<p>월별 사용 내역(예정)</p>
-	<p>회비 내역(예정)</p>
-	<p>후원금(예정)</p>
-	<p>
-		<a href="bankList">계좌 추가/제거</a>
-	</p>
-</div>
-
-
 <!--content-->
 <div class="content">
 	<div class="container-fluid">
@@ -35,11 +19,12 @@
 								<th style="width: 10%">회계번호</th>
 								<th style="width: 10%">모임계좌아이디</th>
 								<th style="width: 10%">회계유형명</th>
-								<th style="width: 10%">입금</th>
-								<th style="width: 10%">출금</th>
 								<th style="width: 10%">거래일</th>
 								<th style="width: 10%">거래처</th>
 								<th style="width: 10%">비고</th>
+								<th style="width: 10%">입금</th>
+								<th style="width: 10%">출금</th>
+								<th style="width: 10%">잔액</th>
 								<th style="width: 10%">영수증사진</th>
 							</thead>
 							<tbody>
@@ -48,11 +33,12 @@
 										<td>${item.accountNo}</td>
 										<td>${item.bankInfoId}</td>
 										<td>${item.accountTypeName}</td>
-										<td>${item.deposit}</td>
-										<td>${item.withdraw}</td>
 										<td>${item.paymentDate}</td>
 										<td>${item.accountConnection}</td>
 										<td>${item.remarks}</td>
+										<td>${item.deposit}</td>
+										<td>${item.withdraw}</td>
+										<td>${item.endingBalance}</td>
 										<td><a href='updatePhotoForm?accountNo=${item.accountNo}'>${item.receiptPhoto}</a></td>
 									</tr>
 								</c:forEach>

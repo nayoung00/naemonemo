@@ -16,7 +16,7 @@
     <result column="account_connection" property="accountConnection"/>
     <result column="remarks" property="remarks"/>
     <result column="receipt_photo" property="receiptPhoto"/>
-    
+    <result column="ending_balance" property="endingBalance"/>
   </resultMap>
   
    <sql id="select1">
@@ -30,6 +30,7 @@
       payment_date, 
       account_connection, 
       remarks, 
+      ending_balance, 
       receipt_photo
     from 
       nm_account
@@ -37,9 +38,27 @@
   
   
   <select id="findAll" resultMap="AccountMap">
-   <include refid="select1"/>
-   order by
-    account_no desc
+   SELECT 
+    a.account_no, 
+    a.bank_info_id, 
+    a.account_type_name, 
+    a.payment_date, 
+    a.account_connection, 
+    a.remarks, 
+    a.deposit, 
+    a.withdraw, 
+    @b := @b + a.deposit - a.withdraw AS ending_balance, 
+    a.receipt_photo
+FROM 
+    (SELECT @b := 0) AS dummy, 
+    nm_account AS a 
+CROSS JOIN 
+    nm_group_account AS ga 
+WHERE 
+    ga.bank_info_id = a.bank_info_id 
+
+ORDER BY 
+    account_no desc;
   </select>
   
   
@@ -53,7 +72,8 @@
       payment_date, 
       account_connection, 
       remarks, 
-      receipt_photo) 
+      receipt_photo
+      ) 
     values(
       #{groupNo}, 
       #{bankInfoId}, 
@@ -63,7 +83,8 @@
       #{paymentDate}, 
       #{accountConnection}, 
       #{remarks}, 
-      #{receiptPhoto})
+      #{receiptPhoto}
+      )
   </insert>
   
  

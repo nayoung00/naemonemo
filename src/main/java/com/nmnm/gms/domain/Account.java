@@ -13,14 +13,7 @@ public class Account {
   private String accountConnection; // 거래처 null
   private String remarks; // 비고 null
   private String receiptPhoto; // 영수증 사진 null
-
-  @Override
-  public String toString() {
-    return "Account [accountNo=" + accountNo + ", groupNo=" + groupNo + ", bankInfoId=" + bankInfoId
-        + ", accountTypeName=" + accountTypeName + ", deposit=" + deposit + ", withdraw=" + withdraw
-        + ", paymentDate=" + paymentDate + ", accountConnection=" + accountConnection + ", remarks="
-        + remarks + ", receiptPhoto=" + receiptPhoto + "]";
-  }
+  private String endingBalance; // 은행명
 
   public int getAccountNo() {
     return accountNo;
@@ -100,6 +93,22 @@ public class Account {
 
   public void setReceiptPhoto(String receiptPhoto) {
     this.receiptPhoto = receiptPhoto;
+  }
+
+  public String getEndingBalance() {
+    return endingBalance;
+  }
+
+  public void setEndingBalance(String endingBalance) {
+    this.endingBalance = endingBalance;
+  }
+
+  @Override
+  public String toString() {
+    return "Account [accountNo=" + accountNo + ", groupNo=" + groupNo + ", bankInfoId=" + bankInfoId
+        + ", accountTypeName=" + accountTypeName + ", deposit=" + deposit + ", withdraw=" + withdraw
+        + ", paymentDate=" + paymentDate + ", accountConnection=" + accountConnection + ", remarks="
+        + remarks + ", receiptPhoto=" + receiptPhoto + ", endingBalance=" + endingBalance + "]";
   }
 
 

@@ -10,8 +10,8 @@
 계좌번호: <input name='bankInfoNo' type='text'><br>
 회계유형명: <input name='accountTypeName' type='text'><br>
 거래일: <input name='paymentDate' type='text'><br>
-비고: <input name='remarks' type='text'><br>
 입금: <input name='deposit' type='text'><br>
+비고: <input name='remarks' type='text'><br>
 출금: <input name='withdraw' type='text'><br>
 영수증: <input name='receiptPhoto' type='file'><br>
 <p><button>변경</button>

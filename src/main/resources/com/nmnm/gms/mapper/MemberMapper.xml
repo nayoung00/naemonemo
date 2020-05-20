@@ -161,7 +161,7 @@
   </insert>
   
   <!-- 가입신청 승인 -->
-    <update
+   
 <!-- 회원이 속해 있는 그룹 회원번호로 조회 -->
   <select id="findgrmember" parameterType="int" resultMap="MemberMap"> 
     select m.*, g.group_name

@@ -5,17 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>sign up</title>
+<title>Insert title here</title>
 <link rel="stylesheet"  type="text/css" href="${path}/resources/css/common.css">
 <style type="text/css">
     /* Header */
     .wrap{
         width: 768px;
         margin: 60px auto;
-    }
-    .header{
-        padding: 62px 0 0;
-        position: relative;
     }
     .ohyoyo_join{
         font-size: 2em;
@@ -235,7 +231,7 @@
         <header><div class="header">
             <h1 class="ohyoyo_join"><a href="#" class="o_join">
                 <!-- <img src="../../img/logo_onlyy.png"> -->
-                회원가입
+                join
             </a></h1>
         </div></header>
         <section>
@@ -243,12 +239,46 @@
              <!-- Spring form태그 form:form -->
              <!-- form:form 태그는 method를 생략하면 defalut는 POST -->
              <!-- action을 생략하면 왔던(기존의) url을 그대로 넣어줌  -->
-             <form:form id="nm_member" modelAttribute="member" autocomplete="on">
+             <form:form id="frm_member" modelAttribute="memberDTO" autocomplete="on">
                 <div class="contaioner">
                     <div class="join_content">
                         <div class="row_group">
-                            
-                                  <div class="join_row">
+                            <div class="join_row">
+                                <h3 class="join_title">
+                                    <label for="uid">아이디<span class="highlight">*</span></label>
+                                </h3>
+                                <span class="ps_box int_id">
+                                    <input type="text" id="uid" name="id" class="int id_input" placeholder="아이디 입력" value="${user.id}">
+                                </span>
+                                <span class="join_err_msg">필수 정보입니다.</span>
+                            </div>
+                            <div class="join_row">
+                                <h3 class="join_title">
+                                    <label for="upw">비밀번호<span class="highlight">*</span></label>
+                                </h3>
+                                <span class="ps_box int_pass overlap">
+                                    <input type="password" id="upw" name="pw" class="int" placeholder="비밀번호 입력 (8자이상)">
+                                    <span class="step_url"><span class="pw_lock"></span></span>
+                                </span>
+                                <span class="ps_box int_pass">
+                                    <input type="password" id="urpw" name="urpw" class="int" placeholder="비밀번호 재확인">
+                                    <span class="step_url"><span class="repw_lock"></span></span>
+                                </span>
+                                <span class="join_err_msg">필수 정보입니다.</span>
+                            </div>
+                        </div>
+                        <div class="row_group">
+                            <div class="join_row">
+                                <h3 class="join_title">
+                                    <label for="uname">이름<span class="highlight">*</span></label>
+                                </h3>
+                                <span class="ps_box ps_box_name">
+                                    <input type="text" id="uname" name="name" class="int" value="${user.name}"> 
+                                    <span class="name_cnt_box"><span id="name_cnt">0</span>/20</span>
+                                </span>
+                                <span class="join_err_msg">필수 정보입니다.</span>
+                            </div>
+                            <div class="join_row">
                                 <h3 class="join_title">
                                     <label for="uemail">이메일<span class="highlight">*</span></label>
                                 </h3>
@@ -272,7 +302,7 @@
                                             <option value="" selected="selected">Email 선택</option>
                                             <option value="directVal">직접입력</option>
                                             <option value="naver.com">naver.com (네이버)</option>
-                                            <option value="hanmail">hanmail.net (다음)</option>
+                                            <option value="daum.net">daum.net (다음)</option>
                                             <option value="gmail.com">gmail.com (구글)</option>
                                             <option value="nate.com">nate.com (네이트)</option>
                                         </select>
@@ -280,43 +310,35 @@
                                 </div>
                                 <span class="join_err_msg">필수 정보입니다.</span>
                             </div>
-                            
-                            
-                            
-                            <div class="join_row">
-                                <h3 class="join_title">
-                                    <label for="upw">비밀번호<span class="highlight">*</span></label>
-                                </h3>
-                                <span class="ps_box int_pass overlap">
-                                    <input type="password" id="upw" name="password" class="int" placeholder="비밀번호 입력 (8자이상)">
-                                    <span class="step_url"><span class="pw_lock"></span></span>
-                                </span>
-                                <span class="ps_box int_pass">
-                                    <input type="password" id="urpw" name="urpw" class="int" placeholder="비밀번호 재확인">
-                                    <span class="step_url"><span class="repw_lock"></span></span>
-                                </span>
-                                <span class="join_err_msg">필수 정보입니다.</span>
-                            </div>
-                        </div>
-                        <div class="row_group">
-                            <div class="join_row">
-                                <h3 class="join_title">
-                                    <label for="uname">이름<span class="highlight">*</span></label>
-                                </h3>
-                                <span class="ps_box ps_box_name">
-                                    <input type="text" id="uname" name="name" class="int" value="${user.name}"> 
-                                    <span class="name_cnt_box"><span id="name_cnt">0</span>/20</span>
-                                </span>
-                                <span class="join_err_msg">필수 정보입니다.</span>
-                            </div>
     
                             <div class="join_row">
                                 <h3 class="join_title">
-                                    <label for="uphone">닉네임<span class="highlight">*</span></label>
+                                    <label for="uphone">휴대전화<span class="highlight">*</span></label>
                                 </h3>
                                 <span class="ps_box">
-                                    <input type="tel" id="uphone" name="phone" class="int" value="${user.phone}">
+                                    <input type="tel" id="uphone" name="phone" class="int" placeholder="-없이 입력  예) 01012341234" value="${user.phone}">
                                 </span>
+                                <span class="join_err_msg">필수 정보입니다.</span>
+                            </div>
+                            <div class="join_row">
+                                <h3 class="join_title">
+                                    <label for="sample6_detailAddress">주소<span class="highlight">*</span></label>
+                                </h3>
+                                <div class="addr_wrap">
+                                    <div class="postcode">
+                                        <span class="ps_box addr_poc overlap">
+                                            <input type="text" id="sample6_postcode" name="postcode" class="int addr_only" placeholder="우편번호" readonly value="${user.postcode}">
+                                        </span>
+                                        <input type="button" class="addr_poc_button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                                    </div>
+                                    <span class="ps_box overlap">
+                                        <input type="text" id="sample6_address" name="addr1" class="int addr_only" placeholder="주소" readonly value="${user.addr1}">
+                                    </span>
+                                    <span class="ps_box">
+                                        <input type="text" id="sample6_detailAddress" name="addr2" class="int" placeholder="상세주소" value="${user.addr2}">
+                                        <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
+                                    </span>
+                                </div>
                                 <span class="join_err_msg">필수 정보입니다.</span>
                             </div>
                             
@@ -416,7 +438,24 @@
             }
         }
         
-    
+        // id 유효성체크
+        $('#uid').keyup(function(){
+            // 사용자가 입력한 값의 좌우여백을 제거하고 id에 입력
+            var id = $(this).val().trim();  // 사용자가 입력한 값
+            //validation.js의 checkId로 유효성체크를 실행후 결과를 result에 담음 (code, desc)
+            var result = joinValidate.checkId(id);
+            console.log('id>>>>> '+result.code+","+result.desc);
+
+            if(result.code == 0){
+                checkArr[0] = true;
+            } else {
+                checkArr[0] = false;
+            }
+            // printCheckArr(checkArr); 확인용도
+
+            // 유효성체크 결과로 테두리색과 err 메세지를 출력하는 함수 실행
+            ckDesign(result.code, result.desc, 0, 0);
+        }); 
 
         // 비밀번호 유효성 체크
         $('#upw').keyup(function(){
@@ -619,6 +658,63 @@
             } else {
                 checkArr[3] = false;
             }
+        }
+
+        // 전화번호 유효성체크
+        $('#uphone').keyup(function(){
+            var phone = $(this).val().trim();
+            console.log(phone); 
+            ckPhone(phone);
+        });
+        
+        function ckPhone(phone){
+            var result = joinValidate.checkPhone(phone);
+            ckDesign(result.code, result.desc, 8, 4);
+            
+            if(result.code == 0){
+                checkArr[4] = true;
+            } else {
+                checkArr[4] = false;
+            }
+            // printCheckArr(checkArr);
+        }
+        
+
+        // 주소 이벤트
+        // 사용자가 주소를 직접 적는 걸 막고 우편번호찾기 버튼으로 주소찾게 하기위해서
+        $('.addr_only').click(function(){
+            // 사용자가 우편번호 또는 주소 input을 클릭했을때!
+            $('#btn_post').click();
+        });
+        // 주소를 적지않고 상세주소를 적으러 왔을때 먼저 주소를 적게 하기위해 우편번호찾기 버튼을 누르게함
+        $('#sample6_detailAddress').focus(function(){
+            var postcode = $('#sample6_postcode').val();
+            if(postcode == '' || postcode == 0){
+                $('#btn_post').click();
+            }
+        });
+        // 주소 유효성체크
+        $('#sample6_detailAddress').keyup(function(){
+            var addr2 = $.trim($(this).val()); // 상세주소
+            var postcode = $('#sample6_postcode').val(); // 우편번호
+            console.log(addr2+','+postcode);
+            ckAddr(postcode, addr2);
+        });
+        
+        function ckAddr(postcode, addr2){
+            var result = joinValidate.checkAddr(addr2, postcode);
+            if(result.code == 3){ // 우편번호&주소x
+                checkArr[5] = false;
+                ckDesign(result.code, result.desc, 9,5);
+            } else if(result.code == 0){ // 성공
+                checkArr[5] = true;
+                ckDesign(result.code, result.desc, 11,5);
+            } else { // 상세주소 통과x한 모든경우
+                checkArr[5] = false;
+                ckDesign(result.code, result.desc, 11,5);
+            }
+            printCheckArr(checkArr);
+            
         }
 
         // 버튼 활성화!

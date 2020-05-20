@@ -1,7 +1,8 @@
 package com.nmnm.gms.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.MemberDao;
 import com.nmnm.gms.domain.GroupMember;
@@ -12,94 +13,12 @@ import com.nmnm.gms.service.MemberService;
 @Component
 public class MemberServiceImpl implements MemberService {
 
+  @Autowired
+  private MemberDao memberDao;
 
-  MemberDao memberDao;
+  @Autowired
+  PasswordEncoder passwordEncoder;
 
-  public MemberServiceImpl(MemberDao memberDao) {
-    this.memberDao = memberDao;
-  }
-
-
-  @Override
-  public List<Member> list() throws Exception {
-    return memberDao.findAll();
-  }
-
-  @Override
-  public int delete(int no) throws Exception {
-    return memberDao.delete(no);
-  }
-
-  @Override
-  public int add(Member member) throws Exception {
-    return memberDao.insert(member);
-  }
-
-  @Override
-  public Member get(int no) throws Exception {
-    return memberDao.findByNo(no);
-  }
-
-  @Override
-  public Member get(String email, String password) throws Exception {
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("email", email);
-    params.put("password", password);
-    return memberDao.findByEmailAndPassword(params);
-  }
-
-  @Override
-  public List<Member> search(String keyword) throws Exception {
-    return memberDao.findByKeyword(keyword);
-  }
-
-  @Override
-  public int update(Member member) throws Exception {
-    return memberDao.update(member);
-  }
-
-
-  @Override
-  public int join(Member member) throws Exception {
-    return memberDao.join(member);
-  }
-
-
-
-  @Override
-  public int send(Message message) throws Exception {
-    return memberDao.send(message);
-  }
-
-  @Override
-  public Member sender(int no) throws Exception {
-    return memberDao.sender(no);
-  }
-
-
-  @Override
-  public Integer checkid(String inputId) throws Exception {
-    return memberDao.checkid(inputId);
-  }
-
-  @Override
-  public Integer checknick(String nickname) throws Exception {
-    return memberDao.checknick(nickname);
-  }
-
-
-  @Override
-  public int updatePassword(int memberNo, String newPassword, String password) throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-
-  @Override
-  public String getEmailByEmail(String email) {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   @Override
   public Member searchGrMember(int grMemberNo) throws Exception {
@@ -115,4 +34,113 @@ public class MemberServiceImpl implements MemberService {
   public int approvalGrMember(GroupMember grMember) throws Exception {
     return memberDao.approvalGrMember(grMember);
   }
+
+  @Override
+  public int emailCheck(String email) {
+    return memberDao.emailCheck(email);
+  }
+
+  @Override
+  public int insert(Member member) {
+    return memberDao.insert(member);
+  }
+
+  @Override
+  public void update(Member member, HttpSession session) {
+    int result = memberDao.update(member);
+    if (result > 0) { // 수정성공
+      // 세션에 로그인유저 정보를 수정된 정보로 변경
+      session.removeAttribute("name");
+      session.setAttribute("name", member.getName());
+    }
+
+  }
+
+  @Override
+  public Member userView(String email) {
+    return memberDao.userView(email);
+  }
+
+  @Override
+  public int pwCheck(String email, String pw) {
+    String encpw = memberDao.pwCheck(email);
+    int result = 0;
+    if (passwordEncoder.matches(pw, encpw)) {
+      result = 1;
+    }
+    return result;
+  }
+
+  @Override
+  public void pwUpdate(Member member) {
+    memberDao.pwUpdate(member);
+  }
+
+  @Override
+  public void drop(HttpSession session, String email) {
+    int result = memberDao.drop(email);
+    if (result > 0)
+      session.invalidate();
+  }
+
+  @Override
+  public int send(Message message) throws Exception {
+    return memberDao.send(message);
+  }
+
+  @Override
+  public Object sender(int no) throws Exception {
+    return memberDao.sender(no);
+  }
+
+  @Override
+  public int login(Member member, HttpSession session) throws Exception {
+    Member login = memberDao.login(member);
+
+    // result 결과
+    // 0: 등록된 회원 아님
+    // 1: 로그인 성공
+    // 2: 이메일인증 하기
+    // 3: 아이디나 비밀번호 없거나,불일치
+    int result = 0; // 로그인 결과값
+
+    // 2. DB 결과에 따라 동작
+    // id가 없는 경우 ( 회원이 아닌 경우)
+    if (login == null) {
+      result = 0;
+      return result;
+    }
+    // - 회원탈퇴한 경우
+    if (member.getUserkey().equals("d")) {
+      result = 3;
+      return result;
+    }
+    // - 회원인데 인증을 안한 경우 (n이나 난수인 경우)
+    if (!(member.getUserkey().equals("y"))) {
+      result = 2;
+      return result;
+    }
+    if (member != null) {
+      // 아이디와 패스워드가 같은지 체크
+      if (passwordEncoder.matches(member.getPassword(), member.getPassword())) {
+        result = 1;
+        session.removeAttribute("email");
+        session.removeAttribute("name");
+        session.setAttribute("email", member.getEmail());
+        session.setAttribute("name", member.getName());
+
+        // id가 있는데 pw가 틀린 경우
+      } else {
+        result = 3;
+      }
+    }
+
+    return result;
+  }
+
+  @Override
+  public void logout(HttpSession session) throws Exception {
+    session.invalidate();
+  }
+
 }

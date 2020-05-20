@@ -1,45 +1,48 @@
 package com.nmnm.gms.service;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
 
 public interface MemberService {
 
+  // 회원가입 email중복체크(AJAX)
+  public int emailCheck(String email);
 
-  List<Member> list() throws Exception;
+  // 회원가입 (DB 에 등록)
+  public int insert(Member member);
 
-  int delete(int no) throws Exception;
+  // 회원수정 (DB에 수정)
+  public void update(Member member, HttpSession session);
 
-  int add(Member member) throws Exception;
+  // 1명의 회원정보
+  public Member userView(String email);
 
-  Member get(int no) throws Exception;
+  // 비밀번호 수정: 현재 비밀번호 체크
+  public int pwCheck(String email, String pw);
 
-  Member get(String email, String password) throws Exception;
+  // 비밀번호 수정: 실제 DB에 update
+  public void pwUpdate(Member member);
 
-  List<Member> search(String keyword) throws Exception;
-
-  int update(Member member) throws Exception;
-
-  int join(Member member) throws Exception;
-
-  int send(Message message) throws Exception;
-
-  Member sender(int no) throws Exception;
-
-  Integer checkid(String email) throws Exception;
-
-  Integer checknick(String nickname) throws Exception;
-
-  int updatePassword(int memberNo, String newPassword, String password) throws Exception;
-
-  String getEmailByEmail(String email);
+  // 회원탈퇴 : userkey = n
+  public void drop(HttpSession session, String email);
 
   Member searchGrMember(int grMemberNo) throws Exception;
 
   int addGrMember(GroupMember grMember) throws Exception; // 그룹 회원 추가
 
   int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
+
+  public int send(Message message) throws Exception;
+
+  Object sender(int no) throws Exception;
+
+  // 로그
+  int login(Member member, HttpSession session) throws Exception;
+
+  // 로그아웃
+  void logout(HttpSession session) throws Exception;
+
 
 }

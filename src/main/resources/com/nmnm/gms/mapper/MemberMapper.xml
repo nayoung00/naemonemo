@@ -15,12 +15,11 @@
     <result column="intro" property="intro"/>
     <result column="interest" property="interest"/>
     <result column="nickname" property="nickname"/>
-    <result column="account_status" property="accountStatus"/>
-    <result column="withdraw" property="withdraw"/>
     <result column="create_date" property="createDate"/>
-    <result column="userkey" property="userkey"/>
   <association property="group" javaType="Group">
     <result column="group_name" property="groupName"/>
+    <result column="userkey" property="userkey"/>
+    <result column="auth_status" property="authStatus"/>
   </association>
   </resultMap>
   
@@ -28,27 +27,42 @@
     <id column="member_no" property="no"/>
   </resultMap>
   
-  <insert id="insert" parameterType="Member">
-    insert into nm_member(
-      member_name,
-      password, 
-      id_photo, 
-      birthday, 
-      email,
-      intro,
-      interest,
-      nickname
-    ) values(
-      #{name},
-      password(#{password}),
-      #{photo},
-      #{birthday},
-      #{email},
-      #{intro},
-      #{interest},
-      #{nickname}
-    )
-  </insert>
+    <select id="emailCheck" resultType="int">
+        SELECT COUNT(*) FROM nm_member
+        WHERE email = #{email}
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO nm_member
+        (email, password, member_name, nickname)
+        VALUES
+        (#{email},password(#{password}),#{name},#{nickname})
+    </insert>
+ 
+  <update id="alterKey">
+        UPDATE nm_member
+        SET userkey = 'y'
+        WHERE id = #{param1} AND userkey = #{param2}
+    </update>
+    
+    <select id="userView" resultType="Member">
+        SELECT * FROM nm_member
+        WHERE id = #{id}
+    </select>
+    <select id="pwCheck" resultType="String">
+        SELECT password FROM nm_member
+        WHERE email = #{param1}
+    </select>
+    <update id="pwUpdate">
+        UPDATE nm_member SET 
+            password = password(#{password})
+        WHERE email = #{email}
+    </update>
+    <update id="memDrop">
+        UPDATE nm_member SET 
+            authStatus = 'd' 
+        WHERE email = #{email}
+    </update>
   
   <select id="findAll" resultMap="MemberMap">
     select
@@ -118,36 +132,13 @@
       and password=password(#{password})
   </select>
   
-  
-    <!-- 회원 인증키(난수) Y로 변경 -->
-    <update id="alterUserKey" parameterType="Map">
-        update nm_member set userkey = 'Y' where email = #{email} and userkey = #{key}
-    </update>
-      
-     
-    <update id="alterKey" parameterType="map">
-        update nm_member set userkey = #{userkey} where email = #{email}
-    </update> 
-      
-      
-    <!-- 회원 가입 -->
-    <insert id="join" parameterType="Member">
-        insert into nm_member  (email, password, member_name, nickname, id_photo, birthday, interest, intro)
-        values(#{email}, password(#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro})
-    </insert>    
-    
- 
- <select id="checkid" parameterType="String" resultType="Integer">
-      SELECT COUNT(*) FROM nm_member
-      WHERE
-          email = #{email}
-</select>
     
 <select id="checknick" parameterType="String" resultType="Integer">
       SELECT COUNT(*) FROM nm_member
       WHERE
           nickname = #{nickname}
 </select>
+
 
 <!-- 그룹 가입 신청하기 -->
   <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">
@@ -182,11 +173,4 @@
     g.group_no = gm.group_no   
     where gm.member_no = #{memberNo} and register = 1
   </select>
-<!-- <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
-        SELECT member_no, member_name, email
-        FROM pf_members
-        WHERE (email=#{email}) AND password=password(#{password})
-        WHERE (email=#{email}) AND password=password(#{password}) AND alterkey='Y'
-    </select>
-       -->
 </mapper>

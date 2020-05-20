@@ -11,9 +11,10 @@
 			<div class="col-md-12">
 				<div class="card card-plain">
 					<div class="header">
-						<h1 class="title">모임 계좌 조회</h1>
+						<h4 class="title">모임 계좌 조회</h4>
 					</div>
 					<div class="content table-responsive table-full-width">
+					<div class="container">
 						<table class="table table-hover">
 							<thead>
 								<th style="width: 10%">회계번호</th>
@@ -44,6 +45,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+</div>
 	<a href='form' style="float: right; margin-right: 200px;">사용내역 추가</a>
 					</div>
 				</div>
@@ -59,3 +61,24 @@
 </div>
 -->
 </div>
+<style>
+  .container {
+    width: 1000px;
+    height: 500px;
+    overflow: auto;
+  }
+  .container::-webkit-scrollbar {
+    width: 10px;
+  }
+  .container::-webkit-scrollbar-thumb {
+    background-color: #777e8c;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  .container::-webkit-scrollbar-track {
+    background-color: lightgrey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+</style>

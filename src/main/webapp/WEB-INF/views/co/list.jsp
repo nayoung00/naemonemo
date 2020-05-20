@@ -12,27 +12,8 @@
 			<div class="col-md-12">
 				<div class="card card-plain">
 					<div class="header">
-						<div style="text-align: center; margin: 0 auto;">
-							<h1>소통 게시판</h1>
-							<hr>
-							<form action='categorySearch' method='get'>
-								글 분류 : <label><input type='radio' name='keyword2'
-									value='공지' />공지</label> <label><input type='radio'
-									name='keyword2' value='홍보' />홍보</label> <label><input
-									type='radio' name='keyword2' value='구인' />구인</label> <label><input
-									type='radio' name='keyword2' value='대여' />대여</label>
-								<button>전송</button>
-								<!--   <a href='list'>전체</a>
-  <a href='' id='공지' type='text'>공지</a>
-  <a href='categorySearch' id='홍보' type='text'>홍보</a>
-  <a href='categorySearch' id='구인' type='text'>구인</a>
-  <a href='categorySearch' id='대여' type='text'>대여</a><br> -->
-								<br>
-							</form>
-						</div>
-						<div style="width: 700px; margin: 0 auto;">
-							<a href='form' style="float: right; margin-right: 75px;">새 글</a>
-						</div>
+							<h3>포럼</h3>
+							<a href='form'>새 글</a>
 					</div>
 					
 					<div class="content table-responsive table-full-width">

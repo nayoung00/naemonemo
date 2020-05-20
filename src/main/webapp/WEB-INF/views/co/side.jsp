@@ -1,25 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <div class="sidebar" data-color="orange" data-image="#">
-      <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-      <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="#" class="simple-text">
-                                    임시
-                </a>
-            </div>
+	<!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+	<div class="sidebar-wrapper">
+		<div class="logo">
+			<a href="#" class="simple-text"> 임시 </a>
+		</div>
 
-            <ul class="nav">
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-#"></i>
-                        <p>타일즈때문에사이드임시로만듬 jsp가아니라 html로 페이지 깔끔하게 따로 만들어야 할 듯 왜냐하면 모임홈과 네모네모홈은 ui가 다름. 상단 메뉴가 다름 왜 다르게 했지.. 그냥 하나로 통일할까</p>
-                    </a>
-                </li>
-            </ul>
-      </div>
-    </div>
+		<ul class="nav">
+			<li><a href="list" class="simple-text"> <i class="pe-7s-#"></i>
+					<h4><p>전체</p></h4>
+			</a></li>
+			<li><a href="/nmnm/app/co/categorySearch?keyword2=공지"> <i class="pe-7s-#"></i>
+					<p>공지</p>
+			</a></li>
+			<li><a href="/nmnm/app/co/categorySearch?keyword2=홍보"> <i class="pe-7s-#"></i>
+					<p>홍보</p>
+			</a></li>
+			<li><a href="/nmnm/app/co/categorySearch?keyword2=구인"> <i class="pe-7s-#"></i>
+					<p>구인</p>
+			</a></li>
+			<li><a href="/nmnm/app/co/categorySearch?keyword2=대여"> <i class="pe-7s-#"></i>
+					<p>대여</p>
+			</a></li>
+<br><br><br><br><br><br><br><br><br><br><br>
+			<li><a href="../../index.html" class="simple-text"> <i
+					class="pe-7s-#"></i> (임시)나가기
+			</a></li>
+		</ul>
+	</div>
+</div>

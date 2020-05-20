@@ -107,11 +107,6 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int addGrMember(GroupMember grMember) throws Exception {
-    return memberDao.insertGrMember(grMember);
-  }
-
-  @Override
   public int approvalGrMember(GroupMember grMember) throws Exception {
     return memberDao.approvalGrMember(grMember);
   }

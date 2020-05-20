@@ -1,49 +1,4 @@
 
--- 모임 예제
-INSERT INTO nm_group(
-group_name,
-group_info,
-group_form,
-group_interest,
-city,
-max_people_no)
-values(
-'등산 모임',
-'등산하는 모임입니다.',
-'오프라인',
-'운동/스포츠',
-'등산캠프 강남',
-10
-);
-
-INSERT INTO nm_group(
-group_name,
-group_info,
-group_form,
-group_interest,
-city,
-max_people_no)
-values(
-'코딩 모임',
-'코딩하는 모임입니다.',
-'오프라인',
-'업종/직무',
-'비트캠프 강남',
-10
-);
-
-
--- 등급 예제
-insert into nm_grade(grade_no, grade_name)
-  values(4, '모임장');  
-insert into nm_grade(grade_no, grade_name)
-  values(3, '관리자');  
-insert into nm_grade(grade_no, grade_name)
-  values(2, '정회원');  
-insert into nm_grade(grade_no, grade_name)
-  values(1, '준회원');  
-
-  
 -- 회원 예제 데이터
 INSERT INTO nm_member(
 member_name, 
@@ -128,7 +83,55 @@ values(
 '나사김'
 );
 
+-- 모임 예제
+INSERT INTO nm_group(
+group_name,
+member_no,
+group_info,
+group_form,
+group_interest,
+city,
+max_people_no)
+values(
+'등산 모임',
+1,
+'등산하는 모임입니다.',
+'오프라인',
+'운동/스포츠',
+'등산캠프 강남',
+10
+);
 
+INSERT INTO nm_group(
+group_name,
+member_no,
+group_info,
+group_form,
+group_interest,
+city,
+max_people_no)
+values(
+'코딩 모임',
+2,
+'코딩하는 모임입니다.',
+'오프라인',
+'업종/직무',
+'비트캠프 강남',
+10
+);
+
+
+-- 등급 예제
+insert into nm_grade(grade_no, grade_name)
+  values(4, '모임장');  
+insert into nm_grade(grade_no, grade_name)
+  values(3, '관리자');  
+insert into nm_grade(grade_no, grade_name)
+  values(2, '정회원');  
+insert into nm_grade(grade_no, grade_name)
+  values(1, '준회원');  
+
+  
 
 -- 모임 회원 예제
 INSERT INTO nm_group_member(group_no,member_no,grade_no)

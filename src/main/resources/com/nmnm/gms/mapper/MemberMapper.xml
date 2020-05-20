@@ -17,9 +17,8 @@
     <result column="nickname" property="nickname"/>
     <result column="account_status" property="accountStatus"/>
     <result column="withdraw" property="withdraw"/>
-    <result column="sns" property="sns"/>
     <result column="create_date" property="createDate"/>
-    <result column="alterkey" property="alterkey"/>
+    <result column="userkey" property="userkey"/>
   <association property="group" javaType="Group">
     <result column="group_name" property="groupName"/>
   </association>
@@ -38,8 +37,7 @@
       email,
       intro,
       interest,
-      nickname,
-      sns
+      nickname
     ) values(
       #{name},
       password(#{password}),
@@ -48,8 +46,8 @@
       #{email},
       #{intro},
       #{interest},
-      #{nickname},
-      #{sns})
+      #{nickname}
+    )
   </insert>
   
   <select id="findAll" resultMap="MemberMap">
@@ -72,7 +70,6 @@
       email,
       id_photo,
       intro,
-      sns,
       create_date
     from 
       nm_member
@@ -124,19 +121,19 @@
   
     <!-- 회원 인증키(난수) Y로 변경 -->
     <update id="alterUserKey" parameterType="Map">
-        update nm_member set alterkey = 'Y' where email = #{email} and alterkey = #{key}
+        update nm_member set userkey = 'Y' where email = #{email} and userkey = #{key}
     </update>
       
      
     <update id="alterKey" parameterType="map">
-        update nm_member set alterkey = #{alterkey} where email = #{email}
+        update nm_member set userkey = #{userkey} where email = #{email}
     </update> 
       
       
     <!-- 회원 가입 -->
     <insert id="join" parameterType="Member">
-        insert into nm_member  (email, password, member_name, nickname, id_photo, birthday, interest, intro, sns)
-        values(#{email}, password(#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro}, #{sns})
+        insert into nm_member  (email, password, member_name, nickname, id_photo, birthday, interest, intro)
+        values(#{email}, password(#{password}), #{name}, #{nickname}, #{photo}, #{birthday}, #{interest}, #{intro})
     </insert>    
     
  
@@ -152,18 +149,6 @@
           nickname = #{nickname}
 </select>
 
-<!-- 그룹 가입 신청하기 -->
-  <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">
-    insert into nm_group_member(
-    group_no,
-    member_no,
-    grade_no)
-    values(
-    #{groupNo},
-    #{memberNo},
-    #{gradeNo})
-  </insert>
-  
   <!-- 가입신청 승인 -->
 
     <update id="approvalGrMember" parameterType="com.nmnm.gms.domain.GroupMember">

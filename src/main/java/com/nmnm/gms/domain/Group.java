@@ -13,13 +13,14 @@ public class Group {
   private String city; // 모임 지역
   private int maxPeopleNo; // 모임 최대인원
   private Date createDate; // 모임 생성일
+  private int groupAdmin;
 
   @Override
   public String toString() {
     return "Group [groupNo=" + groupNo + ", groupName=" + groupName + ", groupInfo=" + groupInfo
         + ", groupForm=" + groupForm + ", groupInterest=" + groupInterest + ", groupPhoto="
         + groupPhoto + ", city=" + city + ", maxPeopleNo=" + maxPeopleNo + ", createDate="
-        + createDate + "]";
+        + createDate + ", groupAdmin=" + groupAdmin + "]";
   }
 
   public int getGroupNo() {
@@ -93,6 +94,15 @@ public class Group {
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
+
+  public int getGroupAdmin() {
+    return groupAdmin;
+  }
+
+  public void setGroupAdmin(int groupAdmin) {
+    this.groupAdmin = groupAdmin;
+  }
+
 
 
 }

@@ -49,8 +49,6 @@ public interface MemberDao {
 
   Member findgrmember(int grMemberNo) throws Exception; // 그룹 멤버 조회
 
-  int insertGrMember(GroupMember grMember) throws Exception; // 그룹 가입신청
-
   int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
 
 }

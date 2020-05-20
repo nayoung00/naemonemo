@@ -1,22 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
-
-    <div>
-<table onload="tableCreate()" style="border: 1px;" id="dynamicTable">
-<thead>
-<tr>
-<th>이름</th>
-<th>직업</th>
-<th>나이</th>
-<th>취미</th>
-</tr>
-</thead>
-<tbody id="dynamicTbody">
     
-</tbody>
+<style>
+table.type09 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+
+}
+table.type09 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+}
+table.type09 tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+}
+table.type09 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+</style>
+
+<table class="type09">
+    <thead>
+    <tr>
+        <th scope="cols">타이틀</th>
+        <th scope="cols">내용</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">항목명</th>
+        <td>내용이 들어갑니다.</td>
+    </tr>
+    <tr>
+        <th scope="row">항목명</th>
+        <td>내용이 들어갑니다.</td>
+    </tr>
+    <tr>
+        <th scope="row">항목명</th>
+        <td>내용이 들어갑니다.</td>
+    </tr>
+    </tbody>
 </table>
-<button onclick="tableCreate()">table_append</button>
-</div>
 
     <script>
     function tableCreate(){
@@ -43,4 +79,5 @@
     	$("#dynamicTbody").append(html);
     				
     	}
+    $(document).ready(function() { tableCreate(); });
 </script>

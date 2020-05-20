@@ -29,10 +29,15 @@ public class GroupMemberController {
 
   @GetMapping("addgrmember")
   public String addgrmember(GroupMember grMember) throws Exception {
-    if (groupService.addgrmember(grMember) > 0) {
-      return "redirect:../group/list";
+    if (grMember.getRegister() == 0) {
+      if (groupService.addGrMember(grMember) > 0) {
+        memberService.approvalGrMember(grMember);
+        return "redirect:../group/list";
+      } else {
+        return "redirect:../error";
+      }
     } else {
-      throw new Exception("그룹에 가입할 수 없습니다.");
+      throw new Exception("이미 가입된 회원입니다.");
     }
   }
 

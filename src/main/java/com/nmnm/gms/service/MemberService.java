@@ -38,8 +38,6 @@ public interface MemberService {
 
   Member searchGrMember(int grMemberNo) throws Exception;
 
-  int addGrMember(GroupMember grMember) throws Exception; // 그룹 회원 추가
-
   int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
 
 }

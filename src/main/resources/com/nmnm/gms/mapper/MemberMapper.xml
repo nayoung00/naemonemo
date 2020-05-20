@@ -149,18 +149,6 @@
           nickname = #{nickname}
 </select>
 
-<!-- 그룹 가입 신청하기 -->
-  <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">
-    insert into nm_group_member(
-    group_no,
-    member_no,
-    grade_no)
-    values(
-    #{groupNo},
-    #{memberNo},
-    #{gradeNo})
-  </insert>
-  
   <!-- 가입신청 승인 -->
 
     <update id="approvalGrMember" parameterType="com.nmnm.gms.domain.GroupMember">

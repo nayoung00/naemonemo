@@ -75,23 +75,44 @@
 <!-- modal폼 관련 태그들 -->
     <!-- grMember 관련 modal -->  
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        모임에 가입하시겠습니까?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="card align-middle" style="width:20rem; margin: 0 auto; border-radius:20px;">
+		<div class="card-title" style="margin-top:30px;">
+			<h2 class="card-title text-center" style="color:#113366;">로그인 폼</h2>
+		</div>
+		<div class="card-body">
+      <form class="form-signin" method="POST" onSubmit="logincall();return false">
+        <h5 class="form-signin-heading">로그인 정보를 입력하세요</h5>
+        <label for="inputEmail" class="sr-only">Your ID</label>
+        <input type="text" id="uid" class="form-control" placeholder="Your ID" required autofocus><BR>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="upw" class="form-control" placeholder="Password" required><br>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> 기억하기
+          </label>
+        </div>
+        <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
+      </form>
+      
+		</div>
+	</div>
+
+	<div class="modal">
+	</div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- 로그인 모달 -->
+
 </body>
 </html>

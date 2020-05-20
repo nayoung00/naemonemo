@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${empty loginUser}">
+<div><p>로그인해야 모임 생성가능!</p>
+<button id="login-btn" data-toggle="modal" data-target="#exampleModal">로그인</button></div>
 
+</c:if>
+<c:if test="${not empty loginUser }">
 <form name='addForm' onsubmit="return checkz()" method="post" action="add" enctype="multipart/form-data" > 
+<input type="hidden" name="groupAdmin" value="${loginUser.no }"/>
 <h2 align="center">모임 생성</h2>
     <div class="box" style="background: #BDBDBD;">
         <img  class="profile" id="blah" src="#"/>
@@ -263,4 +270,5 @@ function checkz() {
          <input type="reset" value="다시입력">
   </p>
    </form>
+   </c:if>
 

@@ -230,10 +230,16 @@ COMMENT '모임계좌';
 
 -- 모임계좌
 ALTER TABLE nm_group_account
-    ADD CONSTRAINT PK_nm_group_account -- 모임계좌 기본키
-        PRIMARY KEY (
-            bank_info_id -- 모임계좌아이디
-        );
+  ADD CONSTRAINT PK_nm_group_account -- 모임계좌 기본키
+    PRIMARY KEY (
+      bank_info_id -- 모임계좌아이디
+    );
+
+ALTER TABLE nm_group_account
+  MODIFY COLUMN bank_info_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '모임계좌아이디';
+
+ALTER TABLE nm_group_account
+  AUTO_INCREMENT = 1;
 
 -- 모임회원
 CREATE TABLE nm_group_member (

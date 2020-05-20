@@ -7,55 +7,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<div style="border: 1px solid white; float: left;">
-	<p>
-		<a href="list">모임 계좌 조회</a>
-	</p>
-	<p>일별 사용 내역(예정)</p>
-	<p>월별 사용 내역(예정)</p>
-	<p>회비 내역(예정)</p>
-	<p>후원금(예정)</p>
-	<p>
-		<a href="bankList">계좌 추가/제거</a>
-	</p>
-</div>
-<div style="text-align: center; margin: 0 auto;">
-	<h1>계좌 추가/제거</h1>
-	<form action='bankAdd' method='post' enctype='multipart/form-data'>
-		<div>
-			<table border='1' style="margin: auto;">
-				<tr>
-					<th>모임계좌아이디</th>
-					<th>모임번호</th>
-					<th>계좌번호</th>
-					<th>은행명</th>
-					<th>예금주</th>
 
-				</tr>
-				<tbody id="bankbody"></tbody>
+<!--content-->
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-plain">
+					<div class="header">
+						<h1>계좌 추가/제거</h1>
+					</div>
+					<form action='bankAdd' method='post' enctype='multipart/form-data'>
+						<div class="content table-responsive table-full-width">
+							<table class="table table-hover">
+								<thead>
+									<th style="width: 10%">모임계좌아이디</th>
+									<th style="width: 10%">모임번호</th>
+									<th style="width: 10%">계좌번호</th>
+									<th style="width: 10%">은행명</th>
+									<th style="width: 10%">예금주</th>
+								</thead>
+								<tbody id="bankbody">
 
 
-				<c:forEach items="${bankList}" var="item">
-					<tr>
-						<td>${item.bankInfoId}</td>
-						<td>${item.groupNo}</td>
-						<td>${item.bankAccountNo}</td>
-						<td>${item.bankName}</td>
-						<td>${item.bankAccountHolder}</td>
-					</tr>
-				</c:forEach>
-			</table>
+									<c:forEach items="${bankList}" var="item">
+										<tr>
+											<td>${item.bankInfoId}</td>
+											<td>${item.groupNo}</td>
+											<td>${item.bankAccountNo}</td>
+											<td>${item.bankName}</td>
+											<td>${item.bankAccountHolder}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 
-			<input type="button" value="계좌 추가" onclick="add_row()"> <input
-				type="submit" value="저장하기">
+							<input type="button" value="계좌 추가" onclick="add_row()"> <input
+								type="submit" value="저장하기">
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-	</form>
+	</div>
 	<br>
 </div>
 
 
 <script type="text/javascript">
-
 	function add_row() {
 		var bankbody = document.getElementById('bankbody');
 		var row = bankbody.insertRow(0); // 상단에 추가
@@ -88,9 +87,3 @@
 		}
 	};
 </script>
-
-
-<br>
-<br>
-<hr>
-<br>

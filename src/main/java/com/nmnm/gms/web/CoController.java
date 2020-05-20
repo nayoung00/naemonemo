@@ -59,7 +59,6 @@ public class CoController {
   @GetMapping("list")
   public void list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
       @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
-
     // 전체 게시글 갯수
     int listCnt = coService.listCnt();
 

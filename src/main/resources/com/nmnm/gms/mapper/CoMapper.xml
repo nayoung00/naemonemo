@@ -23,7 +23,7 @@
 		member_no,
 		title,
 		content,
-		create_date,
+    create_date,
 		view_count
 		from
 		nm_co

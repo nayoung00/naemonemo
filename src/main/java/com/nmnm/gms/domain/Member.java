@@ -17,10 +17,9 @@ public class Member {
   private String address;
   private int accountStatus;
   private int withdraw;
-  private String sns;
   private Date createDate;
   private List<Message> message;
-  private String alterKey;
+  private String userkey;
   private Group group;
 
   public Group getGroup() {
@@ -31,12 +30,12 @@ public class Member {
     this.group = group;
   }
 
-  public String getAlterKey() {
-    return alterKey;
+  public String getUserKey() {
+    return userkey;
   }
 
-  public void setAlterKey(String alterKey) {
-    this.alterKey = alterKey;
+  public void setUserKey(String userkey) {
+    this.userkey = userkey;
   }
 
   public int getNo() {
@@ -135,14 +134,6 @@ public class Member {
     this.withdraw = withdraw;
   }
 
-  public String getSns() {
-    return sns;
-  }
-
-  public void setSns(String sns) {
-    this.sns = sns;
-  }
-
   public Date getCreateDate() {
     return createDate;
   }
@@ -164,8 +155,8 @@ public class Member {
     return "Member [no=" + no + ", name=" + name + ", photo=" + photo + ", birthday=" + birthday
         + ", email=" + email + ", password=" + password + ", intro=" + intro + ", interest="
         + interest + ", nickname=" + nickname + ", address=" + address + ", accountStatus="
-        + accountStatus + ", withdraw=" + withdraw + ", sns=" + sns + ", createDate=" + createDate
-        + ", message=" + message + ", alterKey=" + alterKey + ", group=" + group + "]";
+        + accountStatus + ", withdraw=" + withdraw + ", createDate=" + createDate + ", message="
+        + message + ", userkey=" + userkey + ", group=" + group + "]";
   }
 
 

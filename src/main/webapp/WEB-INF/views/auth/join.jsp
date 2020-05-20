@@ -159,21 +159,6 @@ h2 { text-align: center; }
                                     style="margin-bottom: 25px; width: 100%; height: 100px; border: 1px solid #d9d9de"
                                     ></td>
                             </tr>
-                            <tr>
-                                 <td style="text-align: left">
-                                    <p><strong>sns를 입력 해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="telChk"></span></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="sns" id="sns"
-                                    class="form-control tooltipstered" maxlength="20"
-                                    required="required" aria-required="true"
-                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
-                                    ></td>
-                            </tr>
-                            
-                             
-                            <tr>
                                 <td style="width: 100%; text-align: center; colspan: 2;">
                                 <input
                                     type="button" value="회원가입" 

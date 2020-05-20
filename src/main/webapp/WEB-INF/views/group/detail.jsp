@@ -11,7 +11,10 @@
 <input type="hidden" name="gradeNo" value="1"/>
 <button id="addGrMember" type="button"  onclick="popup()">가입하기</button>
 </form>
-
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  가입 신청
+</button>
 
 
 <form action="../grmember/search" method="GET">
@@ -89,12 +92,6 @@ geocoder.addressSearch(document.getElementById("address").value, function(result
 <c:if test="${empty group}">
 <p>해당  모임이 없습니다.</p>
 </c:if>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  가입 신청
-</button>
-
-<a href="#" data-toggle="modal" data-target="#exampleModal" data-id="1">데이터 넘기기</a>
 
 <script type="text/javascript">
 $(document).ready(function() {     

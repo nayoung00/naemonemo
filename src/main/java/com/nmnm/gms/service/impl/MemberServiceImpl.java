@@ -143,4 +143,7 @@ public class MemberServiceImpl implements MemberService {
     session.invalidate();
   }
 
+  public int approvalGrMember(GroupMember grMember) throws Exception {
+    return memberDao.approvalGrMember(grMember);
+  }
 }

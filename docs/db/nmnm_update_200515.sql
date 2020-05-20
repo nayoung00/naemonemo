@@ -12,6 +12,7 @@ DEFAULT COLLATE utf8_general_ci;
 
 USE nmnmdb;
 
+
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
@@ -185,6 +186,7 @@ ALTER TABLE nm_message
 -- 모임
 CREATE TABLE nm_group (
 	group_no       INTEGER      NOT NULL COMMENT '모임번호', -- 모임번호
+	member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 	group_name     VARCHAR(255) NOT NULL COMMENT '모임명', -- 모임명
 	group_info     TEXT         NOT NULL COMMENT '모임설명', -- 모임설명
 	group_form     VARCHAR(20)  NOT NULL DEFAULT '온라인' COMMENT '모임형태', -- 모임형태
@@ -228,10 +230,16 @@ COMMENT '모임계좌';
 
 -- 모임계좌
 ALTER TABLE nm_group_account
-    ADD CONSTRAINT PK_nm_group_account -- 모임계좌 기본키
-        PRIMARY KEY (
-            bank_info_id -- 모임계좌아이디
-        );
+  ADD CONSTRAINT PK_nm_group_account -- 모임계좌 기본키
+    PRIMARY KEY (
+      bank_info_id -- 모임계좌아이디
+    );
+
+ALTER TABLE nm_group_account
+  MODIFY COLUMN bank_info_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '모임계좌아이디';
+
+ALTER TABLE nm_group_account
+  AUTO_INCREMENT = 1;
 
 -- 모임회원
 CREATE TABLE nm_group_member (
@@ -624,6 +632,16 @@ ALTER TABLE nm_message
 	ADD CONSTRAINT FK_nm_member_TO_nm_message2 -- 회원 -> 메시지2
 		FOREIGN KEY (
 			receiver -- 수신자
+		)
+		REFERENCES nm_member ( -- 회원
+			member_no -- 회원번호
+		);
+
+-- 모임
+ALTER TABLE nm_group
+	ADD CONSTRAINT FK_nm_member_TO_nm_group -- 회원 -> 모임
+		FOREIGN KEY (
+			member_no -- 회원번호
 		)
 		REFERENCES nm_member ( -- 회원
 			member_no -- 회원번호

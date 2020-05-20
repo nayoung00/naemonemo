@@ -38,11 +38,12 @@ public interface MemberService {
 
   Object sender(int no) throws Exception;
 
-  // 로그
+  // 로그인
   int login(Member member, HttpSession session) throws Exception;
 
   // 로그아웃
   void logout(HttpSession session) throws Exception;
 
+  int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
 
 }

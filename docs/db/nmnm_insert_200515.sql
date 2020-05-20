@@ -414,7 +414,7 @@ receipt_photo)
  
  -- 회계 예제
 INSERT INTO nm_account
-any(
+(
 group_no,
 bank_info_id,
 account_type_name,

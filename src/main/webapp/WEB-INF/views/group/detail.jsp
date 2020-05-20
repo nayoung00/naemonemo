@@ -91,28 +91,18 @@ geocoder.addressSearch(document.getElementById("address").value, function(result
 </c:if>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
+  가입 신청
 </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<a href="#" data-toggle="modal" data-target="#exampleModal" data-id="1">데이터 넘기기</a>
+
+<script type="text/javascript">
+$(document).ready(function() {     
+    $('#exampleModal').on('show.bs.modal', function(event) {          
+        var seq = $(event.relatedTarget).data('id');
+    });
+});
+    </script>
+
 
 

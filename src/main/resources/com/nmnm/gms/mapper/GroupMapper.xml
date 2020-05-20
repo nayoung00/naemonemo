@@ -34,17 +34,6 @@
       #{city})
   </insert> 
   
-  <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">
-    insert into nm_group_member(
-    group_no,
-    member_no,
-    grade_no)
-    values(
-    #{groupNo},
-    #{memberNo},
-    #{gradeNo})
-  </insert>
-  
   <select id="findAll" resultMap="GroupMap">
     select
       group_no,

@@ -58,7 +58,7 @@ WHERE
     ga.bank_info_id = a.bank_info_id 
 
 ORDER BY 
-    account_no desc;
+    account_no asc;
   </select>
   
   

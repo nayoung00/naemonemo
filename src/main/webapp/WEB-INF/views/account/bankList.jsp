@@ -30,7 +30,6 @@
 					<th>계좌번호</th>
 					<th>은행명</th>
 					<th>예금주</th>
-					<th>잔액</th>
 
 				</tr>
 				<tbody id="bankbody"></tbody>
@@ -43,7 +42,6 @@
 						<td>${item.bankAccountNo}</td>
 						<td>${item.bankName}</td>
 						<td>${item.bankAccountHolder}</td>
-						<td>${item.endingBalance}</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -67,13 +65,11 @@
 		var cell3 = row.insertCell(2);
 		var cell4 = row.insertCell(3);
 		var cell5 = row.insertCell(4);
-		var cell6 = row.insertCell(5);
 
 		cell2.innerHTML = "<input name='groupNo' type='text' value='1'>";
 		cell3.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
 		cell4.innerHTML = "<input type='text' name='bankName' value=''>";
 		cell5.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
-		cell6.innerHTML = "<input type='text' name='endingBalance' value=''>";
 	};
 
 	function delete_row() {

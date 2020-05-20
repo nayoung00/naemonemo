@@ -7,16 +7,6 @@ public class GroupAccount {
   private String bankAccountNo; // 계좌번호
   private String bankName; // 은행명
   private String bankAccountHolder; // 예금주
-  private String endingBalance; // 은행명
-
-
-  @Override
-  public String toString() {
-    return "GroupAccount [bankInfoId=" + bankInfoId + ", groupNo=" + groupNo + ", bankAccountNo="
-        + bankAccountNo + ", bankName=" + bankName + ", bankAccountHolder=" + bankAccountHolder
-        + ", endingBalance=" + endingBalance + "]";
-  }
-
 
   public int getBankInfoId() {
     return bankInfoId;
@@ -58,11 +48,12 @@ public class GroupAccount {
     this.bankAccountHolder = bankAccountHolder;
   }
 
-  public String getEndingBalance() {
-    return endingBalance;
+  @Override
+  public String toString() {
+    return "GroupAccount [bankInfoId=" + bankInfoId + ", groupNo=" + groupNo + ", bankAccountNo="
+        + bankAccountNo + ", bankName=" + bankName + ", bankAccountHolder=" + bankAccountHolder
+        + "]";
   }
 
-  public void setEndingBalance(String endingBalance) {
-    this.endingBalance = endingBalance;
-  }
+
 }

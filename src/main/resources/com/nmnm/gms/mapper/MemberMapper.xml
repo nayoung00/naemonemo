@@ -165,6 +165,7 @@
   </insert>
   
   <!-- 가입신청 승인 -->
+
     <update id="approvalGrMember" parameterType="com.nmnm.gms.domain.GroupMember">
         update nm_group_member
             <set>

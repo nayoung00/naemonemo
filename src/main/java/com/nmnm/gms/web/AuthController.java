@@ -47,32 +47,14 @@ public class AuthController {
       @RequestParam(value = "flag", defaultValue = "0") String flag, Model model) {
     logger.info(">>> MEMBER/JOIN GET PAGE 출력");
     logger.info(member.toString());
-    // model.addAttribute("flag", flag);
-
-    // 비정상적인 접근일경우 약관동의페이지로 이동
     if (!flag.equals("1")) {
-      return "/auth/join";
+      return "auth/join";
     }
 
-    model.addAttribute("uri", "/ohyoyo/");
-    // 회원가입창에서 로그인을 했을때 main으로 가게 하는 코드를 만들고 싶었는데
-    // 한번만 이용되는 flash를 이용했을때 login창으로 ajax를 통해
-    // RedirectAttributes rttr 리다이렉트방식으로 보내는 거라서 받을수없음
-    // rttr.addFlashAttribute("uri","/ohyoyo/");
-    return "member/join";
+    model.addAttribute("uri", "/nmnm/");
+    return "auth/join";
   }
 
-  /*
-   * insert POST가 memoDTO를 수신할때 입력 form에서 사용자가 입력한 값들이 있으면 그 값들을 memoDTO의 필드변수에 setting을 하고
-   * 
-   * 만약 없으면 메모리 어딘가에 보관중인 SessionAttributes로 설정된 memoDTO변수에서 값을 가져와서 비어있는 필드변수를 채워서서 매개변수에 주입한다.
-   * 
-   * 따라서 form에서 보이지 않아도 되는 값들은 별도의 코딩을 하지 않아도 자동으로 insert POST로 전송되는 효과를 낸다. 단, 이 기능을 효율적으로 사용하려면
-   * jsp 코드에서 Spring-form tag로 input 를 코딩해야 한다.
-   */
-
-  // 원래 8개만 왔다가 null값이 있으니까 저장소 가서 찾아봄 4개 값이 있음
-  // 그래서 4개값을 넣어서 12개가 됨 but 해당 값이 Spring input태그로 되어있어야함
   @PostMapping("/join")
   public String join(@ModelAttribute("member") Member member, SessionStatus sessionStatus,
       HttpServletRequest request, RedirectAttributes rttr) {
@@ -99,43 +81,30 @@ public class AuthController {
     // 4. 회원가입 인증 메일 보내기
     mailService.mailSendUser(member.getEmail(), member.getName(), request);
 
-    // 자원반납하는 코드
-    // SessionAttributes를 사용할때 insert, update가 완료되고
-    // view로 보내기전 반드시 setComplet()를 실행하여
-    // session에 담긴 값을 clear 해주어야한다
     sessionStatus.setComplete();
 
-    // 서버단,Controller단에서 View단으로 갈때 2가지 방식
-    // forward 포워드방식 원페이지에 새페이지를 덮어쓰는 방식 , url주소 안 바뀜 데이터가 남아있음
-    // 새로고침을 하면 윈페이지도 같이 새로고침됨 그래서 가입하기 버튼도 다시 눌림
-    // DB에 같은 정보를 또 넣게 되어서 에러남 DB 값이 바뀌는 작업일때는 리다이렉트해야함
-    // forward가 디폴트!
-    // sendredirct 샌드리다이렉트방식 페이지를 새로만들어서 보내는것, url주소 바뀜
-    // redirect: 이게 샌드리다이렉트방식보내는 것
-
-    // 회원가입 후 메시지 출력을 위한 값 전달
-    rttr.addFlashAttribute("id", member.getName());
+    rttr.addFlashAttribute("name", member.getName());
     rttr.addFlashAttribute("email", member.getEmail());
     rttr.addFlashAttribute("key", "join");
 
     return "redirect:/";
   }
 
-  @GetMapping("/constract")
-  public String viewConstract(Model model, RedirectAttributes rttr) {
-    logger.info(">>> MEMBER/CONSTRACT PAGE 출력");
-    model.addAttribute("uri", "/ohyoyo/");
+  @GetMapping("/interest")
+  public String viewInterest(Model model, RedirectAttributes rttr) {
+    logger.info(">>> MEMBER/INTEREST PAGE 출력");
+    model.addAttribute("uri", "/nmnm/");
     // rttr.addFlashAttribute("uri","/ohyoyo/");
-    return "member/constract";
+    return "auth/interest";
   }
 
   // 회원가입 후 email인증
   @GetMapping("/keyauth")
-  public String keyAuth(String id, String key, RedirectAttributes rttr) {
-    mailService.keyAuth(id, key);
+  public String keyAuth(String email, String key, RedirectAttributes rttr) {
+    mailService.keyAuth(email, key);
 
     // 인증후 메시지 출력을 위한 값 전달
-    rttr.addFlashAttribute("id", id);
+    rttr.addFlashAttribute("email", email);
     rttr.addFlashAttribute("key", "auth");
 
     return "redirect:/";
@@ -153,36 +122,18 @@ public class AuthController {
     if (cnt == 0) {
       flag = "0";
     }
-
     return flag;
   }
 
-  // 마이페이지
-  @GetMapping("/mypage")
-  public String mypage() {
-    logger.info(">>> GET: MYPAGE PAGE");
-    // String id = (String) session.getAttribute("userid");
-    //
-    // // 로그인이 안되있으면 비정상적인 접근으로 간주하여 인텍스페이지로 이동!
-    // if(id == null) {
-    // return "redirect:/";
-    // }
-    return "member/mypage";
-  }
 
   // 회원정보수정
   @GetMapping("/update")
   public String memUpdate(HttpSession session, Model model) {
     logger.info(">>> GET: MEMBER UPDATE PAGE");
 
-    // 현재 로그인 상태 확인
-    // session.getAttribute("userid"); session에 들어가면 타입이 가장상위인 object타입으로 바뀜
-    // 그래서 형변환을 해줘야함
-    String id = (String) session.getAttribute("userid");
+    String email = (String) session.getAttribute("email");
 
-    // 로그인된 유저의 정보를 GET
-    // 회원정보수정 페이지로 보내기
-    model.addAttribute("user", memberService.userView(id));
+    model.addAttribute("user", memberService.userView(email));
 
     return "/member/join";
   }
@@ -232,23 +183,18 @@ public class AuthController {
   // 비밀번호 유효성체크: 기존에 db에 저장되잇는 정보와 동일한지 확인
   @ResponseBody
   @PostMapping("/pwcheck")
-  public Integer pwCheck(String pw, HttpSession session) {
+  public Integer pwCheck(String password, HttpSession session) {
     logger.info(">>> POST: PWCHECK(AJAX)");
 
-    String id = (String) session.getAttribute("userid");
+    String email = (String) session.getAttribute("email");
 
-    return memberService.pwCheck(id, pw);
+    return memberService.pwCheck(email, password);
   }
 
   // 회원탈퇴
   @GetMapping("/drop")
   public String drop(Model model) {
     logger.info(">>> MEMBER/DROP PAGE 출력");
-    // String id = (String) session.getAttribute("userid");
-    // // 로그인이 안되있으면 비정상적인 접근으로 간주하여 인텍스페이지로 이동!
-    // if(id == null) {
-    // return "redirect:/";
-    // }
 
     model.addAttribute("key", "drop");
 
@@ -259,12 +205,12 @@ public class AuthController {
   @GetMapping("/dropAction")
   public String dropAction(HttpSession session, RedirectAttributes rttr) {
     logger.info("*********** GET: DROP UPDATE ");
-    String id = (String) session.getAttribute("userid");
+    String email = (String) session.getAttribute("userid");
 
-    rttr.addFlashAttribute("id", id);
+    rttr.addFlashAttribute("email", email);
     rttr.addFlashAttribute("key", "dropResult");
 
-    memberService.drop(session, id);
+    memberService.drop(session, email);
 
     return "redirect:/";
   }

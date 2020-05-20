@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<div class="sidebar" data-color="orange" data-image="#">
+      <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+      <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                                    임시
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                        <i class="pe-7s-#"></i>
+                        
 <!DOCTYPE html>
 <html>
 <head>
@@ -232,18 +249,14 @@
 </head>
 <body>
     <div class="wrap">
-        <header><div class="header">
+        <header><div class="login-form">
             <h1 class="ohyoyo_join"><a href="#" class="o_join">
                 <!-- <img src="../../img/logo_onlyy.png"> -->
                 회원가입
             </a></h1>
         </div></header>
         <section>
-             <!-- <form id="frm_member" name="frm_member" action="${path}/member/join" method="POST"> -->
-             <!-- Spring form태그 form:form -->
-             <!-- form:form 태그는 method를 생략하면 defalut는 POST -->
-             <!-- action을 생략하면 왔던(기존의) url을 그대로 넣어줌  -->
-             <form:form id="nm_member" modelAttribute="member" autocomplete="on">
+                <form action='login' method='post'>
                 <div class="contaioner">
                     <div class="join_content">
                         <div class="row_group">
@@ -253,13 +266,13 @@
                                     <label for="uemail">이메일<span class="highlight">*</span></label>
                                 </h3>
                                 <span class="ps_box email_hidden_box">
-                                    <input type="text" class="int" name="email" id="emailAll" value="${user.email}">
+                                    <input type="text" class="int" name="email" id="emailAll" value="${member.email}">
                                 </span>
                                 <div class="email_box">
                                     <span class="ps_box email_id overlap">
                                         <input type="text" class="int" id="uemail" name="uemail" placeholder="ID">
                                     </span>
-                                    <span class="nbsp" ></span>
+                                    <span class="nbsp"></span>
                                     <span class="bulr">@</span>
                                     <span class="nbsp"></span>
                                     <span class="ps_box overlap">
@@ -326,7 +339,7 @@
                         </div>
                     </div>
                 </div>
-            </form:form>
+            </form>
             <!--</form>-->
         </section>  
     </div>
@@ -424,13 +437,9 @@
             // .trim() 의 또다른 사용방법
             var pw = $.trim($(this).val());
             var rpw = $('#urpw').val().trim();
-            // console.log(pw);
-            // console.log(rpw);
 
             // 2. 유효성 체크하기
             var result = joinValidate.checkPw('', pw, rpw);
-            // '' 비밀번호변경과 같이 validation.js를 사용하기위해
-            // console.log(result.code+","+result.desc);
             
             // 3. 체크결과에 따라 디자인 하기
             ckDesign(result.code, result.desc, 1, 1);
@@ -449,7 +458,6 @@
             } else {
                 checkArr[1] = false;
             }
-            // printCheckArr(checkArr);
         });
 
         // 비밀번호 재확인 유효성 체크
@@ -579,8 +587,8 @@
 
                 ckDesign(result.code, result.desc, 5, 3);
             }
-            
         });
+
         $('#email_url').keyup(function(){
             var e_id = $('#uemail').val().trim();
             var url = $(this).val().trim();

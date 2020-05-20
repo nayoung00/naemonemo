@@ -42,5 +42,7 @@ public interface MemberDao {
 
   int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
 
+  public int insertGrMember(GroupMember grMember) throws Exception;
+
 
 }

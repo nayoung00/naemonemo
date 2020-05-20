@@ -52,7 +52,7 @@
                            <i class="fa fa-user"></i>
                          </a>
                          <ul class="dropdown-menu">
-                           <li><a href="#">마이페이지</a></li>
+                           <li><a href="../member/mypage">마이페이지</a></li>
                            <li><a href="#">로그아웃</a></li>
                          </ul>
                    </li>

@@ -143,7 +143,28 @@ public class MemberServiceImpl implements MemberService {
     session.invalidate();
   }
 
-  public int approvalGrMember(GroupMember grMember) throws Exception {
-    return memberDao.approvalGrMember(grMember);
+  @Override
+  public int update(Member member) throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
   }
+
+  @Override
+  public Object get(int no) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Object list() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Object search(String keyword) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

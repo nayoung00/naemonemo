@@ -44,6 +44,14 @@ public interface MemberService {
   // 로그아웃
   void logout(HttpSession session) throws Exception;
 
-  int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
+  public int update(Member member) throws Exception;
+
+  public Object get(int no);
+
+  public Object list();
+
+  public Object search(String keyword);
+
+
 
 }

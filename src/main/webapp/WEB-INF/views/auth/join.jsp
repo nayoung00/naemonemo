@@ -25,7 +25,6 @@ h2 { text-align: center; }
     height: 100%;
     object-fit: cover;
 }
-
 </style>
 </head>
 <body>

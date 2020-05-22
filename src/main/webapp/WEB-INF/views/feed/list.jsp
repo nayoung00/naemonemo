@@ -10,7 +10,6 @@
   <table border='1'>
   <tr>
     <th>번호</th>
-    <th>모임번호(출력x)</th>
     <th>회원번호(작성자)</th>
     <th>제목</th>
     <th>등록일</th>
@@ -20,7 +19,6 @@
 <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.feedNo}</td> 
-    <td>${item.groupNo}</td>
     <td>${item.memberNo}</td>
     <td><a href='detail?feedNo=${item.feedNo}'> ${item.title}</a></td> 
     <td>${item.createDate}</td> 

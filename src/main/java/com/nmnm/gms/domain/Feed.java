@@ -1,23 +1,34 @@
 package com.nmnm.gms.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Feed {
 
   private int feedNo; // nm_feed PK NN auto_increment default=1
-  private int memberNo; // nm_meeting_member PK/ FK N
-  private int groupNo; // nm_meeting_member PK/ FK N
+  private int memberNo; // FK N
+  private int groupNo; //  FK N
   private String title; // VARCHAR(255) NN
   private String content; // text NN
   private Date createDate; // DATETIME default=now() NN
-  private int viewCount;
+  private int viewCount; // 0
+  private List<FeedPhoto> feedPhotos;
   
   
-  @Override
-  public String toString() {
-    return "Feed [feedNo=" + feedNo + ", memberNo=" + memberNo + ", groupNo=" + groupNo + ", title="
-        + title + ", content=" + content + ", createDate=" + createDate + ", viewCount=" + viewCount
-        + "]";
+  public Feed() {
+  }
+
+
+  public Feed(int feedNo, int memberNo, int groupNo, String title, String content, Date createDate,
+      int viewCount, List<FeedPhoto> feedPhotos) {
+    this.feedNo = feedNo;
+    this.memberNo = memberNo;
+    this.groupNo = groupNo;
+    this.title = title;
+    this.content = content;
+    this.createDate = createDate;
+    this.viewCount = viewCount;
+    this.feedPhotos = feedPhotos;
   }
 
 
@@ -91,5 +102,23 @@ public class Feed {
   }
 
 
+  public List<FeedPhoto> getFeedPhotos() {
+    return feedPhotos;
+  }
+
+
+  public void setFeedPhotos(List<FeedPhoto> feedPhotos) {
+    this.feedPhotos = feedPhotos;
+  }
+
+
+  @Override
+  public String toString() {
+    return "Feed [feedNo=" + feedNo + ", memberNo=" + memberNo + ", groupNo=" + groupNo + ", title="
+        + title + ", content=" + content + ", createDate=" + createDate + ", viewCount=" + viewCount
+        + ", feedPhotos=" + feedPhotos + "]";
+  }
+  
+ 
 
 }

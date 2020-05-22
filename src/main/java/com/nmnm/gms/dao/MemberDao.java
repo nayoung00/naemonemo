@@ -1,54 +1,50 @@
 package com.nmnm.gms.dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
 
-// 데이터를 저장하고 꺼내는 방식(파일, 클라우드저장소, DB 등)에 상관없이
-// DAO 사용법을 통일하기 위해
-// 메서드 호출 규칙을 정의한다.
 public interface MemberDao {
-  int insert(Member member) throws Exception;
+  // 회원가입 email중복체크
+  Member emailCheck(String email) throws Exception;
 
-  List<Member> findAll() throws Exception;
+  // 회원가입 db에 회원등록
+  int insert(Member memeber) throws Exception;
 
-  Member findByNo(int no) throws Exception;
-
+  // 회원수정
   int update(Member member) throws Exception;
 
-  int delete(int no) throws Exception;
+  // 회원가입 진행시 난수 생성및 useyn 컬럼에 난수 입력
+  void createAuthKey(String email, String userkey) throws Exception;
 
-  List<Member> findByKeyword(String keyword) throws Exception;
+  // 회원가입 이메일인증후 useyn컬럼y로 값변경
+  int alterKey(String email, String key) throws Exception;
 
-  Member findByEmailAndPassword(Map<String, Object> params) throws Exception;
+  // 1명의 회원정보
+  Member userView(String email) throws Exception;
 
-  int login(Member member) throws Exception;
+  // 비밀번호 초기화를 위한 메일보내기
+  void resetPassword(Member member) throws Exception;
 
-  int join(Member member) throws Exception;
+  // 비밀번호 바꾸기
+  void changePassword(Member member) throws Exception;
+
+  void deleteMember(String member) throws Exception;
+
+  Member login(Member member) throws Exception;
 
   int send(Message message) throws Exception;
 
   Member sender(int no) throws Exception;
 
-  // ID 중복체크
-  int checkid(String email) throws Exception;
-
-  // nickname 중복체크
-  int checknick(String nickname) throws Exception;
-
-  int selectMemberNo(String email) throws Exception;
-
-  int alterKey(Map<String, Object> params); // 유저 인증키 생성 메서드
-
-  int alterUserkey(Map<String, Object> params); // 유저 인증키 Y로 바꿔주는 메서드
-
-  void updatePassword(HashMap<String, Object> params) throws Exception;
-
   Member findgrmember(int grMemberNo) throws Exception; // 그룹 멤버 조회
 
   int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
+
+  int insertGrMember(GroupMember grMember) throws Exception;
+
+  void userAuth(String email) throws Exception;
+
+
 
 }

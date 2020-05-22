@@ -1,322 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<title>sign up</title>
-<link rel="stylesheet"  type="text/css" href="${path}/resources/css/common.css">
-<style type="text/css">
-    /* Header */
-    .wrap{
-        width: 768px;
-        margin: 60px auto;
-    }
-    .header{
-        padding: 62px 0 0;
-        position: relative;
-    }
-    .nmnm_join{
-        font-size: 2em;
-    }
-    .n_join{
-        display: block;
-        width: 310px;
-        height: 100px;
-        /*background: url('../../img/logo_onlyy.png') -100px -100px;*/
-        margin: 0 auto;
-        font-size: 60px;
-        text-align: center;
-    }
+<script>
+$(function() {
     
-    /* container */
-    .join_content{
-        width: 460px;
-        margin: 0 auto;
-    }
-    .row_group{
-        overflow : hidden;
-        width: 100%;
-    }
-    .join_title{
-        margin: 19px 0 8px;
-        font-size: 14px;
-        font-weight: 700;
-        color: black;
-    }
-    .join_row input{
-        outline: none;
-    }
-    .ps_box:hover {
-        border: 1px solid #999;
-    }
-    .ps_box input:hover{
-        border: none;
-    }
-    .ps_box{
-        display: flex;
-        align-items: center;
-        position: relative;
-        width: 100%;
-        height: 51px;
-        border: 1px solid #dadada;
-        padding: 10px 14px 10px 14px;
-        background: #fff;
-        vertical-align: top;
-    }
-    .email_hidden_box{
-        display: none;
-    }
-    .int_pass{
-        padding-right: 40px;
-    }
-    .overlap{
-        border-bottom: 1px solid transparent;
-    }
-    .join_row::last-of-type{
-        border: 1px solid #dadada;
-    }
-    .int{
-        display: block;
-        position: relative;
-        width: 100%;
-        height: 29px;
-        padding-right: 25px;
-        line-height: 29px;
-        border: none;
-        background: #fff;
-        font-size: 15px;
-        z-index: 10;
-    }
-    .step_url{
-        position: absolute;
-        right: 13px;
-        font-size: 15px;
-        color: #8e8e8e;
-    }
-    .join_err_msg{
-        display: inline-block;
-        margin: 9px 0 -2px;
-        font-size: 12px;
-        line-height: 14px;
-        color: red;
-        height: 15px;
-        visibility: hidden;
-    }
-    .pw_lock{
-        background: url('https://static.nid.naver.com/images/ui/join/m_icon_pw_step.png');
-        background-repeat: no-repeat;
-        background-size: 125px 75px;
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-        display: inline-block;
-    }
-    .repw_lock{
-        background: url('https://static.nid.naver.com/images/ui/join/m_icon_pw_step.png');
-        background-repeat: no-repeat;
-        background-size: 125px 75px;
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-        display: inline-block;
-        background-position: -27px 0;
-    }
-    .sel{
-        background: #fff url('https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif') 100% 50% no-repeat;
-        background-size: 20px 8px;
-        width: 100%;
-        height: 29px;
-        font-size: 15px;
-        line-height: 18px;
-        color: #000;
-        border: none;
-        -webkit-appearance: none;
-        outline: none;
-    }
-    .sel_box, .sel_box *{
-        cursor: pointer;
-    }
-    .choice{
-        font-size: 12px;
-        font-weight: 400;
-        color: #8e8e8e;
-    }
-    .btn_double_area{
-        margin: 30px 0 9px;
-    }
-    .btn_type{
-        display: block;
-        width: 100%;
-        padding: 21px 0 17px;
-        font-size: 20px;
-        font-weight: 700;
-        text-align: center;
-        cursor: no-drop;
-        border-radius: 4px;
-        border: none;
-        outline: none;
-    }
-    .email_box{
-        display: flex;
-        align-items: center;
-    }
-    .email_id{
-        width: 80%;
-    }
+    //입력값 검증 정규표현식
+    const getPwCheck= RegExp(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
+    const getName= RegExp(/^[가-힣]+$/);
+    //입력값 검증을 마칠 경우 true로 설정 
+    //(chk2 : 비번, chk3: 비번확인란, chk4: 이름, chk5: 이메일)
+    let chk2 = false, chk3 = false, chk4 = false;
     
-    .nbsp{
-        width: 20px;
-        display: inline-block;
-    }
-    .highlight{
-        color: #f24443;         
-    }
-    .ps_box_name{
-        position: relative;
-    }
-    .name_cnt_box{
-        position: absolute;
-        right: 12px;
-        z-index: 10;
-    }
-    /* loadingbar */
-    #back{
-        position: fixed;
-        z-index: 1200;
-        background-color: rgba(0,0,0,0.4);
-        overflow: auto;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-    }
-    .loading_img{
-        animation: ani_loading 1.5s infinite linear;
-        font-size: 70px;
-        color: #f46665;
-    }
-    @keyframes ani_loading{
-        from{-webkit-transform: rotate(0deg);}
-        to{-webkit-transform: rotate(359deg);}
-    }
+    //회원가입 form DOM객체 저장.
+    const regForm = $("#signUpForm");
+    
+    //패스워드 입력값 검증.
+    $('#password').on('keyup', function() {
+        //비밀번호 공백 확인
+        if($("#password").val() === ""){
+            $('#password').css("background-color", "pink");
+            $('#pwChk').html('<b style="font-size:14px;color:red;">[비밀번호를 입력해주세요.]</b>');
+            chk2 = false;
+        }                
+        //비밀번호 유효성검사
+        else if(!getPwCheck.test($("#password").val()) || $("#password").val().length < 8){
+            $('#password').css("background-color", "pink");
+            $('#pwChk').html('<b style="font-size:14px;color:red;">[특수문자 포함 8자이상]</b>');
+            chk2 = false;
+        } else {
+            $('#password').css("background-color", "#b3ffb3");
+            $('#pwChk').html('<b style="font-size:14px;color:green;"></b>');
+            chk2 = true;
+        }
+        
+    });
+    
+    //패스워드 확인란 입력값 검증.
+    $('#password_check').on('keyup', function() {
+        //비밀번호 확인란 공백 확인
+        if($("#password_check").val() === ""){
+            $('#password_check').css("background-color", "pink");
+            $('#pwChk2').html('<b style="font-size:14px;color:red;">[비밀번호를 확인해주세요.]</b>');
+            chk3 = false;
+        }                
+        //비밀번호 확인란 유효성검사
+        else if($("#password").val() != $("#password_check").val()){
+            $('#password_check').css("background-color", "pink");
+            $('#pwChk2').html('<b style="font-size:14px;color:red;">[비밀번호가 일치하지 않습니다.]</b>');
+            chk3 = false;
+        } else {
+            $('#password_check').css("background-color", "#b3ffb3");
+            $('#pwChk2').html('<b style="font-size:14px;color:green;"></b>');
+            chk3 = true;
+        }
+        
+    });
+    </script>
 
-</style>
-</head>
-<body>
-    <div class="wrap">
-        <header><div class="header">
-            <h1 class="nmnm_join"><a href="#" class="n_join">
-                <!-- <img src="../../img/logo_onlyy.png"> -->
-                회원가입
-            </a></h1>
-        </div></header>
-        <section>
-             <!-- <form id="frm_member" name="frm_member" action="${path}/member/join" method="POST"> -->
-             <!-- Spring form태그 form:form -->
-             <!-- form:form 태그는 method를 생략하면 defalut는 POST -->
-             <!-- action을 생략하면 왔던(기존의) url을 그대로 넣어줌  -->
-             <form:form id="nm_member" modelAttribute="member" autocomplete="on">
-                <div class="contaioner">
-                    <div class="join_content">
-                        <div class="row_group">
-                            
-                                  <div class="join_row">
-                                <h3 class="join_title">
-                                    <label for="uemail">이메일<span class="highlight">*</span></label>
-                                </h3>
-                                <span class="ps_box email_hidden_box">
-                                    <input type="text" class="int" name="email" id="emailAll" value="${user.email}">
-                                </span>
-                                <div class="email_box">
-                                    <span class="ps_box email_id overlap">
-                                        <input type="text" class="int" id="uemail" name="uemail" placeholder="ID">
-                                    </span>
-                                    <span class="nbsp" ></span>
-                                    <span class="bulr">@</span>
-                                    <span class="nbsp"></span>
-                                    <span class="ps_box overlap">
-                                        <input type="text" class="int" id="email_url" placeholder="Email 선택" readonly="readonly">
-                                    </span>
-                                </div>
-                                <div class="email_box">
-                                    <span class="ps_box sel_box">
-                                        <select class="sel" id="selmail">
-                                            <option value="" selected="selected">Email 선택</option>
-                                            <option value="directVal">직접입력</option>
-                                            <option value="naver.com">naver.com (네이버)</option>
-                                            <option value="hanmail">hanmail.net (다음)</option>
-                                            <option value="gmail.com">gmail.com (구글)</option>
-                                            <option value="nate.com">nate.com (네이트)</option>
-                                        </select>
-                                    </span>
-                                </div>
-                                <span class="join_err_msg">필수 정보입니다.</span>
-                            </div>
-                            
-                            
-                            
-                            <div class="join_row">
-                                <h3 class="join_title">
-                                    <label for="upw">비밀번호<span class="highlight">*</span></label>
-                                </h3>
-                                <span class="ps_box int_pass overlap">
-                                    <input type="password" id="upw" name="password" class="int" placeholder="비밀번호 입력 (8자이상)">
-                                    <span class="step_url"><span class="pw_lock"></span></span>
-                                </span>
-                                <span class="ps_box int_pass">
-                                    <input type="password" id="urpw" name="urpw" class="int" placeholder="비밀번호 재확인">
-                                    <span class="step_url"><span class="repw_lock"></span></span>
-                                </span>
-                                <span class="join_err_msg">필수 정보입니다.</span>
-                            </div>
-                        </div>
-                        <div class="row_group">
-                            <div class="join_row">
-                                <h3 class="join_title">
-                                    <label for="uname">이름<span class="highlight">*</span></label>
-                                </h3>
-                                <span class="ps_box ps_box_name">
-                                    <input type="text" id="uname" name="name" class="int" value="${user.name}"> 
-                                    <span class="name_cnt_box"><span id="name_cnt"></span></span>
-                                </span>
-                                <span class="join_err_msg">필수 정보입니다.</span>
-                            </div>
-    
-                            <div class="join_row">
-                                <h3 class="join_title">
-                                    <label for="uphone">닉네임<span class="highlight">*</span></label>
-                                </h3>
-                                <span class="ps_box">
-                                    <input type="tel" id="uphone" name="phone" class="int" value="${user.phone}">
-                                </span>
-                                <span class="join_err_msg">필수 정보입니다.</span>
-                            </div>
-                            
-                        </div>
-                        <div class="btn_double_area">
-                            <span><button type="button" id="btn_join" class="btn_type">가입하기</button></span>
-                        </div>
-                    </div>
-                </div>
-            </form:form>
-            <!--</form>-->
-        </section>  
-    </div>
-</body>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="${path}/resources/js/daum_post.js"></script>
-<script src="${path}/resources/js/validation.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         // alert('${uri}');
         $('#selmail').change(function() {
-
             var url = $(this).val();
             if(url !='directVal'){
                 $('#email_url').val(url)
@@ -333,12 +74,10 @@
         // 비밀번호가 유효한 값인지 체크해주는 Flag값
         // default값 false
         var pwFlag = false;
-
         // 유효성체크 여부를 알려주는 배열
         var checkArr = new Array(6).fill(false);
         // 코드의 재사용을 줄이기 위해서 따로 함수로 빼서 이용함
         // printCheckArr(checkArr);
-
         // 유효성체크 모두 통과 or 불통여부를 알려주는 변수 최종결정권자
         var checkAll = true;
         
@@ -395,20 +134,14 @@
         }
         
     
-
         // 비밀번호 유효성 체크
         $('#upw').keyup(function(){
             // 1. 사용자가 입력한 값 받기
             // .trim() 의 또다른 사용방법
             var pw = $.trim($(this).val());
             var rpw = $('#urpw').val().trim();
-            // console.log(pw);
-            // console.log(rpw);
-
             // 2. 유효성 체크하기
             var result = joinValidate.checkPw('', pw, rpw);
-            // '' 비밀번호변경과 같이 validation.js를 사용하기위해
-            // console.log(result.code+","+result.desc);
             
             // 3. 체크결과에 따라 디자인 하기
             ckDesign(result.code, result.desc, 1, 1);
@@ -427,17 +160,13 @@
             } else {
                 checkArr[1] = false;
             }
-            // printCheckArr(checkArr);
         });
-
         // 비밀번호 재확인 유효성 체크
         $('#urpw').keyup(function(){
             var pw = $.trim($('#upw').val());
             var rpw = $.trim($('#urpw').val());
-
-            var result = joinValidate.checkRpw(password, rpw, pwFlag);
+            var result = joinValidate.checkRpw(pw, rpw, pwFlag);
             console.log(result.code+","+result.desc);
-
             ckDesign(result.code, result.desc, 2, 1);
             
             if(result.code == 10){
@@ -455,7 +184,6 @@
             }
             // printCheckArr(checkArr);
         });
-
         // 이름 유효성체크
         $('#uname').keyup(function(){
             var name = $(this).val().trim();
@@ -481,7 +209,6 @@
         $('#uemail').keyup(function(){
             var e_id = $(this).val().trim();
             var url = $('#selmail').val().trim();
-
             if(url == '' || url.length == 0){
                 var result = joinValidate.checkEmail(url);
                 ckDesign(result.code, result.desc, 6,3);
@@ -512,7 +239,6 @@
                     checkArr[3] = false;
                 }
                 // printCheckArr(checkArr);
-
                 ckDesign(result.code, result.desc, 5, 3);
             }
             
@@ -540,7 +266,6 @@
                         checkArr[3] = false;
                     }
                     // printCheckArr(checkArr);
-
                     ckDesign(result.code, result.desc, 6, 3);
                 }
             } else {
@@ -554,15 +279,12 @@
                     checkArr[3] = false;
                 }
                 // printCheckArr(checkArr);
-
                 ckDesign(result.code, result.desc, 5, 3);
             }
-            
         });
         $('#email_url').keyup(function(){
             var e_id = $('#uemail').val().trim();
             var url = $(this).val().trim();
-
             if(e_id == '' || e_id.length == 0){
                 var result = joinValidate.checkEmail(e_id);
                 ckDesign(result.code, result.desc, 5,3);
@@ -577,7 +299,6 @@
                     checkArr[3] = false;
                 }
                 // printCheckArr(checkArr);
-
                 ckDesign(result.code, result.desc, 6, 3);
             }
             
@@ -598,7 +319,6 @@
                 checkArr[3] = false;
             }
         }
-
         // 버튼 활성화!
         $('.int').keyup(function(){
             ckColorBtn();
@@ -641,14 +361,20 @@
                     var url= $('#email_url').val();
                     $('#emailAll').val(id+'@'+url);
                 }
+                
+                // alert('회원가입성공');
+                
+                // submit(): form태그 안에 있는 데이터들을 서버단으로 전송하세요
+                // action: 목적지(MemberController '/join')
+                // method: 방법( POST 숨겨서)
                 $('#frm_member').submit();
+                
             } else{
                 console.log(invalidAll);
                 alert('값을 모두 입력해주세요.');
                 
             }
         });
-
     });
     
     // 개발시 사용: 유효성체크 전체 여부를 출력해주는 함수 (true, false)
@@ -673,6 +399,3 @@
         $('#back, #loadingBar').hide();
         $('#back, #loadingBar').remove();
     }
-    
-</script>
-</html>

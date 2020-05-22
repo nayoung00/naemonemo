@@ -1,98 +1,121 @@
 package com.nmnm.gms.web;
 
-
-import java.io.File;
-import java.util.UUID;
-import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nmnm.gms.domain.Member;
-import com.nmnm.gms.service.MailSendService;
 import com.nmnm.gms.service.MemberService;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-
-  @Autowired
-  ServletContext servletContext;
+  private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
   @Autowired
   MemberService memberService;
 
+
   @Autowired
-  private MailSendService mailsender;
+  BCryptPasswordEncoder passEncoder;
+
+  // 회원 가입 get
+  @RequestMapping(value = "join", method = RequestMethod.GET)
+  public void getJoin(Member member) throws Exception {
+
+    logger.info("get join");
+  }
+
+  // 회원 가입 post
+  @RequestMapping(value = "join", method = RequestMethod.POST)
+  public String postJoin(Member member, Model model, RedirectAttributes rttr,
+      HttpServletRequest request, HttpSession session) throws Exception {
+    logger.info("post join");
+    logger.info("회원가입...");
 
 
-  @GetMapping("login")
-  public void login() {}
+    String email = request.getParameter("email"); // 회원가입 폼에서 넘어오는 데이터들을 받아서 변수에 담음
 
-  @GetMapping("join")
-  public void join() {}
+    Member emailCheck = memberService.emailCheck(email);
 
+    String inputPass = member.getPassword();
 
-  @PostMapping("join")
-  public String join(Member member, MultipartFile photoFile, HttpServletRequest request,
-      Model model) throws Exception {
-    if (photoFile.getSize() > 0) {
-      String dirPath = servletContext.getRealPath("/upload/member");
-      String filename = UUID.randomUUID().toString();
-      photoFile.transferTo(new File(dirPath + "/" + filename));
-      member.setPhoto(filename);
-    }
+    String pass = passEncoder.encode(inputPass);
+    member.setPassword(pass);
 
-    if (memberService.join(member) > 0) {
-      // 인증 메일 보내기 메서드
-      mailsender.mailSendWithKey(member.getEmail(), member.getName(), request);
-      return "redirect:../../index.html";
+    memberService.join(member);
+
+    rttr.addFlashAttribute("authmsg", "가입시 사용한 이메일로 인증해주세요");
+    return "redirect:/";
+  }
+
+  // 에서 Ajax로 email 중복 확인
+  @ResponseBody
+  @RequestMapping(value = "emailCheck", method = {RequestMethod.GET, RequestMethod.POST})
+  public String postIdCheck(HttpServletRequest request) throws Exception {
+    logger.info("post emailCheck");
+
+    String email = request.getParameter("email");
+    Member emailCheck = memberService.emailCheck(email);
+
+    int result = 0;
+
+    if (emailCheck == null) {
+      result = 0;
     } else {
-      throw new Exception("회원을 추가할 수 없습니다.");
+      result = 1;
     }
+
+    return String.valueOf(result);
   }
 
-  @GetMapping("regSuccess")
-  public void regSuccess() {}
+  // 이메일 인증 다시 보내기
+  @RequestMapping(value = "emailAgainSend", method = RequestMethod.POST)
+  public String emailAgainSend(Member member) throws Exception {
 
 
-  @GetMapping(value = "keyalter")
-  public String keyalterConfirm(@RequestParam("email") String email,
-      @RequestParam("key") String key) {
-
-    mailsender.alterUserKey(email, key); // mailsender의 경우 @Autowired
-
-    return "redirect:regSuccess";
+    memberService.emailAgainSend(member);
+    return "emailAgainSuccess";
   }
 
-  @ResponseBody
-  @RequestMapping(value = "checkid", method = RequestMethod.POST)
-  public int checkid(String email) throws Exception {
-    int count = memberService.checkid(email);
-    return count;
+  // 회원이 이메일 인증 클릭시 리턴받는 정보
+  @GetMapping("/emailConfirm")
+  public String emailConfirm(String email, Model model) throws Exception {
+
+    memberService.userAuth(email);
+    model.addAttribute("name", email);
+
+    // view 아래에 emailConfirm.jsp로 이동
+    return "auth/emailConfirm";
   }
 
-  @ResponseBody
-  @RequestMapping(value = "checknick", method = RequestMethod.POST)
-  public int checknick(String nickname) throws Exception {
-    System.out.println(nickname);
-    int count = memberService.checknick(nickname);
-    return count;
+
+
+  // 로그인 get
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public void getLogin() throws Exception {
+    logger.info("get login");
+
   }
 
-  @PostMapping("login")
-  public String login(String email, String password, String saveEmail, HttpServletResponse response,
-      HttpSession session, Model model) throws Exception {
+  // 로그인 post
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public String postLogin(String email, String password, String saveEmail,
+      HttpServletResponse response, HttpSession session, Model model) throws Exception {
+
+
+
     Cookie cookie = new Cookie("email", email);
     if (saveEmail != null) {
       cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -102,16 +125,19 @@ public class AuthController {
     response.addCookie(cookie);
 
     Member member = memberService.get(email, password);
-    if (member != null) {
+    if (member != null && member.getAuthStatus().equals("N")) {
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../index.html");
     } else {
       session.invalidate();
-      model.addAttribute("refreshUrl", "2;url=login");
+      model.addAttribute("refreshUrl", "2;url=emailAgainFail");
     }
 
-    return "auth/loginForm";
+    return "auth/login";
   }
+
+  @GetMapping("emailAgainFail")
+  public void emailFail() {}
 
   @GetMapping("logout")
   public String logout(HttpSession session) {
@@ -119,20 +145,5 @@ public class AuthController {
     return "redirect:../../index.html";
   }
 
-  // @GetMapping("findPassword")
-  // public void findPasswordForm() {}
-  //
-  // @PostMapping("findPassword")
-  // public String findPassword(String email, Model model) throws Exception {
-  // String memberEmail = memberService.getEmailByEmail(email);
-  //
-  // if (memberEmail != null) {
-  // model.addAttribute("email", email);
-  // mailsender.findPassword(email);
-  // return "redirect:/";
-  // } else {
-  // model.addAttribute("error", "해당 이메일은 가입된 이메일이 아닙니다.");
-  // return "redirect:./";
-  // }
-  // }
+
 }

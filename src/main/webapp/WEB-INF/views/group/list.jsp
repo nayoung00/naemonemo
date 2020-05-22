@@ -3,8 +3,12 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<section id="blog" class="blog">
+<div class="container">
+<div class="section-header">
+</div>
 
-  <h1>모임</h1>
+<div class="blog-content">
   <a href='form'>모임 생성</a><br>
   <table border='1'>
   <tr>
@@ -29,4 +33,8 @@
 검색어: <input name='keyword' type='text'>
 <button>검색</button>
 </form>
-
+</div>
+</div>
+</section>
+<!--/.blog-->
+<!--blog end -->

@@ -3,6 +3,27 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<style>
+h2 { text-align: center; }
+
+.virtual-box {
+    margin-bottom: 120px;
+}
+
+.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0px auto; 
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+
 <c:if test="${empty loginUser}">
 <div><p>로그인해야 모임 생성가능!</p>
 <button id="login-btn" data-toggle="modal" data-target="#exampleModal">로그인</button></div>

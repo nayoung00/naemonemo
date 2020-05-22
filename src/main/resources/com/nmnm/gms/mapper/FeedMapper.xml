@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  
 <mapper namespace="com.nmnm.gms.dao.FeedDao">
 
   <resultMap type="Feed" id="FeedMap">
@@ -14,6 +13,10 @@
     <result column="content"  property="content"/>
     <result column="create_date"    property="createDate"/>
     <result column="view_count"    property="viewCount"/>
+    
+    <collection property="feedPhotos" ofType="FeedPhoto">
+    <id column="feed_photo_no"   property="feedPhotoNo"/>
+    </collection>
   </resultMap>
   
   <sql id="select1">

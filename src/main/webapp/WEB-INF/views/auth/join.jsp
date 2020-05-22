@@ -33,8 +33,6 @@ h2 { text-align: center; }
     object-fit: cover;
     
 }
-
-
 </style>
 </head>
 <body>

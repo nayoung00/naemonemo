@@ -27,37 +27,59 @@
     <id column="member_no" property="no"/>
   </resultMap>
   
-    <select id="emailCheck" resultType="int">
-        SELECT COUNT(*) FROM nm_member
+    <select id="emailCheck" resultType="Member">
+        SELECT email FROM nm_member
         WHERE email = #{email}
     </select>
     
     <insert id="insert">
         INSERT INTO nm_member
-        (email, password, member_name, nickname)
+        (email, password, member_name)
         VALUES
-        (#{email},password(#{password}),#{name},#{nickname})
+        (#{email},password(#{password}),#{name})
     </insert>
  
-  <update id="alterKey">
-        UPDATE nm_member
-        SET userkey = 'y'
-        WHERE id = #{param1} AND userkey = #{param2}
+  <!-- 생성된 메일 인증키 업데이트 -->
+    <update id="createAuthKey">
+        update nm_member set userkey = #{param1} where email = #{param2}
     </update>
+    
+    <!-- 다시보낸 메일 인증키 업데이트 -->
+    <update id="emailAgainSend" >
+        update nm_member set userkey = #{userkey} where email = #{email}
+    </update>
+    
+    
+    <!-- 생성된 메일 인증키 컬럼을 N 에서 Y로 업데이트-->
+    <update id="userAuth">
+        update nm_member set auth_status = 'Y'
+    </update>
+    
+    <!-- 로그인 -->
+    <select id="login" resultType="Member">
+     select *
+     from
+         nm_member
+     where email = #{email}
+    </select>
+    
+    <!-- 비밀번호 초기화 -->
+    <update id="resetPassword"> 
+        update nm_member set password = password(#{password}) where email = #{email}
+    </update>
+
+    <!--비빌번호 변경-->
+    <update id="changePassword">    
+         update nm_member set password = password(#{password}) where email = #{email}
+    </update>
+    
+    
     
     <select id="userView" resultType="Member">
         SELECT * FROM nm_member
         WHERE id = #{id}
     </select>
-    <select id="pwCheck" resultType="String">
-        SELECT password FROM nm_member
-        WHERE email = #{param1}
-    </select>
-    <update id="pwUpdate">
-        UPDATE nm_member SET 
-            password = password(#{password})
-        WHERE email = #{email}
-    </update>
+
     <update id="memDrop">
         UPDATE nm_member SET 
             authStatus = 'd' 
@@ -74,22 +96,6 @@
       nm_member
   </select>
 
-  
-  <select id="findByNo" resultMap="MemberMap" parameterType="int">
-    select 
-      member_no,
-      member_name,
-      nickname,
-      birthday,
-      email,
-      id_photo,
-      intro,
-      create_date
-    from 
-      nm_member
-    where 
-      member_no=#{no}
-  </select>
   
   <update id="update" parameterType="Member">
     update nm_member

@@ -19,7 +19,7 @@ public class Member {
   private List<Message> message;
   private Group group;
   private String userkey;
-  private int authStatus;
+  private String authStatus;
 
   public int getNo() {
     return no;
@@ -133,11 +133,11 @@ public class Member {
     this.group = group;
   }
 
-  public int getAuthStatus() {
+  public String getAuthStatus() {
     return authStatus;
   }
 
-  public void setAuthStatus(int authStatus) {
+  public void setAuthStatus(String authStatus) {
     this.authStatus = authStatus;
   }
 
@@ -148,7 +148,7 @@ public class Member {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((address == null) ? 0 : address.hashCode());
-    result = prime * result + authStatus;
+    result = prime * result + ((authStatus == null) ? 0 : authStatus.hashCode());
     result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
     result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
     result = prime * result + ((email == null) ? 0 : email.hashCode());
@@ -179,7 +179,10 @@ public class Member {
         return false;
     } else if (!address.equals(other.address))
       return false;
-    if (authStatus != other.authStatus)
+    if (authStatus == null) {
+      if (other.authStatus != null)
+        return false;
+    } else if (!authStatus.equals(other.authStatus))
       return false;
     if (birthday == null) {
       if (other.birthday != null)

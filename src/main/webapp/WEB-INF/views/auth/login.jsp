@@ -11,10 +11,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SignIn</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style type="text/css">
     .login-form {
@@ -94,24 +90,6 @@
         <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox" name='saveEmail'> Remember me</label>
             <a href="#" class="pull-right">Forgot Password?</a>
-            
-            <% 
-            // 아이디, 비밀번호가 틀릴경우 화면에 메시지 표시
-            // LoginPro.jsp에서 로그인 처리 결과에 따른 메시지를 보낸다.
-            String msg=request.getParameter("msg");
-            
-            if(msg!=null && msg.equals("0")) 
-            {
-                out.println("<br>");
-                out.println("<font color='red' size='5'>비밀번호를 확인해 주세요.</font>");
-            }
-            else if(msg!=null && msg.equals("-1"))
-            {    
-                out.println("<br>");
-                out.println("<font color='red' size='5'>아이디를 확인해 주세요.</font>");
-            }
-        %>    
-
         </div>        
     </form>
     <p class="text-center small">Don't have an account! <a href="join">Sign up here</a>.</p>

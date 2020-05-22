@@ -1,242 +1,148 @@
 package com.nmnm.gms.web;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nmnm.gms.domain.Member;
-import com.nmnm.gms.service.MailService;
 import com.nmnm.gms.service.MemberService;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-
-  Logger logger = LoggerFactory.getLogger(AuthController.class);
+  private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
   @Autowired
   MemberService memberService;
 
-  @Autowired
-  MailService mailService;
 
   @Autowired
-  PasswordEncoder passwordEncoder;
+  BCryptPasswordEncoder passEncoder;
 
-  @ModelAttribute("member")
-  public Member newMember() {
-    return new Member();
+  // 회원 가입 get
+  @RequestMapping(value = "join", method = RequestMethod.GET)
+  public void getJoin(Member member) throws Exception {
+
+    logger.info("get join");
   }
 
-  @GetMapping("/join")
-  // constract 페이지를 통해서 왔을때는 flag값으로 1들어오는데
-  // 비정상적인 접근일 경우 flag값이 0이 된다
-  public String join(@ModelAttribute("member") Member member,
-      @RequestParam(value = "flag", defaultValue = "0") String flag, Model model) {
-    logger.info(">>> MEMBER/JOIN GET PAGE 출력");
-    logger.info(member.toString());
-    if (!flag.equals("1")) {
-      return "auth/join";
-    }
+  // 회원 가입 post
+  @RequestMapping(value = "join", method = RequestMethod.POST)
+  public String postJoin(Member member, Model model, RedirectAttributes rttr,
+      HttpServletRequest request, HttpSession session) throws Exception {
+    logger.info("post join");
+    logger.info("회원가입...");
 
-    model.addAttribute("uri", "/nmnm/");
-    return "auth/join";
-  }
 
-  @PostMapping("/join")
-  public String join(@ModelAttribute("member") Member member, SessionStatus sessionStatus,
-      HttpServletRequest request, RedirectAttributes rttr) {
-    // View단에서 Controller단으로 이동을 잘 했는지 확인됨
-    logger.info(">>> MEMBER/JOIN POST DB에 회원정보 저장");
+    String email = request.getParameter("email"); // 회원가입 폼에서 넘어오는 데이터들을 받아서 변수에 담음
 
-    // View단에서 전송된 데이터가 잘 전달됐는지 확인
-    logger.info(member.toString());
+    Member emailCheck = memberService.emailCheck(email);
 
-    logger.info(member.getPassword()); // 사용자가 입력한 값
+    String inputPass = member.getPassword();
 
-    // 1. 사용자 암호 hash변환
-    String encPw = passwordEncoder.encode(member.getPassword());
-    member.setPassword(encPw); // 암호화된 pw를 DTO에 넣는 과정
-    logger.info("hash: " + member.getPassword()); // 사용자가 입력한 pw를 hash로 바꾼 값
+    String pass = passEncoder.encode(inputPass);
+    member.setPassword(pass);
 
-    // 2. DB에 회원등록
-    // 객체생성을 하지않아도 사용가능 @Autowired로 의존성주입이 되어있음(타입으로함)
-    int result = memberService.insert(member);
-    // 3. 회원 등록 결과
-    if (result > 0) {
-      logger.info(">>>>" + member.getName() + "님이 회원가입되었습니다");
-    }
-    // 4. 회원가입 인증 메일 보내기
-    mailService.mailSendUser(member.getEmail(), member.getName(), request);
+    memberService.join(member);
 
-    sessionStatus.setComplete();
-
-    rttr.addFlashAttribute("name", member.getName());
-    rttr.addFlashAttribute("email", member.getEmail());
-    rttr.addFlashAttribute("key", "join");
-
+    rttr.addFlashAttribute("authmsg", "가입시 사용한 이메일로 인증해주세요");
     return "redirect:/";
   }
 
-  @GetMapping("/interest")
-  public String viewInterest(Model model, RedirectAttributes rttr) {
-    logger.info(">>> MEMBER/INTEREST PAGE 출력");
-    model.addAttribute("uri", "/nmnm/");
-    // rttr.addFlashAttribute("uri","/ohyoyo/");
-    return "auth/interest";
-  }
-
-  // 회원가입 후 email인증
-  @GetMapping("/keyauth")
-  public String keyAuth(String email, String key, RedirectAttributes rttr) {
-    mailService.keyAuth(email, key);
-
-    // 인증후 메시지 출력을 위한 값 전달
-    rttr.addFlashAttribute("email", email);
-    rttr.addFlashAttribute("key", "auth");
-
-    return "redirect:/";
-  }
-
-  // 회원가입 ID 중복체크
+  // 에서 Ajax로 email 중복 확인
   @ResponseBody
-  @PostMapping(value = "/emailCheck", produces = "application/text; charset=utf-8")
-  public String idOverlap(String email) {
-    logger.info(">> ID OVERLAP CHECK");
-    logger.info(" ID : " + email);
-    int cnt = memberService.emailCheck(email);
+  @RequestMapping(value = "emailCheck", method = {RequestMethod.GET, RequestMethod.POST})
+  public String postIdCheck(HttpServletRequest request) throws Exception {
+    logger.info("post emailCheck");
 
-    String flag = "1";
-    if (cnt == 0) {
-      flag = "0";
+    String email = request.getParameter("email");
+    Member emailCheck = memberService.emailCheck(email);
+
+    int result = 0;
+
+    if (emailCheck == null) {
+      result = 0;
+    } else {
+      result = 1;
     }
-    return flag;
+
+    return String.valueOf(result);
+  }
+
+  // 이메일 인증 다시 보내기
+  @RequestMapping(value = "emailAgainSend", method = RequestMethod.POST)
+  public String emailAgainSend(Member member) throws Exception {
+
+
+    memberService.emailAgainSend(member);
+    return "emailAgainSuccess";
+  }
+
+  // 회원이 이메일 인증 클릭시 리턴받는 정보
+  @GetMapping("/emailConfirm")
+  public String emailConfirm(String email, Model model) throws Exception {
+
+    memberService.userAuth(email);
+    model.addAttribute("name", email);
+
+    // view 아래에 emailConfirm.jsp로 이동
+    return "auth/emailConfirm";
   }
 
 
-  // 회원정보수정
-  @GetMapping("/update")
-  public String memUpdate(HttpSession session, Model model) {
-    logger.info(">>> GET: MEMBER UPDATE PAGE");
 
-    String email = (String) session.getAttribute("email");
+  // 로그인 get
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public void getLogin() throws Exception {
+    logger.info("get login");
 
-    model.addAttribute("user", memberService.userView(email));
-
-    return "/member/join";
   }
 
-  // 수정한 회원정보 db에 저장하기
-  @PostMapping("/update")
-  public String memUpdate(Member member, HttpSession session) {
-    logger.info(">>> POST: MEMBER UPDATE ACTION");
-    logger.info(member.toString());
+  // 로그인 post
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public String postLogin(String email, String password, String saveEmail,
+      HttpServletResponse response, HttpSession session, Model model) throws Exception {
 
-    memberService.update(member, session);
 
-    return "redirect:/";
+
+    Cookie cookie = new Cookie("email", email);
+    if (saveEmail != null) {
+      cookie.setMaxAge(60 * 60 * 24 * 30);
+    } else {
+      cookie.setMaxAge(0);
+    }
+    response.addCookie(cookie);
+
+    Member member = memberService.get(email, password);
+    if (member != null && member.getAuthStatus().equals("N")) {
+      session.setAttribute("loginUser", member);
+      model.addAttribute("refreshUrl", "2;url=../../index.html");
+    } else {
+      session.invalidate();
+      model.addAttribute("refreshUrl", "2;url=emailAgainFail");
+    }
+
+    return "auth/login";
   }
 
-  // 비밀번호 변경
-  @GetMapping("/pwupdate")
-  public String pwUpdate() {
-    logger.info(">>> GET: MEMBER PASSWORD UPDATE PAGE");
-    // String id = (String) session.getAttribute("userid");
-    //
-    // // 로그인이 안되있으면 비정상적인 접근으로 간주하여 인텍스페이지로 이동!
-    // if(id == null) {
-    // return "redirect:/";
-    // }
+  @GetMapping("emailAgainFail")
+  public void emailFail() {}
 
-    return "/member/pwupdate";
-  }
-
-  // 입력한 비밀번호 변경하러 보내기
-  @PostMapping("/pwupdate")
-  public String pwUpdate(Member member, HttpSession session) {
-    logger.info(">>> POST: MEMBER PASSWORD UPDATE ACTION");
-
-    String encPw = passwordEncoder.encode(member.getPassword());
-    member.setPassword(encPw);
-
-    String email = (String) session.getAttribute("email");
-    member.setEmail(email);
-    logger.info(member.toString());
-
-    memberService.pwUpdate(member);
-
-    return "redirect:/";
-  }
-
-  // 비밀번호 유효성체크: 기존에 db에 저장되잇는 정보와 동일한지 확인
-  @ResponseBody
-  @PostMapping("/pwcheck")
-  public Integer pwCheck(String password, HttpSession session) {
-    logger.info(">>> POST: PWCHECK(AJAX)");
-
-    String email = (String) session.getAttribute("email");
-
-    return memberService.pwCheck(email, password);
-  }
-
-  // 회원탈퇴
-  @GetMapping("/drop")
-  public String drop(Model model) {
-    logger.info(">>> MEMBER/DROP PAGE 출력");
-
-    model.addAttribute("key", "drop");
-
-    return "member/drop";
-  }
-
-  // 회원탈퇴 : DB에 저장
-  @GetMapping("/dropAction")
-  public String dropAction(HttpSession session, RedirectAttributes rttr) {
-    logger.info("*********** GET: DROP UPDATE ");
-    String email = (String) session.getAttribute("userid");
-
-    rttr.addFlashAttribute("email", email);
-    rttr.addFlashAttribute("key", "dropResult");
-
-    memberService.drop(session, email);
-
-    return "redirect:/";
-  }
-
-  @GetMapping("/login")
-  public String login() {
-    return "/login";
-  }
-
-
-  @PostMapping("/login")
-  public Integer logIn(Member member, HttpSession session) throws Exception {
-    logger.info(">>>>>>>> POST: LOGIN/LOGIN ACTION");
-
-    // 로그인
-    int result = memberService.login(member, session);
-
-    logger.info("~~~~~~~~~~~~~~~~결과는 : " + result);
-
-    return result;
-  }
-
-  @PostMapping("/logout")
-  public void logOut(HttpSession session) throws Exception {
-    logger.info(">>>>>>>> POST: LOGOUT/LOGOUT ACTION");
-    memberService.logout(session);
+  @GetMapping("logout")
+  public String logout(HttpSession session) {
+    session.invalidate();
+    return "redirect:../../index.html";
   }
 
 

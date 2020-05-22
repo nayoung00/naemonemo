@@ -8,22 +8,28 @@ import com.nmnm.gms.domain.Message;
 public interface MemberService {
 
   // 회원가입 email중복체크(AJAX)
-  public int emailCheck(String email);
+  public Member emailCheck(String email);
 
   // 회원가입 (DB 에 등록)
-  public int insert(Member member);
+  public void join(Member member) throws Exception;
+
+  // 이메일인증
+  public void userAuth(String email) throws Exception;
+
+  // 이메일인증 다시 보내기
+  public void emailAgainSend(Member member) throws Exception;
 
   // 회원수정 (DB에 수정)
-  public void update(Member member, HttpSession session);
+  public void update(Member member, HttpSession session) throws Exception;
 
   // 1명의 회원정보
-  public Member userView(String email);
+  public Member userView(String email) throws Exception;
 
-  // 비밀번호 수정: 현재 비밀번호 체크
-  public int pwCheck(String email, String pw);
+  // 비밀번호 초기화를 위한 메일보내기
+  public void resetPassword(Member member) throws Exception;
 
-  // 비밀번호 수정: 실제 DB에 update
-  public void pwUpdate(Member member);
+  // 비밀번호 바꾸기
+  public void changePassword(Member member) throws Exception;
 
   // 회원탈퇴 : userkey = n
   public void drop(HttpSession session, String email);
@@ -39,10 +45,10 @@ public interface MemberService {
   Object sender(int no) throws Exception;
 
   // 로그인
-  int login(Member member, HttpSession session) throws Exception;
+  public Member login(Member member) throws Exception;
 
   // 로그아웃
-  void logout(HttpSession session) throws Exception;
+  public void logout(HttpSession session) throws Exception;
 
   public int update(Member member) throws Exception;
 
@@ -51,6 +57,8 @@ public interface MemberService {
   public Object list();
 
   public Object search(String keyword);
+
+  public Member get(String email, String password) throws Exception;
 
 
 

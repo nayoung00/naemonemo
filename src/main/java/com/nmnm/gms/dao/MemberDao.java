@@ -5,34 +5,33 @@ import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
 
 public interface MemberDao {
-  // 회원가입 email중복체크(+AJAX)
-  public int emailCheck(String email);
+  // 회원가입 email중복체크
+  Member emailCheck(String email) throws Exception;
 
   // 회원가입 db에 회원등록
-  public int insert(Member memeber);
+  int insert(Member memeber) throws Exception;
 
   // 회원수정
-  public int update(Member member);
+  int update(Member member) throws Exception;
 
   // 회원가입 진행시 난수 생성및 useyn 컬럼에 난수 입력
-  public int getKey(String email, String key);
+  void createAuthKey(String email, String userkey) throws Exception;
 
   // 회원가입 이메일인증후 useyn컬럼y로 값변경
-  public int alterKey(String email, String key);
+  int alterKey(String email, String key) throws Exception;
 
   // 1명의 회원정보
-  public Member userView(String email);
+  Member userView(String email) throws Exception;
 
-  // 비밀번호변경 : 현재 비밀번호 체크
-  public String pwCheck(String email);
+  // 비밀번호 초기화를 위한 메일보내기
+  void resetPassword(Member member) throws Exception;
 
-  // 비밀번호 수정: 실제 DB에 update
-  public void pwUpdate(Member member);
+  // 비밀번호 바꾸기
+  void changePassword(Member member) throws Exception;
 
-  // 회원탈퇴 : authStatus = d
-  public int drop(String member);
+  void deleteMember(String member) throws Exception;
 
-  public Member login(Member member);
+  Member login(Member member) throws Exception;
 
   int send(Message message) throws Exception;
 
@@ -42,7 +41,10 @@ public interface MemberDao {
 
   int approvalGrMember(GroupMember grMember) throws Exception; // 그룹 가입승인
 
-  public int insertGrMember(GroupMember grMember) throws Exception;
+  int insertGrMember(GroupMember grMember) throws Exception;
+
+  void userAuth(String email) throws Exception;
+
 
 
 }

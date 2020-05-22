@@ -2,128 +2,142 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.nmnm.gms.dao.AccountDao">
 
-  <resultMap type="Account" id="AccountMap">
-    <id column="account_no"   property="accountNo"/>
-    <result column="group_no"    property="groupNo"/>
-    <result column="bank_info_id"  property="bankInfoId"/>
-    <result column="account_type_name" property="accountTypeName"/>
-    <result column="deposit" property="deposit"/>
-    <result column="withdraw" property="withdraw"/>
-    <result column="payment_date" property="paymentDate"/>
-    <result column="account_connection" property="accountConnection"/>
-    <result column="remarks" property="remarks"/>
-    <result column="receipt_photo" property="receiptPhoto"/>
-    <result column="ending_balance" property="endingBalance"/>
-  </resultMap>
-  
-   <sql id="select1">
-    select 
-      account_no, 
-      group_no, 
-      bank_info_id, 
-      account_type_name, 
-      deposit, 
-      withdraw, 
-      payment_date, 
-      account_connection, 
-      remarks, 
-      ending_balance, 
-      receipt_photo
-    from 
-      nm_account
-  </sql>
-  
-  
-  <select id="findAll" resultMap="AccountMap">
-   SELECT 
-    a.account_no, 
-    a.bank_info_id, 
-    a.account_type_name, 
-    a.payment_date, 
-    a.account_connection, 
-    a.remarks, 
-    a.deposit, 
-    a.withdraw, 
-    @b := @b + a.deposit - a.withdraw AS ending_balance, 
-    a.receipt_photo
-FROM 
-    (SELECT @b := 0) AS dummy, 
-    nm_account AS a 
-CROSS JOIN 
-    nm_group_account AS ga 
-WHERE 
-    ga.bank_info_id = a.bank_info_id 
+	<resultMap type="Account" id="AccountMap">
+		<id column="account_no" property="accountNo" />
+		<result column="group_no" property="groupNo" />
+		<result column="bank_info_id" property="bankInfoId" />
+		<result column="account_type_name" property="accountTypeName" />
+		<result column="deposit" property="deposit" />
+		<result column="withdraw" property="withdraw" />
+		<result column="payment_date" property="paymentDate" />
+		<result column="account_connection" property="accountConnection" />
+		<result column="remarks" property="remarks" />
+		<result column="receipt_photo" property="receiptPhoto" />
+		<result column="ending_balance" property="endingBalance" />
+	</resultMap>
 
-ORDER BY 
-    account_no asc;
+	<sql id="select1">
+		select
+		account_no,
+		group_no,
+		bank_info_id,
+		account_type_name,
+		deposit,
+		withdraw,
+		payment_date,
+		account_connection,
+		remarks,
+		ending_balance,
+		receipt_photo
+		from
+		nm_account
+	</sql>
+
+
+	<select id="findAll" resultMap="AccountMap">
+		SELECT
+		a.account_no,
+		a.bank_info_id,
+		a.account_type_name,
+		a.payment_date,
+		a.account_connection,
+		a.remarks,
+		a.deposit,
+		a.withdraw,
+		@b := @b + a.deposit - a.withdraw AS ending_balance,
+		a.receipt_photo
+		FROM
+		(SELECT @b := 0) AS dummy,
+		nm_account AS a
+		CROSS JOIN
+		nm_group_account AS ga
+		WHERE
+		ga.bank_info_id = a.bank_info_id
+
+		ORDER BY
+		account_no asc;
+	</select>
+
+
+
+
+	<insert id="insert" parameterType="Account">
+		insert into nm_account(
+		group_no,
+		bank_info_id,
+		account_type_name,
+		deposit,
+		withdraw,
+		payment_date,
+		account_connection,
+		remarks,
+		receipt_photo
+		)
+		values(
+		#{groupNo},
+		#{bankInfoId},
+		#{accountTypeName},
+		#{deposit},
+		#{withdraw},
+		#{paymentDate},
+		#{accountConnection},
+		#{remarks},
+		#{receiptPhoto}
+		)
+	</insert>
+
+
+
+	<select id="findByNo" resultMap="AccountMap" parameterType="int">
+	
+		<include refid="select1" />
+		where
+		account_no=#{accountNo}
+	</select>
+
+	<update id="update" parameterType="Account">
+		update nm_account set
+		account_no=#{accountNo},
+		bank_info_id=#{bankInfoId},
+		account_type_name=#{accountTypeName},
+		deposit=#{deposit},
+		withdraw=#{withdraw},
+		payment_date=#{paymentDate},
+		account_connection=#{accountConnection},
+		remarks=#{remarks},
+		receipt_photo=#{receiptPhoto}
+		where
+		account_no=#{accountNo}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from nm_account
+		where account_no=#{accountNo}
+	</delete>
+
+	<select id="findByKeyword" resultMap="AccountMap"
+		parameterType="string">
+		<bind name="keywordPattern" value="'%' + _parameter + '%'" />
+		<include refid="select1" />
+		where
+		account_type_name like #{keywordPattern}
+		or account_connection like #{keywordPattern}
+		or remarks like #{keywordPattern}
+	</select>
+	
+	 <select id="findByDate" resultMap="AccountMap" parameterType="date">
+  <bind name="startDate"  value="'%' + _parameter + '%'" />
+  <bind name="endDate" value="'%' + _parameter + '%'" />
+    SELECT *
+    FROM nm_account 
+    <![CDATA[
+    WHERE payment_date >= #{startDate} 
+    AND payment_date <= #{endDate} 
+    ]]>
+    ORDER BY account_no asc;
   </select>
-  
-  
-   <insert id="insert" parameterType="Account">
-    insert into nm_account(
-      group_no, 
-      bank_info_id, 
-      account_type_name, 
-      deposit, 
-      withdraw, 
-      payment_date, 
-      account_connection, 
-      remarks, 
-      receipt_photo
-      ) 
-    values(
-      #{groupNo}, 
-      #{bankInfoId}, 
-      #{accountTypeName}, 
-      #{deposit}, 
-      #{withdraw}, 
-      #{paymentDate}, 
-      #{accountConnection}, 
-      #{remarks}, 
-      #{receiptPhoto}
-      )
-  </insert>
-  
- 
-  
-  <select id="findByNo" resultMap="AccountMap" parameterType="int">
-    <include refid="select1"/>
-    where 
-      account_no=#{accountNo}
-  </select>
-  
-  <update id="update" parameterType="Account">
-    update nm_account set
-      account_no=#{accountNo}, 
-      bank_info_id=#{bankInfoId},
-      account_type_name=#{accountTypeName},
-      deposit=#{deposit}, 
-      withdraw=#{withdraw}, 
-      payment_date=#{paymentDate},
-      account_connection=#{accountConnection},
-      remarks=#{remarks},
-      receipt_photo=#{receiptPhoto} 
-    where 
-      account_no=#{accountNo}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from nm_account
-    where account_no=#{accountNo}
-  </delete>
-  
-  <select id="findByKeyword" 
-    resultMap="AccountMap" 
-    parameterType="string">
-    <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
-  <include refid="select1"/>
-    where 
-      account_type_name like #{keywordPattern} 
-      or account_connection like #{keywordPattern}
-      or remarks like #{keywordPattern} 
-  </select>
-  
+
 </mapper>

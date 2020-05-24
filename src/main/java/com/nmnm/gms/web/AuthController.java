@@ -11,12 +11,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.service.MemberService;
+import com.nmnm.gms.socialLogin.NaverLoginBO;
+import com.nmnm.gms.util.TempKey;
 
 @Controller
 @RequestMapping("/auth")
@@ -26,6 +29,8 @@ public class AuthController {
   @Autowired
   MemberService memberService;
 
+  private NaverLoginBO naverLoginBO;
+  private String apiResult = null;
 
   @Autowired
   BCryptPasswordEncoder passEncoder;
@@ -80,14 +85,7 @@ public class AuthController {
     return String.valueOf(result);
   }
 
-  // 이메일 인증 다시 보내기
-  @RequestMapping(value = "emailAgainSend", method = RequestMethod.POST)
-  public String emailAgainSend(Member member) throws Exception {
 
-
-    memberService.emailAgainSend(member);
-    return "emailAgainSuccess";
-  }
 
   // 회원이 이메일 인증 클릭시 리턴받는 정보
   @GetMapping("/emailConfirm")
@@ -114,8 +112,6 @@ public class AuthController {
   public String postLogin(String email, String password, String saveEmail,
       HttpServletResponse response, HttpSession session, Model model) throws Exception {
 
-
-
     Cookie cookie = new Cookie("email", email);
     if (saveEmail != null) {
       cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -136,6 +132,7 @@ public class AuthController {
     return "auth/login";
   }
 
+
   @GetMapping("emailAgainFail")
   public void emailFail() {}
 
@@ -144,6 +141,77 @@ public class AuthController {
     session.invalidate();
     return "redirect:../../index.html";
   }
+
+
+  @GetMapping("pwReset")
+  public void pwReset() {}
+
+  // 패스워드 리셋 메소드
+  @PostMapping("resetPassword")
+  public String postResetPassword(HttpSession session, HttpServletRequest request, Member member)
+      throws Exception {
+
+    String email = request.getParameter("email");
+
+    Member findAccount = memberService.findAccount(email);
+
+    if (findAccount != null) {
+
+      String name = findAccount.getName();
+
+      String tempPass = new TempKey().createPwKey();
+
+      String pass = passEncoder.encode(tempPass); // 랜덤으로 생성된 6자리 비밀번호를 암호화해서 저장
+
+      member.setEmail(email);
+      member.setPassword(pass);
+      member.setName(name);
+
+      memberService.resetPassword(member);
+
+    } else {
+
+      return "auth/findAccountFail";
+    }
+
+    return "auth/resetPassword";
+  }
+
+  // 메일로 리턴받은 정보를 가지고 패스워드 변경 페이지로 세션에 이메일을담아 보냄
+  @RequestMapping(value = "returnResetPass", method = {RequestMethod.GET, RequestMethod.POST})
+  public String postRetrunResetPass(HttpSession session, HttpServletRequest request, Model model)
+      throws Exception {
+
+    String email = request.getParameter("email");
+
+    session.setAttribute("email", email);
+
+    return "redirect:/auth/pw-reset-change.jsp";
+
+  }
+
+  // 리셋된 이메일을 통해 변경하는 패스워드 변경과 일반 변경시 사용
+  @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+  public String postChangePassword(HttpSession session, HttpServletRequest request, Member member)
+      throws Exception {
+
+    String password = request.getParameter("password");
+
+    // 넘어온 비밀번호를 암호화하여 저장
+    String pass = passEncoder.encode(password);
+
+    member.setEmail(member.getEmail());
+    member.setPassword(pass);
+
+    memberService.changePassword(member);
+
+    session.invalidate();
+
+    return "changePassSuccess";
+
+
+  }
+
 
 
 }

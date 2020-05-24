@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SignIn</title>
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -44,34 +44,6 @@
     <form action='login' method='post'> 
         <h2 class="text-center">네모네모</h2>   
         <div class="form-group">
-<!--         <div id="kakao">
-    <a id="kakao-login-btn"></a>
-        <a href="http://developers.kakao.com/logout"></a>
-        <script type='text/javascript'>
-            //<![CDATA[
-            // 사용할 앱의 JavaScript 키를 설정해 주세요.
-            Kakao.init('44dc488bb7ee1b14cd2765f0530ea05b');
-            // 카카오 로그인 버튼을 생성합니다.
-            Kakao.Auth.createLoginButton({
-                container: '#kakao-login-btn',
-                success: function(authObj) {
-                    Kakao.API.request({
-                        url:'/v1/user/me',
-                        success:function(res){
-                            /* alert(res.id+'님 카카오톡 로그인 완료.'); */
-                            
-                            location.href="./kakao.member?id="+res.id;
-                        },
-                        fail:function(error){
-                            alert(JSON.stringify(error));
-                        }
-                    });
-                },
-                fail: function(err){
-                    alert(JSON.stringify(err));
-                }
-            });
-        </script> -->
         <br>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -87,12 +59,32 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
         </div>
+        <div id="naverIdLogin"></div>
+        
+        
         <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox" name='saveEmail'> Remember me</label>
-            <a href="#" class="pull-right">Forgot Password?</a>
+            <a href="pwReset" class="pull-right">Forgot Password?</a>
         </div>        
     </form>
     <p class="text-center small">Don't have an account! <a href="join">Sign up here</a>.</p>
 </div>
+
+<script type="text/javascript">
+    var naverLogin = new naver.LoginWithNaverId(
+        {
+            clientId: "gpaO5pkwAnLvkrjATqmF",
+            callbackUrl: "http://localhost:8080/nmnm/auth/callback",
+            isPopup: true, /* 팝업을 통한 연동처리 여부 */
+            loginButton: {color: "green", type: 3, height: 10} /* 로그인 버튼의 타입을 지정 */
+        }
+    );
+    
+    /* 설정정보를 초기화하고 연동을 준비 */
+    naverLogin.init();
+    
+</script>
+<script>
+</script>
 </body>
-</html>                            
+</html>                        

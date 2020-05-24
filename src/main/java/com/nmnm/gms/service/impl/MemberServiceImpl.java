@@ -101,8 +101,7 @@ public class MemberServiceImpl implements MemberService {
   public void resetPassword(Member member) throws Exception {
     MailHandler sendMail = new MailHandler(mailSender);
 
-    String link =
-        "http://localhost:8080/minyas/client/retrunResetPass?userEmail=" + member.getEmail();
+    String link = "http://localhost:8080/nmnm/app/auth/returnResetPass?email=" + member.getEmail();
 
     sendMail.setSubject("[네모내모 비밀번호 초기화 이메일 입니다.]");
     sendMail.setText(
@@ -196,5 +195,27 @@ public class MemberServiceImpl implements MemberService {
     return null;
   }
 
+  @Override
+  public Member findAccount(String email) throws Exception {
+    return memberDao.findAccount(email);
+  }
+
+  @Override
+  public Member naverLoginCheck(String email) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Member kakaoLoginCheck(String usermId) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  // 네이버 로그인 시 기존 네이버 가입자의 이름과 별명을 가져오는 메서드
+  @Override
+  public Member getNameForNaverMember(String naverEmail) {
+    return memberDao.getNameForNaverMember(naverEmail);
+  }
 
 }

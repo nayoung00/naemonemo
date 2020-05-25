@@ -5,14 +5,17 @@
 
 
 
-<!--content-->
-<div class="content">
+<section id="blog" class="blog">
+<div class="container">
+<div class="section-header">
+</div>
+
+<div class="blog-content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card card-plain">
 					<div class="header">
-							<h3>포럼</h3>
 							<a href='form'>새 글</a>
 					</div>
 					
@@ -83,6 +86,7 @@
 		</div>
 	</div>
 </div>
+</section>
 <script>
 	//이전 버튼 이벤트
 	function fn_prev(page, range, rangeSize) {

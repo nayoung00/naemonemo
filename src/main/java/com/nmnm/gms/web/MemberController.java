@@ -35,33 +35,6 @@ public class MemberController {
     message.addAttribute("sender", request.getSession().getAttribute("loginUser"));
   }
 
-  @PostMapping("add")
-  public String add( //
-      Member member, //
-      MultipartFile photoFile) throws Exception {
-    if (photoFile.getSize() > 0) {
-      String dirPath = servletContext.getRealPath("/upload/member");
-      String filename = UUID.randomUUID().toString();
-      photoFile.transferTo(new File(dirPath + "/" + filename));
-      member.setPhoto(filename);
-    }
-
-    if (memberService.add(member) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("회원을 추가할 수 없습니다.");
-    }
-  }
-
-  @GetMapping("delete")
-  public String delete(int no) throws Exception {
-    if (memberService.delete(no) > 0) { // 삭제했다면,
-      return "redirect:list";
-    } else {
-      throw new Exception("삭제할 회원 번호가 유효하지 않습니다.");
-    }
-  }
-
   @GetMapping("detail")
   public void detail(int no, Model model) throws Exception {
     model.addAttribute("member", memberService.get(no));
@@ -94,6 +67,12 @@ public class MemberController {
     } else {
       throw new Exception("변경할 회원 번호가 유효하지 않습니다.");
     }
+  }
+
+  // 마이페이지
+  @GetMapping("/mypage")
+  public String mypage() {
+    return "member/mypage";
   }
 
   @PostMapping("send")

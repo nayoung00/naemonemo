@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.FeedPhotoDao">
+
+  <resultMap type="FeedPhoto" id="FeedPhotoMap">
+    <id column="feed_photo_no"   property="feedPhotoNo"/>
+    <result column="feed_photo_file"    property="photoFile"/>
+    <result column="feed_no" property="feedNo"/>
+    
+    <association property="feed" javaType="Feed">
+      <id column="feed_no"  property="feedNo"/>
+    </association>
+  </resultMap>
+  
+  
+  
+  <insert id="insert" parameterType="Feed">
+    insert into nm_feed_photo(
+      feed_photo_file,
+      feed_no
+      )
+    values(
+      #{feedPhotoFile},
+      #{feedNo}
+      )
+  </insert>
+  
+  <select id="findAllByFeedNo" resultMap="FeedPhotoMap" parameterType="int">
+    select
+      feed_photo_file,
+      feed_no
+    from nm_feed_photo
+    where
+      feed_no=#{feedNo}
+    order by
+      feed_no desc
+  </select>
+
+  
+  <select id="findByNo" resultMap="FeedPhotoMap" parameterType="int">
+    select
+      p.feed_photo_no,
+      p.photo_file,
+      f.feed_no,
+    from nm_feed_photo as p
+     inner join nm_feed as f on p.feed_no=f.feed_no
+    where
+      p.feed_no=#{feedNo}
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from nm_feed_photo
+    where feed_photo_no=#{feedPhotoNo}
+  </delete>
+
+
+<!--  
+  <update id="update" parameterType="FeedPhoto">
+    update nm_feed 
+    set
+    where 
+      feed_no=#{feedNo}
+  </update>
+  
+  
+  <select id="findByKeyword" resultMap="FeedPhotoMap" parameterType="string">
+  <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select
+
+    from 
+      nm_feed
+    where
+      title like #{title}
+      or content like #{content}
+  </select>
+  
+  -->
+  
+</mapper>

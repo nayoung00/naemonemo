@@ -102,6 +102,8 @@
 		title like
 		#{keywordPattern}
 		or content like #{keywordPattern}
+		order by 
+    co_no desc 
 	</select>
 
 	<select id="findByCategory" resultMap="CoMap"
@@ -110,6 +112,8 @@
 		<include refid="select1" />
 		where
 		co_category like #{keyword2Pattern}
+		    order by 
+    co_no desc 
 	</select>
 
 

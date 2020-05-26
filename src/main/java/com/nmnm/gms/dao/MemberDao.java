@@ -23,6 +23,15 @@ public interface MemberDao {
   // 1명의 회원정보
   Member userView(String email) throws Exception;
 
+  // 네이버 로그인 체크
+  Member naverLoginCheck(String email) throws Exception;
+
+  // 카카오 로그인 체크
+  Member kakaoLoginCheck(String email) throws Exception;
+
+  // 멤버 아이디 찾기
+  Member findAccount(String email) throws Exception;
+
   // 비밀번호 초기화를 위한 메일보내기
   void resetPassword(Member member) throws Exception;
 
@@ -44,6 +53,8 @@ public interface MemberDao {
   int insertGrMember(GroupMember grMember) throws Exception;
 
   void userAuth(String email) throws Exception;
+
+  Member getNameForNaverMember(String naverEmail);
 
 
 

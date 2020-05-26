@@ -10,7 +10,6 @@
             width:530px;
             margin-left:auto; 
             margin-right:auto;
-            text-align:center;
         }
 
 
@@ -39,10 +38,11 @@ h2 { text-align: center; }
 
 <!-- 회원가입 양식 -->
 
- <div id="wrap">
+ <div id="wrap" >
     <div class="row">
         <div class="offset-md-2 col-md-4">
-                    <h2><span style="color: orange; text-align: center;"> nemonaemo</span></h2>
+        <br><br><br><br><br><br>
+                    <h1><span style="color: orange; "> nemonaemo</span></h1>
 
                 </div>
                 <div class="card-body">

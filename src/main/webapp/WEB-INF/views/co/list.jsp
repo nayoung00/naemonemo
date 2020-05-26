@@ -6,86 +6,99 @@
 
 
 <section id="blog" class="blog">
-<div class="container">
-<div class="section-header">
-</div>
+	<div class="container">
+		<div class="section-header"></div>
 
-<div class="blog-content">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card card-plain">
-					<div class="header">
-							<a href='form'>새 글</a>
-					</div>
-					
-					<div class="content table-responsive table-full-width">
-						<br>
-						<table class="table table-hover">
-							<thead>
-								<th style="width: 10%">번호</th>
-								<th style="width: 10%">글 분류</th>
-								<th style="width: 10%">회원번호</th>
-								<th style="width: 50%">제목</th>
-								<th style="width: 10%">작성일</th>
-								<th style="width: 10%">조회수</th>
-							</thead>
-							<tbody>
-								<c:forEach items="${list}" var="item">
-									<tr>
-										<td>${item.coNo}</td>
-										<td>${item.category}</td>
-										<td>${item.memberNo}</td>
-										<td><a href='detail?coNo=${item.coNo}'> ${item.title}</a></td>
-										<td>${item.createDate}</td>
-										<td>${item.viewCount}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+		<div class="blog-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card card-plain">
+							<div class="header">
+
+								<select id='categorySearch' onchange="chageSelectedValue(this)">
+									<option value="/list">카테고리</option>
+									<option value="/categorySearch?keyword2=공지">공지</option>
+									<option value="/categorySearch?keyword2=구인">구인</option>
+									<option value="/categorySearch?keyword2=홍보">홍보</option>
+								</select> 
+								
+							</div>
+
+							<div class="content table-responsive table-full-width">
+								<br>
+								<table class="table table-hover">
+									<thead>
+										<th style="width: 10%">번호</th>
+										<th style="width: 10%"></th>
+										<th style="width: 50%">제목</th>
+										<th style="width: 10%">작성자</th>
+										<th style="width: 10%">작성일</th>
+										<th style="width: 10%">조회수</th>
+									</thead>
+									<tbody>
+										<c:forEach items="${list}" var="item">
+											<tr>
+												<td>${item.coNo}</td>
+												<td>[${item.category}]</td>
+												<td><a href='detail?coNo=${item.coNo}'>
+														${item.title}</a></td>
+												<td>${item.memberNo}</td>
+												<td>${item.createDate}</td>
+												<td>${item.viewCount}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						
+						
+						
+						<a href='form'>새 글</a>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
-	<hr>
-	<div style="text-align: center; margin: 0 auto;">
-		<form action='search' method='get'>
-			검색어: <input name='keyword' type='text'>
-			<button class="w3-button w3-round-large w3-teal w3-small">검색</button>
-		</form>
-	</div>
-	<br>
 
-	<div class="paginationBox">
-		<div style="display: table; margin: auto;">
-			<ul class="pagination">
-				<c:if test="${pagination.prev}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
-				</c:if>
+		<hr>
+		<div style="text-align: center; margin: 0 auto;">
+			<form action='search' method='get'>
+				검색어: <input name='keyword' type='text'>
+				<button class="w3-button w3-round-large w3-teal w3-small">검색</button>
+			</form>
+		</div>
+		<br>
 
-				<c:forEach begin="${pagination.startPage}"
-					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
-							${idx} </a>
-					</li>
-				</c:forEach>
+		<div class="paginationBox">
+			<div style="display: table; margin: auto;">
+				<ul class="pagination">
+					<c:if test="${pagination.prev}">
+						<li class="page-item"><a class="page-link" href="#"
+							onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+					</c:if>
 
-				<c:if test="${pagination.next}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', 
+					<c:forEach begin="${pagination.startPage}"
+						end="${pagination.endPage}" var="idx">
+						<li
+							class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+							<a class="page-link" href="#"
+							onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+								${idx} </a>
+						</li>
+					</c:forEach>
+
+					<c:if test="${pagination.next}">
+						<li class="page-item"><a class="page-link" href="#"
+							onClick="fn_next('${pagination.range}', 
 '${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
-				</c:if>
-			</ul>
+					</c:if>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
 </section>
 <script>
 	//이전 버튼 이벤트
@@ -114,5 +127,15 @@
 		url = url + "?page=" + page;
 
 		location.href = url;
+	}
+	$(function chageSelectedValue() {
+
+	});
+
+	// 카테고리 서치
+	function chageSelectedValue() {
+		var yourSelect = document.getElementById("categorySearch");
+		yourSelectValue = yourSelect.value;
+		location.href = "/nmnm/app/co" + yourSelectValue;
 	}
 </script>

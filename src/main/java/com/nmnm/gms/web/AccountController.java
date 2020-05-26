@@ -1,6 +1,7 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
@@ -118,9 +119,14 @@ public class AccountController {
     }
   }
 
+  // @GetMapping("search")
+  // public void search(String keyword, Model model) throws Exception {
+  // model.addAttribute("list", accountService.search(keyword));
+  // }
+
   @GetMapping("search")
-  public void search(String keyword, Model model) throws Exception {
-    model.addAttribute("list", accountService.search(keyword));
+  public void search(Date startDate, Date endDate, Model model) throws Exception {
+    model.addAttribute("list", accountService.search(startDate, endDate));
   }
 
 }

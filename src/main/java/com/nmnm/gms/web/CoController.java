@@ -89,7 +89,8 @@ public class CoController {
   }
 
   @GetMapping("categorySearch")
-  public void categorySearch(String keyword2, Model model) throws Exception {
+  public void categorySearch(@RequestParam String keyword2, Model model) throws Exception {
     model.addAttribute("list", coService.categorySearch(keyword2));
+    model.addAttribute("keyword2", keyword2);
   }
 }

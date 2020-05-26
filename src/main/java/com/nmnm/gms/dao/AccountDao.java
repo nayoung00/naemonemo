@@ -1,5 +1,6 @@
 package com.nmnm.gms.dao;
 
+import java.util.Date;
 import java.util.List;
 import com.nmnm.gms.domain.Account;
 
@@ -13,6 +14,7 @@ public interface AccountDao {
 
   List<Account> findAll() throws Exception;
 
+
   Account findByNo(int accountNo) throws Exception;
 
   int update(Account account) throws Exception;
@@ -20,5 +22,7 @@ public interface AccountDao {
   int delete(int accountNo) throws Exception;
 
   List<Account> findByKeyword(String keyword) throws Exception;
+
+  List<Account> findByDate(Date startDate, Date endDate) throws Exception;
 
 }

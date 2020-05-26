@@ -13,28 +13,32 @@
           <div class="header">
             <h4 class="title">모임 계좌 조회</h4>
           </div>
+          <div class="searchDate">
           <form action='search' method='get' enctype='multipart/form-data'>
-          기간별 조회 : <input name='startDate' type='date'> ~ <input name='endDate' type='date'>
+          <div class="searchDateBox">
+          · 기간별 조회 : <input name='startDate' type='date'> ~ <input name='endDate' type='date'>
           <button>검색</button>
+          </div>
           </form>
+          </div>
           
           <div class="content table-responsive table-full-width">
           
           
           
           <div class="container">
-            <table class="table table-hover">
+            <table class="table table-hover" >
               <thead>
-                <th style="width: 10%">회계번호</th>
-                <th style="width: 10%">모임계좌아이디</th>
-                <th style="width: 10%">회계유형명</th>
-                <th style="width: 10%">거래일</th>
-                <th style="width: 10%">거래처</th>
-                <th style="width: 10%">비고</th>
-                <th style="width: 10%">입금</th>
-                <th style="width: 10%">출금</th>
-                <th style="width: 10%">잔액</th>
-                <th style="width: 10%">영수증사진</th>
+                <th style="width: 10%" class='fixedHeader'>회계번호</th>
+                <th style="width: 10%" class='fixedHeader'>모임계좌아이디</th>
+                <th style="width: 10%" class='fixedHeader'>회계유형명</th>
+                <th style="width: 10%" class='fixedHeader'>거래일</th>
+                <th style="width: 10%" class='fixedHeader'>거래처</th>
+                <th style="width: 10%" class='fixedHeader'>비고</th>
+                <th style="width: 10%" class='fixedHeader'>입금</th>
+                <th style="width: 10%" class='fixedHeader'>출금</th>
+                <th style="width: 10%" class='fixedHeader'>잔액</th>
+                <th style="width: 10%" class='fixedHeader'>영수증사진</th>
               </thead>
               <tbody>
                 <c:forEach items="${list}" var="item">
@@ -70,6 +74,7 @@
 -->
 </div>
 <style>
+
   .container {
     width: 1000px;
     height: 500px;
@@ -89,4 +94,50 @@
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
+  .fixedHeader {
+  background-color : #F2F2F2;
+  position: sticky;
+    color:white;
+  top: 0;
+  opacity: 1;
+  }
+  .searchDate {
+  background-color: lightgray;
+      border-radius: 10px;
+      width: 800px;
+      height: 40px;
+      margin: auto;
+      text-align: center;
+      color: black;
+      font-size: 15px;
+  }
+  .searchDateBox {
+      display:table-cell;
+    vertical-align:middle;
+  }
 </style>
+<!-- 
+<script>
+$("#search").click(function(){
+    
+    var startDate = $( "input[name='startDate']" ).val();
+    var startDateArr = startDate.split('-');
+     
+    var endDate = $( "input[name='endDate']" ).val();
+    var endDateArr = endDate.split('-');
+             
+    var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+    var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+     
+    if(startDateCompare.getTime() > endDateCompare.getTime()) {
+         
+        alert("시작날짜와 종료날짜를 확인해 주세요.");
+         
+        return;
+    }
+     
+    $("#frmSearch").submit();
+});
+
+</script>
+ -->

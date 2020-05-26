@@ -102,7 +102,7 @@
   opacity: 1;
   }
   .searchDate {
-  background-color: lime;
+  background-color: lightgray;
       border-radius: 10px;
       width: 800px;
       height: 40px;
@@ -116,3 +116,28 @@
     vertical-align:middle;
   }
 </style>
+<!-- 
+<script>
+$("#search").click(function(){
+    
+    var startDate = $( "input[name='startDate']" ).val();
+    var startDateArr = startDate.split('-');
+     
+    var endDate = $( "input[name='endDate']" ).val();
+    var endDateArr = endDate.split('-');
+             
+    var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+    var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+     
+    if(startDateCompare.getTime() > endDateCompare.getTime()) {
+         
+        alert("시작날짜와 종료날짜를 확인해 주세요.");
+         
+        return;
+    }
+     
+    $("#frmSearch").submit();
+});
+
+</script>
+-->

@@ -20,7 +20,7 @@ public class NaverLoginBO {
   // state: 애플리케이션이 생성한 상태 토큰
   private final static String CLIENT_ID = "gpaO5pkwAnLvkrjATqmF"; // 네이버API Client ID
   private final static String CLIENT_SECRET = "N8aXnTFQg8";
-  private final static String REDIRECT_URI = "http://localhost:8080/nmnm/auth/callback";
+  private final static String REDIRECT_URI = "http://localhost:8080/nmnm/app/auth/callback";
   private final static String SESSION_STATE = "oauth_state";
   /* 프로필 조회 API URL */
   private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";/// Api 종류 기본
@@ -50,7 +50,7 @@ public class NaverLoginBO {
 
     /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
     String sessionState = getSession(session);
-    System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ" + StringUtils.pathEquals(sessionState, state));
+    System.out.println("Callback 세선검증" + StringUtils.pathEquals(sessionState, state));
     if (StringUtils.pathEquals(sessionState, state)) {
 
       OAuth20Service oauthService = new ServiceBuilder().apiKey(CLIENT_ID).apiSecret(CLIENT_SECRET)

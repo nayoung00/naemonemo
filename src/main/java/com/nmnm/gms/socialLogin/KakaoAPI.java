@@ -1,4 +1,4 @@
-package com.nmnm.gms.service;
+package com.nmnm.gms.socialLogin;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

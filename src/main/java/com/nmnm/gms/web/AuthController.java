@@ -142,6 +142,9 @@ public class AuthController {
     return "redirect:../../index.html";
   }
 
+  @GetMapping("callback")
+  public void callback() {}
+
 
   @GetMapping("pwReset")
   public void pwReset() {}
@@ -186,12 +189,12 @@ public class AuthController {
 
     session.setAttribute("email", email);
 
-    return "redirect:/auth/pw-reset-change.jsp";
+    return "redirect:/auth/pwResetChange.jsp";
 
   }
 
   // 리셋된 이메일을 통해 변경하는 패스워드 변경과 일반 변경시 사용
-  @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+  @RequestMapping(value = "changePassword", method = RequestMethod.POST)
   public String postChangePassword(HttpSession session, HttpServletRequest request, Member member)
       throws Exception {
 

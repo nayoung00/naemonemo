@@ -28,6 +28,7 @@
 
 <p>
 <button><a href='delete?feedNo=${feed.feedNo}'>삭제</a></button>
+<a href='updateForm?feedNo=${feed.feedNo}'>변경</a>
 </p>
 </form>
 </c:if>

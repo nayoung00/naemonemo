@@ -106,36 +106,43 @@ public class FeedController {
 //    model.addAttribute("list", feedService.search(keyword));
 //  }
 
+  @GetMapping("updateForm")
+  public void updateForm(int feedNo, Model model) throws Exception {
+    model.addAttribute("feed", feedService.get(feedNo));
+  }
+
 
   @PostMapping("update")
   public String update(
       int feedNo,//
       String title, //
       String content, //
-      MultipartFile[] FeedPhotos) throws Exception {
-    
+      MultipartFile[] feedPhotos) throws Exception {
+    System.out.println("1");
     Feed feed = feedService.get(feedNo);
     feed.setTitle(title);
     feed.setContent(content);
-
-    ArrayList<FeedPhoto> feedPhotos = new ArrayList<>();
+    if (feedPhotos == null)
+      System.out.println("feedPhotos is null");
+    ArrayList<FeedPhoto> feedPhotoArray = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/feed");
-    for (MultipartFile feedPhoto : FeedPhotos) {
+    for (MultipartFile feedPhoto : feedPhotos) {
       if (feedPhoto.getSize() <= 0) {
         continue;
       }
       String filename = UUID.randomUUID().toString();
       feedPhoto.transferTo(new File(dirPath + "/" + filename));
-      feedPhotos.add(new FeedPhoto(filename));
+      feedPhotoArray.add(new FeedPhoto().setFilepath(filename));
     }
 
-    if (feedPhotos.size() > 0) {
-      feed.setFeedPhotos(feedPhotos);;
+    if (feedPhotoArray.size() > 0) {
+      feed.setFeedPhotos(feedPhotoArray);
     } else {
       feed.setFeedPhotos(null);
     }
 
     feedService.update(feed);
+    
     return "redirect:list";
   }
   

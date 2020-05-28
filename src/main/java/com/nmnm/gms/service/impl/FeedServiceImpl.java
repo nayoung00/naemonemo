@@ -58,6 +58,7 @@ public class FeedServiceImpl implements FeedService {
     }
     if (feed.getFeedPhotos() != null) {
       feedPhotoDao.deleteAll(feed.getFeedNo());
+      feedPhotoDao.insert(feed);
     }
   }
 

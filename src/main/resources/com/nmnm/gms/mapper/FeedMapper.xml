@@ -53,18 +53,14 @@
   
   <select id="findAll" resultMap="FeedMap">
     select
-      f.feed_no,
-      f.member_no, 
-      f.title,
-      f.create_date,
-      f.view_count,
-      p.feed_photo_no,
-      p.feed_photo_file
+      feed_no,
+      member_no, 
+      title,
+      create_date,
+      view_count
     from 
-      nm_feed f
+      nm_feed
       
-    inner join nm_feed_photo p on f.feed_no= p.feed_no
- 
     order by
       feed_no desc
    

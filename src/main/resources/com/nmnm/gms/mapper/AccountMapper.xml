@@ -128,34 +128,30 @@
 		or remarks like #{keywordPattern}
 	</select>
 	
-	 <select id="findByDate" resultMap="AccountMap" parameterType="date">
-  <bind name="startDate"  value="'%' + _parameter + '%'" />
-  <bind name="endDate" value="'%' + _parameter + '%'" />
-    SELECT
-    a.account_no,
-    a.bank_info_id,
-    a.account_type_name,
-    a.payment_date,
-    a.account_connection,
-    a.remarks,
-    a.deposit,
-    a.withdraw,
-    @b := @b + a.deposit - a.withdraw AS ending_balance,
-    a.receipt_photo
-    FROM
-    (SELECT @b := 0) AS dummy,
-    nm_account AS a
-    CROSS JOIN
-    nm_group_account AS ga
+	 <select id="findByDate" resultMap="AccountMap" parameterType="map">
+    SELECT 
+    a.account_no, 
+    a.bank_info_id, 
+    a.account_type_name, 
+    a.payment_date, 
+    a.account_connection, 
+    a.remarks, 
+    a.deposit, 
+    a.withdraw, 
+    @b := @b + a.deposit - a.withdraw AS ending_balance, 
+    a.receipt_photo 
+    FROM 
+    (SELECT @b := 0) AS dummy, 
+    nm_account AS a 
+    CROSS JOIN 
+    nm_group_account AS ga 
 
-    
-
-
-    <![CDATA[
+    <![CDATA[ 
     WHERE payment_date >= #{startDate} 
     AND payment_date <= #{endDate} 
-    AND ga.bank_info_id = a.bank_info_id
-    ]]>
+    AND ga.bank_info_id = a.bank_info_id 
+    ]]> 
+
     ORDER BY account_no desc;
   </select>
 

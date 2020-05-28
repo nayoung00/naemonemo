@@ -107,4 +107,18 @@ dependencies {
   
   
   
+  /* 네이버 아이디로 로그인 */
+// https://mvnrepository.com/artifact/com.github.scribejava/scribejava-core
+implementation 'com.github.scribejava:scribejava-core:2.8.1'
+
+// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+implementation 'org.apache.commons:commons-lang3:3.8.1'
+
+// https://mvnrepository.com/artifact/com.github.cliftonlabs/json-simple
+implementation 'com.github.cliftonlabs:json-simple:3.0.2'
+  
+  
+  
+
+  
 }

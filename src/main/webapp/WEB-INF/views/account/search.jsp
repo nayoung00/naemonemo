@@ -16,8 +16,9 @@
           <div class="searchDate">
           <form action='search' method='get' enctype='multipart/form-data'>
           <div class="searchDateBox">
-          · 기간별 조회 : <input name='startDate' type='date'> ~ <input name='endDate' type='date'>
-          <button>검색</button>
+          · 기간별 조회 : <input id='startDate' name='startDate' type='date'>
+           ~ <input id='endDate' name='endDate' type='date'>
+          <button id='submit_date'>검색</button>
           </div>
           </form>
           </div>
@@ -101,6 +102,13 @@
   top: 0;
   opacity: 1;
   }
+  
+  
+  
+  
+  
+  
+    <!-- 기간검색 -->
   .searchDate {
   background-color: lightgray;
       border-radius: 10px;
@@ -116,6 +124,34 @@
     vertical-align:middle;
   }
 </style>
+
+
+<!-- 기간 검색 유효성 검사 -->
+<script>
+ function searchDateform() {
+  var start = $('#startDate').val();
+  var end = $('#endDate').val();
+  if (start == null || start == "") {
+    alert("시작 기간을 입력해주세요!");
+    return false;
+  }
+  if (end == null || end == "") {
+    alert("종료 기간을 입력해주세요!");
+    return false;
+  }
+ }
+ $(function() {
+  $(document).on("click", "#submit_date", function(e) {
+    if (searchDateform() == false) {
+      e.preventDefault();
+      document.getElementById("startDate").value = $('#startDate').val();
+      document.getElementById("endDate").value = $('#endDate').val();
+    }
+  });
+});
+</script>
+
+
 <!-- 
 <script>
 $("#search").click(function(){

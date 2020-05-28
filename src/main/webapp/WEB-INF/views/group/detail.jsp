@@ -49,7 +49,24 @@ table.type03 td {
     border-bottom: 1px solid #ccc;
 }
 </style>
+<script>
+$(".box").click(function(){
+    $("input[name='photoFile']").click();
+});
 
+// 이미지 업로드시 나타게
+function readURL(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+	reader.onload = function (e) {
+	$('#blah').attr('src', e.target.result);
+	}
+	reader.readAsDataURL(input.files[0]);
+	}
+	}
+</script>
+<section id="blog" class="blog">
+    <div class="container">
 <h1>모임 상세정보</h1>
 
 <!-- Button trigger modal -->
@@ -132,26 +149,5 @@ geocoder.addressSearch(document.getElementById("address").value, function(result
 <c:if test="${empty group}">
 <p>해당  모임이 없습니다.</p>
 </c:if>
-
-<div style="z-index: 9999;">
-<div class="modal fade" id="moimModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
-    </div>
-  </div>
 </div>
-</div>
-
+</section>

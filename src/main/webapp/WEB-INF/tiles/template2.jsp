@@ -94,7 +94,7 @@
               <div class="attr-nav">
                 <ul>
                   <li class="dropdown">
-                    <a href="###app/alarm" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="#app/alarm" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-bell"></i>
                       <!-- <span class="lnr lnr-alarm"></span> -->
                       <span class="badge badge-bg-1">3</span>
@@ -102,7 +102,7 @@
                     <ul class="dropdown-menu cart-list s-cate">
                       <li class="single-cart-list">
                         <a href="#" class="photo"
-                          ><img src="images/collection/arrivals1.jpg" class="cart-thumb" alt="image"
+                          ><img src="${pageContext.servletContext.getContextPath()}/images/collection/arrivals1.jpg" class="cart-thumb" alt="image"
                         /></a>
                         <div class="cart-list-txt">
                           <h6><a href="#">알림1</a></h6>
@@ -116,7 +116,7 @@
                       <!--/.single-cart-list -->
                       <li class="single-cart-list">
                         <a href="#" class="photo"
-                          ><img src="images/collection/arrivals2.jpg" class="cart-thumb" alt="image"
+                          ><img src="${pageContext.servletContext.getContextPath()}/images/collection/arrivals2.jpg" class="cart-thumb" alt="image"
                         /></a>
                         <div class="cart-list-txt">
                           <h6><a href="#">알림2</a></h6>
@@ -130,7 +130,7 @@
                       <!--/.single-cart-list -->
                       <li class="single-cart-list">
                         <a href="#" class="photo"
-                          ><img src="images/collection/arrivals3.jpg" class="cart-thumb" alt="image"
+                          ><img src="${pageContext.servletContext.getContextPath()}/images/collection/arrivals3.jpg" class="cart-thumb" alt="image"
                         /></a>
                         <div class="cart-list-txt">
                           <h6><a href="#">알림3</a></h6>

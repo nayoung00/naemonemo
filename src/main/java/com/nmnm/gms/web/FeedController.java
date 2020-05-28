@@ -1,8 +1,7 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
@@ -23,43 +22,68 @@ import com.nmnm.gms.service.FeedService;
 public class FeedController {
 
   static Logger logger = LogManager.getLogger(NoticeController.class);
-  
+
   @Autowired
   ServletContext servletContext;
-  
+
   @Autowired
   FeedService feedService;
+  
 
   public FeedController() {
     logger.debug("FeedController 생성됨!");
   }
-  
+
   @GetMapping("form")
   public void form() throws Exception {}
 
 
   @PostMapping("add")
-  public String add(Feed feed, //
-      MultipartFile[] FeedPhotos) throws Exception {
-    feedService.add(feed);
+  public String add(
+      String title, //
+      String content, //
+      int groupNo, //
+      int memberNo, //
+      MultipartFile[] feedPhotos) throws Exception {
     
-    List<FeedPhoto> feedPhotos = new LinkedList<>();
-    for (MultipartFile photoFile : FeedPhotos) {
-      if (photoFile.getSize() > 0) {
-        FeedPhoto feedPhoto = new FeedPhoto();
-        String dirPath = servletContext.getRealPath("/upload/feed");
-        String filename = UUID.randomUUID().toString();
-        photoFile.transferTo(new File(dirPath + "/" + filename));
-        feedPhoto.setPhotoFile(filename);
-        feedPhotos.add(feedPhoto);
+    Feed feed = new Feed();
+    
+    feed.setTitle(title);
+    feed.setContent(content);
+    feed.setGroupNo(groupNo);
+    feed.setMemberNo(memberNo);
+
+    ArrayList<FeedPhoto> feedPhotoArray = new ArrayList<>();
+    String dirPath = servletContext.getRealPath("/upload/feed");
+    System.out.println("1");
+    for (MultipartFile feedPhoto : feedPhotos) {
+      if (feedPhoto.getSize() <= 0) {
+        continue;
       }
+      System.out.println("2");
+      String filename = UUID.randomUUID().toString();
+      System.out.println("3");
+      feedPhoto.transferTo(new File(dirPath + "/" + filename));
+      System.out.println("4");
+      feedPhotoArray.add(new FeedPhoto().setFilepath(filename));
+      System.out.println("5");
     }
     
+    if (feedPhotoArray.size() == 0) {
+      throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
+    }
+    else
+    {
+      System.out.println("사진이 있당");
+    }
+    
+    feed.setFeedPhotos(feedPhotoArray);
+    feedService.add(feed);
     
     return "redirect:list";
   }
 
-  
+
   @GetMapping("list")
   public void list(Model model) throws Exception {
     model.addAttribute("list", feedService.list());
@@ -70,35 +94,57 @@ public class FeedController {
     model.addAttribute("feed", feedService.get(feedNo));
   }
 
-  
+
   @GetMapping("delete")
   public String delete(int feedNo) throws Exception {
-    if (feedService.delete(feedNo) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("삭제할 피드 번호가 유효하지 않습니다.");
-    }
+    feedService.delete(feedNo);
+    return "redirect:list";
   }
 
-  @GetMapping("search")
-  public void search(String keyword, Model model) throws Exception {
-    model.addAttribute("list", feedService.search(keyword));
-  }
-  
+//  @GetMapping("search")
+//  public void search(String keyword, Model model) throws Exception {
+//    model.addAttribute("list", feedService.search(keyword));
+//  }
+
   @GetMapping("updateForm")
   public void updateForm(int feedNo, Model model) throws Exception {
-    model.addAttribute("notice", feedService.get(feedNo));
+    model.addAttribute("feed", feedService.get(feedNo));
   }
+
 
   @PostMapping("update")
-  public String update(Feed feed) throws Exception {
-    if (feedService.update(feed) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("변경 피드 게시물 번호가 유효하지 않습니다." + feed.getFeedNo()
-      + " " + feed.getTitle());
+  public String update(
+      int feedNo,//
+      String title, //
+      String content, //
+      MultipartFile[] feedPhotos) throws Exception {
+    System.out.println("1");
+    Feed feed = feedService.get(feedNo);
+    feed.setTitle(title);
+    feed.setContent(content);
+    if (feedPhotos == null)
+      System.out.println("feedPhotos is null");
+    ArrayList<FeedPhoto> feedPhotoArray = new ArrayList<>();
+    String dirPath = servletContext.getRealPath("/upload/feed");
+    for (MultipartFile feedPhoto : feedPhotos) {
+      if (feedPhoto.getSize() <= 0) {
+        continue;
+      }
+      String filename = UUID.randomUUID().toString();
+      feedPhoto.transferTo(new File(dirPath + "/" + filename));
+      feedPhotoArray.add(new FeedPhoto().setFilepath(filename));
     }
-  }
 
+    if (feedPhotoArray.size() > 0) {
+      feed.setFeedPhotos(feedPhotoArray);
+    } else {
+      feed.setFeedPhotos(null);
+    }
+
+    feedService.update(feed);
+    
+    return "redirect:list";
+  }
   
+
 }

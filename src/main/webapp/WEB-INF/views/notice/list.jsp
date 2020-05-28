@@ -42,8 +42,13 @@
                 </div>
             </div>
             <form action='search' method='get'>
-                           검색어: <input name='keyword' type='text'>
-            <button>검색</button>
+             <div class="form-group">
+               <label>검색어</label>
+               <input name='keyword' type="text" class="form-control" placeholder="search" value="검색어를입력하세요">
+             </div>
+            <span>
+            <button type="submit" class="btn btn-info btn-fill pull-right">검색</button>
+            </span>
             </form>
         </div>
 

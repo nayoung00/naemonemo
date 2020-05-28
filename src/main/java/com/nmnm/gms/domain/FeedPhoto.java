@@ -1,45 +1,67 @@
 package com.nmnm.gms.domain;
 
-public class FeedPhoto {
+import java.io.Serializable;
 
-  private int feedPhotoNo; // nm_feed_photo PK auto_increment default=1 NN
-  private String photoFile; // VARCHAR(255) NN
-  private int feedNo; // nm_feed PK/ FK NS
-  private Feed feed; //
+public class FeedPhoto implements Serializable{
+
+  private static final long serialVersionUID = 1L;
   
+  private int no; // nm_feed_photo PK auto_increment default=1 NN
+  private String filepath; // VARCHAR(255) NN
+  private int feedNo; //
+
+  public FeedPhoto() {}
+
+  public FeedPhoto(String filepath, int feedNo) {
+    this.filepath = filepath;
+    this.feedNo = feedNo;
+  }
+
+  public FeedPhoto(String filepath) {
+    this.filepath = filepath;
+  }
   
-  
+  public FeedPhoto(int no, String filepath, int feedNo) {
+    this(filepath, feedNo);
+    this.no = no;
+  }
+
   @Override
   public String toString() {
-    return "FeedPhoto [feedPhotoNo=" + feedPhotoNo + ", photoFile=" + photoFile + ", feedNo="
-        + feedNo + ", feed=" + feed + "]";
+    return "FeedPhoto [no=" + no + ", filepath=" + filepath + ", feedNo=" + feedNo + "]";
   }
+
   
-  
-  public int getFeedPhotoNo() {
-    return feedPhotoNo;
+  public int getNo() {
+    return no;
   }
-  public void setFeedPhotoNo(int feedPhotoNo) {
-    this.feedPhotoNo = feedPhotoNo;
+
+  public FeedPhoto setNo(int no) {
+    this.no = no;
+    return this;
   }
-  public String getPhotoFile() {
-    return photoFile;
+
+  public String getFilepath() {
+    return filepath;
   }
-  public void setPhotoFile(String photoFile) {
-    this.photoFile = photoFile;
+
+  public FeedPhoto setFilepath(String filepath) {
+    this.filepath = filepath;
+    return this;
   }
+
   public int getFeedNo() {
     return feedNo;
   }
-  public void setFeedNo(int feedNo) {
+
+  public FeedPhoto setFeedNo(int feedNo) {
     this.feedNo = feedNo;
+    return this;
   }
-  public Feed getFeed() {
-    return feed;
-  }
-  public void setFeed(Feed feed) {
-    this.feed = feed;
-  }
+
+    
+  
+  
   
   
 }

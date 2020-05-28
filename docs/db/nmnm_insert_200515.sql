@@ -86,7 +86,6 @@ values(
 -- 모임 예제
 INSERT INTO nm_group(
 group_name,
-member_no,
 group_info,
 group_form,
 group_interest,
@@ -94,7 +93,6 @@ city,
 max_people_no)
 values(
 '등산 모임',
-1,
 '등산하는 모임입니다.',
 '오프라인',
 '운동/스포츠',
@@ -104,7 +102,6 @@ values(
 
 INSERT INTO nm_group(
 group_name,
-member_no,
 group_info,
 group_form,
 group_interest,
@@ -112,7 +109,6 @@ city,
 max_people_no)
 values(
 '코딩 모임',
-2,
 '코딩하는 모임입니다.',
 '오프라인',
 '업종/직무',

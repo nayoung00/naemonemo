@@ -1,4 +1,16 @@
+DROP DATABASE nmnmdb;
 
+
+
+-- MySQL 데이터베이스 생성
+
+ CREATE DATABASE nmnmdb
+
+DEFAULT CHARACTER SET utf8
+
+DEFAULT COLLATE utf8_general_ci;
+
+USE nmnmdb;
 
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;

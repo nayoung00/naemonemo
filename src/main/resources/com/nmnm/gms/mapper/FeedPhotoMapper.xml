@@ -6,54 +6,47 @@
 <mapper namespace="com.nmnm.gms.dao.FeedPhotoDao">
 
   <resultMap type="FeedPhoto" id="FeedPhotoMap">
-    <id column="feed_photo_no"   property="feedPhotoNo"/>
-    <result column="feed_photo_file"    property="photoFile"/>
+    <id column="feed_photo_no"   property="no"/>
+    <result column="feed_photo_file"    property="filepath"/>
     <result column="feed_no" property="feedNo"/>
-    
-    <association property="feed" javaType="Feed">
-      <id column="feed_no"  property="feedNo"/>
-    </association>
   </resultMap>
   
   
   
   <insert id="insert" parameterType="Feed">
-    insert into nm_feed_photo(
-      feed_photo_file,
-      feed_no
-      )
-    values(
-      #{feedPhotoFile},
-      #{feedNo}
-      )
+    insert into nm_feed_photo(feed_photo_file, feed_no)
+    values
+    <foreach collection="feedPhotos" item="file" separator=",">
+      (#{file.filepath}, #{feedNo})
+    </foreach>
   </insert>
   
   <select id="findAllByFeedNo" resultMap="FeedPhotoMap" parameterType="int">
     select
-      feed_photo_file,
-      feed_no
+      feed_photo_no,
+      feed_photo_file
     from nm_feed_photo
     where
       feed_no=#{feedNo}
     order by
-      feed_no desc
+      feed_photo_no desc
   </select>
 
   
   <select id="findByNo" resultMap="FeedPhotoMap" parameterType="int">
     select
-      p.feed_photo_no,
-      p.photo_file,
-      f.feed_no,
-    from nm_feed_photo as p
-     inner join nm_feed as f on p.feed_no=f.feed_no
+      t.feed_photo_no,
+      t.photo_file,
+      f.feed_no
+    from nm_feed_photo as t
+     inner join nm_feed as f on t.feed_no=f.feed_no
     where
-      p.feed_no=#{feedNo}
+      t.feed_photo_no=#{no}
   </select>
   
-  <delete id="delete" parameterType="int">
+  <delete id="deleteAll" parameterType="int">
     delete from nm_feed_photo
-    where feed_photo_no=#{feedPhotoNo}
+    where feed_no=#{feedNo}
   </delete>
 
 

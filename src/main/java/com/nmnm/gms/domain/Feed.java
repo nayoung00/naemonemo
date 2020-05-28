@@ -1,10 +1,13 @@
 package com.nmnm.gms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class Feed {
+public class Feed implements Serializable{
 
+  private static final long serialVersionUID = 1L;
+  
   private int feedNo; // nm_feed PK NN auto_increment default=1
   private int memberNo; // FK N
   private int groupNo; //  FK N

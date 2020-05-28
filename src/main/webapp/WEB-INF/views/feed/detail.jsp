@@ -7,21 +7,32 @@
 <h1>피드 상세정보</h1>
 
 <c:if test="${not empty feed}">
-<form action='update' method='post'>
+
+
 번호: ${feed.feedNo}<br>
 제목: ${feed.title}<br>
 내용: ${feed.content}<br>
-회원번호(작성자닉네임): ${feed.memberNo}<br>
-생성일: ${feed.createDate}<br>
+회원번호(작성자닉네임조인): ${feed.memberNo}<br>
+등록일: ${feed.createDate}<br>
 조회수: ${feed.viewCount}<br>
+
+사진:<br>
+
+<p>
+<c:forEach items="${feed.feedPhotos}" var="feedPhoto">
+<img src="${pageContext.servletContext.contextPath}/upload/feed/${feedPhoto.filepath}" width='360'>
+</c:forEach>
+</p>
+
+
+
 <p>
 <button><a href='delete?feedNo=${feed.feedNo}'>삭제</a></button>
-<button><a href='updateForm?feedNo=${feed.feedNo}'>변경</a></button>
 </p>
 </form>
 </c:if>
 
 <c:if test="${empty feed}">
-<p>해당 피드가 없습니다.</p>
+<p>해당 게시물이 없습니다.</p>
 </c:if>
 

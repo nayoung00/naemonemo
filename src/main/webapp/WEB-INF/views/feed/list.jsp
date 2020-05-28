@@ -14,6 +14,7 @@
     <th>제목</th>
     <th>등록일</th>
     <th>조회수</th>
+    <th>사진</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
@@ -23,6 +24,7 @@
     <td><a href='detail?feedNo=${item.feedNo}'> ${item.title}</a></td> 
     <td>${item.createDate}</td> 
     <td>${item.viewCount}</td>
+    <td>${item.feedPhotos}</td>
   </tr>
 </c:forEach>
 

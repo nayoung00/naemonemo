@@ -1,6 +1,7 @@
 package com.nmnm.gms.dao;
 
 import java.util.List;
+import com.nmnm.gms.domain.Feed;
 import com.nmnm.gms.domain.FeedPhoto;
 
 // 데이터를 저장하고 꺼내는 방식(파일, 클라우드저장소, DB 등)에 상관없이
@@ -9,15 +10,10 @@ import com.nmnm.gms.domain.FeedPhoto;
 //
 public interface FeedPhotoDao {
 
-  int insert(FeedPhoto feedPhoto) throws Exception;
+  int insert(Feed feed) throws Exception;
+  
+  List<FeedPhoto> findAll(int feedNo) throws Exception;
 
-  List<FeedPhoto> findAllByFeedNo(int feedNo) throws Exception;
+  int deleteAll(int feedNo) throws Exception;
 
-  FeedPhoto findByNo(int feedPhotoNo) throws Exception;
-
-  int update(FeedPhoto feedPhoto) throws Exception;
-
-  int delete(int feedPhotoNo) throws Exception;
-
-  List<FeedPhoto> findByKeyword(String keyword) throws Exception;
 }

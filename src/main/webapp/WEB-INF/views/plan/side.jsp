@@ -25,12 +25,6 @@
                         <p>일정게시판</p>
                     </a>
                 </li>
-               
-                <li>
-                <a href="../../index.html" class="simple-text">
-                 (임시)나가기
-                </a>
-                </li>
             </ul>
       </div>
     </div>

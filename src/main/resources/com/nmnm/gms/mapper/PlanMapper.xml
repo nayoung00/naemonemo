@@ -8,7 +8,8 @@
 <resultMap type="Plan" id="PlanMap">
     <id column="plan_no"  property="planNo"/>
     <result column="group_no" property="groupNo"/>
-    <result column="plan_date" property="planDate"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
     <result column="title" property="title"/>
     <result column="subtitle" property="subtitle"/>
       <result column="thumbnail" property="thumbnail"/>
@@ -23,7 +24,8 @@
 
 <insert id="insert" parameterType="Plan">
   insert into nm_plan(
-    plan_date, 
+    start_date, 
+    end_date, 
     title, 
     thumbnail,
     content,
@@ -33,7 +35,8 @@
     latitude,
     longitude
     ) values(  
-      #{planDate},
+      #{startDate},
+      #{endDate},
       #{title},
       #{thumbnail},
       #{content},
@@ -57,7 +60,8 @@
     <select id="findByNo" resultMap="PlanMap" parameterType="int">
     select 
       plan_no,
-      plan_date,
+      start_date,
+      end_date,
       title,
       content,
       thumbnail,
@@ -76,7 +80,8 @@
    <update id="update" parameterType="Plan">
     update nm_plan 
     <set>
-      <if test="planDate != null">plan_date=#{planDate},</if>
+      <if test="startDate != null">start_date=#{startDate},</if>
+      <if test="endDate != null">end_date=#{endDate},</if>
       <if test="title != null and title != ''">title=#{title},</if> 
        <if test="thumbnail != null and thumbnail != ''">thumbnail=#{thumbnail},</if> 
       <if test="placeName != null and placeName != ''">place_name=#{placeName},</if>

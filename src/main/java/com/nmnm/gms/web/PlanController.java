@@ -37,6 +37,12 @@ public class PlanController {
     System.out.println("form 호출==================================================");
   }
 
+  @GetMapping("calendar")
+  public void calendar(Model model, int planNo) throws Exception {
+    logger.debug("calendar 호출==================================================");
+    model.addAttribute("calendar", planService.get(planNo));
+  }
+
   @PostMapping("add")
   public String add(Plan plan, MultipartFile thumbnailFile) throws Exception {
     System.out.println("add 호출==================================================");

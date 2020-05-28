@@ -6,7 +6,8 @@ public class Plan {
 
   private int planNo; // nm_plan PK auto_increment default=1 NN
   private int groupNo; // nm_group PK/ FK N
-  private Date planDate; // DATE NN
+  private Date startDate; // DATE NN
+  private Date endDate; // DATE NN
   private String title; // VARCHAR(255) NN
   private String subtitle;
   private String thumbnail;
@@ -15,14 +16,15 @@ public class Plan {
   private String address; // VARCHAR(255) NN
   private int latitude; // 위도 N
   private int longitude; // 경도 N
-  private String createDate;
-  
+  private Date createDate;
+
   @Override
   public String toString() {
-    return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", planDate=" + planDate + ", title="
-        + title + ", subtitle=" + subtitle + ", thumbnail=" + thumbnail + ", content=" + content
-        + ", placeName=" + placeName + ", address=" + address + ", latitude=" + latitude
-        + ", longitude=" + longitude + ", createDate=" + createDate + "]";
+    return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", startDate=" + startDate
+        + ", endDate=" + endDate + ", title=" + title + ", subtitle=" + subtitle + ", thumbnail="
+        + thumbnail + ", content=" + content + ", placeName=" + placeName + ", address=" + address
+        + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
+        + "]";
   }
 
   public int getPlanNo() {
@@ -41,12 +43,20 @@ public class Plan {
     this.groupNo = groupNo;
   }
 
-  public Date getPlanDate() {
-    return planDate;
+  public Date getStartDate() {
+    return startDate;
   }
 
-  public void setPlanDate(Date planDate) {
-    this.planDate = planDate;
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+
+  public Date getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
   }
 
   public String getTitle() {
@@ -113,11 +123,11 @@ public class Plan {
     this.longitude = longitude;
   }
 
-  public String getCreateDate() {
+  public Date getCreateDate() {
     return createDate;
   }
 
-  public void setCreateDate(String createDate) {
+  public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
 

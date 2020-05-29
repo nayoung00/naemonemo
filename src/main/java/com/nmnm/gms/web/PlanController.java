@@ -56,6 +56,10 @@ public class PlanController {
       thumbnailFile.transferTo(new File(dirPath + "/" + filename));
       plan.setThumbnail(filename);
     }
+    String[] startHour = plan.getStartDate().split("T");
+    String[] endHour = plan.getEndDate().split("T");
+    plan.setStartHour(startHour[1]);
+    plan.setEndHour(endHour[1]);
     if (planService.add(plan) > 0) {
       return "redirect:list";
     } else {

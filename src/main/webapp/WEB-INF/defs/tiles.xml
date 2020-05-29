@@ -19,9 +19,14 @@
   
     <definition name="planCalendar" template="/WEB-INF/tiles/plan/template.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
-    <put-attribute name="header" value="/WEB-INF/tiles/plan/header.jsp" />
     <put-attribute name="header" value="/WEB-INF/tiles/plan/calendarHeader.jsp" />
     <put-attribute name="footer" value="/WEB-INF/tiles/plan/footer.jsp" />
+  </definition>  
+  
+      <definition name="planForm" template="/WEB-INF/tiles/plan/template.jsp">
+    <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
+    <put-attribute name="header" value="/WEB-INF/tiles/plan/formheader.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/tiles/plan/formFooter.jsp" />
   </definition>  
   
   <!-- 사이드바없는 곳에서 공통으로 사용할 레이아웃을 정의한다. -->
@@ -60,8 +65,13 @@
   </definition>
   
   <definition name="plan/calendar" extends="planCalendar">
-    <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" />
+    <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" /> 
     <put-attribute name="body" value="/WEB-INF/views/plan/calendar.jsp" />
+  </definition>
+  
+    <definition name="plan/form" extends="planForm">
+    <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/plan/form.jsp" />
   </definition>
   
 </tiles-definitions>

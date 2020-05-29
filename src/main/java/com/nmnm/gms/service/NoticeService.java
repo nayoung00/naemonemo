@@ -9,11 +9,11 @@ public interface NoticeService {
 
   List<Notice> list() throws Exception;
 
-  int delete(int noticeNo) throws Exception;
-
   Notice get(int noticeNo) throws Exception;
 
-  int update(Notice notice) throws Exception;
+  void update(Notice notice) throws Exception;
+
+  void delete(int noticeNo) throws Exception;
   
   List<Notice> search(String keyword) throws Exception;
 }

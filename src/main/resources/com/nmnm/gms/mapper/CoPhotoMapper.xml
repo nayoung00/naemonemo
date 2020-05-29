@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.CoPhotoDao">
+
+  <resultMap type="CoPhoto" id="CoPhotoMap">
+    <id column="co_photo_no"   property="no"/>
+    <result column="co_photo_file"    property="filepath"/>
+    <result column="co_no" property="feedNo"/>
+  </resultMap>
+  
+  
+  
+  <insert id="insert" parameterType="Co">
+    insert into nm_co_photo(co_photo_file, co_no)
+    values
+    <foreach collection="coPhotos" item="file" separator=",">
+      (#{file.filepath}, #{coNo})
+    </foreach>
+  </insert>
+  
+  <select id="findAllByCoNo" resultMap="CoPhotoMap" parameterType="int">
+    select
+      co_photo_no,
+      co_photo_file
+    from nm_co_photo
+    where
+      co_no=#{coNo}
+    order by
+      co_photo_no desc
+  </select>
+
+  
+  <select id="findByNo" resultMap="CoPhotoMap" parameterType="int">
+    select
+      t.co_photo_no,
+      t.photo_file,
+      c.co_no
+    from nm_co_photo as t
+     inner join nm_co as c on t.co_no=c.co_no
+    where
+      t.co_photo_no=#{no}
+      
+    order by
+      t.co_photo_no desc
+  </select>
+  
+  <delete id="deleteAll" parameterType="int">
+    delete from nm_co_photo
+    where co_no=#{coNo}
+  </delete>
+
+
+  
+</mapper>

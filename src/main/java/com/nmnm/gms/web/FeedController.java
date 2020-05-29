@@ -21,7 +21,7 @@ import com.nmnm.gms.service.FeedService;
 @RequestMapping("/feed")
 public class FeedController {
 
-  static Logger logger = LogManager.getLogger(NoticeController.class);
+  static Logger logger = LogManager.getLogger(FeedController.class);
 
   @Autowired
   ServletContext servletContext;
@@ -29,7 +29,6 @@ public class FeedController {
   @Autowired
   FeedService feedService;
   
-
   public FeedController() {
     logger.debug("FeedController 생성됨!");
   }
@@ -39,7 +38,7 @@ public class FeedController {
 
 
   @PostMapping("add")
-  public String add(
+  public String add( //
       String title, //
       String content, //
       int groupNo, //
@@ -71,9 +70,7 @@ public class FeedController {
     
     if (feedPhotoArray.size() == 0) {
       throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
-    }
-    else
-    {
+    } else {
       System.out.println("사진이 있당");
     }
     
@@ -82,7 +79,6 @@ public class FeedController {
     
     return "redirect:list";
   }
-
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
@@ -94,36 +90,34 @@ public class FeedController {
     model.addAttribute("feed", feedService.get(feedNo));
   }
 
-
   @GetMapping("delete")
   public String delete(int feedNo) throws Exception {
     feedService.delete(feedNo);
     return "redirect:list";
   }
 
-//  @GetMapping("search")
-//  public void search(String keyword, Model model) throws Exception {
-//    model.addAttribute("list", feedService.search(keyword));
-//  }
-
   @GetMapping("updateForm")
   public void updateForm(int feedNo, Model model) throws Exception {
     model.addAttribute("feed", feedService.get(feedNo));
   }
 
-
   @PostMapping("update")
-  public String update(
-      int feedNo,//
+  public String update( //
+      int feedNo, //
       String title, //
       String content, //
       MultipartFile[] feedPhotos) throws Exception {
+    
     System.out.println("1");
+    
     Feed feed = feedService.get(feedNo);
+    
     feed.setTitle(title);
     feed.setContent(content);
+    
     if (feedPhotos == null)
       System.out.println("feedPhotos is null");
+   
     ArrayList<FeedPhoto> feedPhotoArray = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/feed");
     for (MultipartFile feedPhoto : feedPhotos) {
@@ -142,9 +136,13 @@ public class FeedController {
     }
 
     feedService.update(feed);
-    
     return "redirect:list";
   }
   
+  
+  @GetMapping("search")
+  public void search(String keyword, Model model) throws Exception {
+    model.addAttribute("list", feedService.search(keyword));
+  }
 
 }

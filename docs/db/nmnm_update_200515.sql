@@ -1,16 +1,16 @@
 DROP DATABASE nmnmdb;
 
 
-
 -- MySQL 데이터베이스 생성
 
- CREATE DATABASE nmnmdb
+CREATE DATABASE nmnmdb
 
 DEFAULT CHARACTER SET utf8
 
 DEFAULT COLLATE utf8_general_ci;
 
 USE nmnmdb;
+
 
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
@@ -102,10 +102,11 @@ ALTER TABLE nm_notice
 
 -- 공지사항댓글
 CREATE TABLE nm_notice_reply (
-  notice_reply_no INTEGER NOT NULL COMMENT '공지사항댓글번호', -- 공지사항댓글번호
-  content         TEXT    NOT NULL COMMENT '댓글내용', -- 댓글내용
-  notice_no       INTEGER NOT NULL COMMENT '공지사항번호', -- 공지사항번호
-  member_no       INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
+  notice_reply_no INTEGER  NOT NULL COMMENT '공지사항댓글번호', -- 공지사항댓글번호
+  content         TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
+  notice_no       INTEGER  NOT NULL COMMENT '공지사항번호', -- 공지사항번호
+  member_no       INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  create_date     DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '공지사항댓글';
 
@@ -282,10 +283,11 @@ ALTER TABLE nm_co
 
 -- 소통댓글
 CREATE TABLE nm_co_reply (
-  co_reply_no INTEGER NOT NULL COMMENT '소통댓글번호', -- 소통댓글번호
-  content     TEXT    NOT NULL COMMENT '댓글내용', -- 댓글내용
-  co_no       INTEGER NOT NULL COMMENT '소통번호', -- 소통번호
-  member_no   INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
+  co_reply_no INTEGER  NOT NULL COMMENT '소통댓글번호', -- 소통댓글번호
+  content     TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
+  co_no       INTEGER  NOT NULL COMMENT '소통번호', -- 소통번호
+  member_no   INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  create_date DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '소통댓글';
 
@@ -359,8 +361,8 @@ ALTER TABLE nm_alram
 -- 일정
 CREATE TABLE nm_plan (
   plan_no     INTEGER      NOT NULL COMMENT '일정번호', -- 일정번호
-  group_no    INTEGER      NULL     COMMENT '모임번호', -- 모임번호
-  member_no   INTEGER      NULL     COMMENT '회원번호', -- 회원번호
+  group_no    INTEGER      NULL     DEFAULT 1 COMMENT '모임번호', -- 모임번호
+  member_no   INTEGER      NULL     DEFAULT 1 COMMENT '회원번호', -- 회원번호
   start_date  VARCHAR(20)  NOT NULL DEFAULT now() COMMENT '시작일', -- 시작일
   end_date    VARCHAR(20)  NOT NULL DEFAULT DATE_ADD(NOW(), INTERVAL 1 HOUR) COMMENT '종료일', -- 종료일
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
@@ -431,10 +433,11 @@ ALTER TABLE nm_feed
 
 -- 피드댓글
 CREATE TABLE nm_feed_reply (
-  feed_reply_no INTEGER NOT NULL COMMENT '피드댓글번호', -- 피드댓글번호
-  content       TEXT    NOT NULL COMMENT '댓글내용', -- 댓글내용
-  feed_no       INTEGER NOT NULL COMMENT '피드번호', -- 피드번호
-  member_no     INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
+  feed_reply_no INTEGER  NOT NULL COMMENT '피드댓글번호', -- 피드댓글번호
+  content       TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
+  feed_no       INTEGER  NOT NULL COMMENT '피드번호', -- 피드번호
+  member_no     INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '피드댓글';
 

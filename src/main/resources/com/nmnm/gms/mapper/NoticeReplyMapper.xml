@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.NoticeReplyDao">
+
+  <resultMap type="NoticeReply" id="NoticeReplyMap">
+    <id column="notice_reply_no"   property="noticeReplyNo"/>
+    <result column="content"  property="content"/>
+    <result column="member_no"    property="memberNo"/>
+    
+    <association property="notice" javaType="Notice">
+      <result column="notice_no" property="noticeNo"/>
+    </association>
+    
+  </resultMap>
+  
+   <sql id="select1">
+    select 
+      r.notice_reply_no,
+      n.notice_no, 
+      r.member_no, 
+      r.content 
+    from 
+      nm_notice_reply r
+    inner join nm_notice n
+    on n.notice_no = r.notice_no
+  </sql>
+  
+  
+  <select id="findAll" resultMap="NoticeReplyMap" parameterType="Map">
+    select 
+      r.notice_reply_no,
+      n.notice_no, 
+      r.member_no,
+      r.content 
+    from nm_notice_reply r
+    
+    inner join nm_notice n on r.notice_no= n.notice_no
+    
+    order by
+      r.notice_reply_no asc
+  </select>
+  
+  
+   <insert id="insert" parameterType="NoticeReply">
+    insert into nm_notice_reply(
+    member_no, 
+    content,
+    notice_no
+    ) 
+    values(
+    #{memberNo},
+    #{content},
+    #{noticeNo}
+    )
+    
+ 
+  </insert>
+  
+ 
+  
+  <select id="findByNo" resultMap="NoticeReplyMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      notice_Reply_no=#{noticeReplyNo}
+  </select>
+  
+  <update id="update" parameterType="NoticeReply">
+    update nm_notice_Reply set
+      notice_no=#{noticeNo},
+      member_no=#{memberNo},
+      content=#{content}
+    where 
+      notice_reply_no=#{noticeReplyNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from nm_notice_reply
+    where notice_reply_no=#{noticeReplyNo}
+  </delete>
+  
+  <select id="findByKeyword" 
+    resultMap="NoticeReplyMap" 
+    parameterType="string">
+    <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select 
+      notice_no, 
+      member_no, 
+      content 
+    from nm_notice_reply
+    where     
+      content like #{keywordPattern} 
+  </select>
+  
+</mapper>

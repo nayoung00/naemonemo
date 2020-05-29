@@ -24,7 +24,7 @@
     <td><a href='detail?feedNo=${item.feedNo}'> ${item.title}</a></td> 
     <td>${item.createDate}</td> 
     <td>${item.viewCount}</td>
-    <td>${item.feedPhotos}</td>
+    <td><img src="../../upload/feed/${item.feedPhotos[0].filepath}"></td>
   </tr>
 </c:forEach>
 

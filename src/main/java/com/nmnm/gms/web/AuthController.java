@@ -112,13 +112,15 @@ public class AuthController {
     Member member = memberService.get(email, password);
     System.out.println(member);
     if (member != null) {
+      if (member.getAuthStatus().equals("N")) {
+        return "redirect:emailAgainFail";
+      }
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../index.html");
     } else {
       session.invalidate();
       model.addAttribute("refreshUrl", "2;url=login");
     }
-
     return "auth/loginForm";
   }
 

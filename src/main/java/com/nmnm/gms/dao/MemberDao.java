@@ -1,5 +1,6 @@
 package com.nmnm.gms.dao;
 
+import java.util.Map;
 import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
@@ -40,7 +41,10 @@ public interface MemberDao {
 
   void deleteMember(String member) throws Exception;
 
-  Member login(Member member) throws Exception;
+  Member findByEmailAndPassword(Map<String, Object> params) throws Exception;
+
+  int login(Member member) throws Exception;
+
 
   int send(Message message) throws Exception;
 
@@ -55,6 +59,8 @@ public interface MemberDao {
   void userAuth(String email) throws Exception;
 
   Member getNameForNaverMember(String naverEmail);
+
+  Member findByNo(int no) throws Exception;
 
 
 

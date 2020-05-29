@@ -1,5 +1,6 @@
 package com.nmnm.gms.service.impl;
 
+import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -155,10 +156,6 @@ public class MemberServiceImpl implements MemberService {
     return null;
   }
 
-  @Override
-  public Member login(Member member) throws Exception {
-    return memberDao.login(member);
-  }
 
   @Override
   public void logout(HttpSession session) throws Exception {
@@ -172,10 +169,10 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public Object get(int no) {
-    // TODO Auto-generated method stub
-    return null;
+  public Member get(int no) throws Exception {
+    return memberDao.findByNo(no);
   }
+
 
   @Override
   public Object list() {
@@ -191,8 +188,11 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public Member get(String email, String password) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("email", email);
+    params.put("password", password);
+    return memberDao.findByEmailAndPassword(params);
+
   }
 
   @Override
@@ -217,5 +217,7 @@ public class MemberServiceImpl implements MemberService {
   public Member getNameForNaverMember(String naverEmail) {
     return memberDao.getNameForNaverMember(naverEmail);
   }
+
+
 
 }

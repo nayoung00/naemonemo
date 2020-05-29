@@ -23,7 +23,7 @@
 		select
 		account_no,
 		group_no,
-		bank_info_id,
+		ga.bank_info_id,
 		account_type_name,
 		deposit,
 		withdraw,
@@ -33,14 +33,15 @@
 		ending_balance,
 		receipt_photo
 		from
-		nm_account
+		nm_account, 
+		nm_group_account AS ga
 	</sql>
 
 
 	<select id="findAll" resultMap="AccountMap">
 		SELECT
 		a.account_no,
-		a.bank_info_id,
+		ga.bank_info_id,
 		a.account_type_name,
 		a.payment_date,
 		a.account_connection,
@@ -131,7 +132,7 @@
 	 <select id="findByDate" resultMap="AccountMap" parameterType="map">
     SELECT 
     a.account_no, 
-    a.bank_info_id, 
+    ga.bank_info_id, 
     a.account_type_name, 
     a.payment_date, 
     a.account_connection, 
@@ -154,5 +155,6 @@
 
     ORDER BY account_no desc;
   </select>
+  
 
 </mapper>

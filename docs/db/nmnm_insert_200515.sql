@@ -425,3 +425,14 @@ payment_date,
 account_connection, 
 receipt_photo)
  values(1,1,'회식',50000,'2020-04-24','판도라','receipt.jpg');
+ 
+ 
+ -- 모임 예제
+INSERT INTO nm_dues
+(
+group_no,
+bank_info_id,
+dues_period,
+dues)
+ values(1,1,'월 1회',150000);
+ 

@@ -72,6 +72,9 @@ DROP TABLE IF EXISTS nm_feed_like RESTRICT;
 -- 회계
 DROP TABLE IF EXISTS nm_account RESTRICT;
 
+-- 모임회비
+DROP TABLE IF EXISTS nm_dues RESTRICT;
+
 -- 회원
 DROP TABLE IF EXISTS nm_member RESTRICT;
 
@@ -901,10 +904,64 @@ ALTER TABLE nm_account
 
 -- 회계
 ALTER TABLE nm_account
-  ADD CONSTRAINT FK_nm_group_account_TO_nm_account -- 모임계좌 -> 회계
+    ADD CONSTRAINT FK_nm_group_account_TO_nm_account -- 모임계좌 -> 회계
+        FOREIGN KEY (
+            bank_info_id -- 모임계좌아이디
+        )
+        REFERENCES nm_group_account ( -- 모임계좌
+            bank_info_id -- 모임계좌아이디
+        );
+        
+        
+        
+
+-- 모임회비
+CREATE TABLE nm_dues (
+  group_no     INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_info_id INTEGER NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
+  member_no    INTEGER NULL     COMMENT '회원번호', -- 회원번호
+  entrance_fee INTEGER NULL     COMMENT '입회비', -- 입회비
+  dues_period  TEXT    NOT NULL COMMENT '회비납부주기', -- 회비납부주기
+  dues         INTEGER NOT NULL COMMENT '회비금액' -- 회비금액
+)
+COMMENT '모임회비';
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT PK_nm_dues -- 모임회비 기본키
+    PRIMARY KEY (
+      group_no,     -- 모임번호
+      bank_info_id  -- 모임계좌아이디
+    );
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT FK_nm_group_TO_nm_dues -- 모임 -> 모임회비
+    FOREIGN KEY (
+      group_no -- 모임번호
+    )
+    REFERENCES nm_group ( -- 모임
+      group_no -- 모임번호
+    );
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT FK_nm_group_account_TO_nm_dues -- 모임계좌 -> 모임회비
     FOREIGN KEY (
       bank_info_id -- 모임계좌아이디
     )
     REFERENCES nm_group_account ( -- 모임계좌
       bank_info_id -- 모임계좌아이디
+    );
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT FK_nm_group_member_TO_nm_dues -- 모임회원 -> 모임회비
+    FOREIGN KEY (
+      group_no,  -- 모임번호
+      member_no  -- 회원번호
+    )
+    REFERENCES nm_group_member ( -- 모임회원
+      group_no,  -- 모임번호
+      member_no  -- 회원번호
     );

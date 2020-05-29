@@ -72,11 +72,11 @@ public class AppConfig {
     return mr;
   }
 
-//  @Bean
-//  public NaverLoginBO naverLoginBO() {
-//    NaverLoginBO naver = new NaverLoginBO();
-//    return naver;
-//  }
+  @Bean
+  public NaverLoginBO naverLoginBO() {
+    NaverLoginBO naver = new NaverLoginBO();
+    return naver;
+  }
 }
 
 

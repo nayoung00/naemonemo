@@ -1,13 +1,5 @@
 var draggedEventIsAllDay;
 var activeInactiveWeekends = true;
-var day = new Date();
-
-function getParameterByName(name) {
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-          results = regex.exec(location.search);
-  return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
 
 function getDisplayEventDate(event) {
 
@@ -172,12 +164,9 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
-    let planNo = getParameterByName('planNo');
-    let xhr = new XMLHttpRequest();
-    console.log(planNo);
     $.ajax({
       type: "get",
-      url: "detail?planNo="+planNo,
+      url: "../../calendar/data.json",
       data: {
         // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
       },
@@ -336,7 +325,7 @@ var calendar = $('#calendar').fullCalendar({
   },
   eventLimitClick: 'week', //popover
   navLinks: true,
-  defaultDate: moment(), //실제 사용시 삭제
+  defaultDate: moment('2019-05'), //실제 사용시 삭제
   timeFormat: 'HH:mm',
   defaultTimedEventDuration: '01:00:00',
   editable: true,

@@ -8,7 +8,11 @@ var editEnd = $('#edit-end');
 var editType = $('#edit-type');
 var editColor = $('#edit-color');
 var editDesc = $('#edit-desc');
-
+var editContent = $('#edit-content');
+var editAddress = $('#edit-address');
+var editLatitude = $('#edit-latitude');
+var editLongitude = $('#edit-longitude');
+var editCreateDate = $('#edit-create');
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
 
@@ -30,6 +34,10 @@ var newEvent = function (start, end, eventType) {
     addBtnContainer.show();
     modifyBtnContainer.hide();
     eventModal.modal('show');
+
+    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
+    // var eventId = 
+    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
 
     //새로운 일정 저장버튼 클릭
     $('#save-event').unbind();
@@ -84,8 +92,8 @@ var newEvent = function (start, end, eventType) {
             },
             success: function (response) {
                 //DB연동시 중복이벤트 방지를 위한
-                $('#calendar').fullCalendar('removeEvents');
-                $('#calendar').fullCalendar('refetchEvents');
+                //$('#calendar').fullCalendar('removeEvents');
+                //$('#calendar').fullCalendar('refetchEvents');
             }
         });
     });

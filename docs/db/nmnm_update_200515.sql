@@ -371,7 +371,7 @@ CREATE TABLE nm_plan (
   address     VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
   latitude    INTEGER      NULL     COMMENT '위도', -- 위도
   longitude   INTEGER      NULL     COMMENT '경도', -- 경도
-  create_date DATETIME     NULL     DEFAULT now() COMMENT '작성일' -- 작성일
+  create_date VARCHAR(20)  NULL     DEFAULT date_format(now(), '%Y-%m-%d')  COMMENT '작성일' -- 작성일
 )
 COMMENT '일정';
 

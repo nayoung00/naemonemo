@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-title">일정명</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                <input class="inputModal" type="text" name="title" id="edit-title"
                                     required="required" />
                             </div>
                         </div>

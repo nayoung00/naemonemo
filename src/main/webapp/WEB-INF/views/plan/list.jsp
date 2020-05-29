@@ -11,6 +11,7 @@
     <th>번호</th>
     <th>제목</th>
      <th>작성일</th>
+     <th>참가신청</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
@@ -27,3 +28,9 @@
 검색어: <input name='keyword' type='text'>
 <button>검색</button>
 </form>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+

@@ -17,14 +17,26 @@ public class Plan {
   private int latitude; // 위도 N
   private int longitude; // 경도 N
   private Date createDate;
+  private PlanMember planMember;
+
   @Override
   public String toString() {
     return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", startDate=" + startDate
         + ", endDate=" + endDate + ", startHour=" + startHour + ", endHour=" + endHour + ", title="
         + title + ", thumbnail=" + thumbnail + ", content=" + content + ", address=" + address
         + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
-        + "]";
+        + ", planMember=" + planMember + "]";
   }
+
+
+  public PlanMember getPlanMember() {
+    return planMember;
+  }
+  public void setPlanMember(PlanMember planMember) {
+    this.planMember = planMember;
+  }
+
+
   public int getPlanNo() {
     return planNo;
   }

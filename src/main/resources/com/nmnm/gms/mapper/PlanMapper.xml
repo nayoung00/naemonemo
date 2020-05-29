@@ -19,7 +19,6 @@
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
-    
 </resultMap>
 
 <insert id="insert" parameterType="Plan">

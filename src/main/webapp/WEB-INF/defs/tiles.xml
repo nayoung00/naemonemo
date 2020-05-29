@@ -11,10 +11,18 @@
     <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
   </definition>
   
-    <definition name="planList" template="/WEB-INF/tiles/plan/template2.jsp">
+    <definition name="plan" template="/WEB-INF/tiles/plan/template2.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
     <put-attribute name="header" value="/WEB-INF/tiles/plan/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/tiles/plan/footer.jsp" />
+  </definition>
+  
+ <definition name="planList" template="/WEB-INF/tiles/plan/list/listTemplate.jsp">
+    <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
+    <put-attribute name="header" value="/WEB-INF/tiles/plan/list/header.jsp" />
+    <put-attribute name="nav" value="/WEB-INF/tiles/plan/list/nav.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/tiles/plan/list/footer.jsp" />
+    <put-attribute name="modal" value="/WEB-INF/tiles/plan/list/listModal.jsp" />
   </definition>
   
     <definition name="planCalendar" template="/WEB-INF/tiles/plan/template.jsp">
@@ -51,19 +59,7 @@
     <put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
   </definition>
   
-  <!-- request handler가 리턴한 JSP의 경로가 'board/*' 일 경우
-       TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다.  -->
-
-    <definition name="*/*" extends="base">
-    <put-attribute name="side" value="/WEB-INF/views/{1}/side.jsp" />
-    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
-  </definition>
-  
-    <definition name="plan/*" extends="planList">
-    <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" />
-    <put-attribute name="body" value="/WEB-INF/views/plan/{1}.jsp" />
-  </definition>
-  
+    <!-- plan -->
   <definition name="plan/calendar" extends="planCalendar">
     <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" /> 
     <put-attribute name="body" value="/WEB-INF/views/plan/calendar.jsp" />
@@ -72,6 +68,20 @@
     <definition name="plan/form" extends="planForm">
     <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" />
     <put-attribute name="body" value="/WEB-INF/views/plan/form.jsp" />
+  </definition>
+  
+ <definition name="plan/list" extends="planList">
+    <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" /> 
+    <put-attribute name="body" value="/WEB-INF/views/plan/list.jsp" />
+  </definition>
+    <!-- /plan -->
+  
+  <!-- request handler가 리턴한 JSP의 경로가 'board/*' 일 경우
+       TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다.  -->
+
+    <definition name="*/*" extends="base">
+    <put-attribute name="side" value="/WEB-INF/views/{1}/side.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>
   
 </tiles-definitions>

@@ -51,15 +51,10 @@ public class AuthController {
 
 
     String email = request.getParameter("email"); // 회원가입 폼에서 넘어오는 데이터들을 받아서 변수에 담음
-
-    Member emailCheck = memberService.emailCheck(email);
-
-    String inputPass = member.getPassword();
-
-    String pass = passEncoder.encode(inputPass);
-    member.setPassword(pass);
-
+    // String hashedPw = BCrypt.hashpw(member.getPassword(), BCrypt.gensalt());
+    // member.setPassword(hashedPw);
     memberService.join(member);
+
 
     rttr.addFlashAttribute("authmsg", "가입시 사용한 이메일로 인증해주세요");
     return "redirect:/";
@@ -100,18 +95,12 @@ public class AuthController {
 
 
 
-  // 로그인 get
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
-  public void getLogin() throws Exception {
-    logger.info("get login");
+  @GetMapping("login")
+  public void login() {}
 
-  }
-
-  // 로그인 post
-  @RequestMapping(value = "/login", method = RequestMethod.POST)
-  public String postLogin(String email, String password, String saveEmail,
-      HttpServletResponse response, HttpSession session, Model model) throws Exception {
-
+  @PostMapping("login")
+  public String login(String email, String password, String saveEmail, HttpServletResponse response,
+      HttpSession session, Model model) throws Exception {
     Cookie cookie = new Cookie("email", email);
     if (saveEmail != null) {
       cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -121,17 +110,19 @@ public class AuthController {
     response.addCookie(cookie);
 
     Member member = memberService.get(email, password);
-    if (member != null && member.getAuthStatus().equals("N")) {
+    System.out.println(member);
+    if (member != null) {
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../index.html");
     } else {
       session.invalidate();
-      model.addAttribute("refreshUrl", "2;url=emailAgainFail");
+      model.addAttribute("refreshUrl", "2;url=login");
     }
 
-    return "auth/login";
+    return "auth/loginForm";
   }
 
+  // && member.getAuthStatus().equals("N")
 
   @GetMapping("emailAgainFail")
   public void emailFail() {}

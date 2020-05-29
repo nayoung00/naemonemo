@@ -59,8 +59,11 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
         </div>
+        <!-- 
+        
         <div id="naverIdLogin"></div>
         
+         -->
         
         <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox" name='saveEmail'> Remember me</label>
@@ -69,7 +72,7 @@
     </form>
     <p class="text-center small">Don't have an account! <a href="join">Sign up here</a>.</p>
 </div>
-
+<!-- 
 <script type="text/javascript">
     var naverLogin = new naver.LoginWithNaverId(
         {
@@ -84,6 +87,7 @@
     naverLogin.init();
     
 </script>
+ -->
 <script>
 </script>
 </body>

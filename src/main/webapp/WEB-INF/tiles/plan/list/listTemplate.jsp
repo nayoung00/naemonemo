@@ -7,16 +7,15 @@
 <!DOCTYPE html>
 <html>
     <tiles:insertAttribute name="header"/>
-
 <body>
 <div class="wrapper">
   <tiles:insertAttribute name="side"/>
-
 <div class="main-panel">
+  <tiles:insertAttribute name="nav"/>
   <tiles:insertAttribute name="body"/>
-</div>
-</div>
   <tiles:insertAttribute name="footer"/>
-
+</div>
+</div>
+    <tiles:insertAttribute name="modal"/>
 </body>
 </html>

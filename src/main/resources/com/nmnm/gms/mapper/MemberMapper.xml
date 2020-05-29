@@ -16,10 +16,10 @@
     <result column="interest" property="interest"/>
     <result column="nickname" property="nickname"/>
     <result column="create_date" property="createDate"/>
+    <result column="auth_status" property="authStatus"/>
+    <result column="userkey" property="userkey"/>
   <association property="group" javaType="Group">
     <result column="group_name" property="groupName"/>
-    <result column="userkey" property="userkey"/>
-    <result column="auth_status" property="authStatus"/>
   </association>
   </resultMap>
   
@@ -44,25 +44,22 @@
         update nm_member set userkey = #{param1} where email = #{param2}
     </update>
     
-    <!-- 다시보낸 메일 인증키 업데이트 -->
-    <update id="emailAgainSend" >
-        update nm_member set userkey = #{userkey} where email = #{email}
-    </update>
-    
     
     <!-- 생성된 메일 인증키 컬럼을 N 에서 Y로 업데이트-->
     <update id="userAuth">
-        update nm_member set auth_status = 'Y'
+        update nm_member set auth_status = 'Y' where email =#{param2}
     </update>
     
-    <!-- 로그인 -->
-    <select id="login" resultType="Member">
-     select *
-     from
-         nm_member
-     where email = #{email}
-    </select>
-    
+   <select id="findByEmailAndPassword" 
+    resultMap="MemberMap" 
+    parameterType="map">
+    select *
+    from nm_member
+    where 
+      email=#{email} 
+      and password=password(#{password})
+  </select> 
+
     <!-- 비밀번호 초기화 -->
     <update id="resetPassword"> 
         update nm_member set password = password(#{password}) where email = #{email}
@@ -127,24 +124,12 @@
             member_name like #{keywordPattern}
             or nickname like #{keywordPattern}
     </select>
-  
- <select id="findByEmailAndPassword" 
-    resultMap="MemberMap" 
-    parameterType="map">
-    select *
-    from nm_member
-    where 
-      email=#{email} 
-      and password=password(#{password})
-  </select>
-  
     
 <select id="checknick" parameterType="String" resultType="Integer">
       SELECT COUNT(*) FROM nm_member
       WHERE
           nickname = #{nickname}
 </select>
-
 
 <!-- 그룹 가입 신청하기 -->
   <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">

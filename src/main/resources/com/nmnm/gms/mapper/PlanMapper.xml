@@ -10,16 +10,15 @@
     <result column="group_no" property="groupNo"/>
     <result column="start_date" property="startDate"/>
     <result column="end_date" property="endDate"/>
+    <result column="start_hour" property="startHour"/>
+    <result column="end_hour" property="endHour"/>
     <result column="title" property="title"/>
-    <result column="subtitle" property="subtitle"/>
       <result column="thumbnail" property="thumbnail"/>
        <result column="content" property="content"/>
-    <result column="place_name" property="placeName"/>
     <result column="address" property="address"/> 
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
-    
 </resultMap>
 
 <insert id="insert" parameterType="Plan">
@@ -29,9 +28,7 @@
     title, 
     thumbnail,
     content,
-    place_name, 
     address, 
-    subtitle,
     latitude,
     longitude
     ) values(  
@@ -40,9 +37,7 @@
       #{title},
       #{thumbnail},
       #{content},
-      #{placeName},
       #{address},
-      #{subtitle},
       #{latitude},
       #{longitude})
 </insert>
@@ -60,12 +55,13 @@
     <select id="findByNo" resultMap="PlanMap" parameterType="int">
     select 
       plan_no,
-      start_date,
-      end_date,
+      DATE_FORMAT(start_date, '%Y-%m-%d') start_date,
+      DATE_FORMAT(end_date, '%Y-%m-%d') end_date,
       title,
       content,
       thumbnail,
-      place_name,
+      DATE_FORMAT(start_date, '%H:%i') start_hour,
+      DATE_FORMAT(end_date, '%H:%i') end_hour,
       address,
       latitude,
       longitude,
@@ -84,8 +80,9 @@
       <if test="endDate != null">end_date=#{endDate},</if>
       <if test="title != null and title != ''">title=#{title},</if> 
        <if test="thumbnail != null and thumbnail != ''">thumbnail=#{thumbnail},</if> 
-      <if test="placeName != null and placeName != ''">place_name=#{placeName},</if>
       <if test="address != null and address != ''">address=#{address},</if>
+      <if test="startHour != null and startHour != ''">start_hour=#{startHour},</if>
+      <if test="endHour != null and endHour != ''">end_hour=#{endHour},</if>
       <if test= "content != null and content != ''">content=#{content},</if>
       <if test="latitude != null and latitude != ''">latitude=#{latitude},</if>
       <if test="longitude != null and longitude != ''">longitude=#{longitude}</if>

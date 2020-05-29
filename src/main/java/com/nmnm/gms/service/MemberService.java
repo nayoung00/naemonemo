@@ -11,7 +11,7 @@ public interface MemberService {
   public Member emailCheck(String email);
 
   // 회원가입 (DB 에 등록)
-  public void join(Member member) throws Exception;
+  void join(Member member) throws Exception;
 
   // 이메일인증
   public void userAuth(String email) throws Exception;
@@ -44,21 +44,18 @@ public interface MemberService {
 
   Object sender(int no) throws Exception;
 
-  // 로그인
-  public Member login(Member member) throws Exception;
-
   // 로그아웃
   public void logout(HttpSession session) throws Exception;
 
   public int update(Member member) throws Exception;
 
-  public Object get(int no);
+  public Object get(int no) throws Exception;
 
   public Object list();
 
   public Object search(String keyword);
 
-  public Member get(String email, String password) throws Exception;
+  Member get(String email, String password) throws Exception;
 
   Member findAccount(String email) throws Exception;
 

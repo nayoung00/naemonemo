@@ -11,12 +11,13 @@
     <th>번호</th>
     <th>제목</th>
      <th>작성일</th>
+     <th>참가신청</th>
   </tr>
   
 <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.planNo}</td> 
-    <td><a href='detail?planNo=${item.planNo}'> ${item.title}</a></td> 
+    <td><a href='calendar?planNo=${item.planNo}'> ${item.title}</a></td> 
     <td>${item.createDate}</td>
   </tr>
 </c:forEach>
@@ -27,4 +28,9 @@
 검색어: <input name='keyword' type='text'>
 <button>검색</button>
 </form>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
 

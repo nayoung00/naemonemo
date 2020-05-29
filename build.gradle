@@ -116,8 +116,9 @@ implementation 'org.apache.commons:commons-lang3:3.8.1'
 
 // https://mvnrepository.com/artifact/com.github.cliftonlabs/json-simple
 implementation 'com.github.cliftonlabs:json-simple:3.0.2'
-  
-  
+
+// jackson 라이브러리  
+implementation 'com.mastfrog:jackson:2.6.10'
   
 
   

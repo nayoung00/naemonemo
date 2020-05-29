@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nmnm.gms.domain.Plan;
 import com.nmnm.gms.service.PlanService;
 
@@ -40,6 +41,10 @@ public class PlanController {
   @GetMapping("calendar")
   public void calendar(Model model, int planNo) throws Exception {
     logger.debug("calendar 호출==================================================");
+    Plan plan = planService.get(planNo);
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonString = mapper.writeValueAsString(plan);
+    System.out.println(jsonString);
     model.addAttribute("calendar", planService.get(planNo));
   }
 
@@ -56,6 +61,10 @@ public class PlanController {
       thumbnailFile.transferTo(new File(dirPath + "/" + filename));
       plan.setThumbnail(filename);
     }
+    String[] startHour = plan.getStartDate().split("T");
+    String[] endHour = plan.getEndDate().split("T");
+    plan.setStartHour(startHour[1]);
+    plan.setEndHour(endHour[1]);
     if (planService.add(plan) > 0) {
       return "redirect:list";
     } else {

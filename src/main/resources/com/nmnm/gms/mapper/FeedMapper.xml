@@ -13,11 +13,12 @@
     <result column="content"  property="content"/>
     <result column="create_date"    property="createDate"/>
     <result column="view_count"    property="viewCount"/>
-    
+
     <collection property="feedPhotos" ofType="FeedPhoto">
     <id column="feed_photo_no"   property="no"/>
     <result column="feed_photo_file"    property="filepath"/>
     </collection>
+        
   </resultMap>
   
   
@@ -51,18 +52,22 @@
       )
   </insert>
   
-  <select id="findAll" resultMap="FeedMap">
+  <select id="findAll" resultMap="FeedMap" parameterType="Map">
     select
-      feed_no,
-      member_no, 
-      title,
-      create_date,
-      view_count
+      f.feed_no,
+      f.member_no, 
+      f.title,
+      f.create_date,
+      f.view_count,
+      p.feed_photo_no,
+      p.feed_photo_file
     from 
-      nm_feed
+      nm_feed f
       
+    inner join nm_feed_photo p on f.feed_no= p.feed_no
+
     order by
-      feed_no desc
+      f.feed_no desc
    
   </select>
 

@@ -15,6 +15,6 @@ public interface FeedService {
 
   void delete(int feedNo) throws Exception;
 
-  //List<Feed> search(String keyword) throws Exception;
+  List<Feed> search(String keyword) throws Exception;
 
 }

@@ -12,11 +12,11 @@ public interface CoService {
 
   List<Co> list(Pagination pagination) throws Exception;
 
-  int delete(int coNo) throws Exception;
+  void delete(int coNo) throws Exception; //int
 
   Co get(int coNo) throws Exception;
 
-  int update(Co co) throws Exception;
+  void update(Co co) throws Exception;//int
 
   List<Co> search(String keyword) throws Exception;
 

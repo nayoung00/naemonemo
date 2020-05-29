@@ -4,6 +4,7 @@ import java.util.List;
 import com.nmnm.gms.domain.Notice;
 
 public interface NoticeDao {
+  
    int insert(Notice notice) throws Exception;
 
    List<Notice> findAll() throws Exception;

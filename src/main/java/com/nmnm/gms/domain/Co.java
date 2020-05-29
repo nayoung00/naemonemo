@@ -1,6 +1,12 @@
 package com.nmnm.gms.domain;
 
-public class Co {
+import java.io.Serializable;
+import java.util.List;
+
+public class Co implements Serializable{
+  
+  private static final long serialVersionUID = 1L;
+  
   private int coNo; // PK
   private String category;
   private int memberNo; // FK
@@ -8,12 +14,15 @@ public class Co {
   private String content;
   private String createDate; // now()
   private int viewCount;
+  private List<CoPhoto> coPhotos;
+
+
 
   @Override
   public String toString() {
     return "Co [coNo=" + coNo + ", category=" + category + ", memberNo=" + memberNo + ", title="
         + title + ", content=" + content + ", createDate=" + createDate + ", viewCount=" + viewCount
-        + "]";
+        + ", coPhotos=" + coPhotos + "]";
   }
 
 
@@ -79,6 +88,16 @@ public class Co {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+
+
+  public List<CoPhoto> getCoPhotos() {
+    return coPhotos;
+  }
+
+  public void setCoPhotos(List<CoPhoto> coPhotos) {
+    this.coPhotos = coPhotos;
   }
 
 

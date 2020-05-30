@@ -27,9 +27,6 @@ public interface MemberDao {
   // 네이버 로그인 체크
   Member naverLoginCheck(String email) throws Exception;
 
-  // 카카오 로그인 체크
-  Member kakaoLoginCheck(String email) throws Exception;
-
   // 멤버 아이디 찾기
   Member findAccount(String email) throws Exception;
 
@@ -41,7 +38,9 @@ public interface MemberDao {
 
   void deleteMember(String member) throws Exception;
 
+
   Member findByEmailAndPassword(Map<String, Object> params) throws Exception;
+
 
   int login(Member member) throws Exception;
 

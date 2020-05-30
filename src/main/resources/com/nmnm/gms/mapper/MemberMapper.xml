@@ -70,6 +70,16 @@
          update nm_member set password = password(#{password}) where email = #{email}
     </update>
     
+    <!-- 비밀번호 찾을거야.. -->
+    <select id="findAccount" resultType="Member">
+        SELECT count(*)
+        FROM   nm_member
+        WHERE  email=#{email} 
+               and password=password(#{password})
+    
+    </select>
+    
+    
     <select id="userView" resultType="Member">
         SELECT * FROM nm_member
         WHERE id = #{id}

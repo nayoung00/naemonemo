@@ -2,23 +2,23 @@ package com.nmnm.gms.domain;
 
 public class PlanMember {
 
-  private int planBoardNo; // nm_plan PK/ PK NN
+  private int planNo; // nm_plan PK/ PK NN
   private int memberNo; // nm_meeting_member PK/ PK NN
   private int groupNo; // nm_meeting_member PK/ PK NN
   private int attend; // nm_plan_member NN default=0 미정,불참,참가
 
   @Override
   public String toString() {
-    return "PlanMember [planBoardNo=" + planBoardNo + ", memberNo=" + memberNo + ", groupNo="
-        + groupNo + ", attend=" + attend + "]";
+    return "PlanMember [planNo=" + planNo + ", memberNo=" + memberNo + ", groupNo=" + groupNo
+        + ", attend=" + attend + "]";
   }
 
-  public int getPlanBoardNo() {
-    return planBoardNo;
+  public int getPlanNo() {
+    return planNo;
   }
 
-  public void setPlanBoardNo(int planBoardNo) {
-    this.planBoardNo = planBoardNo;
+  public void setPlanNo(int planNo) {
+    this.planNo = planNo;
   }
 
   public int getMemberNo() {
@@ -44,4 +44,5 @@ public class PlanMember {
   public void setAttend(int attend) {
     this.attend = attend;
   }
+
 }

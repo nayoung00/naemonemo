@@ -42,6 +42,9 @@
      inner join nm_feed as f on t.feed_no=f.feed_no
     where
       t.feed_photo_no=#{no}
+      
+    order by
+      t.feed_photo_no desc
   </select>
   
   <delete id="deleteAll" parameterType="int">

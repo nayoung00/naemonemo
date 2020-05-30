@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nmnm.gms.dao.DuesDao">
+
+	<resultMap type="Dues" id="DuesMap">
+		<id column="group_no" property="groupNo" />
+		<result column="bank_info_id" property="bankInfoId" />
+		<result column="member_no" property="memberNo" />
+		<result column="entrance_fee" property="entranceFee" />
+		
+		
+		<result column="dues_period" property="duesPeriod" />
+		<result column="dues" property="dues" />
+	</resultMap>
+
+	<select id="findAll" resultMap="DuesMap">
+SELECT 
+      g.group_no,
+      ga.bank_info_id,
+      m.member_no,
+      entrance_fee,
+      dues_period,
+      dues,
+      ga.bank_name,
+      ga.bank_account_no
+FROM ((nm_dues AS d LEFT JOIN nm_member AS m ON d.member_no=m.member_no) 
+  LEFT JOIN nm_group AS g ON g.group_no=d.group_no), 
+  nm_group_account AS ga
+	</select>
+
+	<insert id="insert" parameterType="Dues">
+		insert into nm_dues(
+      group_no,
+      bank_info_id,
+      member_no,
+      entrance_fee,
+      dues_period,
+      dues
+      )
+		values(
+		#{groupNo},
+		#{bankInfoId},
+		#{memberNo},
+		#{entranceFee},
+		#{duesPeriod},
+    #{dues})
+	</insert>
+
+	<update id="update" parameterType="Dues">
+		update nm_dues set
+		entrance_fee=#{entranceFee},
+		dues_period=#{duesPeriod},
+		dues=#{dues}
+	}
+		where
+		group_no=#{groupNo}
+	</update>
+
+</mapper>

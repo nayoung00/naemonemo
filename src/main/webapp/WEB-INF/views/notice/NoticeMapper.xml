@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.NoticeDao">
+
+  <resultMap type="Notice" id="NoticeMap">
+    <id column="notice_no"   property="noticeNo"/>
+    <result column="group_no"  property="groupNo"/>
+    <result column="member_no"    property="memberNo"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="create_date" property="createDate"/>
+    <result column="view_count" property="viewCount"/>
+    
+    <collection property="noticePhotos" ofType="NoticePhoto">
+    <id column="notice_photo_no"   property="no"/>
+    <result column="notice_photo_file"    property="filepath"/>
+    </collection>
+  </resultMap>
+  
+   <sql id="select1">
+    select 
+      notice_no, 
+      group_no,
+      member_no, 
+      title, 
+      content, 
+      create_date, 
+      view_count
+    from 
+      nm_notice
+  </sql>
+  
+  
+   <insert id="insert" parameterType="Notice"
+    useGeneratedKeys="true" keyColumn="notice_no" keyProperty="noticeNo">
+    insert into nm_notice(
+      group_no,
+      member_no, 
+      title,
+      content
+      ) 
+    values(
+      #{groupNo},
+      #{memberNo},
+      #{title},
+      #{content}
+      )
+  </insert>
+  
+  <select id="findAll" resultMap="NoticeMap" parameterType="Map">
+    select
+      n.notice_no,
+      n.member_no, 
+      n.title,
+      n.create_date,
+      n.view_count,
+      p.notice_photo_no,
+      p.notice_photo_file
+    from 
+      nm_notice n
+      
+    inner join nm_notice_photo p on n.notice_no= p.notice_no
+
+    order by
+      n.notice_no desc
+
+  </select>
+  
+  
+ 
+  
+  <select id="findByNo" resultMap="NoticeMap" parameterType="int">
+    select
+      n.notice_no,
+      n.member_no, 
+      n.group_no,
+      n.title,
+      n.create_date,
+      n.view_count,
+      p.notice_photo_no,
+      p.notice_photo_file
+    from 
+      nm_notice n
+      
+    inner join nm_notice_photo p on n.notice_no= p.notice_no
+    
+    where 
+      n.notice_no=#{noticeNo}
+  </select>
+  
+  <update id="update" parameterType="Notice">
+    update nm_notice set
+      group_no=#{groupNo},
+      member_no=#{memberNo},
+      title=#{title},
+      content=#{content}
+    where 
+      notice_no=#{noticeNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from nm_notice
+    where notice_no=#{noticeNo}
+  </delete>
+  
+  <select id="findByKeyword" resultMap="NoticeMap" parameterType="string">
+  <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select 
+      notice_no, 
+      member_no, 
+      title, 
+      create_date, 
+      view_count 
+    from 
+      nm_notice n
+      
+    inner join nm_notice_photo p on n.notice_no= p.notice_no
+      
+    where     
+      title like #{keywordPattern} 
+      or content like #{keywordPattern} 
+  </select>
+  
+</mapper>

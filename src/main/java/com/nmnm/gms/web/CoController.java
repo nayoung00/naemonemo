@@ -1,5 +1,9 @@
 package com.nmnm.gms.web;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
+import com.nmnm.gms.domain.CoPhoto;
 import com.nmnm.gms.service.CoService;
 
 @Controller
@@ -18,6 +24,9 @@ import com.nmnm.gms.service.CoService;
 public class CoController {
 
   static Logger logger = LogManager.getLogger(CoController.class);
+
+  @Autowired
+  ServletContext servletContext;
 
   @Autowired
   CoService coService;
@@ -30,30 +39,57 @@ public class CoController {
   public void form() throws Exception {}
 
   @PostMapping("add")
-  public String add(Co co) throws Exception {
+  public String add( //
+      String category, //
+      int memberNo, //
+      String title, //
+      String content, //
+      MultipartFile[] coPhotos) throws Exception {
+    
+    Co co = new Co();
+    
+    co.setCategory(category);
+    co.setMemberNo(memberNo);
+    co.setTitle(title);
+    co.setContent(content);
+    
+    ArrayList<CoPhoto> coPhotoArray = new ArrayList<>();
+    String dirPath = servletContext.getRealPath("/upload/co");
+    for (MultipartFile coPhoto : coPhotos) {
+      if (coPhoto.getSize() <= 0) {
+        continue;
+      }
+      String filename = UUID.randomUUID().toString();
+      coPhoto.transferTo(new File(dirPath + "/" + filename));
+      coPhotoArray.add(new CoPhoto().setFilepath(filename));
+    }
+    
+    if (coPhotoArray.size() == 0) {
+      throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
+    } else {
+      System.out.println("사진이 있당");
+    }
+    
+    co.setCoPhotos(coPhotoArray);
     coService.add(co);
+    
     return "redirect:list";
   }
 
   @GetMapping("delete")
   public String delete(int coNo) throws Exception {
-    if (coService.delete(coNo) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("삭제할 게시물 번호가 유효하지 않습니다.");
-    }
+    coService.delete(coNo);
+    return "redirect:list";
   }
 
   @GetMapping("detail")
   public void detail(int coNo, Model model) throws Exception {
-    Co co = coService.get(coNo);
-    model.addAttribute("co", co);
+    model.addAttribute("co", coService.get(coNo));
   }
 
   // @GetMapping("list")
   // public void list(Model model) throws Exception {
-  // List<Co> cos = coService.list();
-  // model.addAttribute("list", cos);
+  // model.addAttribute("list", coService.list(););
   // }
 
   @GetMapping("list")
@@ -75,12 +111,39 @@ public class CoController {
   }
 
   @PostMapping("update")
-  public String update(Co co) throws Exception {
-    if (coService.update(co) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("변경할 게시물 번호가 유효하지 않습니다." + co.getCoNo() + " " + co.getTitle());
+  public String update( //
+      int coNo, //
+      String category, //
+      int memberNo, //
+      String title, //
+      String content, //
+      MultipartFile[] coPhotos) throws Exception {
+    
+    Co co = coService.get(coNo);
+    
+    co.setCategory(category);
+    co.setTitle(title);
+    co.setContent(content);
+    
+    ArrayList<CoPhoto> coPhotoArray = new ArrayList<>();
+    String dirPath = servletContext.getRealPath("/upload/co");
+    for (MultipartFile coPhoto : coPhotos) {
+      if (coPhoto.getSize() <= 0) {
+        continue;
+      }
+      String filename = UUID.randomUUID().toString();
+      coPhoto.transferTo(new File(dirPath + "/" + filename));
+      coPhotoArray.add(new CoPhoto().setFilepath(filename));
     }
+
+    if (coPhotoArray.size() > 0) {
+      co.setCoPhotos(coPhotoArray);
+    } else {
+      co.setCoPhotos(null);
+    }
+
+    coService.update(co);
+    return "redirect:list";
   }
 
   @GetMapping("search")

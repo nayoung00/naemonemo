@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Account;
+import com.nmnm.gms.domain.Co;
+import com.nmnm.gms.domain.Dues;
 import com.nmnm.gms.service.AccountService;
+import com.nmnm.gms.service.DuesService;
+import com.nmnm.gms.service.GroupService;
 
 @Controller
 @RequestMapping("/account")
@@ -31,6 +35,12 @@ public class AccountController {
 
   @Autowired
   AccountService accountService;
+  
+  @Autowired
+  GroupService groupService;
+  
+  @Autowired
+  DuesService duesService;
 
   public AccountController() {
     logger.debug("AccountController 생성됨!");
@@ -132,5 +142,30 @@ public class AccountController {
 		  @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, Model model) throws Exception {
     model.addAttribute("list", accountService.search(startDate, endDate));
   }
+  
+  
+  
+  
+  // 회비납부
+  @GetMapping("dues")
+  public void duesList(Model model) throws Exception {
+    List<Dues> duess = duesService.list();
+    model.addAttribute("dues", duess);
+  }
 
+  // 모임당 회비 안내는 1개씩 존재
+  @GetMapping("updateDues")
+  public void updateDuesForm(int groupNo, Model model) throws Exception {
+    model.addAttribute("group", groupService.get(groupNo));
+  }
+
+//  @PostMapping("update")
+//  public String update(Co co) throws Exception {
+//    if (coService.update(co) > 0) {
+//      return "redirect:list";
+//    } else {
+//      throw new Exception("변경할 게시물 번호가 유효하지 않습니다." + co.getCoNo() + " " + co.getTitle());
+//    }
+//  }
+  
 }

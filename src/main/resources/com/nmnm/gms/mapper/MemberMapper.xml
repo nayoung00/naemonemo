@@ -6,7 +6,7 @@
 <mapper namespace="com.nmnm.gms.dao.MemberDao">
     <!-- 회원 -->
   <resultMap type="Member" id="MemberMap">
-    <id column="member_no"  property="no"/>
+    <id column="member_no"  property="memberNo"/>
     <result column="member_name"       property="name"/>
     <result column="id_photo"  property="photo"/>
     <result column="birthday"    property="birthday"/>
@@ -24,7 +24,7 @@
   </resultMap>
   
   <resultMap type="GroupMember" id="GrMemberMap">
-    <id column="member_no" property="no"/>
+    <id column="member_no" property="memberNo"/>
   </resultMap>
   
     <select id="emailCheck" parameterType="String" resultType="int">
@@ -111,12 +111,12 @@
       <if test="photo != null and photo != ''">id_photo=#{photo}</if>
     </set>
     where 
-      member_no=#{no}
+      member_no=#{memberNo}
   </update>
   
   <delete id="delete" parameterType="int">
     delete from nm_member
-    where member_no=#{no}
+    where member_no=#{memberNo}
   </delete>
   
   <select id="findByKeyword" resultMap="MemberMap"
@@ -158,7 +158,7 @@
       <if test="register == 0">register=1</if>
     </set>
     where 
-      member_no=#{no}
+      member_no=#{memberNo}
     </update>
     
 <!-- 회원이 속해 있는 그룹 회원번호로 조회 -->

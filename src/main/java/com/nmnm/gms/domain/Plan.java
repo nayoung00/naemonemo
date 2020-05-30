@@ -6,25 +6,27 @@ public class Plan {
 
   private int planNo; // nm_plan PK auto_increment default=1 NN
   private int groupNo; // nm_group PK/ FK N
-  private Date startDate; // DATE NN
-  private Date endDate; // DATE NN
+  private int memberNo;
+  private String startDate; // DATE NN
+  private String endDate; // DATE NN
+  private String startHour; // 시간 저장
+  private String endHour; // 시간 저장
   private String title; // VARCHAR(255) NN
-  private String subtitle;
   private String thumbnail;
   private String content;
-  private String placeName; // VARCHAR(255) N
   private String address; // VARCHAR(255) NN
   private int latitude; // 위도 N
   private int longitude; // 경도 N
   private Date createDate;
+  private PlanMember planMember;
 
   @Override
   public String toString() {
-    return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", startDate=" + startDate
-        + ", endDate=" + endDate + ", title=" + title + ", subtitle=" + subtitle + ", thumbnail="
-        + thumbnail + ", content=" + content + ", placeName=" + placeName + ", address=" + address
-        + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
-        + "]";
+    return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", memberNo=" + memberNo
+        + ", startDate=" + startDate + ", endDate=" + endDate + ", startHour=" + startHour
+        + ", endHour=" + endHour + ", title=" + title + ", thumbnail=" + thumbnail + ", content="
+        + content + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude
+        + ", createDate=" + createDate + ", planMember=" + planMember + "]";
   }
 
   public int getPlanNo() {
@@ -43,20 +45,44 @@ public class Plan {
     this.groupNo = groupNo;
   }
 
-  public Date getStartDate() {
+  public int getMemberNo() {
+    return memberNo;
+  }
+
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
+  }
+
+  public String getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
 
-  public Date getEndDate() {
+  public String getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(String endDate) {
     this.endDate = endDate;
+  }
+
+  public String getStartHour() {
+    return startHour;
+  }
+
+  public void setStartHour(String startHour) {
+    this.startHour = startHour;
+  }
+
+  public String getEndHour() {
+    return endHour;
+  }
+
+  public void setEndHour(String endHour) {
+    this.endHour = endHour;
   }
 
   public String getTitle() {
@@ -65,14 +91,6 @@ public class Plan {
 
   public void setTitle(String title) {
     this.title = title;
-  }
-
-  public String getSubtitle() {
-    return subtitle;
-  }
-
-  public void setSubtitle(String subtitle) {
-    this.subtitle = subtitle;
   }
 
   public String getThumbnail() {
@@ -89,14 +107,6 @@ public class Plan {
 
   public void setContent(String content) {
     this.content = content;
-  }
-
-  public String getPlaceName() {
-    return placeName;
-  }
-
-  public void setPlaceName(String placeName) {
-    this.placeName = placeName;
   }
 
   public String getAddress() {
@@ -129,6 +139,14 @@ public class Plan {
 
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
+  }
+
+  public PlanMember getPlanMember() {
+    return planMember;
+  }
+
+  public void setPlanMember(PlanMember planMember) {
+    this.planMember = planMember;
   }
 
 

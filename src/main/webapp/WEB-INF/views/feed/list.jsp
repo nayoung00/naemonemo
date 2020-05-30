@@ -10,8 +10,8 @@
   <table border='1'>
   <tr>
     <th>번호</th>
-    <th>회원번호(작성자)</th>
     <th>제목</th>
+    <th>회원번호(작성자)</th>
     <th>등록일</th>
     <th>조회수</th>
     <th>사진</th>
@@ -20,11 +20,11 @@
 <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.feedNo}</td> 
-    <td>${item.memberNo}</td>
     <td><a href='detail?feedNo=${item.feedNo}'> ${item.title}</a></td> 
+    <td>${item.memberNo}</td>
     <td>${item.createDate}</td> 
     <td>${item.viewCount}</td>
-    <td>${item.feedPhotos}</td>
+    <td><img src="../../upload/feed/${item.feedPhotos[0].filepath}" width='240'></td>
   </tr>
 </c:forEach>
 

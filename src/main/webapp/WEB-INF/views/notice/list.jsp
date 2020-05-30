@@ -1,10 +1,11 @@
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+ <!--content-->
 
-  <!--content-->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -12,7 +13,6 @@
                         <div class="card card-plain">
                             <div class="header">
                                 <h4 class="title">공지사항</h4>
-                                <p class="category">모임의 공지가 올라오는 게시판</p>
                                   <a href='form'>새 글</a><br>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -21,7 +21,7 @@
                                       <th style="width: 10%">번호</th>
                                       <th style="width: 50%">제목</th>
                                       <th style="width: 10%">작성자</th>
-                                      <th style="width: 10%">작성일</th>
+                                      <th style="width: 10%">등록일</th>
                                       <th style="width: 10%">조회수</th>
                                     </thead>
                                     <tbody>
@@ -41,17 +41,15 @@
                     </div>
                 </div>
             </div>
+
+            
+
             <form action='search' method='get'>
              <div class="form-group">
                <label>검색어</label>
                <input name='keyword' type="text" class="form-control" placeholder="search" value="검색어를입력하세요">
              </div>
-            <span>
-            <button type="submit" class="btn btn-info btn-fill pull-right">검색</button>
-            </span>
+               <button type="submit" class="btn btn-info btn-fill pull-right">검색</button>
             </form>
+        
         </div>
-
-
-
-    

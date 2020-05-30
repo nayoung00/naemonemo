@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.PlanDao;
 import com.nmnm.gms.domain.Plan;
+import com.nmnm.gms.domain.PlanMember;
 import com.nmnm.gms.service.PlanService;
 
 @Component
@@ -32,8 +33,8 @@ public class PlanServiceImpl implements PlanService {
   }
 
   @Override
-  public List<Plan> list() throws Exception {
-    return planDao.findAll();
+  public List<Plan> list(int groupNo) throws Exception {
+    return planDao.findAll(groupNo);
   }
 
 
@@ -45,5 +46,10 @@ public class PlanServiceImpl implements PlanService {
   @Override
   public List<Plan> search(String keyword) throws Exception {
     return planDao.findByKeyword(keyword);
+  }
+
+  @Override
+  public int apply(PlanMember planMember) throws Exception {
+    return planDao.applyPlanMember(planMember);
   }
 }

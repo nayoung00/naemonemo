@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,11 +60,13 @@ public class AuthController {
     return "redirect:/";
   }
 
-  @RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
-  public @ResponseBody String emailCheck(@ModelAttribute("member") Member member, Model model)
-      throws Exception {
-    int result = memberService.emailCheck(member.getEmail());
-    return String.valueOf(result);
+  @ResponseBody
+  @RequestMapping(value = "emailCheck", method = RequestMethod.POST)
+  public int emailCheck(String email) throws Exception {
+    System.out.println(email);
+    int count = memberService.emailCheck(email);
+    System.out.println(count);
+    return count;
   }
 
 

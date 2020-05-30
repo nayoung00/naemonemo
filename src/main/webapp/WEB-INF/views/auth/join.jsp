@@ -103,24 +103,20 @@
             </div>
      </form>
      </section>
+
 <script>
 
 //start JQuery
 $(function() {
-    
     //입력값 검증 정규표현식
     const getPwCheck= RegExp(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
-    const getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
     
     //패스워드 입력값 검증.
     $('#password').on('keyup', function() {
-        //비밀번호 공백 확인
-        if($("#password").val() === ""){
-        }                
-        //비밀번호 유효성검사
-        else if(!getPwCheck.test($("#password").val()) || $("#password").val().length < 8){
+       if(!getPwCheck.test($("#password").val()) || $("#password").val().length < 8){
             $('#pwChk').html('<b style="font-size:14px;color:red;">[특수문자 포함 8자이상 입력해주세요.]</b>');
         } else {
+        	$('#pwChk').html('');
         }
         
     });
@@ -128,36 +124,36 @@ $(function() {
     //패스워드 확인란 입력값 검증.
     $('#password2').on('keyup', function() {
         //비밀번호 확인란 공백 확인
-        if($("#password2").val() === ""){
-        }                
-        //비밀번호 확인란 유효성검사
-        else if($("#password").val() != $("#password2").val()){
+       if($("#password").val() != $("#password2").val()){
             $('#pwChk2').html('<b style="font-size:14px;color:red;">[비밀번호가 일치하지 않습니다.]</b>');
         } else {
+        	$('#pwChk2').html('');
         }
         
     });
-    
-    
-    function emailCheck(){
-        var email = $('#email').val();
-        $.ajax({
-            url:'auth/emailCheck',
-            type:'post',
-            data:{email:email},
-            success:function(data){
-                if($.trim(data)==0){
-                    $('#chkMsg').html("사용가능");                
-                }else{
-                    $('#chkMsg').html("사용불가");
-                }
-            },
-            error:function(){
-                    alert("에러입니다");
-            }
-    });
-    };
 });//end JQuery
+
+
+function emailCheck(){
+    var emailCheck = 0;
+    $.ajax({
+        type:'post',
+        datatype: 'json',
+        url:'emailCheck',
+        data:{email: $('#email').val()},
+        success:function(data){
+            if(data == 0){
+                $('#chkMsg').html();                
+            }else{
+                $('#chkMsg').html('<b style="font-size:14px;color:red;">이미 사용중인 이메일 입니다.</b>');
+            }
+        },
+        error:function(){
+                alert("에러입니다");
+        }
+});
+};
+
 </script>
 </body>
 </html>

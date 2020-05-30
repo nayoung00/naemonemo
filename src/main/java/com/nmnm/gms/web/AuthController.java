@@ -60,26 +60,14 @@ public class AuthController {
     return "redirect:/";
   }
 
-  // 에서 Ajax로 email 중복 확인
   @ResponseBody
-  @RequestMapping(value = "emailCheck", method = {RequestMethod.GET, RequestMethod.POST})
-  public String postIdCheck(HttpServletRequest request) throws Exception {
-    logger.info("post emailCheck");
-
-    String email = request.getParameter("email");
-    Member emailCheck = memberService.emailCheck(email);
-
-    int result = 0;
-
-    if (emailCheck == null) {
-      result = 0;
-    } else {
-      result = 1;
-    }
-
-    return String.valueOf(result);
+  @RequestMapping(value = "emailCheck", method = RequestMethod.POST)
+  public int emailCheck(String email) throws Exception {
+    System.out.println(email);
+    int count = memberService.emailCheck(email);
+    System.out.println(count);
+    return count;
   }
-
 
 
   // 회원이 이메일 인증 클릭시 리턴받는 정보

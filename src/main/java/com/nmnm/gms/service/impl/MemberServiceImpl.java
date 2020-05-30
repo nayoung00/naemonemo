@@ -37,11 +37,6 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.approvalGrMember(grMember);
   }
 
-  @Override
-  public Member emailCheck(String email) {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   @Override
   public void join(Member member) throws Exception {
@@ -54,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
 
     sendMail.setSubject("[네모내모 회원가입 서비스 이메일 인증 입니다.]");
     sendMail.setText(new StringBuffer().append("<h1>nemonaemo 가입 메일인증 입니다</h1>")
-        .append("<a href='http://localhost:8080/nmnm/app/auth/emailConfirm?email=")
+        .append("<a href='http://localhost:9999/nmnm/app/auth/emailConfirm?email=")
         .append(member.getEmail()).append("&key=").append(key)
         .append("' target='_blenk'>가입 완료를 위해 이메일 이곳을 눌러주세요</a>").toString());
     sendMail.setFrom("nemonaemo0@gmail.com", "nmnm");
@@ -79,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 
     sendMail.setSubject("[네모내모 회원가입 서비스 이메일 인증 입니다.]");
     sendMail.setText(new StringBuffer().append("<h1>nemonaemo 가입 메일인증 입니다</h1>")
-        .append("<a href='http://localhost:8080/nmnm/auth/emailConfirm?email=")
+        .append("<a href='http://localhost:9999/nmnm/auth/emailConfirm?email=")
         .append(member.getEmail()).append("&key=").append(key)
         .append("' target='_blenk'>가입 완료를 위해 이메일 이곳을 눌러주세요</a>").toString());
     sendMail.setFrom("nemonaemo0@gmail.com", "nmnm");
@@ -102,7 +97,7 @@ public class MemberServiceImpl implements MemberService {
   public void resetPassword(Member member) throws Exception {
     MailHandler sendMail = new MailHandler(mailSender);
 
-    String link = "http://localhost:8080/nmnm/app/auth/returnResetPass?email=" + member.getEmail();
+    String link = "http://localhost:9999/nmnm/app/auth/returnResetPass?email=" + member.getEmail();
 
     sendMail.setSubject("[네모내모 비밀번호 초기화 이메일 입니다.]");
     sendMail.setText(
@@ -206,11 +201,6 @@ public class MemberServiceImpl implements MemberService {
     return null;
   }
 
-  @Override
-  public Member kakaoLoginCheck(String usermId) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   // 네이버 로그인 시 기존 네이버 가입자의 이름과 별명을 가져오는 메서드
   @Override
@@ -218,6 +208,10 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.getNameForNaverMember(naverEmail);
   }
 
-
+  @Override
+  public int emailCheck(String email) throws Exception {
+    System.out.println("==========================>emailCheck");
+    return memberDao.emailCheck(email);
+  }
 
 }

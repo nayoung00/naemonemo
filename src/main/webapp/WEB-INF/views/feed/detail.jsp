@@ -30,6 +30,7 @@
 <p>
 <button><a href='delete?feedNo=${feed.feedNo}'>삭제</a></button>
 <button><a href='updateForm?feedNo=${feed.feedNo}'>변경</a></button>
+<button><a href="list.jsp">목록</a></button>
 </p>
 
 </form>
@@ -39,3 +40,5 @@
 <p>해당 게시물이 없습니다.</p>
 </c:if>
 
+
+<jsp:include page="replyView.jsp"/>

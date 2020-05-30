@@ -152,3 +152,11 @@ function debounce(func, wait, immediate) {
 		if (immediate && !timeout) func.apply(context, args);
 	};
 };
+
+
+// 댓글 작성 버튼
+$(".replyWriteBtn").on("click", function(){
+	  var formObj = $("form[name='replyForm']");
+	  formObj.attr("action", "/feed/replyWrite");
+	  formObj.submit();
+});

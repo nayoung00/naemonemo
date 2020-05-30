@@ -37,11 +37,6 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.approvalGrMember(grMember);
   }
 
-  @Override
-  public Member emailCheck(String email) {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   @Override
   public void join(Member member) throws Exception {
@@ -218,6 +213,9 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.getNameForNaverMember(naverEmail);
   }
 
-
+  @Override
+  public int emailCheck(String email) throws Exception {
+    return memberDao.emailCheck(email);
+  }
 
 }

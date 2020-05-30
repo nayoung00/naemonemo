@@ -7,8 +7,6 @@ import com.nmnm.gms.domain.Message;
 
 public interface MemberService {
 
-  // 회원가입 email중복체크(AJAX)
-  public Member emailCheck(String email);
 
   // 회원가입 (DB 에 등록)
   void join(Member member) throws Exception;
@@ -66,6 +64,9 @@ public interface MemberService {
   public Member kakaoLoginCheck(String usermId) throws Exception;
 
   public Member getNameForNaverMember(String naverEmail);
+
+  int emailCheck(String email) throws Exception;
+
 
 
 }

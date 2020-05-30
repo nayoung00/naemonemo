@@ -27,9 +27,8 @@
     <id column="member_no" property="no"/>
   </resultMap>
   
-    <select id="emailCheck" resultType="Member">
-        SELECT email FROM nm_member
-        WHERE email = #{email}
+    <select id="emailCheck" parameterType="String" resultType="int">
+        select count(*) from nm_member where email = #{email}
     </select>
     
     <insert id="insert">

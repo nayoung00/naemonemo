@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,26 +61,12 @@ public class AuthController {
     return "redirect:/";
   }
 
-  // 에서 Ajax로 email 중복 확인
-  @ResponseBody
-  @RequestMapping(value = "emailCheck", method = {RequestMethod.GET, RequestMethod.POST})
-  public String postIdCheck(HttpServletRequest request) throws Exception {
-    logger.info("post emailCheck");
-
-    String email = request.getParameter("email");
-    Member emailCheck = memberService.emailCheck(email);
-
-    int result = 0;
-
-    if (emailCheck == null) {
-      result = 0;
-    } else {
-      result = 1;
-    }
-
+  @RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
+  public @ResponseBody String emailCheck(@ModelAttribute("member") Member member, Model model)
+      throws Exception {
+    int result = memberService.emailCheck(member.getEmail());
     return String.valueOf(result);
   }
-
 
 
   // 회원이 이메일 인증 클릭시 리턴받는 정보

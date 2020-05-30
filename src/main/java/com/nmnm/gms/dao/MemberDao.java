@@ -7,7 +7,7 @@ import com.nmnm.gms.domain.Message;
 
 public interface MemberDao {
   // 회원가입 email중복체크
-  Member emailCheck(String email) throws Exception;
+  int emailCheck(String email) throws Exception;
 
   // 회원가입 db에 회원등록
   int insert(Member memeber) throws Exception;

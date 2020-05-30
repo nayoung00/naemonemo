@@ -33,7 +33,7 @@ public class PlanController {
   }
 
 
-  @GetMapping("form")
+  @PostMapping("form")
   public void form() {
     System.out.println("form 호출==================================================");
   }
@@ -66,7 +66,7 @@ public class PlanController {
     plan.setStartHour(startHour[1]);
     plan.setEndHour(endHour[1]);
     if (planService.add(plan) > 0) {
-      return "redirect:list";
+      return "redirect:list" + "?groupNo=" + plan.getGroupNo();
     } else {
       throw new Exception("일정을 추가할 수 없습니다.");
     }
@@ -87,9 +87,10 @@ public class PlanController {
   }
 
   @GetMapping("list")
-  public void list(Model model) throws Exception {
+  public void list(Model model, int groupNo) throws Exception {
     System.out.println("list 호출==================================================");
-    model.addAttribute("list", planService.list());
+    model.addAttribute("list", planService.list(groupNo));
+    System.out.println("groupNo: " + groupNo);
   }
 
   @GetMapping("search")

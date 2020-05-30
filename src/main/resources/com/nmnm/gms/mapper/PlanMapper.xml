@@ -8,21 +8,30 @@
 <resultMap type="Plan" id="PlanMap">
     <id column="plan_no"  property="planNo"/>
     <result column="group_no" property="groupNo"/>
+    <result column="member_no" property="memberNo"/>
     <result column="start_date" property="startDate"/>
     <result column="end_date" property="endDate"/>
     <result column="start_hour" property="startHour"/>
     <result column="end_hour" property="endHour"/>
     <result column="title" property="title"/>
-      <result column="thumbnail" property="thumbnail"/>
-       <result column="content" property="content"/>
+    <result column="thumbnail" property="thumbnail"/>
+    <result column="content" property="content"/>
     <result column="address" property="address"/> 
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
+    <association property="planMember" javaType="PlanMember">
+         <result column="plan_no" property="planNo"/>
+         <result column="group_no" property="groupNo"/>
+         <result column="member_no" property="memberNo"/>
+         <result column="attend" property="attend"/>
+    </association>
 </resultMap>
 
 <insert id="insert" parameterType="Plan">
   insert into nm_plan(
+    group_no,
+    member_no,
     start_date, 
     end_date, 
     title, 
@@ -32,6 +41,8 @@
     latitude,
     longitude
     ) values(  
+      #{groupNo},
+      #{memberNo},
       #{startDate},
       #{endDate},
       #{title},
@@ -42,6 +53,20 @@
       #{longitude})
 </insert>
 
+<insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
+    insert into nm_plan_member(
+    plan_no,
+    group_no,
+    member_no,
+    attend
+    ) values (
+    #{planNo},
+    #{groupNo},
+    #{memberNo},
+    #{attend}
+    )
+</insert>
+
    <select id="findAll" resultMap="PlanMap">
     select
      plan_no,
@@ -49,6 +74,7 @@
      create_date
     from
      nm_plan
+      where group_no=#{groupNo}
       order by plan_no desc
    </select>
    

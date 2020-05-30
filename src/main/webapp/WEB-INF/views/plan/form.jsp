@@ -15,6 +15,8 @@
                             </div>
                             <div class="content">
                                <form action='add' method='post' enctype='multipart/form-data'>
+                               <input type="hidden" name="groupNo" value="${param.groupNo}" />
+                               <input type="hidden" name="memberNo" value="${loginUser.memberNo}" />
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">

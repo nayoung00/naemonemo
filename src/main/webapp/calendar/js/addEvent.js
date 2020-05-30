@@ -1,13 +1,14 @@
 var eventModal = $('#eventModal');
 
 var modalTitle = $('.modal-title');
-var editAllDay = $('#edit-allDay');
-var editTitle = $('#edit-title');
-var editStart = $('#edit-start');
-var editEnd = $('#edit-end');
 var editType = $('#edit-type');
 var editColor = $('#edit-color');
 var editDesc = $('#edit-desc');
+
+var editTitle = $('#edit-title');
+var editEnd = $('#edit-end');
+var editAllDay = $('#edit-allDay');
+var editStart = $('#edit-start');
 var editContent = $('#edit-content');
 var editAddress = $('#edit-address');
 var editLatitude = $('#edit-latitude');

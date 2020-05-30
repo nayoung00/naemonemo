@@ -3,9 +3,12 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<c:if test="${not empty loginUser}">
   <h1>일정</h1>
-  <a href='form'>새 글</a><br>
+  <form action="form" method="POST">
+  <input type="hidden" name="groupNo" value="${param.groupNo}" />
+  <button>일정 작성</button>
+  </form>
   <table border='1'>
   <tr>
     <th>번호</th>
@@ -13,14 +16,19 @@
      <th>작성일</th>
      <th>참가신청</th>
   </tr>
-  
-<c:forEach items="${list}" var="item">
+  <c:forEach items="${list}" var="item">
   <tr>
     <td>${item.planNo}</td> 
     <td><a href='calendar?planNo=${item.planNo}'> ${item.title}</a></td> 
     <td>${item.createDate}</td>
   </tr>
 </c:forEach>
+</c:if>
+<c:if test="${empty loginUser}">
+    <p>로그인이 필요한 페이지 입니다.</p>
+    <a href="../auth/login"><button>로그인</button></a>
+</c:if>
+
 
 </table>
 <hr>

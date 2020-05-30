@@ -69,10 +69,18 @@ function readURL(input) {
     <div class="container">
 <h1>모임 상세정보</h1>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moimModal">
-가입 신청
-</button>
+<form action="../grmember/addgrmember">
+<input type="hidden" name="groupNo" value="${param.no}"/>
+<input type="hidden" name="memberNo" value="${loginUser.memberNo }" />
+<input type="hidden" name="gradeNo" value="2" />
+<button>가입 신청</button>
+</form>
+
+<form action="../plan/list">
+    <input type="hidden" name="memberNo" value="${loginUser.memberNo}"/>
+    <input type="hidden" name="groupNo" value="${param.no}"/>
+    <button>일정 게시판</button>
+</form>
 
 <c:if test="${empty loginUser}">
 <p>로그인 해야 가입가능합니다.</p>

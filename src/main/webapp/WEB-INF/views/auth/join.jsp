@@ -7,31 +7,12 @@
 
 <style>
  #wrap{
+            hight:120px;
             width:530px;
             margin-left:auto; 
             margin-right:auto;
         }
 
-
-h2 { text-align: center; }
-
-.virtual-box {
-    margin-bottom: 120px;
-}
-
-.box {
-    width: 150px;
-    height: 150px; 
-    border-radius: 70%;
-    overflow: hidden;
-    margin: 0px auto; 
-}
-.profile {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
-}
 </style>
 </head>
 <body>
@@ -49,14 +30,13 @@ h2 { text-align: center; }
                 
                     <form action="join" name="signup" id="signUpForm" method="post">
                         
-                        <table
-                            style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
+                        <table style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
                          <tr>
-                         
                                 <td style="text-align: left">
                                     <p><strong>이름을 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="nameChk"></span></p>
                                 </td>
                             </tr>
+
                             <tr>
                                 <td><input type="text" name="name" id="user_name"
                                     class="form-control tooltipstered" maxlength="20"
@@ -65,25 +45,26 @@ h2 { text-align: center; }
                                     placeholder="이름"></td>
                             </tr>
                         
-                        <table
-                            style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
                              <tr>
                                 <td style="text-align: left"><br>
                                     <p><strong>이메일을 입력해주세요.</strong>
-                                    
                                     &nbsp;&nbsp;&nbsp;<span id="emailCheck"></span><span id = "chkMsg2"></span> </p>
                                 </td>
                                 
                             </tr>
                             <tr>
-                                <td><input type="text" name="email" id="email" oninput="emailCheck()"
+                                <td>
+                                <div>
+                                <input type="text" name="email" id="email" oninput="emailCheck()"
                                     class="form-control tooltipstered" 
                                     required="required" aria-required="true"
-                                    style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
+                                    style="width: 85%;  float:left;  height: 40px; border: 1px solid #d9d9de"
                                     placeholder="ex) nmnm@test.com">
+                                    <button type="submit" id="checkbtn" class="btn btn-primary pull-right" >중복확인</button>
+                                </div>
+
                                     </td>
-                            </tr> 
-            
+                            </tr>
                             <tr>
                                 <td style="text-align: left">
                                     <p><strong>비밀번호를 입력해주세요.</strong>&nbsp;&nbsp;&nbsp;<span id="pwChk"></span></p>
@@ -93,7 +74,7 @@ h2 { text-align: center; }
                                 <td><input type="password" size="17" maxlength="20" id="password"
                                     name="password" class="form-control tooltipstered" 
                                     maxlength="20" required="required" aria-required="true"
-                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
+                                    style="ime-mode: inactive; margin-bottom: 25px;  height: 40px;  border: 1px solid #d9d9de"
                                     placeholder="영문과 특수문자를 포함한 최소 8자"></td>
                             </tr>
                             <tr>
@@ -105,7 +86,7 @@ h2 { text-align: center; }
                                 <td><input type="password" size="17" maxlength="20" id="password_check"
                                     name="pw_check" class="form-control tooltipstered" 
                                     maxlength="20" required="required" aria-required="true"
-                                    style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
+                                    style="ime-mode: inactive; margin-bottom: 25px;  height: 40px;   border: 1px solid #d9d9de"
                                     placeholder="비밀번호가 일치해야합니다."></td>
                             </tr>
             

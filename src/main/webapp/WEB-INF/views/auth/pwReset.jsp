@@ -11,12 +11,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script>
 
-</script>
 
+</script>
+<style>
+ #wrap{
+            hight:120px;
+            width:530px;
+            margin-left:auto; 
+            margin-right:auto;
+        }
+
+</style>
 
 </head>
 
 <body>
+ <div id="wrap" >
     <div class="contact-clean">
         <form action="resetPassword" method="post" class="text-center">
         <br> <br> <br> <br> <br>
@@ -38,7 +48,7 @@
             </div>
         </form>
     </div>
-    
+    </div>
     
 </body>
 

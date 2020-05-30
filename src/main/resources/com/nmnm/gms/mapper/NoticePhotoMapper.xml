@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.nmnm.gms.dao.NoticePhotoDao">
+
+  <resultMap type="NoticePhoto" id="NoticePhotoMap">
+    <id column="notice_photo_no"   property="no"/>
+    <result column="notice_photo_file"    property="filepath"/>
+    <result column="notice_no" property="noticeNo"/>
+  </resultMap>
+  
+  
+  
+  <insert id="insert" parameterType="Notice">
+    insert into nm_notice_photo(notice_photo_file, notice_no)
+    values
+    <foreach collection="noticePhotos" item="file" separator=",">
+      (#{file.filepath}, #{noticeNo})
+    </foreach>
+  </insert>
+  
+  <select id="findAllByNoticeNo" resultMap="NoticePhotoMap" parameterType="int">
+    select
+      notice_photo_no,
+      notice_photo_file
+    from nm_notice_photo
+    where
+      notice_no=#{noticeNo}
+    order by
+      notice_photo_no desc
+  </select>
+
+  
+  <select id="findByNo" resultMap="NoticePhotoMap" parameterType="int">
+    select
+      t.notice_photo_no,
+      t.photo_file,
+      n.notice_no
+    from nm_notice_photo as t
+     inner join nm_notice as n on t.notice_no=n.notice_no
+    where
+      t.notice_photo_no=#{no}
+      
+    order by
+      t.notice_photo_no desc
+  </select>
+  
+  <delete id="deleteAll" parameterType="int">
+    delete from nm_notice_photo
+    where notice_no=#{noticeNo}
+  </delete>
+
+
+<!--  
+  <update id="update" parameterType="FeedPhoto">
+    update nm_feed 
+    set
+    where 
+      feed_no=#{feedNo}
+  </update>
+  
+  
+  <select id="findByKeyword" resultMap="FeedPhotoMap" parameterType="string">
+  <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select
+
+    from 
+      nm_feed
+    where
+      title like #{title}
+      or content like #{content}
+  </select>
+  
+  -->
+  
+</mapper>

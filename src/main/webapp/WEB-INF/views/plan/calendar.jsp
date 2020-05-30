@@ -20,16 +20,6 @@
             <div id="loading"></div>
             <div id="calendar"></div>
         </div>
-    start_date, 
-    end_date, 
-    title, 
-    thumbnail,
-    content,
-    place_name, 
-    address, 
-    subtitle,
-    latitude,
-    longitude
 
         <!-- 일정 추가 MODAL -->
         <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
@@ -41,7 +31,7 @@
                         <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-
+                              <form action='add' method='post' enctype='multipart/form-data'>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-allDay">하루종일</label>
@@ -52,7 +42,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-title">일정명</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                <input class="inputModal" type="text" name="title" id="edit-title"
                                     required="required" />
                             </div>
                         </div>
@@ -102,6 +92,7 @@
                                     id="edit-desc"></textarea>
                             </div>
                         </div>
+                    </form>
                     </div>
                     <div class="modal-footer modalBtnContainer-addEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -153,10 +144,11 @@
                 </div>
 
             </div>
-        </div>
+        </div> 
         <!-- /.filter panel -->
     </div>
-    <!-- /.container -->
+    <!-- /.container --> 
+
 
     <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/jquery.min.js"></script>
     <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/bootstrap.min.js"></script>

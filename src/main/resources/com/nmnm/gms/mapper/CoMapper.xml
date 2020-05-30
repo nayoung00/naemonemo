@@ -5,8 +5,7 @@
 
 <mapper namespace="com.nmnm.gms.dao.CoDao">
 
-	<resultMap type="Co"
-		id="CoMap">
+	<resultMap type="Co" id="CoMap">
 		<id column="co_no" property="coNo" />
 		<result column="co_category" property="category" />
 		<result column="member_no" property="memberNo" />
@@ -14,25 +13,45 @@
 		<result column="content" property="content" />
 		<result column="create_date" property="createDate" />
 		<result column="view_count" property="viewCount" />
+		
+		<collection property="coPhotos" ofType="CoPhoto">
+    <id column="co_photo_no"   property="no"/>
+    <result column="co_photo_file"    property="filepath"/>
+    </collection>
+		
 	</resultMap>
 
 	<sql id="select1">
 		select
-		co_no,
-		co_category,
-		member_no,
-		title,
-		content,
-    create_date,
-		view_count
+	  	co_no,
+		  co_category,
+		  member_no,
+		  title,
+		  content,
+      create_date,
+		  view_count
 		from
-		nm_co
+		  nm_co
 	</sql>
 
-	<select id="findAll" resultMap="CoMap">
-		<include refid="select1" />
+	<select id="findAll" resultMap="CoMap" parameterType="Map">
+    select
+      c.co_no,
+      c.co_category,
+      c.member_no,
+      c.title,
+      c.content,
+      c.create_date,
+      c.view_count,
+      p.co_photo_no,
+      p.co_photo_file
+		from
+		  nm_co c
+		
+		inner join nm_co_photo p on c.co_no= p.co_no
+		
 		order by 
-		co_no desc 
+		  c.co_no desc 
 		limit #{startList}, #{listSize}
 	</select>
 	
@@ -44,47 +63,59 @@
   </select>
 
 
-	<insert id="insert" parameterType="Co">
-		insert into
-		nm_co(
-		co_no,
-		co_category,
-		member_no,
-		title,
-		content,
-		view_count
+	<insert id="insert" parameterType="Co"
+	  useGeneratedKeys="true" keyColumn="co_no" keyProperty="coNo">
+		insert into nm_co(
+		  co_no,
+		  co_category,
+		  member_no,
+		  title,
+		  content,
+		  view_count
 		)
 		values(
-		#{coNo},
-		#{category},
-		#{memberNo},
-		#{title},
-		#{content},
-		#{viewCount}
+		  #{coNo},
+		  #{category},
+		  #{memberNo},
+		  #{title},
+		  #{content},
+		  #{viewCount}
 		)
 	</insert>
 
-	<select id="findByNo" resultMap="CoMap"
-		parameterType="int">
-		<include refid="select1" />
+	<select id="findByNo" resultMap="CoMap" parameterType="int">
+    select
+      c.co_no,
+      c.co_category,
+      c.member_no,
+      c.title,
+      c.content,
+      c.create_date,
+      c.view_count,
+      p.co_photo_no,
+      p.co_photo_file
+    from
+      nm_co c
+    
+    inner join nm_co_photo p on c.co_no= p.co_no
+
 		where
-		co_no=#{coNo}
+  		c.co_no=#{coNo}
 	</select>
 
 	<update id="update" parameterType="Co">
 		update nm_co
 		set
-		co_category=#{category},
-		title=#{title},
-		content=#{content}
-		where co_no=#{coNo}
+		  co_category=#{category},
+		  title=#{title},
+		  content=#{content}
+		where 
+		  co_no=#{coNo}
 	</update>
 
 	<delete id="delete" parameterType="int">
-		delete from
-		nm_co
-		where
-		co_no=#{coNo}
+		delete from nm_co
+		where co_no=#{coNo}
 	</delete>
 
 	<select id="findByKeyword" resultMap="CoMap"

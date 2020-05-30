@@ -8,7 +8,6 @@
 
 <c:if test="${not empty feed}">
 
-
 번호: ${feed.feedNo}<br>
 제목: ${feed.title}<br>
 내용: ${feed.content}<br>
@@ -16,20 +15,23 @@
 등록일: ${feed.createDate}<br>
 조회수: ${feed.viewCount}<br>
 
-사진:<br>
-
+사진:
+<br>
 <p>
 <c:forEach items="${feed.feedPhotos}" var="feedPhoto">
+<br>
 <img src="${pageContext.servletContext.contextPath}/upload/feed/${feedPhoto.filepath}" width='360'>
+<br>
+<br>
 </c:forEach>
 </p>
 
 
-
 <p>
 <button><a href='delete?feedNo=${feed.feedNo}'>삭제</a></button>
-<a href='updateForm?feedNo=${feed.feedNo}'>변경</a>
+<button><a href='updateForm?feedNo=${feed.feedNo}'>변경</a></button>
 </p>
+
 </form>
 </c:if>
 

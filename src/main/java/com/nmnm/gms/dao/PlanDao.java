@@ -2,12 +2,13 @@ package com.nmnm.gms.dao;
 
 import java.util.List;
 import com.nmnm.gms.domain.Plan;
+import com.nmnm.gms.domain.PlanMember;
 
 public interface PlanDao {
 
   int insert(Plan plan) throws Exception;
 
-  List<Plan> findAll() throws Exception;
+  List<Plan> findAll(int groupNo) throws Exception;
 
   Plan findByNo(int planNo) throws Exception;
 
@@ -17,4 +18,5 @@ public interface PlanDao {
 
   List<Plan> findByKeyword(String keyword) throws Exception;
 
+  int applyPlanMember(PlanMember planMember) throws Exception;
 }

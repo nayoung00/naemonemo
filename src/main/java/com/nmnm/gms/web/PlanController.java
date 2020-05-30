@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nmnm.gms.domain.Plan;
 import com.nmnm.gms.service.PlanService;
 
@@ -32,7 +33,7 @@ public class PlanController {
   }
 
 
-  @GetMapping("form")
+  @PostMapping("form")
   public void form() {
     System.out.println("form 호출==================================================");
   }
@@ -40,6 +41,10 @@ public class PlanController {
   @GetMapping("calendar")
   public void calendar(Model model, int planNo) throws Exception {
     logger.debug("calendar 호출==================================================");
+    Plan plan = planService.get(planNo);
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonString = mapper.writeValueAsString(plan);
+    System.out.println(jsonString);
     model.addAttribute("calendar", planService.get(planNo));
   }
 
@@ -56,8 +61,12 @@ public class PlanController {
       thumbnailFile.transferTo(new File(dirPath + "/" + filename));
       plan.setThumbnail(filename);
     }
+    String[] startHour = plan.getStartDate().split("T");
+    String[] endHour = plan.getEndDate().split("T");
+    plan.setStartHour(startHour[1]);
+    plan.setEndHour(endHour[1]);
     if (planService.add(plan) > 0) {
-      return "redirect:list";
+      return "redirect:list" + "?groupNo=" + plan.getGroupNo();
     } else {
       throw new Exception("일정을 추가할 수 없습니다.");
     }
@@ -78,9 +87,10 @@ public class PlanController {
   }
 
   @GetMapping("list")
-  public void list(Model model) throws Exception {
+  public void list(Model model, int groupNo) throws Exception {
     System.out.println("list 호출==================================================");
-    model.addAttribute("list", planService.list());
+    model.addAttribute("list", planService.list(groupNo));
+    System.out.println("groupNo: " + groupNo);
   }
 
   @GetMapping("search")

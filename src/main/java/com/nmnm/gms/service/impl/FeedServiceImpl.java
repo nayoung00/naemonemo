@@ -34,7 +34,6 @@ public class FeedServiceImpl implements FeedService {
     if (feedDao.insert(feed) == 0) {
       throw new Exception("사진 게시글 등록에 실패했습니다.");
     }
-    
     feedPhotoDao.insert(feed);
   }
 
@@ -73,9 +72,9 @@ public class FeedServiceImpl implements FeedService {
   }
 
 
-//  @Override
-//  public List<Feed> search(String keyword) throws Exception {
-//    return feedDao.findByKeyword(keyword);
-//  }
+  @Override
+  public List<Feed> search(String keyword) throws Exception {
+    return feedDao.findByKeyword(keyword);
+  }
 
 }

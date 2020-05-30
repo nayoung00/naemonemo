@@ -20,21 +20,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="dues">
                         <i class="pe-7s-#"></i>
-                        <p>일별 사용 내역(예정)</p>
-                    </a>
-                </li>
-                <li> 
-                    <a href="#">
-                        <i class="pe-7s-#"></i>
-                        <p>월별 사용 내역(예정)</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-#"></i>
-                        <p>회비 내역(예정)</p>
+                        <p>회비 안내</p>
                     </a>
                 </li>
                 <li>

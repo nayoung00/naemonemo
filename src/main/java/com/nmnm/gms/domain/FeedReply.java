@@ -14,7 +14,23 @@ public class FeedReply implements Serializable{
   private int memberNo; // nm_menber PK/ FK N
   private Date createDate; // now()
   
+   
   
+  public FeedReply() {
+  }
+
+
+  public FeedReply(int feedReplyNo, String content, int feedNo, int memberNo, Date createDate) {
+    super();
+    this.feedReplyNo = feedReplyNo;
+    this.content = content;
+    this.feedNo = feedNo;
+    this.memberNo = memberNo;
+    this.createDate = createDate;
+  }
+
+
+
   @Override
   public String toString() {
     return "FeedReply [feedReplyNo=" + feedReplyNo + ", content=" + content + ", feedNo=" + feedNo
@@ -22,9 +38,11 @@ public class FeedReply implements Serializable{
   }
 
 
+
   public int getFeedReplyNo() {
     return feedReplyNo;
   }
+
 
 
   public void setFeedReplyNo(int feedReplyNo) {
@@ -32,9 +50,11 @@ public class FeedReply implements Serializable{
   }
 
 
+
   public String getContent() {
     return content;
   }
+
 
 
   public void setContent(String content) {
@@ -42,9 +62,11 @@ public class FeedReply implements Serializable{
   }
 
 
+
   public int getFeedNo() {
     return feedNo;
   }
+
 
 
   public void setFeedNo(int feedNo) {
@@ -52,9 +74,11 @@ public class FeedReply implements Serializable{
   }
 
 
+
   public int getMemberNo() {
     return memberNo;
   }
+
 
 
   public void setMemberNo(int memberNo) {
@@ -62,15 +86,18 @@ public class FeedReply implements Serializable{
   }
 
 
+
   public Date getCreateDate() {
     return createDate;
   }
+
 
 
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
 
-  
+
+
   
 }

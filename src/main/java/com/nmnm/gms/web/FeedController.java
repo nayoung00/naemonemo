@@ -2,6 +2,7 @@ package com.nmnm.gms.web;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
@@ -12,13 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Feed;
 import com.nmnm.gms.domain.FeedPhoto;
+import com.nmnm.gms.domain.FeedReply;
+import com.nmnm.gms.service.FeedReplyService;
 import com.nmnm.gms.service.FeedService;
 
 @Controller
-@RequestMapping("/feed")
+@RequestMapping("feed")
 public class FeedController {
 
   static Logger logger = LogManager.getLogger(FeedController.class);
@@ -28,6 +32,11 @@ public class FeedController {
 
   @Autowired
   FeedService feedService;
+  
+  @Autowired
+  FeedReplyService feedReplyService;
+  
+  
   
   public FeedController() {
     logger.debug("FeedController 생성됨!");
@@ -88,8 +97,13 @@ public class FeedController {
   @GetMapping("detail")
   public void detail(int feedNo, Model model) throws Exception {
     model.addAttribute("feed", feedService.get(feedNo));
+    
+    // 댓글 리스트 보기
+    List<FeedReply> replyList = feedReplyService.readReply(feedNo);
+    model.addAttribute("replyList", replyList);
   }
 
+  
   @GetMapping("delete")
   public String delete(int feedNo) throws Exception {
     feedService.delete(feedNo);
@@ -145,4 +159,59 @@ public class FeedController {
     model.addAttribute("list", feedService.search(keyword));
   }
 
+  
+  //
+  //댓글 작성
+  @RequestMapping(value="/replyWrite", method = RequestMethod.POST)
+  public String replyWrite(FeedReply feedReply) throws Exception {
+      
+      logger.info("reply Write");
+      
+      feedReplyService.writeReply(feedReply);
+      System.out.println("피드리플라이 한개 추가요");
+      
+      return "redirect:detail?feedNo=" + feedReply.getFeedNo();
+  }
+   
+  //댓글 수정 
+  //댓글 수정 GET
+  @RequestMapping(value="/replyUpdateView", method = RequestMethod.GET)
+  public void replyUpdateView(FeedReply feedReply, Model model) throws Exception {
+      logger.info("reply Update");
+      
+      model.addAttribute("replyUpdate", feedReplyService.selectReply(feedReply.getFeedReplyNo()));
+      
+  }
+  
+  //댓글 수정 POST
+  @RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
+  public String replyUpdate(FeedReply feedReply) throws Exception {
+      logger.info("reply Update");
+      
+      feedReplyService.updateReply(feedReply);
+      
+      return "redirect:detail?feedNo=" + feedReply.getFeedNo();
+  }
+  
+  
+  //댓글 삭제
+  //댓글 삭제 GET
+  @RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
+  public void replyDeleteView(FeedReply feedReply, Model model) throws Exception {
+      logger.info("reply Delete");
+      
+      model.addAttribute("replyDelete", feedReplyService.selectReply(feedReply.getFeedReplyNo()));
+
+  }
+  
+  //댓글 삭제 POST
+  @RequestMapping(value="/replyDelete", method = RequestMethod.POST)
+  public String replyDelete(FeedReply feedReply) throws Exception {
+      logger.info("reply Delete");
+      
+      feedReplyService.deleteReply(feedReply);
+      
+      return "redirect:detail?feedNo=" + feedReply.getFeedNo();
+  }
+  
 }

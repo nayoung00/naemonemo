@@ -25,7 +25,8 @@
     select
       feed_photo_no,
       feed_photo_file
-    from nm_feed_photo
+    from 
+      nm_feed_photo
     where
       feed_no=#{feedNo}
     order by
@@ -38,8 +39,9 @@
       t.feed_photo_no,
       t.photo_file,
       f.feed_no
-    from nm_feed_photo as t
-     inner join nm_feed as f on t.feed_no=f.feed_no
+    from 
+      nm_feed_photo as t
+    inner join nm_feed as f on t.feed_no=f.feed_no
     where
       t.feed_photo_no=#{no}
       

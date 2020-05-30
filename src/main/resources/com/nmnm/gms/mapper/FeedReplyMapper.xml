@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.nmnm.gms.dao.FeedReplyDao">
+
+  <resultMap type="FeedReply" id="FeedReplyMap">
+    <id column="feed_reply_no"   property="feedReplyNo"/>
+    <result column="feed_no"    property="feedNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="content"  property="content"/>
+    <result column="create_date"    property="createDate"/>
+  </resultMap>
+  
+  <!--  댓글 목록 조회 -->
+  <select id="readReply" resultMap="FeedReplyMap" parameterType="int">
+    select
+      feed_no,
+      feed_reply_no,
+      content,
+      member_no, 
+      create_date
+    from 
+      nm_feed_reply
+ 
+    where 
+      feed_no=#{feedNo}
+ 
+    order by
+      feed_reply_no asc
+  </select>
+
+  
+  
+  <!-- 댓글작성 -->
+  <insert id="writeReply" parameterType="FeedReply">
+    insert into nm_feed_reply(
+      feed_no,
+      content,
+      member_no 
+      )
+    values(
+      #{feedNo},
+      #{content},
+      #{memberNo}
+      )
+  </insert>
+ 
+ 
+  <!-- 댓글 수정 -->
+  <update id="updateReply" parameterType="FeedReply">
+    update nm_feed_reply set
+      content=#{content}
+    where 
+      feed_reply_no=#{feedReplyNo}
+  </update>
+  
+  <!-- 댓글삭제 -->
+  <delete id="deleteReply" parameterType="FeedReply">
+    delete from nm_feed_reply
+    where feed_reply_no=#{feedReplyNo}
+  </delete>
+  
+  <!-- 선택된 댓글 조회 -->
+  <select id="selectReply" resultMap="FeedReplyMap" parameterType="int">
+    select
+      feed_reply_no,
+      feed_no,
+      member_no,
+      content,
+      create_date
+    from nm_feed_reply
+    where feed_reply_no=#{feedReplyNo}
+  </select>
+ 
+
+  
+  <!-- 
+  <select id="findByKeyword" resultMap="FeedReplyMap" parameterType="string">
+  <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select
+      member_no, 
+      content,
+    from 
+      nm_feed_reply
+    where
+      content like #{content}
+  </select>
+   -->
+   
+</mapper>

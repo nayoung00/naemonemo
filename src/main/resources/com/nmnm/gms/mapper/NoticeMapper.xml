@@ -58,7 +58,7 @@
       nm_notice
 
     order by
-      n.notice_no desc
+      notice_no desc
    
   </select>
 
@@ -76,7 +76,7 @@
       nm_notice
     
     where
-      n.notice_no=#{noticeNo}
+      notice_no=#{noticeNo}
   </select>
   
   <update id="update" parameterType="Notice">

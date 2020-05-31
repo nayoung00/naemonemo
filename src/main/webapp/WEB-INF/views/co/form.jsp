@@ -34,12 +34,6 @@
 내용:<br>
 <textarea name='content' rows='5' cols='60'></textarea><br>
 
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-
 <button>등록</button>
 </form>
 

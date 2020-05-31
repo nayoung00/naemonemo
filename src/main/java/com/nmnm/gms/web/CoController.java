@@ -1,15 +1,10 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +20,10 @@ import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.domain.CoPhoto;
 import com.nmnm.gms.domain.CoReply;
-import com.nmnm.gms.service.Action;
-import com.nmnm.gms.service.ActionForward;
 import com.nmnm.gms.service.CoReplyService;
 import com.nmnm.gms.service.CoService;
-import com.nmnm.gms.service.impl.RecCount;
-import com.nmnm.gms.service.impl.RecUpdate;
 
 
-@WebServlet("*.do") //좋아요때문에 넣음
 @Controller
 @RequestMapping("/co")
 public class CoController {
@@ -49,12 +39,12 @@ public class CoController {
   @Autowired
   CoReplyService coReplyService;
   
-  
 
   public CoController() {
     logger.debug("CoController 생성됨!");
   }
 
+  
   @GetMapping("form")
   public void form() throws Exception {}
 
@@ -103,12 +93,15 @@ public class CoController {
   }
 
   @GetMapping("detail")
-  public void detail(int coNo, Model model) throws Exception {
+  public void detail(Model model, @RequestParam("coNo")int coNo) throws Exception {
     model.addAttribute("co", coService.get(coNo));
     
     // 댓글 리스트 보기
     List<CoReply> replyList = coReplyService.readReply(coNo);
     model.addAttribute("replyList", replyList);
+    
+    // 게시물 조회수 +1
+    coService.plusCnt(coNo);
   }
 
   // @GetMapping("list")
@@ -235,38 +228,5 @@ public class CoController {
       return "redirect:detail?coNo=" + coReply.getCoNo();
   }
   
-  
-  private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String requestURI = request.getRequestURI();
-    String contextPath = request.getContextPath();
-    String command = requestURI.substring(contextPath.length());
     
-    System.out.println("requestURI : " + requestURI);
-    System.out.println("contextPath : " + contextPath);
-    System.out.println("command : " + command);
-
-    Action action = null;
-    ActionForward forward = null;
-  
-    // 추천수 업데이트
-    if (command.equals("/RecUpdate.do")) {
-        try {
-            action = new RecUpdate();
-            action.execute(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    // 추천수 검색
-    else if (command.equals("/RecCount.do")) {
-        try {
-            action = new RecCount();
-            action.execute(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-  
 }

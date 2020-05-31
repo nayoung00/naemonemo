@@ -89,8 +89,6 @@ public class Co implements Serializable{
     this.content = content;
   }
 
-
-
   public List<CoPhoto> getCoPhotos() {
     return coPhotos;
   }
@@ -98,10 +96,6 @@ public class Co implements Serializable{
   public void setCoPhotos(List<CoPhoto> coPhotos) {
     this.coPhotos = coPhotos;
   }
-
-
-
-
 
 
 }

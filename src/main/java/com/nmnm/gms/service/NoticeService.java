@@ -16,4 +16,7 @@ public interface NoticeService {
   void delete(int noticeNo) throws Exception;
   
   List<Notice> search(String keyword) throws Exception;
+  
+  // 게시물 조회수
+  public boolean plusCnt(int noticeNo) throws Exception;
 }

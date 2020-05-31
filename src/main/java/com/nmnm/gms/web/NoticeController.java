@@ -95,6 +95,9 @@ public class NoticeController {
     // 댓글 리스트 보기
     List<NoticeReply> replyList = noticeReplyService.readReply(noticeNo);
     model.addAttribute("replyList", replyList);
+    
+    // 게시물 조회수 +1
+    noticeService.plusCnt(noticeNo);
   }
 
   @GetMapping("delete")

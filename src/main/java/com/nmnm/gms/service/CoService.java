@@ -28,4 +28,7 @@ public interface CoService {
   public int listCnt() throws Exception;
 
   // public List<Co> getCoList(Pagination pagination) throws Exception;
+
+  // 게시물 조회수
+  public boolean plusCnt(int coNo) throws Exception;
 }

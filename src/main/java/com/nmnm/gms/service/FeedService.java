@@ -16,5 +16,8 @@ public interface FeedService {
   void delete(int feedNo) throws Exception;
 
   List<Feed> search(String keyword) throws Exception;
+  
+  // 게시물 조회수
+  public boolean plusCnt(int feedNo) throws Exception;
 
 }

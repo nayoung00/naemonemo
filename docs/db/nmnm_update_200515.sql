@@ -11,14 +11,13 @@ DEFAULT COLLATE utf8_general_ci;
 
 USE nmnmdb;
 
+
+
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
 -- 공지사항댓글
 DROP TABLE IF EXISTS nm_notice_reply RESTRICT;
-
--- 공지사항사진
-DROP TABLE IF EXISTS nm_notice_photo RESTRICT;
 
 -- 등급
 DROP TABLE IF EXISTS nm_grade RESTRICT;
@@ -32,6 +31,9 @@ DROP TABLE IF EXISTS nm_group RESTRICT;
 -- 모임계좌
 DROP TABLE IF EXISTS nm_group_account RESTRICT;
 
+-- 모임회비
+DROP TABLE IF EXISTS nm_dues RESTRICT;
+
 -- 모임회원
 DROP TABLE IF EXISTS nm_group_member RESTRICT;
 
@@ -40,12 +42,6 @@ DROP TABLE IF EXISTS nm_co RESTRICT;
 
 -- 소통댓글
 DROP TABLE IF EXISTS nm_co_reply RESTRICT;
-
--- 소통사진
-DROP TABLE IF EXISTS nm_co_photo RESTRICT;
-
--- 소통좋아요
-DROP TABLE IF EXISTS nm_co_like RESTRICT;
 
 -- 알림
 DROP TABLE IF EXISTS nm_alram RESTRICT;
@@ -56,6 +52,9 @@ DROP TABLE IF EXISTS nm_plan RESTRICT;
 -- 일정참여자
 DROP TABLE IF EXISTS nm_plan_member RESTRICT;
 
+-- 첨부파일
+DROP TABLE IF EXISTS nm_MP_FILE RESTRICT;
+
 -- 피드
 DROP TABLE IF EXISTS nm_feed RESTRICT;
 
@@ -65,17 +64,11 @@ DROP TABLE IF EXISTS nm_feed_reply RESTRICT;
 -- 피드사진
 DROP TABLE IF EXISTS nm_feed_photo RESTRICT;
 
--- 피드좋아요
-DROP TABLE IF EXISTS nm_feed_like RESTRICT;
-
 -- 회계
 DROP TABLE IF EXISTS nm_account RESTRICT;
 
 -- 회원
 DROP TABLE IF EXISTS nm_member RESTRICT;
-
--- 모임회비
-DROP TABLE IF EXISTS nm_dues RESTRICT;
 
 -- 공지사항
 CREATE TABLE nm_notice (
@@ -123,27 +116,6 @@ ALTER TABLE nm_notice_reply
   MODIFY COLUMN notice_reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항댓글번호';
 
 ALTER TABLE nm_notice_reply
-  AUTO_INCREMENT = 1;
-
--- 공지사항사진
-CREATE TABLE nm_notice_photo (
-  notice_photo_no   INTEGER      NOT NULL COMMENT '공지사항사진번호', -- 공지사항사진번호
-  notice_photo_file VARCHAR(255) NOT NULL COMMENT '사진파일', -- 사진파일
-  notice_no         INTEGER      NOT NULL COMMENT '공지사항번호' -- 공지사항번호
-)
-COMMENT '공지사항사진';
-
--- 공지사항사진
-ALTER TABLE nm_notice_photo
-  ADD CONSTRAINT PK_nm_notice_photo -- 공지사항사진 기본키
-    PRIMARY KEY (
-      notice_photo_no -- 공지사항사진번호
-    );
-
-ALTER TABLE nm_notice_photo
-  MODIFY COLUMN notice_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항사진번호';
-
-ALTER TABLE nm_notice_photo
   AUTO_INCREMENT = 1;
 
 -- 등급
@@ -241,6 +213,25 @@ ALTER TABLE nm_group_account
 ALTER TABLE nm_group_account
   AUTO_INCREMENT = 1;
 
+-- 모임회비
+CREATE TABLE nm_dues (
+  group_no     INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_info_id INTEGER NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
+  member_no    INTEGER NULL     COMMENT '회원번호', -- 회원번호
+  entrance_fee INTEGER NULL     COMMENT '입회비', -- 입회비
+  dues_period  TEXT    NOT NULL COMMENT '회비납부주기', -- 회비납부주기
+  dues         INTEGER NOT NULL COMMENT '회비금액' -- 회비금액
+)
+COMMENT '모임회비';
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT PK_nm_dues -- 모임회비 기본키
+    PRIMARY KEY (
+      group_no,     -- 모임번호
+      bank_info_id  -- 모임계좌아이디
+    );
+
 -- 모임회원
 CREATE TABLE nm_group_member (
   group_no  INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
@@ -305,42 +296,6 @@ ALTER TABLE nm_co_reply
 
 ALTER TABLE nm_co_reply
   AUTO_INCREMENT = 1;
-
--- 소통사진
-CREATE TABLE nm_co_photo (
-  co_photo_no   INTEGER      NOT NULL COMMENT '소통사진번호', -- 소통사진번호
-  co_photo_file VARCHAR(255) NOT NULL COMMENT '사진파일', -- 사진파일
-  co_no         INTEGER      NOT NULL COMMENT '소통번호' -- 소통번호
-)
-COMMENT '소통사진';
-
--- 소통사진
-ALTER TABLE nm_co_photo
-  ADD CONSTRAINT PK_nm_co_photo -- 소통사진 기본키
-    PRIMARY KEY (
-      co_photo_no -- 소통사진번호
-    );
-
-ALTER TABLE nm_co_photo
-  MODIFY COLUMN co_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '소통사진번호';
-
-ALTER TABLE nm_co_photo
-  AUTO_INCREMENT = 1;
-
--- 소통좋아요
-CREATE TABLE nm_co_like (
-  member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  co_no     INTEGER NOT NULL COMMENT '소통번호' -- 소통번호
-)
-COMMENT '소통좋아요';
-
--- 소통좋아요
-ALTER TABLE nm_co_like
-  ADD CONSTRAINT PK_nm_co_like -- 소통좋아요 기본키
-    PRIMARY KEY (
-      member_no, -- 회원번호
-      co_no      -- 소통번호
-    );
 
 -- 알림
 CREATE TABLE nm_alram (
@@ -407,6 +362,31 @@ ALTER TABLE nm_plan_member
       member_no, -- 회원번호
       group_no   -- 모임번호
     );
+
+-- 첨부파일
+CREATE TABLE nm_MP_FILE (
+  FILE_NO          INTEGER      NOT NULL COMMENT '파일번호', -- 파일번호
+  BNO              INTEGER      NOT NULL COMMENT '게시판번호', -- 게시판번호
+  ORG_FILE_NAME    VARCHAR(260) NOT NULL COMMENT '원본파일이름', -- 원본파일이름
+  STORED_FILE_NAME VARCHAR(36)  NOT NULL COMMENT '변경된파일이름', -- 변경된파일이름
+  FILE_SIZE        INTEGER      NULL     COMMENT '파일크기', -- 파일크기
+  REGDATE          DATETIME     NOT NULL DEFAULT now() COMMENT '파일등록일', -- 파일등록일
+  DEL_GB           TINYINT(1)   NOT NULL DEFAULT 0 COMMENT '삭제구분' -- 삭제구분
+)
+COMMENT '첨부파일';
+
+-- 첨부파일
+ALTER TABLE nm_MP_FILE
+  ADD CONSTRAINT PK_nm_MP_FILE -- 첨부파일 기본키
+    PRIMARY KEY (
+      FILE_NO -- 파일번호
+    );
+
+ALTER TABLE nm_MP_FILE
+  MODIFY COLUMN FILE_NO INTEGER NOT NULL AUTO_INCREMENT COMMENT '파일번호';
+
+ALTER TABLE nm_MP_FILE
+  AUTO_INCREMENT = 1;
 
 -- 피드
 CREATE TABLE nm_feed (
@@ -476,23 +456,6 @@ ALTER TABLE nm_feed_photo
 
 ALTER TABLE nm_feed_photo
   AUTO_INCREMENT = 1;
-
--- 피드좋아요
-CREATE TABLE nm_feed_like (
-  like_count INTEGER NOT NULL COMMENT '좋아요수', -- 좋아요수
-  member_no  INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  feed_no    INTEGER NOT NULL COMMENT '피드번호' -- 피드번호
-)
-COMMENT '피드좋아요';
-
--- 피드좋아요
-ALTER TABLE nm_feed_like
-  ADD CONSTRAINT PK_nm_feed_like -- 피드좋아요 기본키
-    PRIMARY KEY (
-      like_count, -- 좋아요수
-      member_no,  -- 회원번호
-      feed_no     -- 피드번호
-    );
 
 -- 회계
 CREATE TABLE nm_account (
@@ -565,25 +528,6 @@ ALTER TABLE nm_member
 ALTER TABLE nm_member
   AUTO_INCREMENT = 1;
 
--- 모임회비
-CREATE TABLE nm_dues (
-  group_no     INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
-  bank_info_id INTEGER NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
-  member_no    INTEGER NULL     COMMENT '회원번호', -- 회원번호
-  entrance_fee INTEGER NULL     COMMENT '입회비', -- 입회비
-  dues_period  TEXT    NOT NULL COMMENT '회비납부주기', -- 회비납부주기
-  dues         INTEGER NOT NULL COMMENT '회비금액' -- 회비금액
-)
-COMMENT '모임회비';
-
--- 모임회비
-ALTER TABLE nm_dues
-  ADD CONSTRAINT PK_nm_dues -- 모임회비 기본키
-    PRIMARY KEY (
-      group_no,     -- 모임번호
-      bank_info_id  -- 모임계좌아이디
-    );
-
 -- 공지사항
 ALTER TABLE nm_notice
   ADD CONSTRAINT FK_nm_group_TO_nm_notice -- 모임 -> 공지사항
@@ -626,16 +570,6 @@ ALTER TABLE nm_notice_reply
       member_no -- 회원번호
     );
 
--- 공지사항사진
-ALTER TABLE nm_notice_photo
-  ADD CONSTRAINT FK_nm_notice_TO_nm_notice_photo -- 공지사항 -> 공지사항사진
-    FOREIGN KEY (
-      notice_no -- 공지사항번호
-    )
-    REFERENCES nm_notice ( -- 공지사항
-      notice_no -- 공지사항번호
-    );
-
 -- 메시지
 ALTER TABLE nm_message
   ADD CONSTRAINT FK_nm_member_TO_nm_message -- 회원 -> 메시지
@@ -664,6 +598,38 @@ ALTER TABLE nm_group_account
     )
     REFERENCES nm_group ( -- 모임
       group_no -- 모임번호
+    );
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT FK_nm_group_TO_nm_dues -- 모임 -> 모임회비
+    FOREIGN KEY (
+      group_no -- 모임번호
+    )
+    REFERENCES nm_group ( -- 모임
+      group_no -- 모임번호
+    );
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT FK_nm_group_account_TO_nm_dues -- 모임계좌 -> 모임회비
+    FOREIGN KEY (
+      bank_info_id -- 모임계좌아이디
+    )
+    REFERENCES nm_group_account ( -- 모임계좌
+      bank_info_id -- 모임계좌아이디
+    );
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT FK_nm_group_member_TO_nm_dues -- 모임회원 -> 모임회비
+    FOREIGN KEY (
+      group_no,  -- 모임번호
+      member_no  -- 회원번호
+    )
+    REFERENCES nm_group_member ( -- 모임회원
+      group_no,  -- 모임번호
+      member_no  -- 회원번호
     );
 
 -- 모임회원
@@ -724,36 +690,6 @@ ALTER TABLE nm_co_reply
     )
     REFERENCES nm_member ( -- 회원
       member_no -- 회원번호
-    );
-
--- 소통사진
-ALTER TABLE nm_co_photo
-  ADD CONSTRAINT FK_nm_co_TO_nm_co_photo -- 소통 -> 소통사진
-    FOREIGN KEY (
-      co_no -- 소통번호
-    )
-    REFERENCES nm_co ( -- 소통
-      co_no -- 소통번호
-    );
-
--- 소통좋아요
-ALTER TABLE nm_co_like
-  ADD CONSTRAINT FK_nm_member_TO_nm_co_like -- 회원 -> 소통좋아요
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES nm_member ( -- 회원
-      member_no -- 회원번호
-    );
-
--- 소통좋아요
-ALTER TABLE nm_co_like
-  ADD CONSTRAINT FK_nm_co_TO_nm_co_like -- 소통 -> 소통좋아요
-    FOREIGN KEY (
-      co_no -- 소통번호
-    )
-    REFERENCES nm_co ( -- 소통
-      co_no -- 소통번호
     );
 
 -- 알림
@@ -890,26 +826,6 @@ ALTER TABLE nm_feed_photo
       feed_no -- 피드번호
     );
 
--- 피드좋아요
-ALTER TABLE nm_feed_like
-  ADD CONSTRAINT FK_nm_member_TO_nm_feed_like -- 회원 -> 피드좋아요
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES nm_member ( -- 회원
-      member_no -- 회원번호
-    );
-
--- 피드좋아요
-ALTER TABLE nm_feed_like
-  ADD CONSTRAINT FK_nm_feed_TO_nm_feed_like -- 피드 -> 피드좋아요
-    FOREIGN KEY (
-      feed_no -- 피드번호
-    )
-    REFERENCES nm_feed ( -- 피드
-      feed_no -- 피드번호
-    );
-
 -- 회계
 ALTER TABLE nm_account
   ADD CONSTRAINT FK_nm_group_TO_nm_account -- 모임 -> 회계
@@ -928,36 +844,4 @@ ALTER TABLE nm_account
     )
     REFERENCES nm_group_account ( -- 모임계좌
       bank_info_id -- 모임계좌아이디
-    );
-
--- 모임회비
-ALTER TABLE nm_dues
-  ADD CONSTRAINT FK_nm_group_TO_nm_dues -- 모임 -> 모임회비
-    FOREIGN KEY (
-      group_no -- 모임번호
-    )
-    REFERENCES nm_group ( -- 모임
-      group_no -- 모임번호
-    );
-
--- 모임회비
-ALTER TABLE nm_dues
-  ADD CONSTRAINT FK_nm_group_account_TO_nm_dues -- 모임계좌 -> 모임회비
-    FOREIGN KEY (
-      bank_info_id -- 모임계좌아이디
-    )
-    REFERENCES nm_group_account ( -- 모임계좌
-      bank_info_id -- 모임계좌아이디
-    );
-
--- 모임회비
-ALTER TABLE nm_dues
-  ADD CONSTRAINT FK_nm_group_member_TO_nm_dues -- 모임회원 -> 모임회비
-    FOREIGN KEY (
-      group_no,  -- 모임번호
-      member_no  -- 회원번호
-    )
-    REFERENCES nm_group_member ( -- 모임회원
-      group_no,  -- 모임번호
-      member_no  -- 회원번호
     );

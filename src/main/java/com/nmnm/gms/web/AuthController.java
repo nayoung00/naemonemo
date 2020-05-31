@@ -45,10 +45,7 @@ public class AuthController {
     logger.info("post join");
     logger.info("회원가입...");
 
-
     String email = request.getParameter("email"); // 회원가입 폼에서 넘어오는 데이터들을 받아서 변수에 담음
-    // String hashedPw = BCrypt.hashpw(member.getPassword(), BCrypt.gensalt());
-    // member.setPassword(hashedPw);
     memberService.join(member);
 
 
@@ -108,7 +105,6 @@ public class AuthController {
     return "auth/loginForm";
   }
 
-  // && member.getAuthStatus().equals("N")
 
   @GetMapping("emailAgainFail")
   public void emailFail() {}
@@ -152,28 +148,6 @@ public class AuthController {
     session.setAttribute("email", email);
 
     return "redirect:/auth/pwResetChange.jsp";
-
-  }
-
-  // 리셋된 이메일을 통해 변경하는 패스워드 변경과 일반 변경시 사용
-  @RequestMapping(value = "changePassword", method = RequestMethod.POST)
-  public String postChangePassword(HttpSession session, HttpServletRequest request, Member member)
-      throws Exception {
-
-    String password = request.getParameter("password");
-
-    // 넘어온 비밀번호를 암호화하여 저장
-    String pass = passEncoder.encode(password);
-
-    member.setEmail(member.getEmail());
-    member.setPassword(pass);
-
-    memberService.changePassword(member);
-
-    session.invalidate();
-
-    return "changePassSuccess";
-
 
   }
 

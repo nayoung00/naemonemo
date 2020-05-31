@@ -44,18 +44,7 @@ public class CoController {
   public void form() throws Exception {}
 
   @PostMapping("add")
-  public String add( //
-      String category, //
-      int memberNo, //
-      String title, //
-      String content) throws Exception {
-    
-    Co co = new Co();
-    
-    co.setCategory(category);
-    co.setMemberNo(memberNo);
-    co.setTitle(title);
-    co.setContent(content);
+  public String add(Co co) throws Exception {
     
     coService.add(co);
     
@@ -104,18 +93,7 @@ public class CoController {
   }
 
   @PostMapping("update")
-  public String update( //
-      int coNo, //
-      String category, //
-      int memberNo, //
-      String title, //
-      String content) throws Exception {
-    
-    Co co = coService.get(coNo);
-    
-    co.setCategory(category);
-    co.setTitle(title);
-    co.setContent(content);
+  public String update(Co co) throws Exception {
     
     coService.update(co);
     return "redirect:list";

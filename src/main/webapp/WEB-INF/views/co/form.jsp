@@ -15,10 +15,13 @@
 <h1>소통게시물 입력</h1>
               </div>
               
-<form action='add' method='post' enctype='multipart/form-data'>
-
+<form action='add' method='post'>
+<!--
 <input name='memberNo' type='hidden'><br>
 <br>
+-->
+
+회원번호: <input name='memberNo' type='text'><br>
 
 <div>
       글 분류:<select name="category">

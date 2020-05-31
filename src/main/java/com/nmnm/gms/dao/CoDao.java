@@ -13,11 +13,11 @@ public interface CoDao {
 
   List<Co> findAll() throws Exception;
 
-  public Co findByNo(int communicationBoardNo) throws Exception;
+  public Co findByNo(int coNo) throws Exception;
 
-  public int update(Co communicationBoard) throws Exception;
+  public int update(Co co) throws Exception;
 
-  public int delete(int communicationBoardNo) throws Exception;
+  public int delete(int coNo) throws Exception;
 
   public List<Co> findByKeyword(String keyword) throws Exception;
 

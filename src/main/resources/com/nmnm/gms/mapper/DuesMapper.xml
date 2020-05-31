@@ -11,7 +11,9 @@
 		<result column="member_no" property="memberNo" />
 		<result column="entrance_fee" property="entranceFee" />
 		
-		
+		<result column="bank_name" property="bankName" />
+		<result column="bank_account_no" property="bankAccountNo" />
+
 		<result column="dues_period" property="duesPeriod" />
 		<result column="dues" property="dues" />
 	</resultMap>
@@ -48,15 +50,34 @@ FROM ((nm_dues AS d LEFT JOIN nm_member AS m ON d.member_no=m.member_no)
 		#{duesPeriod},
     #{dues})
 	</insert>
+	
+	  <select id="findByNo" resultMap="DuesMap" parameterType="int">
+SELECT 
+      g.group_no,
+      ga.bank_info_id,
+      m.member_no,
+      entrance_fee,
+      dues_period,
+      dues,
+      ga.bank_name,
+      ga.bank_account_no
+FROM ((nm_dues AS d LEFT JOIN nm_member AS m ON d.member_no=m.member_no) 
+  LEFT JOIN nm_group AS g ON g.group_no=d.group_no), 
+  nm_group_account AS ga
+
+    where
+      d.group_no=#{groupNo}
+  </select>
+	
 
 	<update id="update" parameterType="Dues">
-		update nm_dues set
-		entrance_fee=#{entranceFee},
-		dues_period=#{duesPeriod},
-		dues=#{dues}
-	}
-		where
-		group_no=#{groupNo}
+UPDATE nm_dues  SET     
+    entrance_fee=#{entranceFee},
+    dues_period=#{duesPeriod},
+    dues=#{dues}
+
+ WHERE
+  group_no=#{groupNo}
 	</update>
 
 </mapper>

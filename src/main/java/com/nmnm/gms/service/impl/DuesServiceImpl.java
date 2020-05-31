@@ -40,9 +40,15 @@ public class DuesServiceImpl implements DuesService {
 //  }
 
   @Override
-  public int update(Group groupNo) throws Exception {
+  public int update(Dues groupNo) throws Exception {
     return duesDao.update(groupNo);
   }
+
+
+	@Override
+	public Dues get(int groupNo) throws Exception{
+		return duesDao.findByNo(groupNo);
+	}
 
 //  @Override
 //  public List<Account> search(String keyword) throws Exception {

@@ -15,11 +15,6 @@
     <result column="view_count" property="viewCount" />
     <result column="nickname" property="nickname" />
     
-    <collection property="coPhotos" ofType="CoPhoto">
-    <id column="co_photo_no"   property="no"/>
-    <result column="co_photo_file"    property="filepath"/>
-    </collection>
-    
   </resultMap>
 
 
@@ -31,13 +26,11 @@
       c.title,
       c.content,
       c.create_date,
-      c.view_count,
-      p.co_photo_no,
-      p.co_photo_file
+      c.view_count
     FROM
-      (nm_co AS c 
-    LEFT JOIN nm_member AS m ON c.member_no=m.member_no)
-    LEFT join nm_co_photo AS p on c.co_no= p.co_no
+      nm_co AS c 
+      
+    LEFT JOIN nm_member AS m ON c.member_no=m.member_no
     
     ORDER BY 
       c.co_no desc 
@@ -80,13 +73,10 @@
       c.title,
       c.content,
       c.create_date,
-      c.view_count,
-      p.co_photo_no,
-      p.co_photo_file
+      c.view_count
     FROM
-      (nm_co AS c 
-    LEFT JOIN nm_member AS m ON c.member_no=m.member_no)
-    inner join nm_co_photo p on c.co_no= p.co_no
+      nm_co AS c 
+    LEFT JOIN nm_member AS m ON c.member_no=m.member_no
 
     where
       c.co_no=#{coNo}

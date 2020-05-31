@@ -16,17 +16,6 @@
 등록일: ${notice.createDate}<br>
 조회수: ${notice.viewCount}<br>
 
-사진: 
-<br>
-<p>
-<c:forEach items="${notice.noticePhotos}" var="noticePhoto">
-<br>
-<img src="${pageContext.servletContext.contextPath}/upload/notice/${noticePhoto.filepath}" width='360'>
-<br>
-<br>
-</c:forEach>
-</p>
-
 
 <p>
 <button><a href='delete?noticeNo=${notice.noticeNo}'>삭제</a></button>

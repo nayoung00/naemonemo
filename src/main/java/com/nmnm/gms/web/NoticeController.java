@@ -1,9 +1,6 @@
 package com.nmnm.gms.web;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,10 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.NoticeReply;
 import com.nmnm.gms.domain.Notice;
-import com.nmnm.gms.domain.NoticePhoto;
 import com.nmnm.gms.service.NoticeReplyService;
 import com.nmnm.gms.service.NoticeService;
 
@@ -50,8 +45,7 @@ public class NoticeController {
       String title, //
       String content, //
       int groupNo, //
-      int memberNo, //
-      MultipartFile[] noticePhotos) throws Exception {
+      int memberNo) throws Exception {
 
     Notice notice = new Notice();
     
@@ -60,25 +54,6 @@ public class NoticeController {
     notice.setGroupNo(groupNo);
     notice.setMemberNo(memberNo);
     
-    ArrayList<NoticePhoto> noticePhotoArray = new ArrayList<>();
-    String dirPath = servletContext.getRealPath("upload/notice");
-    
-    for (MultipartFile noticePhoto : noticePhotos) {
-      if (noticePhoto.getSize() <= 0) {
-        continue;
-      }
-      String filename = UUID.randomUUID().toString();
-      noticePhoto.transferTo(new File(dirPath + "/" + filename));
-      noticePhotoArray.add(new NoticePhoto().setFilepath(filename));
-    }
-    
-    if (noticePhotoArray.size() == 0) {
-      throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
-    } else {
-      System.out.println("사진이 있당");      
-    }
-    
-    notice.setNoticePhotos(noticePhotoArray);
     noticeService.add(notice);
     
     return "redirect:list";
@@ -118,30 +93,12 @@ public class NoticeController {
       String title, //
       String content, //
       int groupNo, //
-      int memberNo, //
-      MultipartFile[] noticePhotos) throws Exception {
+      int memberNo) throws Exception {
     
     Notice notice = noticeService.get(noticeNo);
     
     notice.setTitle(title);
     notice.setContent(content);
-    
-    ArrayList<NoticePhoto> noticePhotoArray = new ArrayList<>();
-    String dirPath = servletContext.getRealPath("/upload/notice");   
-    for (MultipartFile noticePhoto : noticePhotos) {
-      if(noticePhoto.getSize() <= 0) {
-        continue;
-      }
-      String filename = UUID.randomUUID().toString();
-      noticePhoto.transferTo(new File(dirPath + "/" + filename));
-      noticePhotoArray.add(new NoticePhoto().setFilepath(filename));
-    }
-    
-    if (noticePhotoArray.size() > 0) {
-      notice.setNoticePhotos(noticePhotoArray);
-    } else {
-      notice.setNoticePhotos(null);
-    }
     
     noticeService.update(notice);
     return "redirect:list";

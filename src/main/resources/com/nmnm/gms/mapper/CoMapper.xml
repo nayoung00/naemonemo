@@ -23,14 +23,8 @@
   </resultMap>
 
 
-
-<<<<<<< HEAD
- <select id="findAll" resultMap="CoMap" parameterType="Map">
-    select
-=======
   <select id="findAll" resultMap="CoMap" parameterType="Map">
     SELECT
->>>>>>> upstream/master
       c.co_no,
       c.co_category,
       m.nickname,

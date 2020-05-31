@@ -17,7 +17,6 @@ public class Co implements Serializable{
   private List<CoPhoto> coPhotos;
 
 
-
   @Override
   public String toString() {
     return "Co [coNo=" + coNo + ", category=" + category + ", memberNo=" + memberNo + ", title="
@@ -99,6 +98,9 @@ public class Co implements Serializable{
   public void setCoPhotos(List<CoPhoto> coPhotos) {
     this.coPhotos = coPhotos;
   }
+
+
+
 
 
 

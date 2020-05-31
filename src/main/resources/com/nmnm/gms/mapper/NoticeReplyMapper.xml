@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.nmnm.gms.dao.NoticeReplyDao">
+
+  <resultMap type="NoticeReply" id="NoticeReplyMap">
+    <id column="notice_reply_no"   property="noticeReplyNo"/>
+    <result column="notice_no"    property="noticeNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="content"  property="content"/>
+    <result column="create_date"    property="createDate"/>
+  </resultMap>
+  
+  <!--  댓글 목록 조회 -->
+  <select id="readReply" resultMap="NoticeReplyMap" parameterType="int">
+    select
+      notice_no,
+      notice_reply_no,
+      content,
+      member_no, 
+      create_date
+    from 
+      nm_notice_reply
+ 
+    where 
+      notice_no=#{noticeNo}
+ 
+    order by
+      notice_reply_no asc
+  </select>
+
+  
+  
+  <!-- 댓글작성 -->
+  <insert id="writeReply" parameterType="NoticeReply">
+    insert into nm_notice_reply(
+      notice_no,
+      content,
+      member_no 
+      )
+    values(
+      #{noticeNo},
+      #{content},
+      #{memberNo}
+      )
+  </insert>
+ 
+ 
+  <!-- 댓글 수정 -->
+  <update id="updateReply" parameterType="NoticeReply">
+    update nm_notice_reply set
+      content=#{content}
+    where 
+      notice_reply_no=#{noticeReplyNo}
+  </update>
+  
+  <!-- 댓글삭제 -->
+  <delete id="deleteReply" parameterType="NoticeReply">
+    delete from nm_notice_reply
+    where notice_reply_no=#{noticeReplyNo}
+  </delete>
+  
+  <!-- 선택된 댓글 조회 -->
+  <select id="selectReply" resultMap="NoticeReplyMap" parameterType="int">
+    select
+      notice_reply_no,
+      notice_no,
+      member_no,
+      content,
+      create_date
+    from nm_notice_reply
+    where notice_reply_no=#{noticeReplyNo}
+  </select>
+ 
+
+  
+  <!-- 
+  <select id="findByKeyword" resultMap="NoticeReplyMap" parameterType="string">
+  <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select
+      member_no, 
+      content,
+    from 
+      nm_notice_reply
+    where
+      content like #{content}
+  </select>
+   -->
+   
+</mapper>

@@ -1,9 +1,15 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +18,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.domain.CoPhoto;
+import com.nmnm.gms.domain.CoReply;
+import com.nmnm.gms.service.Action;
+import com.nmnm.gms.service.ActionForward;
+import com.nmnm.gms.service.CoReplyService;
 import com.nmnm.gms.service.CoService;
+import com.nmnm.gms.service.impl.RecCount;
+import com.nmnm.gms.service.impl.RecUpdate;
 
+
+@WebServlet("*.do") //좋아요때문에 넣음
 @Controller
 @RequestMapping("/co")
 public class CoController {
@@ -30,6 +45,11 @@ public class CoController {
 
   @Autowired
   CoService coService;
+  
+  @Autowired
+  CoReplyService coReplyService;
+  
+  
 
   public CoController() {
     logger.debug("CoController 생성됨!");
@@ -85,6 +105,10 @@ public class CoController {
   @GetMapping("detail")
   public void detail(int coNo, Model model) throws Exception {
     model.addAttribute("co", coService.get(coNo));
+    
+    // 댓글 리스트 보기
+    List<CoReply> replyList = coReplyService.readReply(coNo);
+    model.addAttribute("replyList", replyList);
   }
 
   // @GetMapping("list")
@@ -156,4 +180,93 @@ public class CoController {
     model.addAttribute("list", coService.categorySearch(keyword2));
     model.addAttribute("keyword2", keyword2);
   }
+  
+  //
+  //댓글 작성
+  @RequestMapping(value="/replyWrite", method = RequestMethod.POST)
+  public String replyWrite(CoReply coReply) throws Exception {
+      
+      logger.info("reply Write");
+      
+      coReplyService.writeReply(coReply);
+      System.out.println("리플라이 한개 추가요");
+      
+      return "redirect:detail?coNo=" + coReply.getCoNo();
+  }
+   
+  //댓글 수정 
+  //댓글 수정 GET
+  @RequestMapping(value="/replyUpdateView", method = RequestMethod.GET)
+  public void replyUpdateView(CoReply coReply, Model model) throws Exception {
+      logger.info("reply Update");
+      
+      model.addAttribute("replyUpdate", coReplyService.selectReply(coReply.getCoReplyNo()));
+      
+  }
+  
+  //댓글 수정 POST
+  @RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
+  public String replyUpdate(CoReply coReply) throws Exception {
+      logger.info("reply Update");
+      
+      coReplyService.updateReply(coReply);
+      
+      return "redirect:detail?coNo=" + coReply.getCoNo();
+  }
+  
+  
+  //댓글 삭제
+  //댓글 삭제 GET
+  @RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
+  public void replyDeleteView(CoReply coReply, Model model) throws Exception {
+      logger.info("reply Delete");
+      
+      model.addAttribute("replyDelete", coReplyService.selectReply(coReply.getCoReplyNo()));
+
+  }
+  
+  //댓글 삭제 POST
+  @RequestMapping(value="/replyDelete", method = RequestMethod.POST)
+  public String replyDelete(CoReply coReply) throws Exception {
+      logger.info("reply Delete");
+      
+      coReplyService.deleteReply(coReply);
+      
+      return "redirect:detail?coNo=" + coReply.getCoNo();
+  }
+  
+  
+  private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String requestURI = request.getRequestURI();
+    String contextPath = request.getContextPath();
+    String command = requestURI.substring(contextPath.length());
+    
+    System.out.println("requestURI : " + requestURI);
+    System.out.println("contextPath : " + contextPath);
+    System.out.println("command : " + command);
+
+    Action action = null;
+    ActionForward forward = null;
+  
+    // 추천수 업데이트
+    if (command.equals("/RecUpdate.do")) {
+        try {
+            action = new RecUpdate();
+            action.execute(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // 추천수 검색
+    else if (command.equals("/RecCount.do")) {
+        try {
+            action = new RecCount();
+            action.execute(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+  
 }

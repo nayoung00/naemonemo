@@ -13,7 +13,6 @@ public interface CoDao {
 
   List<Co> findAll() throws Exception;
 
-
   public Co findByNo(int communicationBoardNo) throws Exception;
 
   public int update(Co communicationBoard) throws Exception;

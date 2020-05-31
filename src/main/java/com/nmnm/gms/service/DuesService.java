@@ -14,7 +14,9 @@ public interface DuesService {
 
 //  Account get(int accountNo) throws Exception;
 
-  int update(Group groupNo) throws Exception;
+  int update(Dues groupNo) throws Exception;
+
+	Dues get(int groupNo) throws Exception;
 
 //  List<Account> search(String keyword) throws Exception;
 

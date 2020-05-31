@@ -12,7 +12,7 @@
                    <span class="icon-bar"></span>
                    <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="../../moim-index.html">모임홈?</a>
+               <a class="navbar-brand" href="../../moim-index.html">${group.groupName}</a>
                <a class="navbar-brand" href="../notice/list">공지</a>
                <a class="navbar-brand" href="../plan/list">일정</a>
                <a class="navbar-brand" href="../account/list">회계</a>

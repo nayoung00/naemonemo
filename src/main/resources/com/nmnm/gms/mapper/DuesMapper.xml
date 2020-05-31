@@ -13,6 +13,7 @@
 		
 		<result column="bank_name" property="bankName" />
 		<result column="bank_account_no" property="bankAccountNo" />
+		<result column="group_name" property="groupName" />
 
 		<result column="dues_period" property="duesPeriod" />
 		<result column="dues" property="dues" />
@@ -27,7 +28,8 @@ SELECT
       dues_period,
       dues,
       ga.bank_name,
-      ga.bank_account_no
+      ga.bank_account_no, 
+      g.group_name
 FROM ((nm_dues AS d LEFT JOIN nm_member AS m ON d.member_no=m.member_no) 
   LEFT JOIN nm_group AS g ON g.group_no=d.group_no), 
   nm_group_account AS ga

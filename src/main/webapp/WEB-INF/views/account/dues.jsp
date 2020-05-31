@@ -10,8 +10,9 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="card">
+									<c:forEach items="${dues}" var="item">
 						<div class="header text-center">
-							<h4 class="title">회비 안내 : [모임 이름]</h4>
+							<h4 class="title">회비 안내 : ${item.groupName}</h4>
 							<p class="category">모임에서 설정한 회비는 아래와 같습니다.</p>
 							<br>
 						</div>
@@ -24,7 +25,6 @@
 									<th class="text-center">How</th>
 								</thead>
 								<tbody>
-									<c:forEach items="${dues}" var="item">
 										<tr class="text-center">
 											<td>입회비</td>
 											<td><i class="fa fa-check text-success"></i></td>
@@ -52,10 +52,11 @@
 													수정하기</button>
 										</a></td>
 									</tr>
-									</c:forEach>
+									
 								</tbody>
 							</table>
 						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

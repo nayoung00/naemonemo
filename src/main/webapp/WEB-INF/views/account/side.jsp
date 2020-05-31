@@ -7,9 +7,7 @@
       <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
       <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
-                                    모임명?
-                </a>
+                <a href="#" class="simple-text">123</a>
             </div>
 
             <ul class="nav">

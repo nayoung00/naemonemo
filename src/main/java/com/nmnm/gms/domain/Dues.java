@@ -9,11 +9,26 @@ public class Dues {
 	private int dues; // 회비금액
 	  private String bankAccountNo; // 계좌번호
 	  private String bankName; // 은행명
+	  private String groupName; // 모임 이름
+	  
+	  
+	  
+	  
+	@Override
+		public String toString() {
+			return "Dues [groupNo=" + groupNo + ", bankInfoId=" + bankInfoId + ", memberNo=" + memberNo + ", entranceFee="
+					+ entranceFee + ", duesPeriod=" + duesPeriod + ", dues=" + dues + ", bankAccountNo=" + bankAccountNo
+					+ ", bankName=" + bankName + ", groupName=" + groupName + "]";
+		}
 
-	  
-	  
-	  
-	  
+	public String getGroupName() {
+			return groupName;
+		}
+
+		public void setGroupName(String groupName) {
+			this.groupName = groupName;
+		}
+
 	public String getBankAccountNo() {
 		return bankAccountNo;
 	}
@@ -77,14 +92,4 @@ public class Dues {
 	public void setDues(int dues) {
 		this.dues = dues;
 	}
-
-	@Override
-	public String toString() {
-		return "Dues [groupNo=" + groupNo + ", bankInfoId=" + bankInfoId + ", memberNo=" + memberNo + ", entranceFee="
-				+ entranceFee + ", duesPeriod=" + duesPeriod + ", dues=" + dues + ", bankAccountNo=" + bankAccountNo
-				+ ", bankName=" + bankName + "]";
-	}
-
-
-
 }

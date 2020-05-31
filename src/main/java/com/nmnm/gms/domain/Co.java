@@ -13,20 +13,36 @@ public class Co implements Serializable{
   private String title;
   private String content;
   private String createDate; // now()
+  private String nickname; 
   private int viewCount;
   private List<CoPhoto> coPhotos;
 
 
+
+
+
   @Override
-  public String toString() {
-    return "Co [coNo=" + coNo + ", category=" + category + ", memberNo=" + memberNo + ", title="
-        + title + ", content=" + content + ", createDate=" + createDate + ", viewCount=" + viewCount
-        + ", coPhotos=" + coPhotos + "]";
-  }
+	public String toString() {
+		return "Co [coNo=" + coNo + ", category=" + category + ", memberNo=" + memberNo + ", title=" + title + ", content="
+				+ content + ", createDate=" + createDate + ", nickname=" + nickname + ", viewCount=" + viewCount + ", coPhotos="
+				+ coPhotos + "]";
+	}
 
 
 
-  public String getCreateDate() {
+	public String getNickname() {
+		return nickname;
+	}
+
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+
+	public String getCreateDate() {
     // Date currentDate = new Date();
     // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     // String createDate = format.format(currentDate);

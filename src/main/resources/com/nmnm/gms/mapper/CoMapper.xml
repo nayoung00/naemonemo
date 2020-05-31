@@ -13,6 +13,7 @@
     <result column="content" property="content" />
     <result column="create_date" property="createDate" />
     <result column="view_count" property="viewCount" />
+    <result column="nickname" property="nickname" />
     
     <collection property="coPhotos" ofType="CoPhoto">
     <id column="co_photo_no"   property="no"/>
@@ -21,36 +22,25 @@
     
   </resultMap>
 
-  <sql id="select1">
-    select
-      co_no,
-      co_category,
-      member_no,
-      title,
-      content,
-      create_date,
-      view_count
-    from
-      nm_co
-  </sql>
+
 
   <select id="findAll" resultMap="CoMap" parameterType="Map">
-    select
+    SELECT
       c.co_no,
       c.co_category,
-      c.member_no,
+      m.nickname,
       c.title,
       c.content,
       c.create_date,
       c.view_count,
       p.co_photo_no,
       p.co_photo_file
-    from
-      nm_co c
+    FROM
+      (nm_co AS c 
+    LEFT JOIN nm_member AS m ON c.member_no=m.member_no)
+    LEFT join nm_co_photo AS p on c.co_no= p.co_no
     
-    inner join nm_co_photo p on c.co_no= p.co_no
-    
-    order by 
+    ORDER BY 
       c.co_no desc 
     limit #{startList}, #{listSize}
   </select>
@@ -84,19 +74,19 @@
   </insert>
 
   <select id="findByNo" resultMap="CoMap" parameterType="int">
-    select
+    SELECT
       c.co_no,
       c.co_category,
-      c.member_no,
+      m.nickname,
       c.title,
       c.content,
       c.create_date,
       c.view_count,
       p.co_photo_no,
       p.co_photo_file
-    from
-      nm_co c
-    
+    FROM
+      (nm_co AS c 
+    LEFT JOIN nm_member AS m ON c.member_no=m.member_no)
     inner join nm_co_photo p on c.co_no= p.co_no
 
     where
@@ -140,7 +130,20 @@
   <select id="findByCategory" resultMap="CoMap"
     parameterType="string">
     <bind name="keyword2Pattern" value="'%' + _parameter + '%'" />
-    <include refid="select1" />
+        SELECT
+      c.co_no,
+      c.co_category,
+      m.nickname,
+      c.title,
+      c.content,
+      c.create_date,
+      c.view_count,
+      p.co_photo_no,
+      p.co_photo_file
+    FROM
+      (nm_co AS c 
+    LEFT JOIN nm_member AS m ON c.member_no=m.member_no)
+    LEFT join nm_co_photo AS p on c.co_no= p.co_no
     where
     co_category like #{keyword2Pattern}
         order by 

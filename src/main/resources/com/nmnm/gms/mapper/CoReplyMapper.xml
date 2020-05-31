@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.nmnm.gms.dao.CoReplyDao">
+
+  <resultMap type="CoReply" id="CoReplyMap">
+    <id column="co_reply_no"   property="coReplyNo"/>
+    <result column="co_no"    property="coNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="content"  property="content"/>
+    <result column="create_date"    property="createDate"/>
+  </resultMap>
+  
+  <!--  댓글 목록 조회 -->
+  <select id="readReply" resultMap="CoReplyMap" parameterType="int">
+    select
+      co_no,
+      co_reply_no,
+      content,
+      member_no, 
+      create_date
+    from 
+      nm_co_reply
+ 
+    where 
+      co_no=#{coNo}
+ 
+    order by
+      co_reply_no asc
+  </select>
+
+  
+  
+  <!-- 댓글작성 -->
+  <insert id="writeReply" parameterType="CoReply">
+    insert into nm_co_reply(
+      co_no,
+      content,
+      member_no 
+      )
+    values(
+      #{coNo},
+      #{content},
+      #{memberNo}
+      )
+  </insert>
+ 
+ 
+  <!-- 댓글 수정 -->
+  <update id="updateReply" parameterType="CoReply">
+    update nm_co_reply set
+      content=#{content}
+    where 
+      co_reply_no=#{coReplyNo}
+  </update>
+  
+  <!-- 댓글삭제 -->
+  <delete id="deleteReply" parameterType="CoReply">
+    delete from nm_co_reply
+    where co_reply_no=#{coReplyNo}
+  </delete>
+  
+  <!-- 선택된 댓글 조회 -->
+  <select id="selectReply" resultMap="CoReplyMap" parameterType="int">
+    select
+      co_reply_no,
+      co_no,
+      member_no,
+      content,
+      create_date
+    from nm_co_reply
+    where co_reply_no=#{coReplyNo}
+  </select>
+ 
+
+  
+  <!-- 
+  <select id="findByKeyword" resultMap="CoReplyMap" parameterType="string">
+  <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
+    select
+      member_no, 
+      content,
+    from 
+      nm_co_reply
+    where
+      content like #{content}
+  </select>
+   -->
+   
+</mapper>

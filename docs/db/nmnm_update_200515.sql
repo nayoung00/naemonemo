@@ -11,7 +11,6 @@ DEFAULT COLLATE utf8_general_ci;
 
 USE nmnmdb;
 
-
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
@@ -72,11 +71,11 @@ DROP TABLE IF EXISTS nm_feed_like RESTRICT;
 -- 회계
 DROP TABLE IF EXISTS nm_account RESTRICT;
 
--- 모임회비
-DROP TABLE IF EXISTS nm_dues RESTRICT;
-
 -- 회원
 DROP TABLE IF EXISTS nm_member RESTRICT;
+
+-- 모임회비
+DROP TABLE IF EXISTS nm_dues RESTRICT;
 
 -- 공지사항
 CREATE TABLE nm_notice (
@@ -330,9 +329,8 @@ ALTER TABLE nm_co_photo
 
 -- 소통좋아요
 CREATE TABLE nm_co_like (
-  like_count INTEGER NOT NULL COMMENT '좋아요수', -- 좋아요수
-  member_no  INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  co_no      INTEGER NOT NULL COMMENT '소통번호' -- 소통번호
+  member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  co_no     INTEGER NOT NULL COMMENT '소통번호' -- 소통번호
 )
 COMMENT '소통좋아요';
 
@@ -340,9 +338,8 @@ COMMENT '소통좋아요';
 ALTER TABLE nm_co_like
   ADD CONSTRAINT PK_nm_co_like -- 소통좋아요 기본키
     PRIMARY KEY (
-      like_count, -- 좋아요수
-      member_no,  -- 회원번호
-      co_no       -- 소통번호
+      member_no, -- 회원번호
+      co_no      -- 소통번호
     );
 
 -- 알림
@@ -364,17 +361,19 @@ ALTER TABLE nm_alram
 -- 일정
 CREATE TABLE nm_plan (
   plan_no     INTEGER      NOT NULL COMMENT '일정번호', -- 일정번호
-  group_no    INTEGER      NULL     DEFAULT 1 COMMENT '모임번호', -- 모임번호
-  member_no   INTEGER      NULL     DEFAULT 1 COMMENT '회원번호', -- 회원번호
-  start_date  VARCHAR(20)  NOT NULL DEFAULT now() COMMENT '시작일', -- 시작일
-  end_date    VARCHAR(20)  NOT NULL DEFAULT DATE_ADD(NOW(), INTERVAL 1 HOUR) COMMENT '종료일', -- 종료일
+  group_no    INTEGER      NULL     COMMENT '모임번호', -- 모임번호
+  member_no   INTEGER      NULL     COMMENT '회원번호', -- 회원번호
+  start_date  DATE         NOT NULL COMMENT '시작일', -- 시작일
+  end_date    DATE         NOT NULL COMMENT '종료일', -- 종료일
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  subtitle    VARCHAR(255) NULL     DEFAULT '소제목' COMMENT '소제목', -- 소제목
   content     TEXT         NULL     COMMENT '내용', -- 내용
   thumbnail   VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
+  place_name  VARCHAR(255) NULL     COMMENT '장소명', -- 장소명
   address     VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
   latitude    INTEGER      NULL     COMMENT '위도', -- 위도
   longitude   INTEGER      NULL     COMMENT '경도', -- 경도
-  create_date VARCHAR(20)  NULL     DEFAULT date_format(now(), '%Y-%m-%d')  COMMENT '작성일' -- 작성일
+  create_date DATETIME     NULL     DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '일정';
 
@@ -565,6 +564,25 @@ ALTER TABLE nm_member
 
 ALTER TABLE nm_member
   AUTO_INCREMENT = 1;
+
+-- 모임회비
+CREATE TABLE nm_dues (
+  group_no     INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
+  bank_info_id INTEGER NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
+  member_no    INTEGER NULL     COMMENT '회원번호', -- 회원번호
+  entrance_fee INTEGER NULL     COMMENT '입회비', -- 입회비
+  dues_period  TEXT    NOT NULL COMMENT '회비납부주기', -- 회비납부주기
+  dues         INTEGER NOT NULL COMMENT '회비금액' -- 회비금액
+)
+COMMENT '모임회비';
+
+-- 모임회비
+ALTER TABLE nm_dues
+  ADD CONSTRAINT PK_nm_dues -- 모임회비 기본키
+    PRIMARY KEY (
+      group_no,     -- 모임번호
+      bank_info_id  -- 모임계좌아이디
+    );
 
 -- 공지사항
 ALTER TABLE nm_notice
@@ -904,34 +922,12 @@ ALTER TABLE nm_account
 
 -- 회계
 ALTER TABLE nm_account
-    ADD CONSTRAINT FK_nm_group_account_TO_nm_account -- 모임계좌 -> 회계
-        FOREIGN KEY (
-            bank_info_id -- 모임계좌아이디
-        )
-        REFERENCES nm_group_account ( -- 모임계좌
-            bank_info_id -- 모임계좌아이디
-        );
-        
-        
-        
-
--- 모임회비
-CREATE TABLE nm_dues (
-  group_no     INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
-  bank_info_id INTEGER NOT NULL COMMENT '모임계좌아이디', -- 모임계좌아이디
-  member_no    INTEGER NULL     COMMENT '회원번호', -- 회원번호
-  entrance_fee INTEGER NULL     COMMENT '입회비', -- 입회비
-  dues_period  TEXT    NOT NULL COMMENT '회비납부주기', -- 회비납부주기
-  dues         INTEGER NOT NULL COMMENT '회비금액' -- 회비금액
-)
-COMMENT '모임회비';
-
--- 모임회비
-ALTER TABLE nm_dues
-  ADD CONSTRAINT PK_nm_dues -- 모임회비 기본키
-    PRIMARY KEY (
-      group_no,     -- 모임번호
-      bank_info_id  -- 모임계좌아이디
+  ADD CONSTRAINT FK_nm_group_account_TO_nm_account -- 모임계좌 -> 회계
+    FOREIGN KEY (
+      bank_info_id -- 모임계좌아이디
+    )
+    REFERENCES nm_group_account ( -- 모임계좌
+      bank_info_id -- 모임계좌아이디
     );
 
 -- 모임회비

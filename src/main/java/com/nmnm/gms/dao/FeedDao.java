@@ -20,4 +20,5 @@ public interface FeedDao {
   int delete(int feedNo) throws Exception;
 
   List<Feed> findByKeyword(String keyword) throws Exception;
+  
 }

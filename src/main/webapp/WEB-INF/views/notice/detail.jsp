@@ -30,7 +30,10 @@
 
 <p>
 <button><a href='delete?noticeNo=${notice.noticeNo}'>삭제</a></button>
-<button><a href='updateForm?noticeNo=${notice.noticeNo}'>변경</a></p></button>
+<button><a href='updateForm?noticeNo=${notice.noticeNo}'>변경</a></button>
+<button><a href="list.jsp">목록</a></button>
+</p>
+
 </form>
 </c:if>
 
@@ -38,4 +41,5 @@
 <p>해당 공지사항 게시물이 없습니다.</p>
 </c:if>
 
-    
+
+<jsp:include page="replyView.jsp"/>

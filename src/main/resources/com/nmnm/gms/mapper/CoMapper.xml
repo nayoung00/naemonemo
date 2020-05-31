@@ -5,36 +5,36 @@
 
 <mapper namespace="com.nmnm.gms.dao.CoDao">
 
-	<resultMap type="Co" id="CoMap">
-		<id column="co_no" property="coNo" />
-		<result column="co_category" property="category" />
-		<result column="member_no" property="memberNo" />
-		<result column="title" property="title" />
-		<result column="content" property="content" />
-		<result column="create_date" property="createDate" />
-		<result column="view_count" property="viewCount" />
-		
-		<collection property="coPhotos" ofType="CoPhoto">
+  <resultMap type="Co" id="CoMap">
+    <id column="co_no" property="coNo" />
+    <result column="co_category" property="category" />
+    <result column="member_no" property="memberNo" />
+    <result column="title" property="title" />
+    <result column="content" property="content" />
+    <result column="create_date" property="createDate" />
+    <result column="view_count" property="viewCount" />
+    
+    <collection property="coPhotos" ofType="CoPhoto">
     <id column="co_photo_no"   property="no"/>
     <result column="co_photo_file"    property="filepath"/>
     </collection>
-		
-	</resultMap>
+    
+  </resultMap>
 
-	<sql id="select1">
-		select
-	  	co_no,
-		  co_category,
-		  member_no,
-		  title,
-		  content,
+  <sql id="select1">
+    select
+      co_no,
+      co_category,
+      member_no,
+      title,
+      content,
       create_date,
-		  view_count
-		from
-		  nm_co
-	</sql>
+      view_count
+    from
+      nm_co
+  </sql>
 
-	<select id="findAll" resultMap="CoMap" parameterType="Map">
+  <select id="findAll" resultMap="CoMap" parameterType="Map">
     select
       c.co_no,
       c.co_category,
@@ -45,17 +45,17 @@
       c.view_count,
       p.co_photo_no,
       p.co_photo_file
-		from
-		  nm_co c
-		
-		inner join nm_co_photo p on c.co_no= p.co_no
-		
-		order by 
-		  c.co_no desc 
-		limit #{startList}, #{listSize}
-	</select>
-	
-	<select id="listCnt" resultType="int">
+    from
+      nm_co c
+    
+    inner join nm_co_photo p on c.co_no= p.co_no
+    
+    order by 
+      c.co_no desc 
+    limit #{startList}, #{listSize}
+  </select>
+  
+  <select id="listCnt" resultType="int">
     select 
       count(*) as listCnt 
     from 
@@ -63,27 +63,27 @@
   </select>
 
 
-	<insert id="insert" parameterType="Co"
-	  useGeneratedKeys="true" keyColumn="co_no" keyProperty="coNo">
-		insert into nm_co(
-		  co_no,
-		  co_category,
-		  member_no,
-		  title,
-		  content,
-		  view_count
-		)
-		values(
-		  #{coNo},
-		  #{category},
-		  #{memberNo},
-		  #{title},
-		  #{content},
-		  #{viewCount}
-		)
-	</insert>
+  <insert id="insert" parameterType="Co"
+    useGeneratedKeys="true" keyColumn="co_no" keyProperty="coNo">
+    insert into nm_co(
+      co_no,
+      co_category,
+      member_no,
+      title,
+      content,
+      view_count
+    )
+    values(
+      #{coNo},
+      #{category},
+      #{memberNo},
+      #{title},
+      #{content},
+      #{viewCount}
+    )
+  </insert>
 
-	<select id="findByNo" resultMap="CoMap" parameterType="int">
+  <select id="findByNo" resultMap="CoMap" parameterType="int">
     select
       c.co_no,
       c.co_category,
@@ -99,53 +99,53 @@
     
     inner join nm_co_photo p on c.co_no= p.co_no
 
-		where
-  		c.co_no=#{coNo}
-	</select>
+    where
+      c.co_no=#{coNo}
+  </select>
 
-	<update id="update" parameterType="Co">
-		update nm_co
-		set
-		  co_category=#{category},
-		  title=#{title},
-		  content=#{content}
-		where 
-		  co_no=#{coNo}
-	</update>
+  <update id="update" parameterType="Co">
+    update nm_co
+    set
+      co_category=#{category},
+      title=#{title},
+      content=#{content}
+    where 
+      co_no=#{coNo}
+  </update>
 
-	<delete id="delete" parameterType="int">
-		delete from nm_co
-		where co_no=#{coNo}
-	</delete>
+  <delete id="delete" parameterType="int">
+    delete from nm_co
+    where co_no=#{coNo}
+  </delete>
 
-	<select id="findByKeyword" resultMap="CoMap"
-		parameterType="string">
-		<bind name="keywordPattern" value="'%' + _parameter + '%'" />
-		select
-		co_no,
-		co_category,
-		member_no,
-		title,
-		create_date,
-		view_count
-		from nm_co
-		where
-		title like
-		#{keywordPattern}
-		or content like #{keywordPattern}
-		order by 
+  <select id="findByKeyword" resultMap="CoMap"
+    parameterType="string">
+    <bind name="keywordPattern" value="'%' + _parameter + '%'" />
+    select
+    co_no,
+    co_category,
+    member_no,
+    title,
+    create_date,
+    view_count
+    from nm_co
+    where
+    title like
+    #{keywordPattern}
+    or content like #{keywordPattern}
+    order by 
     co_no desc 
-	</select>
+  </select>
 
-	<select id="findByCategory" resultMap="CoMap"
-		parameterType="string">
-		<bind name="keyword2Pattern" value="'%' + _parameter + '%'" />
-		<include refid="select1" />
-		where
-		co_category like #{keyword2Pattern}
-		    order by 
+  <select id="findByCategory" resultMap="CoMap"
+    parameterType="string">
+    <bind name="keyword2Pattern" value="'%' + _parameter + '%'" />
+    <include refid="select1" />
+    where
+    co_category like #{keyword2Pattern}
+        order by 
     co_no desc 
-	</select>
+  </select>
 
 
 </mapper>

@@ -59,7 +59,7 @@
 
     <!-- 비밀번호 초기화 -->
     <update id="resetPassword"> 
-        update nm_member set password = password(#{param1}) where email = #{param2}
+        update nm_member set password = password(#{param3}) where email = #{param2}
     </update>
 
     <!--비빌번호 변경-->

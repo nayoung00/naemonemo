@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -75,7 +78,7 @@
     text-decoration: none;
    } 
      
-     
+   .div login_naver_area{ text-align: center; }  
     
 </style>
 </head>
@@ -90,13 +93,13 @@
                 <label for="email">EMAIL</label>
             </div>
              <div class="int-area">
-                <input type="password" name="password" id="password"
+                <input type="password" name="password" id="password" 
                  required>
                 <label for="password">PASSWORD</label>
             </div>
         <div class="caption">
             <input type="checkbox" name='saveEmail'> Remember me</label>
-            <a href="pwReset" class="pull-right">Forgot Password?</a>
+            <a href="findPassword" class="pull-right">Forgot Password?</a>
             </div>
             
             <div class="btn-area">
@@ -106,26 +109,28 @@
     <p class="text-center small">Don't have an account! <a href="join">Sign up here</a>.</p>
 </div>
     <p>
-    <hr color=" #D2691E" size="10">
-    <div id="naverIdLogin"></div>
-    
+<hr>
+ <%
+    String clientId = "gpaO5pkwAnLvkrjATqmF";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:9999/nmnm/app/auth/naverLogin", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+
+<div class="login_naver_area">
+  <a href="<%=apiURL%>"><img width=300 src="https://static.nid.naver.com/oauth/big_g.PNG"/></a>
+ </div>
+
+
     
     </section>
 
-<script type="text/javascript">
-    var naverLogin = new naver.LoginWithNaverId(
-        {
-            clientId: "gpaO5pkwAnLvkrjATqmF",
-            callbackUrl: "http://localhost:8080/nmnm/app/auth/callback",
-            isPopup: true, /* 팝업을 통한 연동처리 여부 */
-            loginButton: {color: "green", type: 3, height: 100} /* 로그인 버튼의 타입을 지정 */
-        }
-    );
-    
-    /* 설정정보를 초기화하고 연동을 준비 */
-    naverLogin.init();
-    
-</script>
+
 </body>
     
 </html>

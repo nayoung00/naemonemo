@@ -49,9 +49,7 @@
         update nm_member set auth_status = 'Y' where email =#{param2}
     </update>
     
-   <select id="findByEmailAndPassword" 
-    resultMap="MemberMap" 
-    parameterType="map">
+   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select *
     from nm_member
     where 
@@ -59,29 +57,28 @@
       and password=password(#{password})
   </select> 
 
-    <!-- 비밀번호 초기화 -->
-    <update id="resetPassword"> 
-        update nm_member set password = password(#{password}) where email = #{email}
-    </update>
-
     <!--비빌번호 변경-->
     <update id="changePassword">    
          update nm_member set password = password(#{password}) where email = #{email}
     </update>
+
+    <!-- 비밀번호 초기화 -->
+    <update id="resetPassword"> 
+        update nm_member set password = password(#{param3}) where email = #{param2}
+    </update>
     
     <!-- 비밀번호 찾을거야.. -->
-    <select id="findAccount" resultType="Member">
+    <select id="findPassword" parameterType="map" resultType="int">
         SELECT count(*)
         FROM   nm_member
-        WHERE  email=#{email} 
-               and password=password(#{password})
-    
+        WHERE member_name=#{name}  
+              and email=#{email} 
     </select>
     
     
-    <select id="userView" resultType="Member">
+    <select id="userView" resultMap="MemberMap" parameterType="string">
         SELECT * FROM nm_member
-        WHERE id = #{id}
+        WHERE email = #{email}
     </select>
 
     <update id="memDrop">
@@ -137,6 +134,7 @@
       WHERE
           nickname = #{nickname}
 </select>
+
 
 <!-- 그룹 가입 신청하기 -->
   <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">

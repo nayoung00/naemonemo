@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
@@ -25,6 +26,10 @@ public class MemberController {
 
   @Autowired
   MemberService memberService;
+
+  @GetMapping("pwupdate")
+  public void pwupdate() {}
+
 
   @GetMapping("form")
   public void form() {}
@@ -83,5 +88,25 @@ public class MemberController {
     } else {
       throw new Exception("쪽지를 보낼 수 없습니다.");
     }
+  }
+
+  @RequestMapping(value = "changePassword", method = RequestMethod.POST)
+  public String postChangePassword(HttpSession session, HttpServletRequest request, Member member)
+      throws Exception {
+
+    String password = request.getParameter("password");
+
+    member.setEmail(member.getEmail());
+    member.setPassword(password);
+
+    memberService.changePassword(member);
+
+    return "member/changePassSuccess";
+  }
+
+
+  @GetMapping("changePassSuccess")
+  public String changePassSuccess() {
+    return "member/changePassSuccess";
   }
 }

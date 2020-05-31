@@ -1,7 +1,11 @@
 package com.nmnm.gms.web;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.domain.CoReply;
@@ -43,10 +48,12 @@ public class CoController {
   @GetMapping("form")
   public void form() throws Exception {}
 
+  
   @PostMapping("add")
-  public String add(Co co) throws Exception {
+  public String add(Co co, MultipartHttpServletRequest mpRequest) throws Exception {
+    logger.info("write/add");
     
-    coService.add(co);
+    coService.add(co, mpRequest);
     
     return "redirect:list";
   }
@@ -58,7 +65,7 @@ public class CoController {
   }
 
   @GetMapping("detail")
-  public void detail(Model model, @RequestParam("coNo")int coNo) throws Exception {
+  public void detail(Co co, Model model, @RequestParam("coNo")int coNo) throws Exception {
     model.addAttribute("co", coService.get(coNo));
     
     // 댓글 리스트 보기
@@ -67,6 +74,11 @@ public class CoController {
     
     // 게시물 조회수 +1
     coService.plusCnt(coNo);
+    
+    // 첨부파일 조회
+    List<Map<String, Object>> fileList = coService.selectFileList(co.getCoNo());
+    model.addAttribute("file", fileList);
+    
   }
 
   // @GetMapping("list")
@@ -87,18 +99,31 @@ public class CoController {
     model.addAttribute("list", coService.list(pagination));
   }
 
+  // 게시물 수정 뷰
   @GetMapping("updateForm")
-  public void updateForm(int coNo, Model model) throws Exception {
-    model.addAttribute("co", coService.get(coNo));
+  public void updateForm(Co co, Model model) throws Exception {
+    logger.info("updateForm");
+    
+    model.addAttribute("update", coService.get(co.getCoNo()));
+    
+    List<Map<String, Object>> fileList = coService.selectFileList(co.getCoNo());
+    model.addAttribute("file", fileList);
   }
 
   @PostMapping("update")
-  public String update(Co co) throws Exception {
+  public String update(Co co, //
+      @RequestParam(value="fileNoDel[]") String[] files, //
+      @RequestParam(value="fileNameDel[]") String[] fileNames, //
+      MultipartHttpServletRequest mpRequest) throws Exception {
     
-    coService.update(co);
-    return "redirect:list";
+    logger.info("update");
+    
+    coService.update(co, files, fileNames, mpRequest);
+    
+    return "redirect:detail?coNo=" + co.getCoNo();
   }
 
+  
   @GetMapping("search")
   public void search(String keyword, Model model) throws Exception {
     model.addAttribute("list", coService.search(keyword));
@@ -163,6 +188,26 @@ public class CoController {
       
       return "redirect:detail?coNo=" + coReply.getCoNo();
   }
+  
+  
+  // 첨부파일 다운로드
+  @RequestMapping(value="/fileDown")
+  public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
+      Map<String, Object> resultMap = coService.selectFileInfo(map);
+      String storedFileName = (String) resultMap.get("STORED_FILE_NAME");
+      String originalFileName = (String) resultMap.get("ORG_FILE_NAME");
+      
+      // 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
+      byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+storedFileName));
+      
+      response.setContentType("application/octet-stream");
+      response.setContentLength(fileByte.length);
+      response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
+      response.getOutputStream().write(fileByte);
+      response.getOutputStream().flush();
+      response.getOutputStream().close();
+  }
+  
   
     
 }

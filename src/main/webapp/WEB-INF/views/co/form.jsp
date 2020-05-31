@@ -15,10 +15,13 @@
 <h1>소통게시물 입력</h1>
               </div>
               
-<form action='add' method='post' enctype='multipart/form-data'>
-
+<form action='add' method='post'>
+<!--
 <input name='memberNo' type='hidden'><br>
 <br>
+-->
+
+회원번호: <input name='memberNo' type='text'><br>
 
 <div>
       글 분류:<select name="category">
@@ -33,12 +36,6 @@
 제목: <input name='title' type='text'><br>
 내용:<br>
 <textarea name='content' rows='5' cols='60'></textarea><br>
-
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
 
 <button>등록</button>
 </form>

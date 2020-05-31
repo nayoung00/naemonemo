@@ -39,12 +39,6 @@
 작성일: ${co.createDate}<br>
 조회수: ${co.viewCount}<br>
 
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-사진: <input name='coPhotos' type='file'><br>
-
 <button>변경</button>
 </form>
     

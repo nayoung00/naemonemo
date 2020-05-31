@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.nmnm.gms.dao.NoticeDao;
-import com.nmnm.gms.dao.NoticePhotoDao;
 import com.nmnm.gms.domain.Notice;
 import com.nmnm.gms.service.NoticeService;
 
@@ -16,15 +15,12 @@ public class NoticeServiceImpl implements NoticeService {
   
   TransactionTemplate transactionTemplate;
   NoticeDao noticeDao;
-  NoticePhotoDao noticePhotoDao;
   
   public NoticeServiceImpl(//
       PlatformTransactionManager txManager, //      
-      NoticeDao noticeDao, //
-      NoticePhotoDao noticePhotoDao) {
+      NoticeDao noticeDao) {
     this.transactionTemplate = new TransactionTemplate(txManager);    
     this.noticeDao = noticeDao;
-    this.noticePhotoDao = noticePhotoDao;
   }
 
   @Transactional
@@ -34,7 +30,6 @@ public class NoticeServiceImpl implements NoticeService {
       throw new Exception("공지사항 등록에 실패했습니다.");
     }
     System.out.println("공지사항 등록  완료#" + notice.getNoticeNo());
-    noticePhotoDao.insert(notice);
   }
 
   @Transactional
@@ -56,16 +51,11 @@ public class NoticeServiceImpl implements NoticeService {
     if (noticeDao.update(notice) == 0) {
       throw new Exception("공지사항 변경에 실패했습니다.");
     }
-    if (notice.getNoticePhotos() != null) {
-      noticePhotoDao.deleteAll(notice.getNoticeNo());
-      noticePhotoDao.insert(notice);
-    }
   }
 
   @Transactional
   @Override
   public void delete(int noticeNo) throws Exception {
-    noticePhotoDao.deleteAll(noticeNo);
     if (noticeDao.delete(noticeNo) == 0) {
       throw new Exception("해당 번호의 공지사항이 없습니다.");
     }

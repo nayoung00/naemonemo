@@ -14,11 +14,6 @@
     <result column="create_date"    property="createDate"/>
     <result column="view_count"    property="viewCount"/>
 
-    <collection property="noticePhotos" ofType="NoticePhoto">
-    <id column="notice_photo_no"   property="no"/>
-    <result column="notice_photo_file"    property="filepath"/>
-    </collection>
-        
   </resultMap>
   
   
@@ -54,42 +49,34 @@
   
   <select id="findAll" resultMap="NoticeMap" parameterType="Map">
     select
-      n.notice_no,
-      n.member_no, 
-      n.title,
-      n.create_date,
-      n.view_count,
-      p.notice_photo_no,
-      p.notice_photo_file
+      notice_no,
+      member_no, 
+      title,
+      create_date,
+      view_count
     from 
-      nm_notice n
-      
-    inner join nm_notice_photo p on n.notice_no= p.notice_no
+      nm_notice
 
     order by
-      n.notice_no desc
+      notice_no desc
    
   </select>
 
   
   <select id="findByNo" resultMap="NoticeMap" parameterType="int">
     select
-      n.notice_no,
-      n.member_no,
-      n.group_no,
-      n.title,
-      n.content,
-      n.create_date,
-      n.view_count,
-      p.notice_photo_no,
-      p.notice_photo_file
+      notice_no,
+      member_no,
+      group_no,
+      title,
+      content,
+      create_date,
+      view_count
     from 
-      nm_notice n
+      nm_notice
     
-    inner join nm_notice_photo p on n.notice_no= p.notice_no
-      
     where
-      n.notice_no=#{noticeNo}
+      notice_no=#{noticeNo}
   </select>
   
   <update id="update" parameterType="Notice">
@@ -118,8 +105,6 @@
     from 
       nm_notice f
       
-    inner join notice_photo t on f.notice_no= t.notice_no
-
     where
       title like #{title}
       or content like #{content}

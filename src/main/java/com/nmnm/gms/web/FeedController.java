@@ -96,7 +96,7 @@ public class FeedController {
   }
 
   @GetMapping("detail")
-  public void detail(Model model, @RequestParam("coNo") int feedNo) throws Exception {
+  public void detail(Model model, @RequestParam("feedNo") int feedNo) throws Exception {
     model.addAttribute("feed", feedService.get(feedNo));
 
     // 댓글 리스트 보기

@@ -65,7 +65,7 @@ public class NoticeController {
   }
 
   @GetMapping("detail")
-  public void detail(Model model, @RequestParam("coNo")int noticeNo) throws Exception {
+  public void detail(Model model, @RequestParam("noticeNo")int noticeNo) throws Exception {
     model.addAttribute("notice", noticeService.get(noticeNo));
     
     // 댓글 리스트 보기

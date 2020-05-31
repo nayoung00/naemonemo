@@ -179,13 +179,16 @@ INSERT INTO nm_notice_reply(content,notice_no,member_no)
 -- 일정 예제 데이터
 INSERT INTO nm_plan
 (group_no,
+member_no,
 title,
+start_date,
+end_date,
 content,
 thumbnail,
 address,
 latitude,
 longitude)
-VALUES(2,'프로젝트','내용이랍니다', 'bit.jpg','주소',11,22);
+VALUES(2,1,'프로젝트','2020-04-02 12:09', '2020-04-02 13:09','내용이랍니다', 'bit.jpg','주소',11,22);
 
 -- 일정 참여자 & 일정이 먼저
 INSERT INTO nm_plan_member(plan_no,member_no,group_no,attend)

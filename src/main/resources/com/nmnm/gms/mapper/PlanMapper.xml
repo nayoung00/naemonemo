@@ -81,8 +81,8 @@
     <select id="findByNo" resultMap="PlanMap" parameterType="int">
     select 
       plan_no,
-      DATE_FORMAT(start_date, '%Y-%m-%d') start_date,
-      DATE_FORMAT(end_date, '%Y-%m-%d') end_date,
+      DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
+      DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
       title,
       content,
       thumbnail,

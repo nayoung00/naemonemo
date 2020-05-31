@@ -8,14 +8,11 @@ import com.nmnm.gms.domain.Message;
 public interface MemberService {
 
 
-  // 회원가입 (DB 에 등록)
+  // 회원가입 (DB 에 등록)..
   void join(Member member) throws Exception;
 
   // 이메일인증
   public void userAuth(String email) throws Exception;
-
-  // 이메일인증 다시 보내기
-  public void emailAgainSend(Member member) throws Exception;
 
   // 회원수정 (DB에 수정)
   public void update(Member member, HttpSession session) throws Exception;
@@ -53,9 +50,10 @@ public interface MemberService {
 
   public Object search(String keyword);
 
+  // 로그인
   Member get(String email, String password) throws Exception;
 
-  Member findAccount(String email) throws Exception;
+  int findPassword(String name, String email) throws Exception;
 
   // 네이버 로그인 체크 후 정보를 가져오기 위함
   public Member naverLoginCheck(String email) throws Exception;
@@ -63,7 +61,6 @@ public interface MemberService {
   public Member getNameForNaverMember(String naverEmail);
 
   int emailCheck(String email) throws Exception;
-
 
 
 }

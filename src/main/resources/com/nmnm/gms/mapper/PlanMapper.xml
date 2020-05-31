@@ -20,12 +20,12 @@
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
-    <association property="planMember" javaType="PlanMember">
+<!--     <association property="planMember" javaType="PlanMember">
          <result column="plan_no" property="planNo"/>
          <result column="group_no" property="groupNo"/>
          <result column="member_no" property="memberNo"/>
          <result column="attend" property="attend"/>
-    </association>
+    </association> -->
 </resultMap>
 
 <insert id="insert" parameterType="Plan">
@@ -53,7 +53,8 @@
       #{longitude})
 </insert>
 
-<insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
+<!-- 보류 -->
+<!-- <insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
     insert into nm_plan_member(
     plan_no,
     group_no,
@@ -65,7 +66,7 @@
     #{memberNo},
     #{attend}
     )
-</insert>
+</insert> -->
 
    <select id="findAll" resultMap="PlanMap">
     select
@@ -96,6 +97,26 @@
       nm_plan
     where 
       plan_no=#{planBoardNo}
+  </select>
+  
+      <select id="findByCalendar" resultMap="PlanMap">
+    select 
+      plan_no,
+      DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
+      DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
+      title,
+      content,
+      thumbnail,
+      DATE_FORMAT(start_date, '%H:%i') start_hour,
+      DATE_FORMAT(end_date, '%H:%i') end_hour,
+      address,
+      latitude,
+      longitude,
+      create_date
+    from 
+      nm_plan
+     where group_no=#{groupNo}
+      order by plan_no desc
   </select>
    
    

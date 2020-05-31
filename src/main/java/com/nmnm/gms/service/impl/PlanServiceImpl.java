@@ -37,6 +37,11 @@ public class PlanServiceImpl implements PlanService {
     return planDao.findAll(groupNo);
   }
 
+  @Override
+  public List<Plan> calendar(int groupNo) throws Exception {
+    return planDao.findByCalendar(groupNo);
+  }
+
 
   @Override
   public int update(Plan plan) throws Exception {

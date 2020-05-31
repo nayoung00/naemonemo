@@ -184,7 +184,34 @@ thumbnail,
 address,
 latitude,
 longitude)
+VALUES(1,1,'프로젝트','2020-04-02 12:09', '2020-04-02 13:09','내용이랍니다', 'bit.jpg','주소',11,22);
+
+INSERT INTO nm_plan
+(group_no,
+member_no,
+title,
+start_date,
+end_date,
+content,
+thumbnail,
+address,
+latitude,
+longitude)
+VALUES(1,2,'테스트라빈다','2020-05-06 13:12', '2020-06-02 13:09','테스트랍니다다다', 'bit222.jpg','주소',11,22);
+  
+INSERT INTO nm_plan
+(group_no,
+member_no,
+title,
+start_date,
+end_date,
+content,
+thumbnail,
+address,
+latitude,
+longitude)
 VALUES(2,1,'프로젝트','2020-04-02 12:09', '2020-04-02 13:09','내용이랍니다', 'bit.jpg','주소',11,22);
+
 
 -- 일정 참여자 & 일정이 먼저
 INSERT INTO nm_plan_member(plan_no,member_no,group_no,attend)

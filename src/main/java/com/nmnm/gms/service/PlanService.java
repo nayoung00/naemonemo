@@ -13,6 +13,8 @@ public interface PlanService {
 
   List<Plan> list(int groupNo) throws Exception;
 
+  List<Plan> calendar(int groupNo) throws Exception;
+
   int update(Plan plan) throws Exception;
 
   List<Plan> search(String keyword) throws Exception;

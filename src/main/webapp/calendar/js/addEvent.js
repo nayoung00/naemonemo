@@ -16,6 +16,24 @@ var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
 /* ****************
  *  새로운 일정 생성
  * ************** */
+
+function getQueryStringObject() {
+    var a = window.location.search.substr(1).split('&');
+    if (a == "") return {};
+    var b = {};
+    for (var i = 0; i < a.length; ++i) {
+        var p = a[i].split('=', 2);
+        if (p.length == 1)
+            b[p[0]] = "";
+        else
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+}
+
+var gq = getQueryStringObject()
+var planNo = gq.planNo;
+console.log(planNo);
 var newEvent = function (start, end, eventType) {
 
     $("#contextMenu").hide(); //메뉴 숨김
@@ -32,7 +50,7 @@ var newEvent = function (start, end, eventType) {
     eventModal.modal('show');
 
     /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
-    var eventId = 1 + Math.floor(Math.random() * 1000);
+    var eventId = Number(planNo) + 1;
     /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
 
     //새로운 일정 저장버튼 클릭

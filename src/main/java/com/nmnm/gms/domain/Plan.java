@@ -19,8 +19,6 @@ public class Plan {
   private int latitude; // 위도 N
   private int longitude; // 경도 N
   private Date createDate;
-  private PlanMember planMember;
-
 
   @Override
   public String toString() {
@@ -28,8 +26,7 @@ public class Plan {
         + ", startDate=" + startDate + ", endDate=" + endDate + ", startHour=" + startHour
         + ", endHour=" + endHour + ", title=" + title + ", thumbnail=" + thumbnail + ", content="
         + content + ", category=" + category + ", address=" + address + ", latitude=" + latitude
-        + ", longitude=" + longitude + ", createDate=" + createDate + ", planMember=" + planMember
-        + "]";
+        + ", longitude=" + longitude + ", createDate=" + createDate + "]";
   }
 
   public int getPlanNo() {
@@ -152,12 +149,6 @@ public class Plan {
     this.createDate = createDate;
   }
 
-  public PlanMember getPlanMember() {
-    return planMember;
-  }
 
-  public void setPlanMember(PlanMember planMember) {
-    this.planMember = planMember;
-  }
 
 }

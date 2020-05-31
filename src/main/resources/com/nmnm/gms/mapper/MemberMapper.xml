@@ -76,9 +76,9 @@
     </select>
     
     
-    <select id="userView" resultType="Member">
+    <select id="userView" resultMap="MemberMap" parameterType="string">
         SELECT * FROM nm_member
-        WHERE id = #{id}
+        WHERE email = #{email}
     </select>
 
     <update id="memDrop">
@@ -134,6 +134,7 @@
       WHERE
           nickname = #{nickname}
 </select>
+
 
 <!-- 그룹 가입 신청하기 -->
   <insert id="insertGrMember" parameterType="com.nmnm.gms.domain.GroupMember">

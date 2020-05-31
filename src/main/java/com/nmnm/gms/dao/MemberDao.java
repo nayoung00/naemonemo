@@ -64,5 +64,4 @@ public interface MemberDao {
   void resetPassword(String name, String email, String newPassword);
 
 
-
 }

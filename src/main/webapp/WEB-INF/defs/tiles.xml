@@ -25,10 +25,11 @@
     <put-attribute name="modal" value="/WEB-INF/tiles/plan/list/listModal.jsp" />
   </definition>
   
-    <definition name="planCalendar" template="/WEB-INF/tiles/plan/template.jsp">
+    <definition name="planCalendar" template="/WEB-INF/tiles/plan/calendar/calendarTemplate.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
-    <put-attribute name="header" value="/WEB-INF/tiles/plan/calendarHeader.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/tiles/plan/footer.jsp" />
+    <put-attribute name="header" value="/WEB-INF/tiles/plan/calendar/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/tiles/plan/calendar/footer.jsp" />
+    <put-attribute name="nav" value="/WEB-INF/tiles/plan/calendar/nav.jsp" />
   </definition>  
   
       <definition name="planForm" template="/WEB-INF/tiles/plan/template.jsp">

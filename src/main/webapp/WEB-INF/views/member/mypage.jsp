@@ -175,7 +175,7 @@
                         </div>
                         <div class="mp_main_massage">
                             <p class="msg_userid"><strong>
-                                <span class="name">${name}</span>님 반갑습니다.
+                                <span class="name">${loginUser.name}</span>님 반갑습니다.
                             </strong></p>
                             <div class="msg_userInfoLink">
                             </div>
@@ -198,7 +198,7 @@
                 <div class="mp_list">
                     <ul>
                         <li><a href="#">관리모임</a></li>                   
-                        <li><a href="${path}/member/pwupdate">비밀번호변경</a></li>
+                        <li><a href="pwupdate">비밀번호변경</a></li>
                         <li><a href="${path}/member/drop">회원탈퇴</a></li>
                     </ul>
                 </div>

@@ -114,7 +114,7 @@ $(function() {
     //패스워드 입력값 검증.
     $('#password').on('keyup', function() {
        if(!getPwCheck.test($("#password").val()) || $("#password").val().length < 8){
-            $('#pwChk').html('<b style="font-size:14px;color:red;">[특수문자 포함 8자이상 입력해주세요.]</b>');
+            $('#pwChk').html('<b style="font-size:14px;color:red;">특수문자 포함 8자이상 입력해주세요.</b>');
         } else {
         	$('#pwChk').html('');
         }
@@ -125,7 +125,7 @@ $(function() {
     $('#password2').on('keyup', function() {
         //비밀번호 확인란 공백 확인
        if($("#password").val() != $("#password2").val()){
-            $('#pwChk2').html('<b style="font-size:14px;color:red;">[비밀번호가 일치하지 않습니다.]</b>');
+            $('#pwChk2').html('<b style="font-size:14px;color:red;">비밀번호가 일치하지 않습니다.</b>');
         } else {
         	$('#pwChk2').html('');
         }

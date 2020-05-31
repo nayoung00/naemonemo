@@ -26,6 +26,10 @@ public class MemberController {
   @Autowired
   MemberService memberService;
 
+  @GetMapping("pwupdate")
+  public void pwupdate() {}
+
+
   @GetMapping("form")
   public void form() {}
 

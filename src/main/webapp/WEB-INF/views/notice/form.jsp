@@ -14,12 +14,6 @@
 모임번호: <input name='groupNo' type='text'><br>
 그룹번호: <input name='memberNo' type='text'><br>
 
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-
 <button>등록</button>
 </form>
 

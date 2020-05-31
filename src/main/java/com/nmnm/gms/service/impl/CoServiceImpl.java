@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.dao.CoDao;
-import com.nmnm.gms.dao.CoPhotoDao;
 import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.service.CoService;
 
@@ -17,16 +16,13 @@ public class CoServiceImpl implements CoService {
 
   TransactionTemplate transactionTemplate;
   CoDao coDao;
-  CoPhotoDao coPhotoDao;
 
 
   public CoServiceImpl( //
       PlatformTransactionManager txManager, // 
-      CoDao coDao, //
-      CoPhotoDao coPhotoDao) {
+      CoDao coDao) {
     this.transactionTemplate = new TransactionTemplate(txManager);
     this.coDao = coDao;
-    this.coPhotoDao = coPhotoDao;
   }
 
   
@@ -35,8 +31,7 @@ public class CoServiceImpl implements CoService {
   public void add(Co co) throws Exception {
     if (coDao.insert(co) == 0) {
       throw new Exception("게시글 등록에 실패했습니다.");     
-    }
-    coPhotoDao.insert(co);
+    } 
   }
 
   @Transactional
@@ -58,10 +53,9 @@ public class CoServiceImpl implements CoService {
   @Transactional
   @Override
   public void delete(int coNo) throws Exception {
-    coPhotoDao.deleteAll(coNo);
     if (coDao.delete(coNo) == 0) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
-    }
+    } 
   }
 
   @Transactional
@@ -75,11 +69,7 @@ public class CoServiceImpl implements CoService {
   public void update(Co co) throws Exception {
     if (coDao.update(co) == 0) {
       throw new Exception("게시글 변경에 실패했습니다.");
-    }
-    if (co.getCoPhotos() != null) {
-      coPhotoDao.deleteAll(co.getCoNo());
-      coPhotoDao.insert(co);
-    }
+    } 
   }
 
   @Override

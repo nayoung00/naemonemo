@@ -28,16 +28,6 @@ ${co.content}<br>
 등록일: ${co.createDate}<br>
 조회수: ${co.viewCount}<br>
 
-사진:
-<br>
-<p>
-<c:forEach items="${co.coPhotos}" var="coPhoto">
-<br>
-<img src="${pageContext.servletContext.contextPath}/upload/co/${coPhoto.filepath}" width='360'>
-<br>
-<br>
-</c:forEach>
-</p>
 
 <p>
 <button><a href='delete?coNo=${co.coNo}'>삭제</a></button>

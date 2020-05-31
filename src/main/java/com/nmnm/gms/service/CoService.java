@@ -1,12 +1,14 @@
 package com.nmnm.gms.service;
 
 import java.util.List;
+import java.util.Map;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
 
 public interface CoService {
 
-  void add(Co co) throws Exception;
+  void add(Co co, MultipartHttpServletRequest mpRequest) throws Exception;
 
   List<Co> list() throws Exception;
 
@@ -16,7 +18,8 @@ public interface CoService {
 
   Co get(int coNo) throws Exception;
 
-  void update(Co co) throws Exception;//int
+  // 게시물 수정 + 첨부파일 수정
+  void update(Co co, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 
   List<Co> search(String keyword) throws Exception;
 
@@ -31,4 +34,10 @@ public interface CoService {
 
   // 게시물 조회수
   public boolean plusCnt(int coNo) throws Exception;
+  
+  // 첨부파일 조회
+  public List<Map<String, Object>> selectFileList(int bno) throws Exception;
+  
+  // 첨부파일 다운
+  public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
 }

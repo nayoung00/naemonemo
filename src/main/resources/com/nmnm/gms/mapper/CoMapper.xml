@@ -45,23 +45,24 @@
   </select>
 
 
-  <insert id="insert" parameterType="Co"
-    useGeneratedKeys="true" keyColumn="co_no" keyProperty="coNo">
+  <insert id="insert" parameterType="Co" useGeneratedKeys="true" keyProperty="coNo">
+    <selectKey resultType="int" keyProperty="coNo" order="BEFORE">
+     SELECT MAX(co_no)+1 FROM nm_co 
+    </selectKey>
+   
     insert into nm_co(
       co_no,
       co_category,
       member_no,
       title,
-      content,
-      view_count
+      content
     )
     values(
       #{coNo},
       #{category},
       #{memberNo},
       #{title},
-      #{content},
-      #{viewCount}
+      #{content}
     )
   </insert>
 
@@ -144,6 +145,50 @@
     UPDATE nm_co SET
      view_count = view_count + 1
     WHERE co_no=#{coNo}
+  </update>
+  
+  
+  <!-- 첨부파일 추가 -->
+  <insert id="insertFile" parameterType="hashMap">
+   INSERT INTO nm_MP_FILE(
+     BNO,
+     ORG_FILE_NAME,
+     STORED_FILE_NAME,
+     FILE_SIZE
+   )VALUES(
+     #{BNO},
+     #{ORG_FILE_NAME},
+     #{STORED_FILE_NAME},
+     #{FILE_SIZE}
+   )
+   </insert>
+
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+	  SELECT FILE_NO,
+	    ORG_FILE_NAME,
+	    ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
+	    DEL_GB
+	  FROM nm_MP_FILE
+	  WHERE BNO = #{BNO}
+	    AND DEL_GB = 0
+	  ORDER BY FILE_NO ASC
+	</select>
+	
+	<!-- 첨부파일 다운 -->
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+	  SELECT 
+	    STORED_FILE_NAME,
+	    ORG_FILE_NAME
+	  FROM nm_MP_FILE
+	  WHERE FILE_NO = #{FILE_NO}
+	</select>
+	
+	<!-- 첨부파일 수정 -->
+  <update id="updateFile" parameterType="hashMap">
+    UPDATE nm_MP_FILE SET
+    DEL_GB = '1'
+    WHERE FILE_NO = #{FILE_NO}
   </update>
 
 </mapper>

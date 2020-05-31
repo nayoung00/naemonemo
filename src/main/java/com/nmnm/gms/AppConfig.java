@@ -62,6 +62,7 @@ public class AppConfig {
     return configurer;
   }
 
+  //    <!-- MultipartResolver 설정 --> 
   @Bean
   public MultipartResolver multipartResolver() {
     CommonsMultipartResolver mr = new CommonsMultipartResolver();

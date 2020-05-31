@@ -8,7 +8,7 @@ import com.nmnm.gms.domain.Message;
 public interface MemberService {
 
 
-  // 회원가입 (DB 에 등록)
+  // 회원가입 (DB 에 등록)..
   void join(Member member) throws Exception;
 
   // 이메일인증

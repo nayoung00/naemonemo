@@ -1,6 +1,9 @@
 package com.nmnm.gms.service.impl;
 
 import java.util.HashMap;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -64,24 +67,6 @@ public class MemberServiceImpl implements MemberService {
 
   }
 
-  @Override
-  public void emailAgainSend(Member member) throws Exception {
-    String key = new TempKey().getKey(50, false); // 인증키 생성
-
-    memberDao.createAuthKey(member.getEmail(), key); // 인증키 DB저장
-
-    MailHandler sendMail = new MailHandler(mailSender);
-
-    sendMail.setSubject("[네모내모 회원가입 서비스 이메일 인증 입니다.]");
-    sendMail.setText(new StringBuffer().append("<h1>nemonaemo 가입 메일인증 입니다</h1>")
-        .append("<a href='http://localhost:9999/nmnm/auth/emailConfirm?email=")
-        .append(member.getEmail()).append("&key=").append(key)
-        .append("' target='_blenk'>가입 완료를 위해 이메일 이곳을 눌러주세요</a>").toString());
-    sendMail.setFrom("nemonaemo0@gmail.com", "nmnm");
-    sendMail.setTo(member.getEmail());
-    sendMail.send();
-
-  }
 
   @Override
   public void update(Member member, HttpSession session) throws Exception {
@@ -93,42 +78,32 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.userView(email);
   }
 
+
+
   @Override
-  public void resetPassword(Member member) throws Exception {
-    MailHandler sendMail = new MailHandler(mailSender);
-
-    String link = "http://localhost:9999/nmnm/app/auth/returnResetPass?email=" + member.getEmail();
-
-    sendMail.setSubject("[네모내모 비밀번호 초기화 이메일 입니다.]");
-    sendMail.setText(
-        "<br><table class=\"main\" style=\"border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;background:#ffffff;border-radius:0 !important;border-left-width:0 !important;border-right-width:0 !important;\">\n"
-            + "<!-- START MAIN CONTENT AREA --><tr>\n"
-            + "<td class=\"wrapper\" style=\"font-family:sans-serif;font-size:16px !important;vertical-align:top;padding:10px !important;box-sizing:border-box;\">\n"
-            + " \n" + " \n"
-            + "                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate;\n"
-            + "        mso-table-lspace: 0pt;\n" + "        mso-table-rspace: 0pt;\n"
-            + "        width: 100%;\"><tr>\n"
-            + "<td style=\"font-family:sans-serif;font-size:16px !important;vertical-align:top;padding:10px!important;\">\n"
-            + "                        <h1 style=\"color:#000000;font-family:sans-serif;font-weight:700;line-height:1.4;margin-top:15px;margin-bottom:10px !important;border-bottom:1px solid #000;padding-bottom:15px;font-size:28px !important;text-transform:capitalize;\">비밀번호 초기화</h1>\n"
-            + "                        <p style=\"font-family:sans-serif;font-size:16px !important;font-weight:normal;margin:0;margin-bottom:15px;\">"
-            + member.getName() + "님 비밀번호를 잊으셨나요?<br> 아래 링크를 누르신 후 새 비밀번호를 설정해주시기 바랍니다.</p>\n"
-            + "                        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"btn btn-primary\" style=\"border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;box-sizing:border-box;\"><tbody><tr>\n"
-            + "<td align=\"left\" style=\"font-family:sans-serif;font-size:16px !important;vertical-align:top;padding:10px!important;padding-left:0!important;padding-right:0!important;padding-bottom:15px;\">\n"
-            + "                                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100% !important;\"><tbody><tr>\n"
-            + "<td style=\"font-family:sans-serif;font-size:16px !important;vertical-align:top;padding:10px!important;background-color:#1FCBC7;border-radius:5px;text-align:center;padding-left:0!important;padding-right:0!important;\"> <a href=\""
-            + link
-            + "\" target=\"_blank\" style=\"color:#ffffff;text-decoration:none;font-size:20px;background-color:#1FCBC7;border:solid 1px #1FCBC7;border-radius:5px;box-sizing:border-box;cursor:pointer;display:inline-block;font-weight:bold;margin:0;padding:3px 25px;text-transform:capitalize;border-color:#1FCBC7;width:100% !important;\">비밀번호 초기화</a> </td>\n"
-            + "                                    </tr></tbody></table>\n" + "</td>\n"
-            + "                            </tr></tbody></table>\n"
-            + "<br>본 메일을 요청하지 않으셨다면 고객센터로 연락바랍니다.\n" + "                      </p>\n" + "</td>\n"
-            + "                    </tr></table>\n</table>\n");
-
-    sendMail.setFrom("nemonaemo0@gmail.com", "네모내모");
-    sendMail.setTo(member.getEmail());
-    sendMail.send();
-
-    memberDao.resetPassword(member);
-
+  public int findPassword(String name, String email) throws Exception {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("name", name);
+    params.put("email", email);
+    if (memberDao.findPassword(params) == 1) {
+      String newPassword = new TempKey().getKey(8, false);
+      params.put("newPassword", newPassword);
+      memberDao.resetPassword(name, email, newPassword);
+      MimeMessage mail = mailSender.createMimeMessage();
+      String htmlStr = "<h2>해당 계정의 임시 비밀번호가 발급되었습니다.<br><br>" + "<h3>" + newPassword
+          + "</h3><br><p><a href='http://localhost:9999/nmnm/auth/login'>nmnm 바로가기</a><br>(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
+      try {
+        mail.setSubject("[임시 비밀번호 발급] nmnm: 임시 비밀번호를 보내드립니다.", "utf-8");
+        mail.setText(htmlStr, "utf-8", "html");
+        mail.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(email));
+        mailSender.send(mail);
+      } catch (MessagingException e) {
+        e.printStackTrace();
+      }
+    } else {
+      System.out.println("일치하는 회원이 없습니다.");
+    }
+    return memberDao.findPassword(params);
   }
 
   @Override
@@ -181,6 +156,7 @@ public class MemberServiceImpl implements MemberService {
     return null;
   }
 
+  // 로그인
   @Override
   public Member get(String email, String password) throws Exception {
     HashMap<String, Object> params = new HashMap<>();
@@ -190,10 +166,7 @@ public class MemberServiceImpl implements MemberService {
 
   }
 
-  @Override
-  public Member findAccount(String email) throws Exception {
-    return memberDao.findAccount(email);
-  }
+
 
   @Override
   public Member naverLoginCheck(String email) throws Exception {
@@ -210,8 +183,15 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int emailCheck(String email) throws Exception {
-    System.out.println("==========================>emailCheck");
     return memberDao.emailCheck(email);
   }
 
+  @Override
+  public void resetPassword(Member member) throws Exception {
+    memberDao.resetPassword(member);
+  }
+
+
 }
+
+

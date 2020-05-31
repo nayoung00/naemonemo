@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
-import com.nmnm.gms.socialLogin.NaverLoginBO;
 
 // Spring IoC 컨테이너가 탐색할 패키지 설정
 // => 지정한 패키지 및 그 하위 패키지를 모두 뒤져서
@@ -72,11 +71,6 @@ public class AppConfig {
     return mr;
   }
 
-  @Bean
-  public NaverLoginBO naverLoginBO() {
-    NaverLoginBO naver = new NaverLoginBO();
-    return naver;
-  }
 }
 
 

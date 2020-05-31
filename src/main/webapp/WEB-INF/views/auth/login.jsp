@@ -90,13 +90,13 @@
                 <label for="email">EMAIL</label>
             </div>
              <div class="int-area">
-                <input type="password" name="password" id="password"
+                <input type="password" name="password" id="password" 
                  required>
                 <label for="password">PASSWORD</label>
             </div>
         <div class="caption">
             <input type="checkbox" name='saveEmail'> Remember me</label>
-            <a href="pwReset" class="pull-right">Forgot Password?</a>
+            <a href="findPassword" class="pull-right">Forgot Password?</a>
             </div>
             
             <div class="btn-area">

@@ -13,7 +13,7 @@
         justify-content: center;
         align-items: center;
         width: 5%;
-        height: 200vh;
+        height: 100vh;
         background-size: cover
         }
     body::before {

@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.service.MemberService;
-import com.nmnm.gms.socialLogin.NaverLoginBO;
-import com.nmnm.gms.util.TempKey;
 
 @Controller
 @RequestMapping("/auth")
@@ -29,8 +27,6 @@ public class AuthController {
   @Autowired
   MemberService memberService;
 
-  private NaverLoginBO naverLoginBO;
-  private String apiResult = null;
 
   @Autowired
   BCryptPasswordEncoder passEncoder;
@@ -126,39 +122,24 @@ public class AuthController {
   @GetMapping("callback")
   public void callback() {}
 
-
-  @GetMapping("pwReset")
-  public void pwReset() {}
-
-  // 패스워드 리셋 메소드
   @PostMapping("resetPassword")
-  public String postResetPassword(HttpSession session, HttpServletRequest request, Member member)
-      throws Exception {
+  public void resetPassword() {}
 
-    String email = request.getParameter("email");
 
-    Member findAccount = memberService.findAccount(email);
+  @GetMapping("findPassword")
+  public void findPasswordForm() {}
 
-    if (findAccount != null) {
-
-      String name = findAccount.getName();
-
-      String tempPass = new TempKey().createPwKey();
-
-      String pass = passEncoder.encode(tempPass); // 랜덤으로 생성된 6자리 비밀번호를 암호화해서 저장
-
-      member.setEmail(email);
-      member.setPassword(pass);
-      member.setName(name);
-
-      memberService.resetPassword(member);
-
+  @PostMapping("findPassword")
+  public String findPassword(String name, String email, Model model) throws Exception {
+    System.out.println("비밀번호를 찾아줘!");
+    int user = memberService.findPassword(name, email);
+    System.out.println("=======================================>" + user);
+    if (user == 1) {
+      model.addAttribute("email", email);
+      return "redirect:/";
     } else {
-
-      return "auth/findAccountFail";
+      throw new Exception("일치하는 회원이 없습니다.");
     }
-
-    return "auth/resetPassword";
   }
 
   // 메일로 리턴받은 정보를 가지고 패스워드 변경 페이지로 세션에 이메일을담아 보냄

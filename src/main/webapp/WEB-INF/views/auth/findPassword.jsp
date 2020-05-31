@@ -14,41 +14,75 @@
 
 </script>
 <style>
- #wrap{
-            hight:120px;
+    *{margin: 0; padding: 0; box-sizing: border-box;}
+    body{
+            hight:200vh;
             width:530px;
             margin-left:auto; 
             margin-right:auto;
         }
-
+ .login-form h1{
+    color: #F4A460;
+ }   
+ .btn-area {margin-top: 30px;}     
+    .btn-area button{
+        width: 100%; height: 50px;
+        background: #F4A460;
+        color: #fff;
+        font-size: 20px;
+        border: none;
+        border-radius: 25px;
+        }        
+        
 </style>
 
 </head>
 
 <body>
- <div id="wrap" >
+<section class="login-form">
     <div class="contact-clean">
-        <form action="resetPassword" method="post" class="text-center">
+        <form action="findPassword" method="post" class="text-center">
         <br> <br> <br> <br> <br>
             <h1 class="text-center">비밀번호 찾기</h1>
             <p class="text-center">
                 회원가입시 등록한 아이디와 이메일주소를 입력하시면,<br> 입력하신 이메일로 임시 비밀번호를 발급합니다.<br>
                 <br>
-            <div class="form-group has-success has-feedback" >
+                 <div class="int-area">
+                
+            <div class="form-group" >
                 <input type="text" name="name" placeholder="이름을 입력해주세요." style="width:500px; height:50px;" 
                     class="form-control"/>
             </div>
-            <div class="form-group has-success has-feedback">
+            <div class="form-group">
                 <input type="email" name="email" placeholder="'@'포함한 이메일주소를 정확히 입력해주세요." style="width:500px; height:50px;" 
                     class="form-control" /><span id=emailCheck>&nbsp;</span><br> 
             </div>
-
-            <div class="form-group">
-                <input allign="center" class="btn btn-primary" type="submit" value="비밀번호 찾기"/>
+        </div>
+            <div class="btn-area">
+                <button type="submit" value=findPassword>임시 비밀번호 발급</button>
             </div>
         </form>
     </div>
-    </div>
+    </section>
+
+<script>
+    $(function(){
+        $("#findBtn").click(function(){
+            $.ajax({
+                url : "find_pw",
+                type : "POST",
+                data : {
+                    id : $("#name").val(),
+                    email : $("#email").val()
+                },
+                success : function(result) {
+                    alert(result);
+                },
+            })
+        });
+    })
+</script>
+
     
 </body>
 

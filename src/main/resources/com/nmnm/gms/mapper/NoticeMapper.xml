@@ -125,4 +125,11 @@
       or content like #{content}
   </select>
   
+    <!-- 게시물 조회수 -->
+  <update id="plusCnt" parameterType="int">
+    UPDATE nm_notice SET
+     view_count = view_count + 1
+    WHERE notice_no=#{noticeNo}
+  </update>
+  
 </mapper>

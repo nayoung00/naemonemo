@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.NoticeReply;
 import com.nmnm.gms.domain.Notice;
@@ -89,12 +90,15 @@ public class NoticeController {
   }
 
   @GetMapping("detail")
-  public void detail(int noticeNo, Model model) throws Exception {
+  public void detail(Model model, @RequestParam("coNo")int noticeNo) throws Exception {
     model.addAttribute("notice", noticeService.get(noticeNo));
     
     // 댓글 리스트 보기
     List<NoticeReply> replyList = noticeReplyService.readReply(noticeNo);
     model.addAttribute("replyList", replyList);
+    
+    // 게시물 조회수 +1
+    noticeService.plusCnt(noticeNo);
   }
 
   @GetMapping("delete")

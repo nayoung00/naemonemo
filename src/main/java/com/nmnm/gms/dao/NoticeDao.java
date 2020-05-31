@@ -16,4 +16,7 @@ public interface NoticeDao {
    int delete(int noticeNo) throws Exception;
    
    List<Notice> findByKeyword(String keyword) throws Exception;
+   
+   // 게시물 조회수
+   public boolean plusCnt(int noticeNo) throws Exception;
 }

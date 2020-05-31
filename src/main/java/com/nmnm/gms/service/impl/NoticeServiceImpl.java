@@ -3,6 +3,7 @@ package com.nmnm.gms.service.impl;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.nmnm.gms.dao.NoticeDao;
@@ -73,6 +74,13 @@ public class NoticeServiceImpl implements NoticeService {
   @Override
   public List<Notice> search(String keyword) throws Exception {
     return noticeDao.findByKeyword(keyword);
+  }
+
+  // 게시물 조회수
+  @Transactional(isolation = Isolation.READ_COMMITTED)
+  @Override
+  public boolean plusCnt(int noticeNo) throws Exception {
+    return noticeDao.plusCnt(noticeNo);
   }
 
 }

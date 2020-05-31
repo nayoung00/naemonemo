@@ -24,8 +24,13 @@
 
 
 
+<<<<<<< HEAD
+ <select id="findAll" resultMap="CoMap" parameterType="Map">
+    select
+=======
   <select id="findAll" resultMap="CoMap" parameterType="Map">
     SELECT
+>>>>>>> upstream/master
       c.co_no,
       c.co_category,
       m.nickname,
@@ -150,5 +155,11 @@
     co_no desc 
   </select>
 
+  <!-- 게시물 조회수 -->
+  <update id="plusCnt" parameterType="int">
+    UPDATE nm_co SET
+     view_count = view_count + 1
+    WHERE co_no=#{coNo}
+  </update>
 
 </mapper>

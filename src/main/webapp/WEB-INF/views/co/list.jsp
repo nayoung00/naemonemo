@@ -45,7 +45,7 @@
 														${item.title}</a></td>
 												<td>${item.nickname}</td>
 												<td>${item.createDate}</td>
-												<td>${item.viewCount}</td>
+												<td><c:out value="${item.viewCount}"/></td>
 											</tr>
 										</c:forEach>
 									</tbody>

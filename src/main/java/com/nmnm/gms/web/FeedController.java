@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Feed;
 import com.nmnm.gms.domain.FeedPhoto;
@@ -95,7 +96,7 @@ public class FeedController {
   }
 
   @GetMapping("detail")
-  public void detail(int feedNo, Model model) throws Exception {
+  public void detail(Model model, @RequestParam("coNo")int feedNo) throws Exception {
     model.addAttribute("feed", feedService.get(feedNo));
     
     // 댓글 리스트 보기

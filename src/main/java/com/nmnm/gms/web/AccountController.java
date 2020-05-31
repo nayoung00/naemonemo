@@ -37,9 +37,6 @@ public class AccountController {
   AccountService accountService;
   
   @Autowired
-  GroupService groupService;
-  
-  @Autowired
   DuesService duesService;
 
   public AccountController() {
@@ -48,17 +45,6 @@ public class AccountController {
 
   @GetMapping("form")
   public void form() throws Exception {}
-
-  // @PostMapping("add")
-  // public String add(Account account) throws Exception {
-  // System.out.println("point 1");
-  //
-  //
-  // return "redirect:list";
-  //
-  // }
-
-
 
   @PostMapping("add")
   public String add( //
@@ -154,18 +140,30 @@ public class AccountController {
   }
 
   // 모임당 회비 안내는 1개씩 존재
-  @GetMapping("updateDues")
+  @GetMapping("updateDuesForm")
   public void updateDuesForm(int groupNo, Model model) throws Exception {
-    model.addAttribute("group", groupService.get(groupNo));
+  	
+  	System.out.println("updateDuesForm @@@@@@@@@");
+  	model.addAttribute("dues", duesService.get(groupNo));
+  }
+  
+  @PostMapping("updateDues")
+  public String updateDues(//
+  		int groupNo,
+  		int entranceFee, //
+  		String duesPeriod, //
+  		int dues
+  		) throws Exception {
+  	System.out.println("updateDues @@@@@@@@@");
+  	System.out.println("updateDues 호출");
+    Dues duess = duesService.get(groupNo);
+    
+    duess.setEntranceFee(entranceFee);
+    duess.setDuesPeriod(duesPeriod);
+    duess.setDues(dues);
+  	duesService.update(duess);
+  	return "redirect:dues";
   }
 
-//  @PostMapping("update")
-//  public String update(Co co) throws Exception {
-//    if (coService.update(co) > 0) {
-//      return "redirect:list";
-//    } else {
-//      throw new Exception("변경할 게시물 번호가 유효하지 않습니다." + co.getCoNo() + " " + co.getTitle());
-//    }
-//  }
   
 }

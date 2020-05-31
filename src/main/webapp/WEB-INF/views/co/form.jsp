@@ -17,7 +17,7 @@
               
 <form action='add' method='post' enctype='multipart/form-data'>
 
-작성자(자동입력회원닉네임과조인 띄울필요는없음):<input name='memberNo' type='text'><br>
+<input name='memberNo' type='hidden'><br>
 <br>
 
 <div>

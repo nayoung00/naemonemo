@@ -19,9 +19,6 @@
 					</div>
 					<form action='bankUpdate' method='post' enctype='multipart/form-data'>
 						<div class="content table-responsive table-full-width">
-							<input type="button" value="계좌 추가" onclick="add_row()"> <input
-								type="submit" value="저장하기">
-								<a href="/nmnm/app/account/bankUpdateForm">편집</a>
 							<table class="table table-hover">
 								<thead>
 									<th style="width: 10%">모임계좌아이디</th>
@@ -31,20 +28,18 @@
 									<th style="width: 10%">예금주</th>
 								</thead>
 								<tbody id="bankbody">
-
-
-									<c:forEach items="${bankList}" var="item">
 										<tr>
-											<td>${item.bankInfoId}</td>
-											<td>${item.groupNo}</td>
-											<td>${item.bankAccountNo}</td>
-											<td>${item.bankName}</td>
-											<td>${item.bankAccountHolder}</td>
+											<td><input type='text' readonly name='bankInfoId' value='${groupAccount.bankInfoId}'></td>
+											<td><input type='text' name='groupNo' value='${groupAccount.groupNo}'></td>
+											<td><input type='text' name='bankAccountNo' value='${groupAccount.bankAccountNo}'></td>
+											<td><input type='text' name='bankName' value='${groupAccount.bankName}'></td>
+											<td><input type='text' name='bankAccountHolder' value='${groupAccount.bankAccountHolder}'></td>
 										</tr>
-									</c:forEach>
 								</tbody>
 							</table>
 
+							<input type="button" value="계좌 추가" onclick="add_row()"> <input
+								type="submit" value="저장하기">
 						</div>
 					</form>
 				</div>

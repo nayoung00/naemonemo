@@ -28,22 +28,40 @@ public class GroupAccountServiceImpl implements GroupAccountService {
   }
 
   @Override
-  public int delete(int bankInfoId) throws Exception {
-    return groupAccountDao.delete(bankInfoId);
+  public int delete(int groupNo) throws Exception {
+    return groupAccountDao.delete(groupNo);
   }
 
   @Override
-  public GroupAccount get(int bankInfoId) throws Exception {
-    return groupAccountDao.findByNo(bankInfoId);
+  public GroupAccount get(int groupNo) throws Exception {
+    return groupAccountDao.findByNo(groupNo);
   }
 
   @Override
-  public int update(GroupAccount groupAccount) throws Exception {
-    return groupAccountDao.update(groupAccount);
+  public void update(GroupAccount groupAccount) throws Exception{
+	  System.out.println("111111");
+	  groupAccountDao.update(groupAccount);
   }
+  
+//  @Override
+//  public void update(
+//		  int bankInfoId, 
+//		  int groupNo, 
+//		  int bankAccountNo, 
+//		  String bankName, 
+//		  String bankAccountHolder) throws Exception {
+//	  System.out.println("서비스 impl");
+	  
+//	  GroupAccount groupAccount = new GroupAccount;
+//	  groupAccount =
+	  
+//    return groupAccountDao.update(groupAccount);
+  
 
   @Override
   public List<GroupAccount> search(String keyword) throws Exception {
     return groupAccountDao.findByKeyword(keyword);
   }
+
+
 }

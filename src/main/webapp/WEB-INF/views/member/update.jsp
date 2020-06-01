@@ -8,8 +8,9 @@
  <style>
  
 .row{
- display: grid;
- grid-template-columns: 160px 160px 160px; /* 명시적 2개 열 정의 */
+   display: grid;
+   grid-auto-rows: 30px; 
+   grid-template-columns: 160px 160px 160px; /* 명시적 2개 열 정의 */
 }
 
 .box {
@@ -44,7 +45,6 @@
     width: 400px; position: relative;
     margin-top:20px;
     }
-    .int-area:first-child {margin-top: 0;}
     .int-area input{
             width: 130%;
             padding: 5px 10px 10px;
@@ -99,6 +99,7 @@
                   <label style="font-size: 13px; color: #F4A460; ">INTEREST</label>
                                                     <div class="checkbox">
                                                     <div class="row">
+                                                    <br><br><br><br><br><br><br><hr>
                                                         <input id="checkbox1" type="checkbox" name="interest" value="sports"> 
                                                         <label for="checkbox1">Sports</label>
                                                         <input id="checkbox2" name="interest" value="coding" type="checkbox">
@@ -130,7 +131,7 @@
 														<input id="checkbox15" type="checkbox" name="interest" value="cooking"> 
 														<label for="checkbox15">Cooking</label>
 														<input id="checkbox16" type="checkbox" name="interest" value="crafts"> 
-														<label for="checkbox16">Crafts</label>
+														<label for="checkbox16">Crafts</label> 
                                                     </div> 
                                                     </div>
                         <input type="text" id="interest"  name = "interest" value="${loginUser.interest}">

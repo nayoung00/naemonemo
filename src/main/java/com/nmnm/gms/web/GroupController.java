@@ -46,7 +46,7 @@ public class GroupController {
     }
 
     if (groupService.add(group) > 0) {
-      return "redirect:list";
+      return "redirect:list"; // 모임 홈으로 가게
     } else {
       throw new Exception("그룹을 추가할 수 없습니다.");
     }

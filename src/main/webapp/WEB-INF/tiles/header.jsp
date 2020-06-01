@@ -18,6 +18,8 @@
                <a class="navbar-brand" href="../account/list">회계</a>
                <a class="navbar-brand" href="../feed/list">피드</a>
                <a class="navbar-brand" href="../member/list">회원</a>
+               <a class="navbar-brand" href="../admin/manual">관리</a> 
+               <!-- 관리 메뉴 관리자에게만 보이게 조건문 걸기 -->
            </div>
            <div class="collapse navbar-collapse">
 

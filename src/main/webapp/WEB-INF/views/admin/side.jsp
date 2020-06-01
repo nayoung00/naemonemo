@@ -8,30 +8,36 @@
       <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
       <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="../../index.html" class="simple-text">
+                <a href="../../moim-index.html" class="simple-text">
                                     네모내모 로고
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="list">
-                        <i class="pe-7s-user"></i>
-                        <p>회원보기</p>
+                    <a href="groupadmin" class="simple-text">
+                        <i class="pe-7s-bell"></i>
+                        <p>모임관리</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="memberadmin" class="simple-text">
                         <i class="pe-7s-user"></i>
-                        <p>신규회원</p>
+                        <p>회원관리</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="accountadmin" class="simple-text">
+                        <i class="pe-7s-graph"></i>
+                        <p>회계관리</p>
                     </a>
                 </li>
                 <li> 
-                    <a href="#">
+                    <a href="boardadmin" class="simple-text">
                         <i class="pe-7s-note"></i>
-                        <p>?</p>
+                        <p>게시판관리</p>
                     </a>
                 </li>
-              </ul>
+            </ul>
       </div>
     </div>

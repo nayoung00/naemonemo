@@ -109,4 +109,7 @@ public class MemberController {
   public String changePassSuccess() {
     return "member/changePassSuccess";
   }
+
+  @GetMapping("update")
+  public void update() {}
 }

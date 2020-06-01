@@ -2,7 +2,6 @@ package com.nmnm.gms.service.impl;
 
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,30 +17,30 @@ import com.nmnm.gms.util.FileUtils;
 @Component
 public class CoServiceImpl implements CoService {
 
-  @Resource(name="fileUtils")
+  // @Resource(name="fileUtils")
   private FileUtils fileUtils;
-  
+
   TransactionTemplate transactionTemplate;
   CoDao coDao;
 
 
   public CoServiceImpl( //
-      PlatformTransactionManager txManager, // 
+      PlatformTransactionManager txManager, //
       CoDao coDao) {
     this.transactionTemplate = new TransactionTemplate(txManager);
     this.coDao = coDao;
   }
 
-  // 게시물 추가  + 첨부파일 업로드
-  @Transactional  
+  // 게시물 추가 + 첨부파일 업로드
+  @Transactional
   @Override
   public void add(Co co, MultipartHttpServletRequest mpRequest) throws Exception {
     coDao.insert(co);
-    
-    List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(co, mpRequest); 
+
+    List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(co, mpRequest);
     int size = list.size();
-    for(int i=0; i<size; i++){ 
-        coDao.insertFile(list.get(i)); 
+    for (int i = 0; i < size; i++) {
+      coDao.insertFile(list.get(i));
     }
 
   }
@@ -67,7 +66,7 @@ public class CoServiceImpl implements CoService {
   public void delete(int coNo) throws Exception {
     if (coDao.delete(coNo) == 0) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
-    } 
+    }
   }
 
   @Transactional
@@ -79,19 +78,20 @@ public class CoServiceImpl implements CoService {
   // 게시물 수정 + 첨부파일 수정
   @Transactional
   @Override
-  public void update(Co co, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
+  public void update(Co co, String[] files, String[] fileNames,
+      MultipartHttpServletRequest mpRequest) throws Exception {
     coDao.update(co);
-    
+
     List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(co, files, fileNames, mpRequest);
     Map<String, Object> tempMap = null;
     int size = list.size();
-    for(int i = 0; i < size; i++) {
-        tempMap = list.get(i);
-        if (tempMap.get("IS_NEW").equals("1")) {
-            coDao.insertFile(tempMap);
-        } else {
-            coDao.updateFile(tempMap);
-        }
+    for (int i = 0; i < size; i++) {
+      tempMap = list.get(i);
+      if (tempMap.get("IS_NEW").equals("1")) {
+        coDao.insertFile(tempMap);
+      } else {
+        coDao.updateFile(tempMap);
+      }
     }
   }
 
@@ -121,16 +121,16 @@ public class CoServiceImpl implements CoService {
     return coDao.plusCnt(coNo);
   }
 
-  //첨부파일 조회
+  // 첨부파일 조회
   @Override
   public List<Map<String, Object>> selectFileList(int bno) throws Exception {
-      return coDao.selectFileList(bno);
+    return coDao.selectFileList(bno);
   }
 
-  //첨부파일 다운로드
+  // 첨부파일 다운로드
   @Override
   public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
-      return coDao.selectFileInfo(map);
+    return coDao.selectFileInfo(map);
   }
 
 }

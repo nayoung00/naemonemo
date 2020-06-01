@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
        
 <tiles-definitions>
-  <!-- 여러 템플릿에서 공통으로 사용할 레이아웃을 정의한다. -->
+  <!-- 모임내 사이드바 있는 곳에서 에서 공통으로 사용할 레이아웃을 정의한다. -->
   <definition name="base" template="/WEB-INF/tiles/template.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
     <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
@@ -38,11 +38,11 @@
     <put-attribute name="footer" value="/WEB-INF/tiles/plan/formFooter.jsp" />
   </definition>  
   
-  <!-- 사이드바없는 곳에서 공통으로 사용할 레이아웃을 정의한다. -->
+  <!-- 네모메인 / 사이드바없는 곳에서 공통으로 사용할 레이아웃을 정의한다. -->
   <definition name="noside" template="/WEB-INF/tiles/template2.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
-    <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+    <put-attribute name="top" value="/WEB-INF/tiles/top.jsp" />
+    <put-attribute name="bottom" value="/WEB-INF/tiles/bottom.jsp" />
   </definition>
   
   

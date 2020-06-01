@@ -53,7 +53,7 @@
                          </a>
                          <ul class="dropdown-menu">
                            <li><a href="../member/mypage">마이페이지</a></li>
-                           <li><a href="#">로그아웃</a></li>
+                           <li><a href="../auth/logout">로그아웃</a></li>
                          </ul>
                    </li>
                    <li class="separator hidden-lg hidden-md">

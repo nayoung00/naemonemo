@@ -6,8 +6,8 @@
 <mapper namespace="com.nmnm.gms.dao.GroupAccountDao">
 
   <resultMap type="GroupAccount" id="GroupAccountMap">
-    <id column="bank_info_id"   property="bankInfoId"/>
-    <result column="group_no"    property="groupNo"/>
+    <id column="group_no"    property="groupNo"/>
+    <result column="bank_info_id"   property="bankInfoId"/>
     <result column="bank_account_no"  property="bankAccountNo"/>
     <result column="bank_name" property="bankName"/>
     <result column="bank_account_holder" property="bankAccountHolder"/>

@@ -191,7 +191,7 @@
                 <div class="mp_list">
                     <ul>
                         <li><a href="#">참여모임</a></li>
-                        <li><a href="${path}/member/update">회원정보수정</a></li>
+                        <li><a href="${pageContext.servletContext.getContextPath()}/app/member/update">회원정보수정</a></li>
                         <li><a href="#">게시글관리</a></li>
                     </ul>
                 </div>

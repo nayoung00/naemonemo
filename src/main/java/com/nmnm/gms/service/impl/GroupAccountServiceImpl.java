@@ -38,10 +38,11 @@ public class GroupAccountServiceImpl implements GroupAccountService {
   }
 
   @Override
-  public void update(GroupAccount groupAccount) throws Exception{
-	  System.out.println("111111");
-	  groupAccountDao.update(groupAccount);
+  public int update(GroupAccount groupNo) throws Exception{
+//	  System.out.println("111111");
+	  return groupAccountDao.update(groupNo);
   }
+  
   
 //  @Override
 //  public void update(

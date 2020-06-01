@@ -16,9 +16,9 @@ public interface GroupAccountDao {
 
   GroupAccount findByNo(int groupNo) throws Exception;
 
-  void update(GroupAccount groupAccount) throws Exception;
+//  void update(GroupAccount groupAccount) throws Exception;
   
-  int update(int groupNo) throws Exception;
+  int update(GroupAccount groupNo) throws Exception;
 
   int delete(int groupNo) throws Exception;
 

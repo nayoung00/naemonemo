@@ -1,8 +1,28 @@
 var draggedEventIsAllDay;
 var activeInactiveWeekends = true;
 
-function getDisplayEventDate(event) {
+function getQueryStringObject() {
+    var a = window.location.search.substr(1).split('&');
+    if (a == "") return {};
+    var b = {};
+    for (var i = 0; i < a.length; ++i) {
+        var p = a[i].split('=', 2);
+        if (p.length == 1)
+            b[p[0]] = "";
+        else
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+}
 
+var gq = getQueryStringObject()
+var groupNo = gq.groupNo;
+
+var isRun = false;
+var eventData = [];
+
+
+function getDisplayEventDate(event) {
   var displayEventDate;
 
   if (event.allDay == false) {
@@ -165,24 +185,41 @@ var calendar = $('#calendar').fullCalendar({
    * ************** */
   events: function (start, end, timezone, callback) {
     $.ajax({
+      dataType : "json",
       type: "get",
-      url: "../../calendar/data.json",
+      url: "../plan/calendar-data?groupNo=" + groupNo,
+//      url: "../../calendar/data.json",
       data: {
-        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
       },
-      success: function (response) {
-        var fixedDate = response.map(function (array) {
-          if (array.allDay && array.start !== array.end) {
-            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
-            array.end = moment(array.end).add(1, 'days');
-          }
-          return array;
-        })
-        callback(fixedDate);
-      }
-    });
-  },
-
+          success: function (response) {
+          	for (let a of response) {
+        		eventData.push({
+        			title : a.title,
+        			description : a.content,
+        			start : a.startDate,
+        			end : a.endDate,
+        			username : a.memberName,
+        			url : a.thumbnail,
+        			startTime : a.startHour,
+        			endTime : a.endHour,
+        			textColor : "#ffffff",
+        			allDay : a.allday,
+        			type : a.category,
+        			_id : a.planNo
+        		});
+          	}
+        	resopnse = eventData;
+              var fixedDate = eventData.map(function (array) {
+                if (array.allDay && array.start !== array.end) {
+                  // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
+                  array.end = moment(array.end).add(1, 'days');
+                }
+                return array;
+              })
+              callback(fixedDate);
+            }
+          });
+        },
   eventAfterAllRender: function (view) {
     if (view.name == "month") {
       $(".fc-content").css('height', 'auto');
@@ -325,7 +362,7 @@ var calendar = $('#calendar').fullCalendar({
   },
   eventLimitClick: 'week', //popover
   navLinks: true,
-  defaultDate: moment('2019-05'), //실제 사용시 삭제
+  defaultDate: moment(), //실제 사용시 삭제
   timeFormat: 'HH:mm',
   defaultTimedEventDuration: '01:00:00',
   editable: true,

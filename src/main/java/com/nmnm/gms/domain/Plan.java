@@ -7,6 +7,7 @@ public class Plan {
   private int planNo; // nm_plan PK auto_increment default=1 NN
   private int groupNo; // nm_group PK/ FK N
   private int memberNo;
+  private String memberName;
   private String startDate; // DATE NN
   private String endDate; // DATE NN
   private String startHour; // 시간 저장
@@ -19,14 +20,25 @@ public class Plan {
   private int latitude; // 위도 N
   private int longitude; // 경도 N
   private Date createDate;
+  private boolean allday = false;
+
 
   @Override
   public String toString() {
     return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", memberNo=" + memberNo
-        + ", startDate=" + startDate + ", endDate=" + endDate + ", startHour=" + startHour
-        + ", endHour=" + endHour + ", title=" + title + ", thumbnail=" + thumbnail + ", content="
-        + content + ", category=" + category + ", address=" + address + ", latitude=" + latitude
-        + ", longitude=" + longitude + ", createDate=" + createDate + "]";
+        + ", memberName=" + memberName + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", startHour=" + startHour + ", endHour=" + endHour + ", title=" + title + ", thumbnail="
+        + thumbnail + ", content=" + content + ", category=" + category + ", address=" + address
+        + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
+        + ", allday=" + allday + "]";
+  }
+
+  public String getMemberName() {
+    return memberName;
+  }
+
+  public void setMemberName(String memberName) {
+    this.memberName = memberName;
   }
 
   public int getPlanNo() {

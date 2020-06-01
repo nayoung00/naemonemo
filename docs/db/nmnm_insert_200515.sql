@@ -168,10 +168,6 @@ INSERT INTO nm_notice(group_no,member_no,title,content)
  values(1,1,'모임 이용규칙','제곧내');
 
 
--- 공지사항 사진 예제
-INSERT INTO nm_notice_photo(notice_photo_no,notice_photo_file,notice_no)
-  values(1,'회비 납부하는법.jpg',1);
-  
 -- 공지사항 댓글 예제
 INSERT INTO nm_notice_reply(content,notice_no,member_no)
   values('글이 성의 없네요 ㅡ.ㅡ',1,2);
@@ -179,13 +175,43 @@ INSERT INTO nm_notice_reply(content,notice_no,member_no)
 -- 일정 예제 데이터
 INSERT INTO nm_plan
 (group_no,
+member_no,
 title,
+start_date,
+end_date,
 content,
 thumbnail,
 address,
 latitude,
 longitude)
-VALUES(2,'프로젝트','내용이랍니다', 'bit.jpg','주소',11,22);
+VALUES(1,1,'프로젝트','2020-04-02 12:09', '2020-04-02 13:09','내용이랍니다', 'bit.jpg','주소',11,22);
+
+INSERT INTO nm_plan
+(group_no,
+member_no,
+title,
+start_date,
+end_date,
+content,
+thumbnail,
+address,
+latitude,
+longitude)
+VALUES(1,2,'테스트라빈다','2020-05-06 13:12', '2020-06-02 13:09','테스트랍니다다다', 'bit222.jpg','주소',11,22);
+  
+INSERT INTO nm_plan
+(group_no,
+member_no,
+title,
+start_date,
+end_date,
+content,
+thumbnail,
+address,
+latitude,
+longitude)
+VALUES(2,1,'프로젝트','2020-04-02 12:09', '2020-04-02 13:09','내용이랍니다', 'bit.jpg','주소',11,22);
+
 
 -- 일정 참여자 & 일정이 먼저
 INSERT INTO nm_plan_member(plan_no,member_no,group_no,attend)
@@ -217,10 +243,6 @@ INSERT INTO nm_feed_reply(content,feed_no,member_no)
 
 INSERT INTO nm_feed_reply(content,feed_no,member_no)
   values('다음엔 저도 갈게요',1,2);  
-  
-  -- 피드좋아요 예제
-INSERT INTO nm_feed_like(like_count,member_no,feed_no)
-  values(1,1,1);
   
 -- 소통예제
 INSERT INTO nm_co(member_no,co_category,title,content)
@@ -305,15 +327,7 @@ values('저요~',2,1);
 
 insert into nm_co_reply(content,co_no,member_no)
 values('30000원 입니다',2,2);
- 
--- 소통사진 예제
-INSERT INTO nm_co_photo(co_photo_file,co_no)
-  values('party.jpg',1);
-  
--- 소통좋아요 예제
-INSERT INTO nm_co_like(like_count,member_no,co_no)
-  values(1,1,1);
-  
+   
 -- 알림 예제
 INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
   values(1,1,1,1);
@@ -435,4 +449,20 @@ bank_info_id,
 dues_period,
 dues)
  values(1,1,'월 1회',150000);
+ 
+ -- 첨부파일 예제
+INSERT INTO nm_MP_FILE(
+  FILE_NO,
+  BNO,
+  ORG_FILE_NAME,
+  STORED_FILE_NAME,
+  FILE_SIZE
+)VALUES(
+1,
+1,
+'원래첨부파일이름',
+'저장된파일이름',
+10
+);
+
  

@@ -10,6 +10,8 @@ public interface PlanDao {
 
   List<Plan> findAll(int groupNo) throws Exception;
 
+  List<Plan> findByCalendar(int groupNo) throws Exception;
+
   Plan findByNo(int planNo) throws Exception;
 
   int update(Plan plan) throws Exception;

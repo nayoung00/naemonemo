@@ -14,19 +14,19 @@ public class Plan {
   private String title; // VARCHAR(255) NN
   private String thumbnail;
   private String content;
+  private String category;
   private String address; // VARCHAR(255) NN
   private int latitude; // 위도 N
   private int longitude; // 경도 N
   private Date createDate;
-  private PlanMember planMember;
 
   @Override
   public String toString() {
     return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", memberNo=" + memberNo
         + ", startDate=" + startDate + ", endDate=" + endDate + ", startHour=" + startHour
         + ", endHour=" + endHour + ", title=" + title + ", thumbnail=" + thumbnail + ", content="
-        + content + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude
-        + ", createDate=" + createDate + ", planMember=" + planMember + "]";
+        + content + ", category=" + category + ", address=" + address + ", latitude=" + latitude
+        + ", longitude=" + longitude + ", createDate=" + createDate + "]";
   }
 
   public int getPlanNo() {
@@ -109,6 +109,14 @@ public class Plan {
     this.content = content;
   }
 
+  public String getCategory() {
+    return category;
+  }
+
+  public void setCategory(String category) {
+    this.category = category;
+  }
+
   public String getAddress() {
     return address;
   }
@@ -139,14 +147,6 @@ public class Plan {
 
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
-  }
-
-  public PlanMember getPlanMember() {
-    return planMember;
-  }
-
-  public void setPlanMember(PlanMember planMember) {
-    this.planMember = planMember;
   }
 
 

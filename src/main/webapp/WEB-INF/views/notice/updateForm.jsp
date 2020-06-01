@@ -19,12 +19,6 @@
 등록일: ${notice.createDate}<br>
 조회수: ${notice.viewCount}<br>
 
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-사진: <input name='noticePhotos' type='file'><br>
-
 <button>변경</button>
 
 </form>

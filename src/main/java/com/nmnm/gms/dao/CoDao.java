@@ -1,6 +1,7 @@
 package com.nmnm.gms.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
 
@@ -13,11 +14,11 @@ public interface CoDao {
 
   List<Co> findAll() throws Exception;
 
-  public Co findByNo(int communicationBoardNo) throws Exception;
+  public Co findByNo(int coNo) throws Exception;
 
-  public int update(Co communicationBoard) throws Exception;
+  public int update(Co co) throws Exception;
 
-  public int delete(int communicationBoardNo) throws Exception;
+  public int delete(int coNo) throws Exception;
 
   public List<Co> findByKeyword(String keyword) throws Exception;
 
@@ -30,6 +31,21 @@ public interface CoDao {
 
   List<Co> findAll(Pagination pagination) throws Exception;
   // public List<Co> getCoList(Pagination pagination) throws Exception;
+  
+  // 게시물 조회수
+  public boolean plusCnt(int coNo) throws Exception;
+  
+  // 첨부파일 업로드 (coMapper : sqlSession.insert("boardMapper.insertFile", map); )
+  public void insertFile(Map<String, Object> map) throws Exception;
+  
+  // 첨부파일 조회 (coMapper: return sqlSession.selectList("boardMapper.selectFileList", bno);)
+  public List<Map<String, Object>> selectFileList(int bno) throws Exception;
+  
+  // 첨부파일 다운로드 (coMapper: return sqlSession.selectOne("boardMapper.selectFileInfo", map);)
+  public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
+  
+  //첨부파일 수정 (coMapper: sqlSession.update("boardMapper.updateFile", map);)
+  public void updateFile(Map<String, Object> map) throws Exception;
 }
 
 

@@ -1,7 +1,6 @@
 package com.nmnm.gms.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Co implements Serializable{
   
@@ -15,22 +14,20 @@ public class Co implements Serializable{
   private String createDate; // now()
   private String nickname; 
   private int viewCount;
-  private List<CoPhoto> coPhotos;
 
 
 
 
-
-  @Override
-	public String toString() {
-		return "Co [coNo=" + coNo + ", category=" + category + ", memberNo=" + memberNo + ", title=" + title + ", content="
-				+ content + ", createDate=" + createDate + ", nickname=" + nickname + ", viewCount=" + viewCount + ", coPhotos="
-				+ coPhotos + "]";
-	}
-
+	@Override
+  public String toString() {
+    return "Co [coNo=" + coNo + ", category=" + category + ", memberNo=" + memberNo + ", title="
+        + title + ", content=" + content + ", createDate=" + createDate + ", nickname=" + nickname
+        + ", viewCount=" + viewCount + "]";
+  }
 
 
-	public String getNickname() {
+
+  public String getNickname() {
 		return nickname;
 	}
 
@@ -104,19 +101,6 @@ public class Co implements Serializable{
   public void setContent(String content) {
     this.content = content;
   }
-
-
-
-  public List<CoPhoto> getCoPhotos() {
-    return coPhotos;
-  }
-
-  public void setCoPhotos(List<CoPhoto> coPhotos) {
-    this.coPhotos = coPhotos;
-  }
-
-
-
 
 
 

@@ -21,4 +21,7 @@ public interface FeedDao {
 
   List<Feed> findByKeyword(String keyword) throws Exception;
   
+  // 게시물 조회수
+  public boolean plusCnt(int feedNo) throws Exception;
+  
 }

@@ -14,11 +14,13 @@ public interface GroupAccountDao {
 
   List<GroupAccount> findAll() throws Exception;
 
-  GroupAccount findByNo(int bankInfoId) throws Exception;
+  GroupAccount findByNo(int groupNo) throws Exception;
 
-  int update(GroupAccount groupAccount) throws Exception;
+  void update(GroupAccount groupAccount) throws Exception;
+  
+  int update(int groupNo) throws Exception;
 
-  int delete(int bankInfoId) throws Exception;
+  int delete(int groupNo) throws Exception;
 
   List<GroupAccount> findByKeyword(String keyword) throws Exception;
 

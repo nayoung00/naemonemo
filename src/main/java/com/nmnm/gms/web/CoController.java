@@ -1,14 +1,10 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URLEncoder;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,20 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
-import com.nmnm.gms.domain.CoPhoto;
 import com.nmnm.gms.domain.CoReply;
-import com.nmnm.gms.service.Action;
-import com.nmnm.gms.service.ActionForward;
 import com.nmnm.gms.service.CoReplyService;
 import com.nmnm.gms.service.CoService;
-import com.nmnm.gms.service.impl.RecCount;
-import com.nmnm.gms.service.impl.RecUpdate;
 
 
-@WebServlet("*.do") //좋아요때문에 넣음
 @Controller
 @RequestMapping("/co")
 public class CoController {
@@ -49,49 +39,21 @@ public class CoController {
   @Autowired
   CoReplyService coReplyService;
   
-  
 
   public CoController() {
     logger.debug("CoController 생성됨!");
   }
 
+  
   @GetMapping("form")
   public void form() throws Exception {}
 
+  
   @PostMapping("add")
-  public String add( //
-      String category, //
-      int memberNo, //
-      String title, //
-      String content, //
-      MultipartFile[] coPhotos) throws Exception {
+  public String add(Co co, MultipartHttpServletRequest mpRequest) throws Exception {
+    logger.info("write/add");
     
-    Co co = new Co();
-    
-    co.setCategory(category);
-    co.setMemberNo(memberNo);
-    co.setTitle(title);
-    co.setContent(content);
-    
-    ArrayList<CoPhoto> coPhotoArray = new ArrayList<>();
-    String dirPath = servletContext.getRealPath("/upload/co");
-    for (MultipartFile coPhoto : coPhotos) {
-      if (coPhoto.getSize() <= 0) {
-        continue;
-      }
-      String filename = UUID.randomUUID().toString();
-      coPhoto.transferTo(new File(dirPath + "/" + filename));
-      coPhotoArray.add(new CoPhoto().setFilepath(filename));
-    }
-    
-    if (coPhotoArray.size() == 0) {
-      throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
-    } else {
-      System.out.println("사진이 있당");
-    }
-    
-    co.setCoPhotos(coPhotoArray);
-    coService.add(co);
+    coService.add(co, mpRequest);
     
     return "redirect:list";
   }
@@ -103,12 +65,20 @@ public class CoController {
   }
 
   @GetMapping("detail")
-  public void detail(int coNo, Model model) throws Exception {
+  public void detail(Co co, Model model, @RequestParam("coNo")int coNo) throws Exception {
     model.addAttribute("co", coService.get(coNo));
     
     // 댓글 리스트 보기
     List<CoReply> replyList = coReplyService.readReply(coNo);
     model.addAttribute("replyList", replyList);
+    
+    // 게시물 조회수 +1
+    coService.plusCnt(coNo);
+    
+    // 첨부파일 조회
+    List<Map<String, Object>> fileList = coService.selectFileList(co.getCoNo());
+    model.addAttribute("file", fileList);
+    
   }
 
   // @GetMapping("list")
@@ -129,47 +99,31 @@ public class CoController {
     model.addAttribute("list", coService.list(pagination));
   }
 
+  // 게시물 수정 뷰
   @GetMapping("updateForm")
-  public void updateForm(int coNo, Model model) throws Exception {
-    model.addAttribute("co", coService.get(coNo));
+  public void updateForm(Co co, Model model) throws Exception {
+    logger.info("updateForm");
+    
+    model.addAttribute("update", coService.get(co.getCoNo()));
+    
+    List<Map<String, Object>> fileList = coService.selectFileList(co.getCoNo());
+    model.addAttribute("file", fileList);
   }
 
   @PostMapping("update")
-  public String update( //
-      int coNo, //
-      String category, //
-      int memberNo, //
-      String title, //
-      String content, //
-      MultipartFile[] coPhotos) throws Exception {
+  public String update(Co co, //
+      @RequestParam(value="fileNoDel[]") String[] files, //
+      @RequestParam(value="fileNameDel[]") String[] fileNames, //
+      MultipartHttpServletRequest mpRequest) throws Exception {
     
-    Co co = coService.get(coNo);
+    logger.info("update");
     
-    co.setCategory(category);
-    co.setTitle(title);
-    co.setContent(content);
+    coService.update(co, files, fileNames, mpRequest);
     
-    ArrayList<CoPhoto> coPhotoArray = new ArrayList<>();
-    String dirPath = servletContext.getRealPath("/upload/co");
-    for (MultipartFile coPhoto : coPhotos) {
-      if (coPhoto.getSize() <= 0) {
-        continue;
-      }
-      String filename = UUID.randomUUID().toString();
-      coPhoto.transferTo(new File(dirPath + "/" + filename));
-      coPhotoArray.add(new CoPhoto().setFilepath(filename));
-    }
-
-    if (coPhotoArray.size() > 0) {
-      co.setCoPhotos(coPhotoArray);
-    } else {
-      co.setCoPhotos(null);
-    }
-
-    coService.update(co);
-    return "redirect:list";
+    return "redirect:detail?coNo=" + co.getCoNo();
   }
 
+  
   @GetMapping("search")
   public void search(String keyword, Model model) throws Exception {
     model.addAttribute("list", coService.search(keyword));
@@ -236,37 +190,24 @@ public class CoController {
   }
   
   
-  private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String requestURI = request.getRequestURI();
-    String contextPath = request.getContextPath();
-    String command = requestURI.substring(contextPath.length());
+  // 첨부파일 다운로드
+  @RequestMapping(value="/fileDown")
+  public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
+      Map<String, Object> resultMap = coService.selectFileInfo(map);
+      String storedFileName = (String) resultMap.get("STORED_FILE_NAME");
+      String originalFileName = (String) resultMap.get("ORG_FILE_NAME");
+      
+      // 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
+      byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+storedFileName));
+      
+      response.setContentType("application/octet-stream");
+      response.setContentLength(fileByte.length);
+      response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
+      response.getOutputStream().write(fileByte);
+      response.getOutputStream().flush();
+      response.getOutputStream().close();
+  }
+  
+  
     
-    System.out.println("requestURI : " + requestURI);
-    System.out.println("contextPath : " + contextPath);
-    System.out.println("command : " + command);
-
-    Action action = null;
-    ActionForward forward = null;
-  
-    // 추천수 업데이트
-    if (command.equals("/RecUpdate.do")) {
-        try {
-            action = new RecUpdate();
-            action.execute(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    // 추천수 검색
-    else if (command.equals("/RecCount.do")) {
-        try {
-            action = new RecCount();
-            action.execute(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-  
 }

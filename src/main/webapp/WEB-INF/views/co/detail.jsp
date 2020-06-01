@@ -3,43 +3,17 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script>
 
-$(function(){
-    // 추천버튼 클릭시(추천 추가 또는 추천 제거)
-    $("#rec_update").click(function(){
-      $.ajax({
-        url: "/expro/RecUpdate.do",
-                type: "POST",
-                data: {
-                    no: ${content.co_no},
-                    id: '${id}'
-                },
-                success: function () {
-              recCount();
-                },
-      })
-    })
+<script type="text/javascript">
     
-    // 게시글 추천수
-      function recCount() {
-      $.ajax({
-        url: "/expro/RecCount.do",
-                type: "POST",
-                data: {
-                    no: ${content.co_no}
-                },
-                success: function (count) {
-                  $(".rec_count").html(count);
-                },
-      })
-      };
-      recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
-
+    function fn_fileDown(fileNo){
+      var formObj = $("form[name='readForm']");
+      $("#FILE_NO").attr("value", fileNo);
+      formObj.attr("action", "fileDown");
+      formObj.submit();
+    }
 </script>
-
-
-
+  
 <section id="blog" class="blog">
   <div class="container">
     <div class="section-header"></div>
@@ -50,11 +24,15 @@ $(function(){
           <div class="col-md-12">
             <div class="card card-plain">
               <div class="header">
-                <h1>댓글수정</h1>
               
               </div>
               
 <c:if test="${not empty co}">
+
+<form name="readForm" role="form" method="post">
+<input type="hidden" id="bno" name="bno" value="${read.bno}" />
+<input type="hidden" id="FILE_NO" name="FILE_NO" value=""> 
+</form>
 
 번호: ${co.coNo}<br>
 글 분류: ${co.category}<br>
@@ -65,22 +43,21 @@ ${co.content}<br>
 등록일: ${co.createDate}<br>
 조회수: ${co.viewCount}<br>
 
-사진:
-<br>
-<p>
-<c:forEach items="${co.coPhotos}" var="coPhoto">
-<br>
-<img src="${pageContext.servletContext.contextPath}/upload/co/${coPhoto.filepath}" width='360'>
-<br>
-<br>
-</c:forEach>
-</p>
+<hr>
+<span>파일 목록</span>
+<div class="form-group" style="border: 1px solid #dbdbdb;">
+  <c:forEach var="file" items="${file}">
+    <a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
+  </c:forEach>
+</div>
+<hr>
 
 <p>
 <button><a href='delete?coNo=${co.coNo}'>삭제</a></button>
 <button><a href='updateForm?coNo=${co.coNo}'>변경</a></button>
 <button><a href="list.jsp">목록</a></button>
 </p>
+<hr>
 
 </form>
 </c:if>
@@ -89,32 +66,8 @@ ${co.content}<br>
 <p>해당 글이 없습니다.</p>
 </c:if>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-<!-- 좋아요 -->
-    <div>
-      <div class="w3-border w3-center w3-padding">
-        <c:if test="${ id == null }">
-          추천 기능은 <button type="button" id="newLogin"><b class="w3-text-blue">로그인</b></button> 후 사용 가능합니다.<br />
-          <i class="fa fa-heart" style="font-size:16px;color:red"></i>
-          <span class="rec_count"></span>         
-        </c:if>
-        <c:if test="${ id != null }">
-          <button class="w3-button w3-black w3-round" id="rec_update">
-            <i class="fa fa-heart" style="font-size:16px;color:red"></i>
-            &nbsp;<span class="rec_count"></span>
-          </button> 
-        </c:if>
-      </div>
-    </div>
 
-<br>
-<br>
-<br>
+<br>    
 
 <!-- 댓글 -->
 <jsp:include page="replyView.jsp"/>

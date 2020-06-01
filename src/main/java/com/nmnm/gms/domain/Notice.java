@@ -2,7 +2,6 @@ package com.nmnm.gms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 public class Notice implements Serializable {
 
@@ -15,12 +14,11 @@ public class Notice implements Serializable {
   private String content; //
   private Date createDate; // now()
   private int viewCount;
-  private List<NoticePhoto> noticePhotos;
   
   public Notice() {}
 
   public Notice(int noticeNo, int groupNo, int memberNo, String title, String content,
-      Date createDate, int viewCount, List<NoticePhoto> noticePhotos) {
+      Date createDate, int viewCount) {
     super();
     this.noticeNo = noticeNo;
     this.groupNo = groupNo;
@@ -29,7 +27,6 @@ public class Notice implements Serializable {
     this.content = content;
     this.createDate = createDate;
     this.viewCount = viewCount;
-    this.noticePhotos = noticePhotos;
   }
 
   
@@ -89,20 +86,16 @@ public class Notice implements Serializable {
     this.viewCount = viewCount;
   }
 
-  public List<NoticePhoto> getNoticePhotos() {
-    return noticePhotos;
-  }
-
-  public void setNoticePhotos(List<NoticePhoto> noticePhotos) {
-    this.noticePhotos = noticePhotos;
-  }
-
+  
   @Override
   public String toString() {
     return "Notice [noticeNo=" + noticeNo + ", groupNo=" + groupNo + ", memberNo=" + memberNo
         + ", title=" + title + ", content=" + content + ", createDate=" + createDate
-        + ", viewCount=" + viewCount + ", noticePhotos=" + noticePhotos + "]";
+        + ", viewCount=" + viewCount + "]";
   }
+
+
+
   
   
 }

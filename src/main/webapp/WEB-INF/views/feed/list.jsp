@@ -23,7 +23,7 @@
     <td><a href='detail?feedNo=${item.feedNo}'> ${item.title}</a></td> 
     <td>${item.memberNo}</td>
     <td>${item.createDate}</td> 
-    <td>${item.viewCount}</td>
+    <td><c:out value="${item.viewCount}"/></td>
     <td><img src="../../upload/feed/${item.feedPhotos[0].filepath}" width='240'></td>
   </tr>
 </c:forEach>

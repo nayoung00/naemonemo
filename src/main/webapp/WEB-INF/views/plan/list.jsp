@@ -21,6 +21,7 @@
     <td>${item.planNo}</td> 
     <td><a href='calendar?planNo=${item.planNo}'> ${item.title}</a></td> 
     <td>${item.createDate}</td>
+    <td><a href='calendar?groupNo=${param.groupNo}'> ${item.title}</a></td> 
   </tr>
 </c:forEach>
 </c:if>

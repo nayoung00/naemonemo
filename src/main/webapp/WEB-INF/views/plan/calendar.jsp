@@ -6,11 +6,10 @@
         <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
                 style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">카테고리1</a></li>
-                <li><a tabindex="-1" href="#">카테고리2</a></li>
-                <li><a tabindex="-1" href="#">카테고리3</a></li>
-                <li><a tabindex="-1" href="#">카테고리4</a></li>
-                <li><a tabindex="-1" href="#">${calendar.title }</a></li>
+                <li><a tabindex="-1" href="#">중요</a></li>
+                <li><a tabindex="-1" href="#">필수</a></li>
+                <li><a tabindex="-1" href="#">선택</a></li>
+                <li><a tabindex="-1" href="#">${calendar.title}</a></li>
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
@@ -25,47 +24,46 @@
         <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                <form action='add' method='post' enctype='multipart/form-data'>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-                              <form action='add' method='post' enctype='multipart/form-data'>
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-allDay">하루종일</label>
-                                <input class='allDayNewEvent' id="edit-allDay" type="checkbox"></label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-title">일정명</label>
+                                <label class="col-xs-4" for="title">일정명</label>
                                 <input class="inputModal" type="text" name="title" id="edit-title"
                                     required="required" />
                             </div>
                         </div>
+                    <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="title">썸네일</label>
+                                <input class="inputModal" type="text" name="thumbnailFile" id="edit-thumbnail"
+                                    required="required" value="${calendar.thumbnail}" />
+                            </div>
+                        </div>                   
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-start">시작</label>
-                                <input class="inputModal" type="text" name="edit-start" id="edit-start" />
+                                <label class="col-xs-4" for="startDate">시작</label>
+                                <input class="inputModal" type="text" name="startDate" id="edit-start" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-end">끝</label>
-                                <input class="inputModal" type="text" name="edit-end" id="edit-end" />
+                                <label class="col-xs-4" for="endDate">끝</label>
+                                <input class="inputModal" type="text" name="endDate" id="edit-end" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type">구분</label>
                                 <select class="inputModal" type="text" name="edit-type" id="edit-type">
-                                    <option value="카테고리1">카테고리1</option>
-                                    <option value="카테고리2">카테고리2</option>
-                                    <option value="카테고리3">카테고리3</option>
-                                    <option value="카테고리4">카테고리4</option>
+                                    <option value="중요">중요</option>
+                                    <option value="필수">필수</option>
+                                    <option value="선택">선택</option>
                                 </select>
                             </div>
                         </div>
@@ -92,7 +90,6 @@
                                     id="edit-desc"></textarea>
                             </div>
                         </div>
-                    </form>
                     </div>
                     <div class="modal-footer modalBtnContainer-addEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -103,6 +100,7 @@
                         <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
                         <button type="button" class="btn btn-primary" id="updateEvent">저장</button>
                     </div>
+                    </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
@@ -119,10 +117,9 @@
                     <label for="calendar_view">구분별</label>
                     <div class="input-group">
                         <select class="filter" id="type_filter" multiple="multiple">
-                            <option value="카테고리1">카테고리1</option>
-                            <option value="카테고리2">카테고리2</option>
-                            <option value="카테고리3">카테고리3</option>
-                            <option value="카테고리4">카테고리4</option>
+                            <option value="중요">중요</option>
+                            <option value="필수">필수</option>
+                            <option value="선택">선택</option>
                         </select>
                     </div>
                 </div>
@@ -148,16 +145,3 @@
         <!-- /.filter panel -->
     </div>
     <!-- /.container --> 
-
-
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/jquery.min.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/bootstrap.min.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/moment.min.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/fullcalendar.min.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/ko.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/select2.min.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/vendor/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/js/main.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/js/addEvent.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/js/editEvent.js"></script>
-    <script src="${pageContext.servletContext.getContextPath()}/calendar/js/etcSetting.js"></script>

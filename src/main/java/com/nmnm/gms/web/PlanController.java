@@ -1,6 +1,9 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nmnm.gms.domain.Plan;
 import com.nmnm.gms.service.PlanService;
@@ -38,14 +42,29 @@ public class PlanController {
     System.out.println("form 호출==================================================");
   }
 
-  @GetMapping("calendar")
-  public void calendar(Model model, int planNo) throws Exception {
-    logger.debug("calendar 호출==================================================");
+  @GetMapping("calendar-data")
+  public String calendarData(int planNo) throws Exception {
+    System.out.println("CalendarData 호출======================");
     Plan plan = planService.get(planNo);
     ObjectMapper mapper = new ObjectMapper();
     String jsonString = mapper.writeValueAsString(plan);
+    System.out.println("calendar-data" + jsonString);
+    return jsonString;
+
+  }
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  @GetMapping("calendar")
+  public void calendar(Model model, int groupNo) throws Exception {
+    logger.debug("calendar 호출==================================================");
+    List<Plan> planList = planService.calendar(groupNo);
+    ObjectMapper mapper = new ObjectMapper();
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    mapper.setDateFormat(df);
+    String jsonString = mapper.writeValueAsString(planList);
+    System.out.println(planList.toString());
     System.out.println(jsonString);
-    model.addAttribute("calendar", planService.get(planNo));
+    // model.addAttribute("calendar", planService.get(planNo));
   }
 
   @PostMapping("add")

@@ -23,14 +23,15 @@
 						<div class="content table-responsive table-full-width">
 							<table class="table table-hover">
 								<thead>
-									<th style="width: 10%"></th>
+								<br>
+									<th style="width: 10%">No</th>
 									<th style="width: 10%">계좌번호</th>
 									<th style="width: 10%">은행명</th>
 									<th style="width: 10%">예금주</th>
 								</thead>
 								<tbody id="bankbody">
 									<tr>
-										<td><input type='checkbox' name='chkBox'></td>
+										<td>${groupAccount.bankInfoId}</td>
 										<td><input type='text' name='bankAccountNo'
 											value='${groupAccount.bankAccountNo}'></td>
 										<td><input type='text' name='bankName'
@@ -40,12 +41,14 @@
 									</tr>
 								</tbody>
 							</table>
-							<span style="float:left"><input type="button" value="계좌 추가" onclick="add_row()"></span> 
-							<span style="float:left"><input type="button" value="계좌 삭제" onclick="delete_row()"></span> 
-              <button>저장하기</button>
+							<!-- <span style="float: left">
+							<input type="button" value="계좌 추가" onclick="add_row()"></span> 
+							<span	style="float: left">
+								<input type="button" value="계좌 삭제" onclick="delete_row()"></span>-->
+							<button>저장하기</button>
 							<!-- <span style="float:right"><input type="submit" value="저장하기"></span> -->
 						</div>
-						<input type='hidden' readonly name='bankInfoId' value='${groupAccount.bankInfoId}'> 
+						<input type='hidden' readonly name='bankInfoId'	value='${groupAccount.bankInfoId}'> 
 						<input type='hidden' readonly name='groupNo' value='${groupAccount.groupNo}'>
 					</form>
 
@@ -56,7 +59,7 @@
 	<br>
 </div>
 
-
+<!-- 
 <script type="text/javascript">
 	function add_row() {
 		var bankbody = document.getElementById('bankbody');
@@ -70,11 +73,11 @@
 			var cell3 = row.insertCell(2);
 			var cell4 = row.insertCell(3);
 
-			cell1.innerHTML = "<input type='checkbox'  name='chkBox'>";
-			cell2.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
-			cell3.innerHTML = "<input type='text' name='bankName' value=''>";
-			cell4.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
-			rowCnt++;  
+	        cell1.innerHTML = "<input type='checkbox'  name='chkBox'>";
+	        cell2.innerHTML = "<input type='hidden' name='bankAccountNo' value=''>";
+	        cell3.innerHTML = "<input type='hidden' name='bankName' value=''>";
+	        cell4.innerHTML = "<input type='hidden' name='bankAccountHolder' value=''>";
+			rowCnt++;
 		} else {
 			alert("계좌는 하나만 등록 가능합니다.");
 		}
@@ -92,22 +95,39 @@
 				table.deleteRow(i);
 				rowCnt--;
 				i--;
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+				var cell4 = row.insertCell(3);
+				var cell5 = row.insertCell(4);
+				var cell6 = row.insertCell(5);
+
+				cell1.innerHTML = "<input type='checkbox'  name='chkBox'>";
+				cell2.innerHTML = "<input type='hidden' name='bankAccountNo' value=''>";
+				cell3.innerHTML = "<input type='hidden' name='bankName' value=''>";
+				cell4.innerHTML = "<input type='hidden' name='bankAccountHolder' value=''>";
+				cell5.innerHTML = "<input type='hidden' readonly name='bankInfoId' value='${groupAccount.bankInfoId}'>";
+				cell6.innerHTML = "<input type='hidden' readonly name='groupNo' value='${groupAccount.groupNo}'>";
+
 			} else {
 				alert("삭제할 계좌가 존재하지 않습니다.");
 			}
 		}
-		  
+
 	};
 </script>
+ -->
 <style>
 .row {
 	width: 879px;
 	margin: auto;
 }
+
 .col-md-12 {
-height: 400px;
+	height: 400px;
 }
+
 .card card-plain {
-height: 400px;
+	height: 400px;
 }
 </style>

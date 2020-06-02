@@ -93,10 +93,11 @@
                             </div>
                         </div>
                     </div>
-
+                  <div class="col-md-4">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal">
+                                     Launch demo modal
+                          </button>
+                  </div>
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal">
-  Launch demo modal
-</button>

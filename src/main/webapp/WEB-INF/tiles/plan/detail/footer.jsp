@@ -10,4 +10,10 @@
        </div>
    </footer>
 
-   
+   <script>
+   function goData() {
+     var form = document.apply;
+     
+     form.submit();
+   }
+   </script>

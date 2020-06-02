@@ -1,6 +1,7 @@
 package com.nmnm.gms.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Plan {
 
@@ -22,6 +23,7 @@ public class Plan {
   private Date createDate;
   private String backgroundColor;
   private boolean allday = false;
+  private List<PlanMember> planMember;
 
 
   @Override
@@ -32,6 +34,12 @@ public class Plan {
         + thumbnail + ", content=" + content + ", category=" + category + ", address=" + address
         + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
         + ", backgroundColor=" + backgroundColor + ", allday=" + allday + "]";
+  }
+  public List<PlanMember> getPlanMember() {
+    return planMember;
+  }
+  public void setPlanMember(List<PlanMember> planMember) {
+    this.planMember = planMember;
   }
   public int getPlanNo() {
     return planNo;

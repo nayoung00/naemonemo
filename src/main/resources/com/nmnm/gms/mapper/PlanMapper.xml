@@ -22,12 +22,12 @@
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
-<!--     <association property="planMember" javaType="PlanMember">
-         <result column="plan_no" property="planNo"/>
-         <result column="group_no" property="groupNo"/>
-         <result column="member_no" property="memberNo"/>
-         <result column="attend" property="attend"/>
-    </association> -->
+    <collection property="planMember" ofType="PlanMember">
+      <id column="plan_no"   property="planNo"/>
+      <result column="group_no" property="groupNo"/>
+      <result column="member_no" property="memberNo"/>
+      <result column="attend" property="attend"/>
+    </collection>
 </resultMap>
 
 <insert id="insert" parameterType="Plan">
@@ -58,7 +58,7 @@
 </insert>
 
 <!-- 보류 -->
-  <insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
+  <insert id="applyPlanMember" parameterType="com.nmnm.gms.domain.PlanMember">
     insert into nm_plan_member(
     plan_no,
     group_no,

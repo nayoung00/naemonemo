@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nmnm.gms.domain.Plan;
+import com.nmnm.gms.domain.PlanMember;
 import com.nmnm.gms.service.PlanService;
 
 @Controller
@@ -95,6 +96,16 @@ public class PlanController {
       return "redirect:list" + "?groupNo=" + plan.getGroupNo();
     } else {
       throw new Exception("일정을 추가할 수 없습니다.");
+    }
+  }
+
+  @GetMapping("apply")
+  public String apply(PlanMember planMember) throws Exception{
+    System.out.println(planMember.toString());
+    if (planService.apply(planMember) > 0) {
+      return "redirect:list?groupNo=" + planMember.getGroupNo();
+    } else {
+      throw new Exception("일정에 참여할 수 없습니다." + planMember.toString());
     }
   }
 

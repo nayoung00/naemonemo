@@ -152,4 +152,21 @@
     order by
       create_date desc
   </select>
+  
+  <!-- 모임홈 app/moim/home?groupNo= -->
+  <select id="home" resultMap="GroupMap" parameterType="int">
+    select 
+    group_photo,
+    group_no,
+    group_name,
+    group_form,
+    group_info,
+    group_interest,
+    city,
+    create_date
+    from 
+      nm_group
+    where 
+      group_no=#{groupNo}
+  </select>
 </mapper>

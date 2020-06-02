@@ -40,9 +40,10 @@ h2 { text-align: center; }
 </div>
 
 </c:if>
+
 <c:if test="${not empty loginUser }">
 <form name='addForm' onsubmit="return checkz()" method="post" action="add" enctype="multipart/form-data" > 
-<input type="hidden" name="groupAdmin" value="${loginUser.no }"/>
+<input type="hidden" name="groupAdmin" value="${loginUser.memberNo }"/>
 <h2 align="center">모임 생성</h2>
     <div class="box" style="background: #BDBDBD;">
         <img  class="profile" id="blah" src="#"/>

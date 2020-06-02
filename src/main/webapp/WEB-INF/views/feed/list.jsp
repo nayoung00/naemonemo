@@ -24,7 +24,7 @@
     <td>${item.memberNo}</td>
     <td>${item.createDate}</td> 
     <td><c:out value="${item.viewCount}"/></td>
-    <td><img src="../../upload/feed/${item.feedPhotos[0].filepath}" width='240'></td>
+    <td><img src="${pageContext.servletContext.contextPath}/upload/feed/${item.feedPhotos[0].filepath}" width='240'></td>
   </tr>
 </c:forEach>
 

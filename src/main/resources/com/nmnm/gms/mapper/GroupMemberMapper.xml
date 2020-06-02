@@ -10,10 +10,12 @@
 				<result column="member_no" property="memberNo" />
 				<result column="grade_no" property="gradeNo" />
 				<result column="register" property="register" />
+				
 				<result column="id_photo" property="photo"/> 
 				<result column="birthday" property="birthday"/> 
 				<result column="member_name" property="name"/> 
 				<result column="nickname" property="nickname"/> 
+		
 		</resultMap>
 
 		<sql id="select1">

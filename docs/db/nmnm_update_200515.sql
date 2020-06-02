@@ -235,7 +235,7 @@ CREATE TABLE nm_group_member (
   group_no  INTEGER NOT NULL COMMENT '모임번호', -- 모임번호
   member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   grade_no  INTEGER NOT NULL DEFAULT 1 COMMENT '등급번호', -- 등급번호
-  register  INTEGER NOT NULL DEFAULT 0 COMMENT '가입상태' -- 가입상태
+  register  TEXT    NOT NULL DEFAULT '가입신청중' COMMENT '가입상태' -- 가입상태
 )
 COMMENT '모임회원';
 
@@ -844,3 +844,4 @@ ALTER TABLE nm_account
     REFERENCES nm_group_account ( -- 모임계좌
       bank_info_id -- 모임계좌아이디
     );
+

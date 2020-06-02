@@ -25,7 +25,7 @@
 <c:forEach items="${listByJoin}" var="item">
   <tr>
     <td>${item.groupNo}</td> 
-    <td><a href='detail(groupHome)?groupNo=${item.groupNo}'> ${item.groupName}</a></td> 
+    <td><a href='${pageContext.servletContext.contextPath}/app/moim/home?groupNo=${item.groupNo}'> ${item.groupName}</a></td> 
     <td>${item.groupInfo}</td>
     <td>${item.groupForm}</td> 
     <td>${item.groupInterest}</td> 

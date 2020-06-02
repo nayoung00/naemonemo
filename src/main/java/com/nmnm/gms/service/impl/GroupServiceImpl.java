@@ -22,8 +22,8 @@ public class GroupServiceImpl implements GroupService {
   }
 
   @Override
-  public int delete(int no) throws Exception {
-    return groupDao.delete(no);
+  public int delete(int groupNo) throws Exception {
+    return groupDao.delete(groupNo);
   }
 
   @Override
@@ -31,10 +31,6 @@ public class GroupServiceImpl implements GroupService {
     return groupDao.insert(group);
   }
 
-  @Override
-  public Group get(int groupNo) throws Exception {
-    return groupDao.findByNo(groupNo);
-  }
 
 
   @Override
@@ -64,8 +60,14 @@ public class GroupServiceImpl implements GroupService {
     return groupDao.listByCd();
   }
 
+  // 모임홈 app/moim/home?groupNo=1 
   @Override
-  public Group home(int groupNo) throws Exception {
-    return groupDao.home(groupNo);
+  public Group get(int groupNo) throws Exception { //detail등 
+    return groupDao.findByNo(groupNo);
   }
+
+
+
+
+
 }

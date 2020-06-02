@@ -75,6 +75,7 @@
     where gm.group_no = g.group_no and gm.member_no = m.member_no
   </select>
     
+    <!--  모임홈에서 쓸 detail  -->
   <select id="findByNo" resultMap="GroupMap" parameterType="int">
     select 
     group_photo,
@@ -153,20 +154,5 @@
       create_date desc
   </select>
   
-  <!-- 모임홈 app/moim/home?groupNo= -->
-  <select id="home" resultMap="GroupMap" parameterType="int">
-    select 
-    group_photo,
-    group_no,
-    group_name,
-    group_form,
-    group_info,
-    group_interest,
-    city,
-    create_date
-    from 
-      nm_group
-    where 
-      group_no=#{groupNo}
-  </select>
+
 </mapper>

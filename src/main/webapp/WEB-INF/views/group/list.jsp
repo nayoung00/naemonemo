@@ -18,7 +18,7 @@
             <div class="col-md-3 col-sm-4">
               <div class="single-new-arrival">
                 <div class="single-new-arrival-bg">
-                  <img src="${item.groupPhoto}" alt="new-arrivals images">
+                  <img src="../../upload/${item.groupPhoto}" alt="new-arrivals images">
                   <div class="single-new-arrival-bg-overlay"></div>
                   <div class="sale bg-1">
                     <p>sale</p>

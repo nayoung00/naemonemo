@@ -65,12 +65,21 @@ function readURL(input) {
 	}
 	}
 </script>
+
 <section id="blog" class="blog">
-    <div class="container">
-<h1>모임 상세정보</h1>
+  <div class="container">
+    <div class="section-header"></div>
+
+    <div class="blog-content">
+      <div class="container-fluid">
+    
+    
+<h1>모임 홈</h1>
+
+<br>
 
 <form action="../grmember/addgrmember">
-<input type="hidden" name="groupNo" value="${param.no}"/>
+<input type="hidden" name="groupNo" value="${param.groupNo}"/>
 <input type="hidden" name="memberNo" value="${loginUser.memberNo }" />
 <input type="hidden" name="gradeNo" value="2" />
 <button>가입 신청</button>
@@ -78,7 +87,7 @@ function readURL(input) {
 
 <form action="../plan/list">
     <input type="hidden" name="memberNo" value="${loginUser.memberNo}"/>
-    <input type="hidden" name="groupNo" value="${param.no}"/>
+    <input type="hidden" name="groupNo" value="${param.groupNo}"/>
     <button>일정 게시판</button>
 </form>
 
@@ -152,10 +161,19 @@ geocoder.addressSearch(document.getElementById("address").value, function(result
 });    
 </script>
 <p>생성일: ${group.createDate}</p>
+<p>
+<a href = "${pageContext.servletContext.contextPath}/app/moim/home?groupNo=${param.groupNo}">모임입장</a>
+</p>
+
+<!-- 모임관리에서 하도록 삭제
 <p><a href='updateForm?no=${group.groupNo}'>변경</a>
 <a href='delete?no=${group.groupNo}'>삭제</a></p>
+ -->
+
 <c:if test="${empty group}">
 <p>해당  모임이 없습니다.</p>
 </c:if>
+
+</div>
 </div>
 </section>

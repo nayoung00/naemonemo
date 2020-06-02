@@ -15,17 +15,14 @@ public interface GroupService {
   // 신규 모임 리스트 
   List<Group> listByCd() throws Exception;
   
-  // 모임홈 app/moim/home?groupNo=
-  Group home(int groupNo) throws Exception;
+  // 모임홈 app/moim/home?groupNo=1 
+  Group get(int groupNo) throws Exception; //detail
 
   // 모임관리에서 쓸 모임 삭제
-  int delete(int no) throws Exception;
+  int delete(int groupNo) throws Exception;
 
   // 모임만들기 버튼으로 모임 생성
   int add(Group group) throws Exception;
-
-  
-  Group get(int groupNo) throws Exception;
 
   // 모임관리에서 모임정보업데이트시 사용할 서비스
   int update(Group group) throws Exception;

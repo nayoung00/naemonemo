@@ -51,4 +51,16 @@ public class GroupServiceImpl implements GroupService {
   public int addGrMember(GroupMember grMember) throws Exception {
     return groupDao.insertGrMember(grMember);
   }
+
+  // 추천 모임 리스트
+  @Override
+  public List<Group> listByRec() throws Exception {
+    return groupDao.listByRec();
+  }
+
+  // 신규 모임 리스트
+  @Override
+  public List<Group> listByCd() throws Exception {
+    return groupDao.listByCd();
+  }
 }

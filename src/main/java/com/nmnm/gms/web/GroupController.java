@@ -46,7 +46,7 @@ public class GroupController {
     }
 
     if (groupService.add(group) > 0) {
-      return "redirect:list";
+      return "redirect:list"; // 모임 홈으로 가게
     } else {
       throw new Exception("그룹을 추가할 수 없습니다.");
     }
@@ -94,4 +94,17 @@ public class GroupController {
       throw new Exception("변경할 그룹 번호가 유효하지 않습니다.");
     }
   }
+  
+  // 추천 모임 리스트
+  @GetMapping("listByRec")
+  public void listByRec(Model model) throws Exception {
+    model.addAttribute("listByRec", groupService.listByRec());
+  }
+  
+  // 신규 모임 리스트
+  @GetMapping("listByCd")
+  public void listByCd(Model model) throws Exception {
+    model.addAttribute("listByCd", groupService.listByCd());
+  }
+  
 }

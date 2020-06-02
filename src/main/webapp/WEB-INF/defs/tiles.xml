@@ -4,14 +4,14 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
        
 <tiles-definitions>
-  <!-- 모임내 사이드바 있는 곳에서 에서 공통으로 사용할 레이아웃을 정의한다. -->
+  <!-- 모임 내 사이드바 있는 곳에서 에서 공통으로 사용할 레이아웃을 정의한다. -->
   <definition name="base" template="/WEB-INF/tiles/template.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
     <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
   </definition>
   
-    <definition name="plan" template="/WEB-INF/tiles/plan/template2.jsp">
+  <definition name="plan" template="/WEB-INF/tiles/plan/template2.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
     <put-attribute name="header" value="/WEB-INF/tiles/plan/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/tiles/plan/footer.jsp" />
@@ -38,14 +38,15 @@
     <put-attribute name="footer" value="/WEB-INF/tiles/plan/formFooter.jsp" />
   </definition>  
   
+  
+  
   <!-- 네모메인 / 사이드바없는 곳에서 공통으로 사용할 레이아웃을 정의한다. -->
   <definition name="noside" template="/WEB-INF/tiles/template2.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
     <put-attribute name="top" value="/WEB-INF/tiles/top.jsp" />
     <put-attribute name="bottom" value="/WEB-INF/tiles/bottom.jsp" />
   </definition>
-  
-  
+    
   <!-- request handler가 리턴한 JSP의 경로가 'auth/*', 'co/*', 'group/*' 일 경우
        TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다.  -->
   <definition name="auth/*" extends="noside">
@@ -66,7 +67,7 @@
     <put-attribute name="body" value="/WEB-INF/views/plan/calendar.jsp" />
   </definition>
   
-    <definition name="plan/form" extends="planForm">
+  <definition name="plan/form" extends="planForm">
     <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" />
     <put-attribute name="body" value="/WEB-INF/views/plan/form.jsp" />
   </definition>
@@ -79,8 +80,7 @@
   
   <!-- request handler가 리턴한 JSP의 경로가 'board/*' 일 경우
        TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다.  -->
-
-    <definition name="*/*" extends="base">
+  <definition name="*/*" extends="base">
     <put-attribute name="side" value="/WEB-INF/views/{1}/side.jsp" />
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>

@@ -117,7 +117,7 @@ function readURL(input) {
         <td>${group.groupInterest}</td>
     </tr>
 </table>
-<span class='group_region'>지역: <input type='text' style='width:550px;' id='address' value='${group.city}'></span>
+<span class='group_region'>장소 or url: <input type='text' style='width:550px;' id='address' value='${group.city}'></span>
 <div id="map" style="width:300px;height:200px;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72ccb0849c4c5a8e44c4774f8f03594c&libraries=services"></script>
 <script>

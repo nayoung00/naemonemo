@@ -33,6 +33,4 @@ public interface GroupService {
   // 모임검색
   List<Group> search(String keyword) throws Exception;
 
-  // 그룹회원 추가
-  int addGrMember(GroupMember grMember) throws Exception;
 }

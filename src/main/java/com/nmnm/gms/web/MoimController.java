@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.nmnm.gms.service.GroupService;
 
 @Controller
@@ -29,7 +30,7 @@ public class MoimController {
   
   
   @GetMapping("home")
-  public void home(Model model, int groupNo) throws Exception {
+  public void home(Model model, @RequestParam("groupNo") int groupNo) throws Exception {
     model.addAttribute("group", groupService.get(groupNo));
   }
 

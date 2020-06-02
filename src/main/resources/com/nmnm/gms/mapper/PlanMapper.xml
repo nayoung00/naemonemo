@@ -10,6 +10,8 @@
     <result column="group_no" property="groupNo"/>
     <result column="member_no" property="memberNo"/>
     <result column="start_date" property="startDate"/>
+    <result column="category" property="category"/>
+    <result column="back_color" property="backgroundColor"/>
     <result column="end_date" property="endDate"/>
     <result column="start_hour" property="startHour"/>
     <result column="end_hour" property="endHour"/>
@@ -35,6 +37,7 @@
     start_date, 
     end_date, 
     title, 
+    category,
     thumbnail,
     content,
     address, 
@@ -46,6 +49,7 @@
       #{startDate},
       #{endDate},
       #{title},
+      #{category},
       #{thumbnail},
       #{content},
       #{address},
@@ -54,7 +58,7 @@
 </insert>
 
 <!-- 보류 -->
-<!-- <insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
+  <insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
     insert into nm_plan_member(
     plan_no,
     group_no,
@@ -66,7 +70,7 @@
     #{memberNo},
     #{attend}
     )
-</insert> -->
+</insert>
 
    <select id="findAll" resultMap="PlanMap">
     select
@@ -81,17 +85,16 @@
    
     <select id="findByNo" resultMap="PlanMap" parameterType="int">
     select 
+    group_no,
       plan_no,
+      member_no,
       DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
       DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
       title,
       content,
       thumbnail,
-      DATE_FORMAT(start_date, '%H:%i') start_hour,
-      DATE_FORMAT(end_date, '%H:%i') end_hour,
+      category,
       address,
-      latitude,
-      longitude,
       create_date
     from 
       nm_plan
@@ -107,6 +110,7 @@
       DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
       DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
       p.title,
+      p.category,
       p.content,
       p.thumbnail,
       DATE_FORMAT(start_date, '%H:%i') start_hour,
@@ -115,6 +119,7 @@
       p.latitude,
       p.longitude,
       p.create_date,
+      p.back_color,
       m.member_name memberName
     from 
       nm_plan p join nm_member m

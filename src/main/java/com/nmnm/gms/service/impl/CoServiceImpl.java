@@ -17,7 +17,7 @@ import com.nmnm.gms.util.FileUtils;
 @Component
 public class CoServiceImpl implements CoService {
 
-//  @Resource(name="fileUtils")
+  //  @Resource(name="fileUtils")
   private FileUtils fileUtils;
 
   TransactionTemplate transactionTemplate;

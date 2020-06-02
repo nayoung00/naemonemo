@@ -8,7 +8,9 @@
   <resultMap type="Group" id="GroupMap">
     <id column="group_no"  property="groupNo"/>
     <result column="group_name" property="groupName"/>
-    <result column="member_no" property="groupAdmin"/>
+    
+
+    
     <result column="group_info" property="groupInfo"/> 
     <result column="group_form" property="groupForm"/> 
     <result column="group_interest" property="groupInterest"/> 
@@ -17,13 +19,11 @@
     <result column="max_people_no" property="maxPeopleNo"/>
     <result column="create_date" property="createDate"/>
     
-    
   </resultMap>
   
   <insert id="insert" parameterType="Group">
     insert into nm_group(
     group_name,
-    member_no,
     group_info,
     group_form,
     group_interest,
@@ -31,7 +31,6 @@
     city
     ) values(
       #{groupName},
-      #{groupAdmin},
       #{groupInfo},
       #{groupForm},
       #{groupInterest},

@@ -3,7 +3,7 @@
     trimDirectiveWhitespaces="true"%>
 
 
-<h1 style='text-align:center'> 일정 등록하기</h1>
+<h1 style='text-align:center'>${plan.title}</h1>
 
         <div class="content">
             <div class="container-fluid">
@@ -14,14 +14,11 @@
                                 <h4 class="title">일정 작성</h4>
                             </div>
                             <div class="content">
-                               <form action='add' method='post' enctype='multipart/form-data'>
-                               <input type="hidden" name="groupNo" value="${param.groupNo}" />
-                               <input type="hidden" name="memberNo" value="${loginUser.memberNo}" />
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>제목</label>
-                                                <input type="text" name="title" class="form-control" placeholder="title">
+                                                <p class="form-control">${plan.title}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -30,13 +27,13 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>시작일</label>
-                                                <input type="datetime-local" name="startDate" class="form-control" placeholder="startDate" required="required">
+                                                <p  class="form-control">${plan.startDate}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <label>종료일(기재 안할시 시작일이 종료일)</label>
-                                                <input type="datetime-local" name="endDate" class="form-control" placeholder="endDate">
+                                                <label>종료일</label>
+                                                <p class="form-control" >${plan.endDate}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -45,58 +42,27 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>주소</label>
-                                                <input type="text" name="address" class="form-control" placeholder="address">
+                                                <p class="form-control">${plan.address}</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>사진</label>
-                                                <input type="file" name="thumbnailFile" id="thumbnail" class="form-control" placeholder="이미지" onchange="readURL(this);"
-                                    required="required" aria-required="true">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>상세 계획</label>
-                                                <textarea rows="5" name="content" class="form-control" placeholder="작성해주십시오."></textarea>
+                                                <p style="height : 130px; overflow-y: scroll" class="form-control" >${plan.content}</p>
                                             </div>
                                         </div>
                                     </div>
                         <div class="row">
-                            <div class="col-md-5">
-                                <label class="col-md-4" for="category">구분</label>
-                                <select class="inputModal" type="text" name="category" id="edit-category">
-                                    <option value="중요">중요</option>
-                                    <option value="필수">필수</option>
-                                    <option value="선택">선택</option>
-                                </select>
+                            <div class="col-md-3">
+                                <label for="category">구분</label>
+                                <p id="category" class="form-control">${plan.category}</p>
                             </div>
                         </div>                                    
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="col-md-4" for="edit-color">색상</label>
-                                <select class="inputModal" name="backgroundColor" id="edit-color">
-                                    <option value="#D25565" style="color:#D25565;">빨간색</option>
-                                    <option value="#9775fa" style="color:#9775fa;">보라색</option>
-                                    <option value="#ffa94d" style="color:#ffa94d;">주황색</option>
-                                    <option value="#74c0fc" style="color:#74c0fc;">파란색</option>
-                                    <option value="#f06595" style="color:#f06595;">핑크색</option>
-                                    <option value="#63e6be" style="color:#63e6be;">연두색</option>
-                                    <option value="#a9e34b" style="color:#a9e34b;">초록색</option>
-                                    <option value="#4d638c" style="color:#4d638c;">남색</option>
-                                    <option value="#495057" style="color:#495057;">검정색</option>
-                                </select>
-                            </div>
-                        </div>
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">등록하기</button>
+                                    <button type="submit"  class="btn btn-info btn-fill pull-right">등록하기</button>
                                     <div class="clearfix"></div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -108,8 +74,7 @@
                             <div class="content">
                                 <div class="author">
                                      <a href="#">
-                                    <img class="avatar border-gray" id="blah" src="#" alt="..."/>
-
+                                    <img class="avatar border-gray" id="blah" src="${pageContext.servletContext.contextPath}/upload/plan/${plan.thumbnail}" alt="..."/>
                                       <h4 class="title">Mike Andrew<br />
                                          <small>michael24</small>
                                       </h4>
@@ -132,6 +97,6 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal">
   Launch demo modal
 </button>

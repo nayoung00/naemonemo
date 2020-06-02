@@ -37,7 +37,7 @@ public class PlanController {
   }
 
 
-  @PostMapping("form")
+  @GetMapping("form")
   public void form() {
     System.out.println("form 호출==================================================");
   }
@@ -74,10 +74,23 @@ public class PlanController {
       thumbnailFile.transferTo(new File(dirPath + "/" + filename));
       plan.setThumbnail(filename);
     }
+    System.out.println("startDate: " + plan.getStartDate());
+    System.out.println("endDate: " + plan.getEndDate());
     String[] startHour = plan.getStartDate().split("T");
-    String[] endHour = plan.getEndDate().split("T");
+    System.out.println("0: " + startHour[0] + "  1:" + startHour[1]);
+    System.out.println(Integer.parseInt(startHour[1].split(":")[0]));
+    if (plan.getEndDate().equals(""))
+    { plan.setEndDate(plan.getStartDate());
+    String eHour = startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1) );
+    plan.setEndHour(eHour);
+    System.out.println("0: " + eHour);
+    } else {
+      String[] endHour = plan.getEndDate().split("T");
+      plan.setEndHour(endHour[0]);
+    }
     plan.setStartHour(startHour[1]);
-    plan.setEndHour(endHour[1]);
+    plan.setEndHour(plan.getStartHour());
+    System.out.println(plan.getCategory());
     if (planService.add(plan) > 0) {
       return "redirect:list" + "?groupNo=" + plan.getGroupNo();
     } else {
@@ -96,7 +109,10 @@ public class PlanController {
 
   @GetMapping("detail")
   public void detail(int planNo, Model model) throws Exception {
-    model.addAttribute("plan", planService.get(planNo));
+    Plan plan = planService.get(planNo);
+    model.addAttribute("plan", plan);
+    System.out.println(plan.getStartDate());
+    System.out.println(plan.getCategory());
   }
 
   @GetMapping("list")

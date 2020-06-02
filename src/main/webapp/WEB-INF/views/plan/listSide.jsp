@@ -18,12 +18,6 @@
                         <p>캘린더</p>
                     </a>
                 </li>
-                <li>
-                    <a href="list?groupNo=${plan.groupNo}">
-                        <i class="pe-7s-#"></i>
-                        <p>일정게시판</p>
-                    </a>
-                </li>
             </ul>
       </div>
     </div>

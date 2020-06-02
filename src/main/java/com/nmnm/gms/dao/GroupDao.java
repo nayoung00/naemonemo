@@ -25,6 +25,9 @@ public interface GroupDao {
 
   int insertGrMember(GroupMember grMember) throws Exception; // 그룹 가입신청
   
+  // 멤버가 가입한 모임 리스트 - 배열 0번 그룹부터 추출 
+  List<Group> listByJoin() throws Exception;
+  
   // 추천 모임 리스트 - 배열 0번 그룹 부터 추출 / mapper에서 로그인한 멤버의 interest스트링 검색 sql로 조건설정
   List<Group> listByRec() throws Exception;
   

@@ -2,7 +2,6 @@ package com.nmnm.gms.service.impl;
 
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,7 +17,7 @@ import com.nmnm.gms.util.FileUtils;
 @Component
 public class CoServiceImpl implements CoService {
 
-  @Resource(name="fileUtils")
+//  @Resource(name="fileUtils")
   private FileUtils fileUtils;
 
   TransactionTemplate transactionTemplate;

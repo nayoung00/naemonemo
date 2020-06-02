@@ -12,7 +12,9 @@ public interface GroupAccountService {
 
   GroupAccount get(int groupNo) throws Exception;
 
-  void update(GroupAccount groupAccount) throws Exception;
+//  void update(GroupAccount groupAccount) throws Exception;
+
+  int update(GroupAccount groupNo) throws Exception;
 
   List<GroupAccount> search(String keyword) throws Exception;
 

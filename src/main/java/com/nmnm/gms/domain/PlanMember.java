@@ -2,6 +2,10 @@ package com.nmnm.gms.domain;
 
 public class PlanMember {
 
+  public PlanMember() {
+    setAttend("불참");
+  }
+
   private int planNo; // nm_plan PK/ PK NN
   private int memberNo; // nm_meeting_member PK/ PK NN
   private int groupNo; // nm_meeting_member PK/ PK NN

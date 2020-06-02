@@ -13,96 +13,70 @@ public class Group {
   private String city; // 모임 지역
   private int maxPeopleNo; // 모임 최대인원
   private Date createDate; // 모임 생성일
-  private int groupAdmin;
-
+  
+  
+  
   @Override
   public String toString() {
     return "Group [groupNo=" + groupNo + ", groupName=" + groupName + ", groupInfo=" + groupInfo
         + ", groupForm=" + groupForm + ", groupInterest=" + groupInterest + ", groupPhoto="
         + groupPhoto + ", city=" + city + ", maxPeopleNo=" + maxPeopleNo + ", createDate="
-        + createDate + ", groupAdmin=" + groupAdmin + "]";
+        + createDate + "]";
   }
-
   public int getGroupNo() {
     return groupNo;
   }
-
   public void setGroupNo(int groupNo) {
     this.groupNo = groupNo;
   }
-
   public String getGroupName() {
     return groupName;
   }
-
   public void setGroupName(String groupName) {
     this.groupName = groupName;
   }
-
   public String getGroupInfo() {
     return groupInfo;
   }
-
   public void setGroupInfo(String groupInfo) {
     this.groupInfo = groupInfo;
   }
-
   public String getGroupForm() {
     return groupForm;
   }
-
   public void setGroupForm(String groupForm) {
     this.groupForm = groupForm;
   }
-
   public String getGroupInterest() {
     return groupInterest;
   }
-
   public void setGroupInterest(String groupInterest) {
     this.groupInterest = groupInterest;
   }
-
   public String getGroupPhoto() {
     return groupPhoto;
   }
-
   public void setGroupPhoto(String groupPhoto) {
     this.groupPhoto = groupPhoto;
   }
-
   public String getCity() {
     return city;
   }
-
   public void setCity(String city) {
     this.city = city;
   }
-
   public int getMaxPeopleNo() {
     return maxPeopleNo;
   }
-
   public void setMaxPeopleNo(int maxPeopleNo) {
     this.maxPeopleNo = maxPeopleNo;
   }
-
   public Date getCreateDate() {
     return createDate;
   }
-
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
 
-  public int getGroupAdmin() {
-    return groupAdmin;
-  }
-
-  public void setGroupAdmin(int groupAdmin) {
-    this.groupAdmin = groupAdmin;
-  }
-
-
-
+  
 }

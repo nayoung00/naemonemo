@@ -1,12 +1,11 @@
 package com.nmnm.gms.service;
 
 import java.util.List;
-import com.nmnm.gms.domain.Group;
 import com.nmnm.gms.domain.GroupMember;
 
 public interface GroupMemberService {
 
-  List<Group> list() throws Exception;
+  List<GroupMember> list() throws Exception;
   
   int delete(int memberNo) throws Exception;
 
@@ -19,5 +18,5 @@ public interface GroupMemberService {
   int update(GroupMember groupMember) throws Exception;
 
   
-  List<Group> search(String keyword) throws Exception;
+  List<GroupMember> search(String keyword) throws Exception;
 }

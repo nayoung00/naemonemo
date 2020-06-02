@@ -26,12 +26,6 @@
                         <p>회원관리</p>
                     </a>
                 </li>
-                <li>
-                    <a href="accountadmin" class="simple-text">
-                        <i class="pe-7s-graph"></i>
-                        <p>회계관리</p>
-                    </a>
-                </li>
                 <li> 
                     <a href="boardadmin" class="simple-text">
                         <i class="pe-7s-note"></i>

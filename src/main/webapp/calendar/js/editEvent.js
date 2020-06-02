@@ -70,6 +70,7 @@ var editEvent = function (event, element, view) {
 
         event.allDay = statusAllDay;
         event.title = editTitle.val();
+        console.log("event.title: " + event.title);
         event.start = startDate;
         event.end = displayDate;
         event.type = editType.val();

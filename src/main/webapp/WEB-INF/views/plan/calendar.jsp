@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="container">
         <!-- 일자 클릭시 메뉴오픈 -->
         <div id="contextMenu" class="dropdown clearfix">
@@ -9,7 +9,6 @@
                 <li><a tabindex="-1" href="#">중요</a></li>
                 <li><a tabindex="-1" href="#">필수</a></li>
                 <li><a tabindex="-1" href="#">선택</a></li>
-                <li><a tabindex="-1" href="#">${calendar.title}</a></li>
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
@@ -31,6 +30,19 @@
                         <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
+                                            <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-allDay">하루종일</label>
+                                <input class='allDayNewEvent' id="edit-allDay" type="checkbox"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="memberName">작성자</label>
+                                <input class="inputModal" type="text" name="memberName" id="edit-memberName"
+                                    required="required" />
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="title">일정명</label>
@@ -38,11 +50,18 @@
                                     required="required" />
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="address">주소</label>
+                                <input class="inputModal" type="text" name="address" id="edit-address"
+                                    required="required" />
+                            </div>
+                        </div>
                     <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="title">썸네일</label>
-                                <input class="inputModal" type="text" name="thumbnailFile" id="edit-thumbnail"
-                                    required="required" value="${calendar.thumbnail}" />
+                                <label class="col-xs-4" for="thumbnailFile">썸네일</label>
+                                <input class="inputModal" type="file" name="thumbnailFile" id="edit-thumbnail"
+                                    required="required"/>
                             </div>
                         </div>                   
                         <div class="row">
@@ -59,8 +78,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-type">구분</label>
-                                <select class="inputModal" type="text" name="edit-type" id="edit-type">
+                                <label class="col-xs-4" for="category">구분</label>
+                                <select class="inputModal" type="text" name="category" id="edit-category">
                                     <option value="중요">중요</option>
                                     <option value="필수">필수</option>
                                     <option value="선택">선택</option>
@@ -85,9 +104,9 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <label class="col-xs-4" for="edit-desc">설명</label>
-                                <textarea rows="4" cols="50" class="inputModal" name="edit-desc"
-                                    id="edit-desc"></textarea>
+                                <label class="col-xs-4" for="content">설명</label>
+                                <textarea rows="4" cols="50" class="inputModal" name="content"
+                                    id="edit-content"></textarea>
                             </div>
                         </div>
                     </div>
@@ -127,16 +146,10 @@
                 <div class="col-lg-6">
                     <label for="calendar_view">등록자별</label>
                     <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="정연"
-                                checked>정연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="다현"
-                                checked>다현</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="사나"
-                                checked>사나</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="나연"
-                                checked>나연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="지효"
-                                checked>지효</label>
+                    <c:forEach items="${planList}" var="item">
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="${item.memberName}"
+                                checked>${item.memberName}</label>
+                    </c:forEach>
                     </div>
                 </div>
 

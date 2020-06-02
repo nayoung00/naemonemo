@@ -101,21 +101,24 @@
   
       <select id="findByCalendar" resultMap="PlanMap">
     select 
-      plan_no,
+      p.plan_no,
+      p.group_no,
+      p.member_no,
       DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
       DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
-      title,
-      content,
-      thumbnail,
+      p.title,
+      p.content,
+      p.thumbnail,
       DATE_FORMAT(start_date, '%H:%i') start_hour,
       DATE_FORMAT(end_date, '%H:%i') end_hour,
-      address,
-      latitude,
-      longitude,
-      create_date
+      p.address,
+      p.latitude,
+      p.longitude,
+      p.create_date,
+      m.member_name memberName
     from 
-      nm_plan
-     where group_no=#{groupNo}
+      nm_plan p join nm_member m
+     where p.group_no=#{groupNo} and m.member_no=p.member_no
       order by plan_no desc
   </select>
    

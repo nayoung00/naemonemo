@@ -16,6 +16,8 @@
     <result column="city" property="city"/>
     <result column="max_people_no" property="maxPeopleNo"/>
     <result column="create_date" property="createDate"/>
+    
+    
   </resultMap>
   
   <insert id="insert" parameterType="Group">
@@ -116,6 +118,8 @@
       group_no,
       group_name,
       group_form,
+      group_interest,
+      
       city
         from nm_group
         where
@@ -125,4 +129,27 @@
             or city  like #{keywordPattern}
     </select>
     
+  <!-- 추천모임 리스트 -->
+  <select id="listByRec" resultMap="GroupMap" parameterType="string">
+		SELECT g.group_no, g.group_name, g.group_photo, g.group_interest
+		 FROM nm_group g
+		WHERE g.group_interest
+		 IN 
+		(SELECT m.interest FROM nm_member m)
+  </select>
+  
+  <!-- 신규모임 리스트 -->
+  <select id="listByCd" resultMap="GroupMap">
+    select
+      group_photo,
+      group_no,
+      group_name,
+      group_form,
+      city,
+      group_interest
+    from 
+      nm_group
+    order by
+      create_date desc
+  </select>
 </mapper>

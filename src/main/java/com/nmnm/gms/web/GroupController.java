@@ -31,13 +31,24 @@ public class GroupController {
   @GetMapping("form")
   public void form() {}
 
-  @GetMapping("register")
-  public void register() {}
 
   @PostMapping("add")
   public String add( //
-      Group group, //
+      String groupName, //
+      String groupInfo, //
+      String groupForm, //
+      String groupInterest,
+      String city,
       MultipartFile photoFile) throws Exception {
+    
+    Group group = new Group();
+    
+    group.setGroupName(groupName);
+    group.setGroupInfo(groupInfo);
+    group.setGroupForm(groupForm);
+    group.setGroupInterest(groupInterest);
+    group.setCity(city);
+    
     if (photoFile.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/group");
       String filename = UUID.randomUUID().toString();
@@ -45,11 +56,10 @@ public class GroupController {
       group.setGroupPhoto(filename);
     }
 
-    if (groupService.add(group) > 0) {
-      return "redirect:list"; // 모임 홈으로 가게
-    } else {
-      throw new Exception("그룹을 추가할 수 없습니다.");
-    }
+    groupService.add(group);
+    System.out.println("group 추가가 되었다.");
+    
+        return "redirect:http://localhost:9999/nmnm/app/moim/home?groupNo="+ group.getGroupNo(); // 모임 홈으로 가게
   }
 
   @GetMapping("delete")

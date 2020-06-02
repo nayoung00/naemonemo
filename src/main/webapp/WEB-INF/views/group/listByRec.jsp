@@ -18,17 +18,17 @@
     <th>이름</th>
     <th>모임소개</th>
     <th>오프라인/온라인</th>
-    <th>장소?</th>
+    <th>카테고리?</th>
     <th>사진</th>
   </tr>
   
 <c:forEach items="${listByRec}" var="item">
   <tr>
     <td>${item.groupNo}</td> 
-    <td><a href='detail(groupHome)?groupNo=${item.groupNo}'> ${item.groupName}</a></td> 
+    <td><a href='${pageContext.servletContext.contextPath}/app/moim/home?groupNo=${item.groupNo}'> ${item.groupName}</a></td> 
     <td>${item.groupInfo}</td>
     <td>${item.groupForm}</td> 
-    <td>${item.city}</td> 
+    <td>${item.groupInterest}</td> 
     <td><img src="../../upload/group/${item.groupPhoto.filepath}" width='240'></td>
   </tr>
 </c:forEach>

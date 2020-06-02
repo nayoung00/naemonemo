@@ -1,6 +1,7 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,12 @@ public class GroupController {
   // 추천 모임 리스트
   @GetMapping("listByRec")
   public void listByRec(Model model) throws Exception {
-    model.addAttribute("listByRec", groupService.listByRec());
+    System.out.println("listByRec :: Test");
+    List<Group> list = groupService.listByRec();
+    for(Group g : list) {
+      System.out.println(g);
+    }
+    model.addAttribute("listByRec", list);
   }
   
   // 신규 모임 리스트

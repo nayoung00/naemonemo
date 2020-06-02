@@ -30,7 +30,7 @@
     <td>${item.groupInfo}</td>
     <td>${item.groupForm}</td> 
     <td>${item.groupInterest}</td> 
-    <td><img src="../../upload/group/${item.groupPhoto.filepath}" width='240'></td>
+    <td><img src="../../upload/group/${item.groupPhoto}" width='240'></td>
   </tr>
 </c:forEach>
 </table>

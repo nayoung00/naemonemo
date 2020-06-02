@@ -24,8 +24,8 @@ public class GroupController {
   GroupService groupService;
 
   @GetMapping("updateForm")
-  public void updateForm(int no, Model model) throws Exception {
-    model.addAttribute("group", groupService.get(no));
+  public void updateForm(int groupNo, Model model) throws Exception {
+    model.addAttribute("group", groupService.get(groupNo));
   }
 
   @GetMapping("form")
@@ -53,8 +53,8 @@ public class GroupController {
   }
 
   @GetMapping("delete")
-  public String delete(int no) throws Exception {
-    if (groupService.delete(no) > 0) { // 삭제했다면,
+  public String delete(int groupNo) throws Exception {
+    if (groupService.delete(groupNo) > 0) { // 삭제했다면,
       return "redirect:list";
     } else {
       throw new Exception("삭제할 그룹 번호가 유효하지 않습니다.");
@@ -62,8 +62,8 @@ public class GroupController {
   }
 
   @GetMapping("detail")
-  public void detail(int no, Model model) throws Exception {
-    model.addAttribute("group", groupService.get(no));
+  public void detail(int groupNo, Model model) throws Exception {
+    model.addAttribute("group", groupService.get(groupNo));
   }
 
   @GetMapping("list")

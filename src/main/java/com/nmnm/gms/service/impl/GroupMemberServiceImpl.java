@@ -2,70 +2,46 @@ package com.nmnm.gms.service.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
-import com.nmnm.gms.dao.GroupDao;
-import com.nmnm.gms.domain.Group;
+import com.nmnm.gms.dao.GroupMemberDao;
 import com.nmnm.gms.domain.GroupMember;
-import com.nmnm.gms.service.GroupService;
+import com.nmnm.gms.service.GroupMemberService;
 
 @Component
-public class GroupServiceImpl implements GroupService {
+public class GroupMemberServiceImpl implements GroupMemberService {
 
-  GroupDao groupDao;
+  GroupMemberDao groupMemberDao;
 
-  public GroupServiceImpl(GroupDao groupDao) {
-    this.groupDao = groupDao;
-  }
+	@Override
+	public List<GroupMember> list() throws Exception {
+		return groupMemberDao.findAll();
+	}
 
-  @Override
-  public List<Group> list() throws Exception {
-    return groupDao.findAll();
-  }
+	@Override
+	public int delete(int memberNo) throws Exception {
+		return groupMemberDao.delete(memberNo);
+	}
 
-  @Override
-  public int delete(int no) throws Exception {
-    return groupDao.delete(no);
-  }
+	@Override
+	public int add(GroupMember groupMember) throws Exception {	
+		return groupMemberDao.insert(groupMember);
+	}
 
-  @Override
-  public int add(Group group) throws Exception {
-    return groupDao.insert(group);
-  }
+	@Override
+	public GroupMember get(int memberNo) throws Exception {
+		return groupMemberDao.findByNo(memberNo);
+	}
 
-  @Override
-  public Group get(int groupNo) throws Exception {
-    return groupDao.findByNo(groupNo);
-  }
+	@Override
+	public int update(GroupMember groupMember) throws Exception {
+		return groupMemberDao.update(groupMember);
+	}
 
-
-  @Override
-  public int update(Group group) throws Exception {
-    return groupDao.update(group);
-  }
-
-  @Override
-  public List<Group> search(String keyword) throws Exception {
-    return groupDao.findByKeyword(keyword);
-  }
-
-  @Override
-  public int addGrMember(GroupMember grMember) throws Exception {
-    return groupDao.insertGrMember(grMember);
-  }
-
-  // 추천 모임 리스트
-  @Override
-  public List<Group> listByRec() throws Exception {
-    return groupDao.listByRec();
-  }
-
-  // 신규 모임 리스트
-  @Override
-  public List<Group> listByCd() throws Exception {
-    return groupDao.listByCd();
-  }
-
-  @Override
-  public Group home(int groupNo) throws Exception {
-    return groupDao.home(groupNo);
+	@Override
+	public List<GroupMember> search(String keyword) throws Exception {
+		return groupMemberDao.findByKeyword(keyword);
+	}
+  
+  public GroupMemberServiceImpl(GroupMemberDao groupMemberDao) {
+    this.groupMemberDao = groupMemberDao;
   }
 }

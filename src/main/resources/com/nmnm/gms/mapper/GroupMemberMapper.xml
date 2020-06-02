@@ -2,87 +2,86 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.nmnm.gms.dao.GroupMemberDao">
 
-  <resultMap type="GroupMember" id="GroupMemberMap">
-    <id column="group_no"    property="groupNo"/>
-    <result column="member_no"   property="memberNo"/>
-    <result column="grade_no"  property="gradeNo"/>
-    <result column="register" property="register"/>
+		<resultMap type="GroupMember" id="GroupMemberMap">
+				<id column="group_no" property="groupNo" />
+				<result column="member_no" property="memberNo" />
+				<result column="grade_no" property="gradeNo" />
+				<result column="register" property="register" />
+				<result column="id_photo" property="photo"/> 
+				<result column="birthday" property="birthday"/> 
+				<result column="member_name" property="name"/> 
+				<result column="nickname" property="nickname"/> 
+		</resultMap>
 
+		<sql id="select1">
+				SELECT
+				  g.group_no,
+				  m.member_no,
+				  gm.register,
+				  gm.grade_no,
+
+				  m.id_photo,
+				  m.birthday,
+				  m.member_name,
+				  m.nickname
+
+				FROM
+				  (nm_member AS m LEFT JOIN nm_group_member AS gm
+				  ON m.member_no=gm.member_no)
+				  LEFT JOIN nm_group AS g ON g.group_no=gm.group_no
+		</sql>
+
+
+		<select id="findAll" resultMap="GroupMemberMap">
+				<include refid="select1" />
+				WHERE
+          gm.group_no=${group.groupNo}
+		</select>
+
+
+    <!-- 
+    insert는 member, group 테이블에서 각각 값을 가져와서
+    register, grade_no를 부여하는 형식
+     -->
+		<insert id="insert" parameterType="GroupMember">
     
-    
-  </resultMap>
-  
-   <sql id="select1">
-    SELECT 
-      ga.bank_info_id, 
-      g.group_no, 
-      ga.bank_account_no, 
-      ga.bank_name, 
-      ga.bank_account_holder
-      
-    FROM 
-      nm_group_account AS ga LEFT JOIN nm_group AS g ON ga.group_no=g.group_no
-  </sql>
-  
-  
-  <select id="findAll" resultMap="GroupAccountMap">
-   <include refid="select1"/>
-   order by
-    bank_info_id desc
-  </select>
-  
-  
-   <insert id="insert" parameterType="GroupAccount">
-    insert into nm_group_account(
-      bank_info_id, 
-      group_no, 
-      bank_account_no, 
-      bank_name, 
-      bank_account_holder) 
-    values(
-      #{bankInfoId}, 
-      #{groupNo}, 
-      #{bankAccountNo}, 
-      #{bankName}, 
-      #{bankAccountHolder})
-  </insert>
-  
- 
-  
-  <select id="findByNo" resultMap="GroupAccountMap" parameterType="int">
-    <include refid="select1"/>
-    where 
-      bank_info_id=#{bankInfoId}
-  </select>
-  
-  <update id="update" parameterType="GroupAccount">
-    UPDATE nm_group_account SET
-      bank_info_id=#{bankInfoId}, 
-      group_no=#{groupNo}, 
-      bank_account_no=#{bankAccountNo}, 
-      bank_name=#{bankName}, 
-      bank_account_holder=#{bankAccountHolder}
-      
-    WHERE 
-      bank_info_id=#{bankInfoId}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from nm_group_account
-    where bank_info_id=#{bankInfoId}
-  </delete>
-  
-  <select id="findByKeyword" 
-    resultMap="GroupAccountMap" 
-    parameterType="string">
-    <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
-  <include refid="select1"/>
-    where     
-      bank_info_id like #{keywordPattern} 
-      or bank_account_no like #{keywordPattern} 
-  </select>
-  
+		</insert>
+
+
+
+		<select id="findByNo" resultMap="GroupMemberMap"
+				parameterType="int">
+				<include refid="select1" />
+				WHERE
+				  gm.group_no=${group.groupNo}
+				AND
+				  m.member_no=#{member.memberNo}
+		</select>
+<!-- 
+		<update id="update" parameterType="GroupAccount">
+				UPDATE nm_group_member SET
+				  register=#{register},
+				  grade_no=#{gradeNo}
+				WHERE
+				  member_no=#{memberNo}
+		</update>
+
+		<delete id="delete" parameterType="int">
+				delete from nm_group_account
+				where bank_info_id=#{bankInfoId}
+		</delete>
+
+		<select id="findByKeyword" resultMap="GroupAccountMap"
+				parameterType="string">
+				<bind name="keywordPattern" value="'%' + _parameter + '%'" />
+				<include refid="select1" />
+				where
+				bank_info_id like #{keywordPattern}
+				or bank_account_no like #{keywordPattern}
+		</select>
+		 -->
+
 </mapper>

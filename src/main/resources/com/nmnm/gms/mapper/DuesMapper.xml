@@ -10,13 +10,15 @@
 		<result column="bank_info_id" property="bankInfoId" />
 		<result column="member_no" property="memberNo" />
 		<result column="entrance_fee" property="entranceFee" />
-		
+
 		<result column="bank_name" property="bankName" />
 		<result column="bank_account_no" property="bankAccountNo" />
 		<result column="group_name" property="groupName" />
 
 		<result column="dues_period" property="duesPeriod" />
 		<result column="dues" property="dues" />
+		
+		
 	</resultMap>
 
 	<select id="findAll" resultMap="DuesMap">

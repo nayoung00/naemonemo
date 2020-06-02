@@ -1,49 +1,72 @@
 package com.nmnm.gms.web;
 
+import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.nmnm.gms.domain.GroupMember;
-import com.nmnm.gms.service.GroupService;
-import com.nmnm.gms.service.MemberService;
+import com.nmnm.gms.service.GroupMemberService;
 
 @Controller
-@RequestMapping("/grmember")
+@RequestMapping("/groupmember")
 public class GroupMemberController {
 
-  @Autowired
-  MemberService memberService;
+  static Logger logger = LogManager.getLogger(GroupMemberController.class);
 
   @Autowired
-  GroupService groupService;
+  GroupMemberService groupMemberService;
 
-  @GetMapping("add")
-  public void add() throws Exception {
-    // return "redirect:add";
+  public GroupMemberController() {
+    logger.debug("GroupMemberController 생성됨!");
   }
 
-  @GetMapping("list")
-  public void list() throws Exception {}
+  @GetMapping("form")
+  public void form() throws Exception {}
 
-  @GetMapping("addgrmember")
-  public String addgrmember(GroupMember grMember) throws Exception {
-    if (grMember.getRegister() == 0) {
-      if (groupService.addGrMember(grMember) > 0) {
-        memberService.approvalGrMember(grMember);
-        return "redirect:../group/list";
-      } else {
-        return "redirect:../error";
-      }
+  @PostMapping("add")
+  public String add(GroupMember groupMember) throws Exception {
+    groupMemberService.add(groupMember);
+    return "redirect:list";
+  }
+
+  @GetMapping("delete")
+  public String delete(int memberNo) throws Exception {
+    if (groupMemberService.delete(memberNo) > 0) {
+      return "redirect:list";
     } else {
-      throw new Exception("이미 가입된 회원입니다.");
+      throw new Exception("삭제할 회원 데이터가 유효하지 않습니다.");
     }
   }
 
-  @GetMapping("search")
-  public void searchGrMember(int memberNo, Model model) throws Exception {
-    model.addAttribute("search", memberService.searchGrMember(memberNo));
-    // return "redirect:list";
+  @GetMapping("detail")
+  public void detail(int memberNo, Model model) throws Exception {
+  	GroupMember groupMember = groupMemberService.get(memberNo);
+    model.addAttribute("groupMember", groupMember);
+  }
+
+  @GetMapping("list")
+  public void list(Model model) throws Exception {
+    List<GroupMember> groupMembers= groupMemberService.list();
+    model.addAttribute("list", groupMembers);
+  }
+
+  @GetMapping("updateForm")
+  public void updateForm(int memberNo, Model model) throws Exception {
+    model.addAttribute("groupMember", groupMemberService.get(memberNo));
+  }
+
+  @PostMapping("update")
+  public String update(GroupMember groupMember) throws Exception {
+    if (groupMemberService.update(groupMember) > 0) {
+      return "redirect:list";
+    } else {
+      throw new Exception("변경할 회원 데이터가 유효하지 않습니다.");
+    }
   }
 }

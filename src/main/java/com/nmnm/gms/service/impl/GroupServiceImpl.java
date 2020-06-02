@@ -32,8 +32,8 @@ public class GroupServiceImpl implements GroupService {
   }
 
   @Override
-  public Group get(int no) throws Exception {
-    return groupDao.findByNo(no);
+  public Group get(int groupNo) throws Exception {
+    return groupDao.findByNo(groupNo);
   }
 
 
@@ -62,5 +62,10 @@ public class GroupServiceImpl implements GroupService {
   @Override
   public List<Group> listByCd() throws Exception {
     return groupDao.listByCd();
+  }
+
+  @Override
+  public Group home(int groupNo) throws Exception {
+    return groupDao.home(groupNo);
   }
 }

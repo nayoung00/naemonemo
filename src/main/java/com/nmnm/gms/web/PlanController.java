@@ -80,11 +80,13 @@ public class PlanController {
     String[] startHour = plan.getStartDate().split("T");
     System.out.println("0: " + startHour[0] + "  1:" + startHour[1]);
     System.out.println(Integer.parseInt(startHour[1].split(":")[0]));
-    if (plan.getEndDate().equals(""))
-    { plan.setEndDate(plan.getStartDate());
-    String eHour = startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1) );
-    plan.setEndHour(eHour);
-    System.out.println("0: " + eHour);
+    if (plan.getEndDate().equals("")) {
+      plan.setEndDate(plan.getStartDate());
+      String eHour =
+          startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),
+              String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1));
+      plan.setEndHour(eHour);
+      System.out.println("0: " + eHour);
     } else {
       String[] endHour = plan.getEndDate().split("T");
       plan.setEndHour(endHour[0]);
@@ -100,13 +102,26 @@ public class PlanController {
   }
 
   @GetMapping("apply")
-  public String apply(PlanMember planMember) throws Exception{
+  public String apply(PlanMember planMember) throws Exception {
     System.out.println(planMember.toString());
     if (planService.apply(planMember) > 0) {
       return "redirect:list?groupNo=" + planMember.getGroupNo();
     } else {
       throw new Exception("일정에 참여할 수 없습니다." + planMember.toString());
     }
+  }
+
+  @GetMapping(value = "find", produces = "application/json; charset=utf-8")
+  @ResponseBody
+  public String find(int planNo) throws Exception {
+    List<Plan> planMemberList = planService.find(planNo);
+    System.out.println(planMemberList);
+    System.out.println("attend: " + planMemberList.get(0).getPlanMember().get(1).getAttend());
+    System.out.println("attend: " + planMemberList.get(0).getPlanMember().get(0).getAttend());
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonString = mapper.writeValueAsString(planMemberList);
+    System.out.println(jsonString);
+    return jsonString;
   }
 
   @GetMapping("delete")

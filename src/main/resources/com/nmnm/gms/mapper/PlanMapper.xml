@@ -22,7 +22,7 @@
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
-    <collection property="planMember" ofType="PlanMember">
+     <collection property="planMember" ofType="PlanMember">
       <result column="plan_no"   property="planNo"/>
       <result column="group_no" property="groupNo"/>
       <result column="member_no" property="memberNo"/>
@@ -71,6 +71,22 @@
     #{attend}
     )
 </insert>
+
+    <select id="findPlanMember" resultMap="PlanMap" parameterType="int">
+      select 
+           p.plan_no,
+           pm.attend,
+           pm.group_no,
+           m.member_name,
+           m.member_no
+       from nm_member m
+       join nm_plan_member pm on
+      pm.member_no = m.member_no
+     join nm_plan p on
+     p.plan_no = #{planNo}
+     where pm.group_no = p.group_no
+    </select>
+
 
    <select id="findAll" resultMap="PlanMap">
     select

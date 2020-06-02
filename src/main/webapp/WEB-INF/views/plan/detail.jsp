@@ -98,6 +98,35 @@
                                      Launch demo modal
                           </button>
                   </div>
+                  <div class="col-md-4">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Striped Table with Hover</h4>
+                                <p class="category">Here is a subtitle for this table</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                      <th>ID</th>
+                                      <th>제목</th>
+                                      <th>생성일</th>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                    <c:forEach items="${list}" var="item">
+                                                            <td>${item.planNo}</td> 
+                                                            <td><a href='detail?planNo=${item.planNo}'> ${item.title}</a></td>
+                                                            <td>${item.createDate}</td>
+                                        </tr>
+                                    </c:forEach>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                  </div>                  
                 </div>
             </div>
         </div>

@@ -57,16 +57,17 @@
             data-minus-value-mobile="55"
             data-speed="1000"
           >
-                   <div class="container">
- <div class="attr-nav">
+             <div class="container">
+              <div class="attr-nav">
                 <ul>
                  <li class="profile">
-  <a href='app/auth/logout'>Logout</a>
-  <li>
-  <a href='app/member/mypage'>Mypage</a>
-</li>
-</ul>   
-</div>
+                 <a href='app/auth/logout'>Logout</a>
+                 <li>
+                 <a href='app/member/mypage'>Mypage</a>
+                 </li>
+                </ul>   
+              </div>
+              
               <!-- Start Header Navigation -->
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
@@ -103,32 +104,48 @@
     <!--/.Welcome-hero-->
     <!--Welcome-hero end -->
 
-    <!--썸네일 start -->
+
+    <!--본체 start -->
     <section id="blog" class="blog">
       <div class="container">
+          <br />
+          <br />
+          <br />
         <div class="section-header">
-          <br />
-          <br />
-          <h2>내가 가입한 모임 썸네일 이미지가 뜸</h2>
-          <br />
-          <div><p>검색 하시오</p><form action="app/group/search" method="GET">
-          <input type="text" name="keyword" placeholder="모임 이름" />
+          <div>
+          <p>모임 검색 하시오</p>
+          <form action="app/group/search" method="GET">
+          <input type="text" name="keyword" placeholder="키워드" />
           <input type="submit" value="전송"/>
           </form>
+          <p>
+          <br>
+          <button><a href="app/group/form">모임만들기</a></button>
+          </p>
           </div>
-          <br />
         </div>
-        <!--/.section-header-->
+      </div>
+           
+       
+      <div class="container">
+       <div class="section-header">
+       <hr>
+       <br>
+       <h4>추천모임 - 로그인한 멤버의 관심사와 일치하는 그룹의 리스트에서 썸네일을 가져온다</h4>
+       </div>  
+       <!--/.section-header-->
+        
         <div class="blog-content">
           <div class="row">
             <div class="col-sm-4">
               <div class="single-blog">
                 <div class="single-blog-img">
-                  <img src="images/blog/b1.jpg" alt="blog image" />
-                  <div class="single-blog-img-overlay"></div>
+                  <img src="images/blog/b2.jpg" alt="blog image" />
+                  <div class="single-blog-img-overlay">
+                  </div>
                 </div>
                 <div class="single-blog-txt">
-                  <h2><a href="app/group/list">그룹리스트로(임시)</a></h2>
+                  <h2><a href="app/group/listByRec">추천모임1</a></h2>
                 </div>
               </div>
             </div>
@@ -136,10 +153,11 @@
               <div class="single-blog">
                 <div class="single-blog-img">
                   <img src="images/blog/b2.jpg" alt="blog image" />
-                  <div class="single-blog-img-overlay"></div>
+                  <div class="single-blog-img-overlay">
+                  </div>
                 </div>
                 <div class="single-blog-txt">
-                  <h2><a href="#">모임2</a></h2>
+                  <h2><a href="#">추천모임2</a></h2>
                 </div>
               </div>
             </div>
@@ -147,10 +165,11 @@
               <div class="single-blog">
                 <div class="single-blog-img">
                   <img src="images/blog/b3.jpg" alt="blog image" />
-                  <div class="single-blog-img-overlay"></div>
+                  <div class="single-blog-img-overlay">
+                  </div>
                 </div>
                 <div class="single-blog-txt">
-                  <h2><a href="#">모임3</a></h2>
+                  <h2><a href="#">추천모임3</a></h2>
                 </div>
               </div>
             </div>
@@ -161,9 +180,12 @@
 
       <div class="container">
         <div class="section-header">
-          <br />
+        <hr>
+        <br>
+        <h4>신규모임 - 그룹리스트를 최신순으로 정렬해서 정보를 가져온다</h4>
         </div>
         <!--/.section-header-->
+        
         <div class="blog-content">
           <div class="row">
             <div class="col-sm-4">
@@ -173,7 +195,7 @@
                   <div class="single-blog-img-overlay"></div>
                 </div>
                 <div class="single-blog-txt">
-                  <h2><a href="#">모임4</a></h2>
+                  <h2><a href="app/group/listByCd ">신규모임1</a></h2>
                 </div>
               </div>
             </div>
@@ -184,7 +206,7 @@
                   <div class="single-blog-img-overlay"></div>
                 </div>
                 <div class="single-blog-txt">
-                  <h2><a href="#">모임5</a></h2>
+                  <h2><a href="#">신규모임2</a></h2>
                 </div>
               </div>
             </div>
@@ -195,7 +217,7 @@
                   <div class="single-blog-img-overlay"></div>
                 </div>
                 <div class="single-blog-txt">
-                  <h2><a href="#">모임6</a></h2>
+                  <h2><a href="#">신규모임3</a></h2>
                 </div>
               </div>
             </div>
@@ -207,18 +229,19 @@
     <!--/.blog-->
     <!--blog end -->
 
-    <!-- footer-->
-    <footer class="footer">
-      <div class="container-fluid">
-        <p class="copyright pull-right">
-          &copy;
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          <a href="index.html">네모내모</a>
-        </p>
-      </div>
-    </footer>
+
+<!-- footer-->
+<footer class="footer">
+  <div class="container-fluid">
+    <p class="copyright pull-right">
+      &copy;
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+      <a href="index.html">네모내모</a>
+    </p>
+  </div>
+</footer>
 
     <!-- Include all js compiled plugins (below), or include individual files as needed -->
 

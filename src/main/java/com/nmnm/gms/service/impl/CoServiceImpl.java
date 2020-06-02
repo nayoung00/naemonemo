@@ -2,6 +2,7 @@ package com.nmnm.gms.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Isolation;
@@ -17,7 +18,7 @@ import com.nmnm.gms.util.FileUtils;
 @Component
 public class CoServiceImpl implements CoService {
 
-  // @Resource(name="fileUtils")
+  @Resource(name="fileUtils")
   private FileUtils fileUtils;
 
   TransactionTemplate transactionTemplate;
@@ -37,12 +38,13 @@ public class CoServiceImpl implements CoService {
   public void add(Co co, MultipartHttpServletRequest mpRequest) throws Exception {
     coDao.insert(co);
 
+    System.out.println(co);
+    System.out.println(fileUtils);
     List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(co, mpRequest);
     int size = list.size();
     for (int i = 0; i < size; i++) {
       coDao.insertFile(list.get(i));
     }
-
   }
 
   @Transactional

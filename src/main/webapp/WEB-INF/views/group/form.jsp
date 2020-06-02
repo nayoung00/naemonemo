@@ -24,9 +24,20 @@ h2 { text-align: center; }
 }
 </style>
 
+
+<section id="blog" class="blog">
+  <div class="container">
+   <div class="section-header">
+   </div>
+    <div class="blog-content">
+     <div class="container-fluid">
+
+
 <c:if test="${empty loginUser}">
-<div><p>로그인해야 모임 생성가능!</p>
-<button id="login-btn" data-toggle="modal" data-target="#exampleModal">로그인</button></div>
+<div>
+<p>로그인해야 모임 생성가능!</p>
+<button id="login-btn" data-toggle="modal" data-target="#exampleModal">로그인</button>
+</div>
 
 </c:if>
 <c:if test="${not empty loginUser }">
@@ -293,3 +304,7 @@ function checkz() {
    </form>
    </c:if>
 
+</div>
+</div>
+</div>
+</section>

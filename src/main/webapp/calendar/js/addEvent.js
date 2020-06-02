@@ -3,11 +3,17 @@ var eventModal = $('#eventModal');
 var modalTitle = $('.modal-title');
 var editAllDay = $('#edit-allDay');
 var editTitle = $('#edit-title');
+var editMemberName = $('#edit-memberName');
 var editStart = $('#edit-start');
 var editEnd = $('#edit-end');
-var editType = $('#edit-type');
+var editCreateDate = $('#edit-createDate');
+var editStartHour = $('#edit-startHour');
+var editEndHour = $('#edit-endHour');
+var editThumbnail = $('#edit-thumbnail');
+var editContent = $('#edit-content');
+var editCategory = $('#edit-category');
+var editAddress = $('#edit-address');
 var editColor = $('#edit-color');
-var editDesc = $('#edit-desc');
 
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
@@ -32,18 +38,18 @@ function getQueryStringObject() {
 }
 
 var gq = getQueryStringObject()
-var planNo = gq.planNo;
-console.log(planNo);
+var groupNo = gq.groupNo;
+console.log(groupNo);
 var newEvent = function (start, end, eventType) {
 
     $("#contextMenu").hide(); //메뉴 숨김
 
     modalTitle.html('새로운 일정');
-    editType.val(eventType).prop('selected', true);
+    editCategory.val(eventType).prop('selected', true);
     editTitle.val('');
     editStart.val(start);
     editEnd.val(end);
-    editDesc.val('');
+    editContent.val('');
     
     addBtnContainer.show();
     modifyBtnContainer.hide();
@@ -60,11 +66,16 @@ var newEvent = function (start, end, eventType) {
         var eventData = {
             _id: eventId,
             title: editTitle.val(),
-            start: editStart.val(),
-            end: editEnd.val(),
-            description: editDesc.val(),
-            type: editType.val(),
-            username: '사나',
+            startDate: editStart.val(),
+            endDate: editEnd.val(),
+            startHour: editStartHour.val(),
+            endHour: editEndHour.val(),
+            content: editContent.val(),
+            category: editCategory.val(),
+            memberName: editMemberName.val(),
+            thumbnail: editThumbnail.val(),
+            address: editAddress.val(),
+            createDate: editCreateDate.val(),
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
             allDay: false
@@ -106,8 +117,8 @@ var newEvent = function (start, end, eventType) {
             },
             success: function (response) {
                 //DB연동시 중복이벤트 방지를 위한
-                //$('#calendar').fullCalendar('removeEvents');
-                //$('#calendar').fullCalendar('refetchEvents');
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('refetchEvents');
             }
         });
         console.log(eventId);

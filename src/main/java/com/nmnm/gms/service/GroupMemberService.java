@@ -5,7 +5,7 @@ import com.nmnm.gms.domain.GroupMember;
 
 public interface GroupMemberService {
 
-  List<GroupMember> list() throws Exception;
+  List<GroupMember> list(int groupNumber) throws Exception;
   
   int delete(int memberNo) throws Exception;
 

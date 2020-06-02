@@ -4,11 +4,21 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
        
 <tiles-definitions>
+
+
+
   <!-- 모임 내 사이드바 있는 곳에서 에서 공통으로 사용할 레이아웃을 정의한다. -->
   <definition name="base" template="/WEB-INF/tiles/template.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
     <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+  <!-- request handler가 리턴한 JSP의 경로가 'board/*' 일 경우
+   TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다.  -->
+  <definition name="*/*" extends="base">
+    <put-attribute name="side" value="/WEB-INF/views/{1}/side.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>
   
   <definition name="plan" template="/WEB-INF/tiles/plan/template2.jsp">
@@ -90,12 +100,15 @@
     <put-attribute name="body" value="/WEB-INF/views/plan/detail.jsp" />
   </definition>
     <!-- /plan -->
+    
   
-  <!-- request handler가 리턴한 JSP의 경로가 'board/*' 일 경우
-       TilesView 템플릿 엔진이 사용할 레이아웃을 정의한다.  -->
-  <definition name="*/*" extends="base">
-    <put-attribute name="side" value="/WEB-INF/views/{1}/side.jsp" />
-    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+  <definition name="admin/groupmember/*" extends="groupMemberList">
+    <put-attribute name="side" value="/WEB-INF/views/admin/side.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/admin/groupmember/{1}.jsp" />
   </definition>
+  
+  
+  
+
   
 </tiles-definitions>

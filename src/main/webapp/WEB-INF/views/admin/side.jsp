@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="memberadmin" class="simple-text">
+                    <a href="groupmember/list" class="simple-text">
                         <i class="pe-7s-user"></i>
                         <p>회원관리</p>
                     </a>

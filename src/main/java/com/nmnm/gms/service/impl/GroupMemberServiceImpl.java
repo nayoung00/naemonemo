@@ -12,8 +12,8 @@ public class GroupMemberServiceImpl implements GroupMemberService {
   GroupMemberDao groupMemberDao;
 
 	@Override
-	public List<GroupMember> list() throws Exception {
-		return groupMemberDao.findAll();
+	public List<GroupMember> list(int groupNumber) throws Exception {
+		return groupMemberDao.findAll(groupNumber);
 	}
 
 	@Override

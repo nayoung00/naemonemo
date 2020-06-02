@@ -14,7 +14,7 @@ import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.service.GroupMemberService;
 
 @Controller
-@RequestMapping("/groupmember")
+@RequestMapping("/admin/groupmember")
 public class GroupMemberController {
 
   static Logger logger = LogManager.getLogger(GroupMemberController.class);
@@ -52,8 +52,14 @@ public class GroupMemberController {
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
-    List<GroupMember> groupMembers= groupMemberService.list();
+  	int groupNumber = 1;
+    List<GroupMember> groupMembers= groupMemberService.list(groupNumber);
+    for(GroupMember gm : groupMembers) {
+    	System.out.println(gm);
+    }
+    System.out.println("groupmember/list Test>>>>>>>>>>>>>>");
     model.addAttribute("list", groupMembers);
+    System.out.println("Test");
   }
 
   @GetMapping("updateForm")

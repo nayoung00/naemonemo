@@ -319,14 +319,15 @@ CREATE TABLE nm_plan (
   start_date  DATE         NOT NULL COMMENT '시작일', -- 시작일
   end_date    DATE         NOT NULL COMMENT '종료일', -- 종료일
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  subtitle    VARCHAR(255) NULL     DEFAULT '소제목' COMMENT '소제목', -- 소제목
+  category    VARCHAR(20)  NULL     COMMENT '카테고리', -- 카테고리
   content     TEXT         NULL     COMMENT '내용', -- 내용
   thumbnail   VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
   place_name  VARCHAR(255) NULL     COMMENT '장소명', -- 장소명
   address     VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
   latitude    INTEGER      NULL     COMMENT '위도', -- 위도
   longitude   INTEGER      NULL     COMMENT '경도', -- 경도
-  create_date DATETIME     NULL     DEFAULT now() COMMENT '작성일' -- 작성일
+  create_date DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
+  back_color  VARCHAR(20)  NULL     COMMENT '캘린더_배경' -- 캘린더_배경
 )
 COMMENT '일정';
 
@@ -345,19 +346,12 @@ ALTER TABLE nm_plan
 
 -- 일정참여자
 CREATE TABLE nm_plan_member (
-  plan_no   INTEGER     NOT NULL COMMENT '일정번호', -- 일정번호
   member_no INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  plan_no   INTEGER     NOT NULL COMMENT '일정번호', -- 일정번호
   group_no  INTEGER     NOT NULL COMMENT '모임번호', -- 모임번호
   attend    VARCHAR(10) NOT NULL DEFAULT '불참' COMMENT '참석여부' -- 참석여부
 )
 COMMENT '일정참여자';
-
--- 일정참여자
-ALTER TABLE nm_plan_member
-  ADD CONSTRAINT PK_nm_plan_member -- 일정참여자 기본키
-    PRIMARY KEY (
-      plan_no -- 일정번호
-    );
 
 -- 첨부파일
 CREATE TABLE nm_MP_FILE (

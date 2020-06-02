@@ -23,7 +23,7 @@
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
     <collection property="planMember" ofType="PlanMember">
-      <id column="plan_no"   property="planNo"/>
+      <result column="plan_no"   property="planNo"/>
       <result column="group_no" property="groupNo"/>
       <result column="member_no" property="memberNo"/>
       <result column="attend" property="attend"/>

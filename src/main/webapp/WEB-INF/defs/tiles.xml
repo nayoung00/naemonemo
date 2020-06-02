@@ -25,6 +25,14 @@
     <put-attribute name="modal" value="/WEB-INF/tiles/plan/list/listModal.jsp" />
   </definition>
   
+ <definition name="planDetail" template="/WEB-INF/tiles/plan/detail/detailTemplate.jsp">
+    <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
+    <put-attribute name="header" value="/WEB-INF/tiles/plan/detail/header.jsp" />
+    <put-attribute name="nav" value="/WEB-INF/tiles/plan/detail/nav.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/tiles/plan/detail/footer.jsp" />
+    <put-attribute name="modal" value="/WEB-INF/tiles/plan/detail/detailModal.jsp" />
+  </definition>
+  
     <definition name="planCalendar" template="/WEB-INF/tiles/plan/calendar/calendarTemplate.jsp">
     <!-- template.jsp 안에서 사용할 JSP 파일의 이름을 설정한다. -->
     <put-attribute name="header" value="/WEB-INF/tiles/plan/calendar/header.jsp" />
@@ -63,7 +71,7 @@
   
     <!-- plan -->
   <definition name="plan/calendar" extends="planCalendar">
-    <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" /> 
+    <put-attribute name="side" value="/WEB-INF/views/plan/calendarSide.jsp" /> 
     <put-attribute name="body" value="/WEB-INF/views/plan/calendar.jsp" />
   </definition>
   
@@ -73,8 +81,13 @@
   </definition>
   
  <definition name="plan/list" extends="planList">
-    <put-attribute name="side" value="/WEB-INF/views/plan/side.jsp" /> 
+    <put-attribute name="side" value="/WEB-INF/views/plan/listSide.jsp" /> 
     <put-attribute name="body" value="/WEB-INF/views/plan/list.jsp" />
+  </definition>
+  
+ <definition name="plan/detail" extends="planDetail">
+    <put-attribute name="side" value="/WEB-INF/views/plan/detailSide.jsp" /> 
+    <put-attribute name="body" value="/WEB-INF/views/plan/detail.jsp" />
   </definition>
     <!-- /plan -->
   

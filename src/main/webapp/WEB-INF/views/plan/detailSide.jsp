@@ -13,7 +13,7 @@
 
             <ul class="nav">
                 <li>
-                    <a href="calendar?groupNo=${param.groupNo}"> 
+                    <a href="calendar?groupNo=${plan.groupNo}"> 
                         <i class="pe-7s-#"></i>
                         <p>캘린더</p>
                     </a>

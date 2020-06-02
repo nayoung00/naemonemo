@@ -191,35 +191,39 @@ var calendar = $('#calendar').fullCalendar({
 //      url: "../../calendar/data.json",
       data: {
       },
-          success: function (response) {
-          	for (let a of response) {
-        		eventData.push({
-        			title : a.title,
-        			description : a.content,
-        			start : a.startDate,
-        			end : a.endDate,
-        			username : a.memberName,
-        			url : a.thumbnail,
-        			startTime : a.startHour,
-        			endTime : a.endHour,
-        			textColor : "#ffffff",
-        			allDay : a.allday,
-        			type : a.category,
-        			_id : a.planNo
-        		});
-          	}
-        	resopnse = eventData;
-              var fixedDate = eventData.map(function (array) {
-                if (array.allDay && array.start !== array.end) {
-                  // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
-                  array.end = moment(array.end).add(1, 'days');
-                }
-                return array;
-              })
-              callback(fixedDate);
-            }
-          });
-        },
+      success: function (response) {
+        eventData = [];
+      	for (let a of response) {
+    		eventData.push({
+    			title : a.title, 
+    			description : a.content,
+    			start : a.startDate,
+    			end : a.endDate, 
+    			username : a.memberName,
+    			url : "detail?planNo=" + a.planNo,
+    			startTime : a.startHour,
+    			endTime : a.endHour,
+    			textColor : "#ffffff",
+    			backgroundColor : a.backgroundColor,
+    			allDay : a.allday,
+    			type : a.category,
+    			_id : a.planNo
+    		});
+      	}
+      	response = eventData;
+      	console.dir(response);
+      	console.log("eventData: " + eventData);
+        var fixedDate = response.map(function (array) {
+          if (array.allDay && array.start !== array.end) {
+            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
+            array.end = moment(array.end).add(1, 'days');
+          }
+          return array;
+        })
+        callback(fixedDate);
+      }
+    });
+  },
   eventAfterAllRender: function (view) {
     if (view.name == "month") {
       $(".fc-content").css('height', 'auto');

@@ -18,6 +18,7 @@
   <script>
   $(".author").click(function(){
     $("input[name='thumbnailFile']").click();
+    console.log($("input[name='thumbnailFile']"));
 });
 
 // 이미지 업로드시 나타게
@@ -30,6 +31,7 @@ function readURL(input) {
   reader.readAsDataURL(input.files[0]);
   }
   }
+  
   </script>
   <!--  Charts Plugin -->
   <script src="${pageContext.servletContext.getContextPath()}/js/chartist.min.js"></script>

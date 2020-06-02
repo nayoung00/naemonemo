@@ -15,17 +15,15 @@
 			<div class="col-md-12">
 				<div class="card card-plain">
 					<div class="header">
-						<h1>계좌 추가/제거</h1>
+						<h3>계좌 추가/제거</h3>
 					</div>
 					<form action='bankUpdate' method='post' enctype='multipart/form-data'>
 						<div class="content table-responsive table-full-width">
-							<input type="button" value="계좌 추가" onclick="add_row()"> <input
-								type="submit" value="저장하기">
-								<a href="/nmnm/app/account/bankUpdateForm">편집</a>
+									<c:forEach items="${bankList}" var="item">
+								<a href="bankUpdateForm?groupNo=${item.groupNo}">편집</a>
 							<table class="table table-hover">
 								<thead>
-									<th style="width: 10%">모임계좌아이디</th>
-									<th style="width: 10%">모임번호</th>
+									<th style="width: 10%">No</th>
 									<th style="width: 10%">계좌번호</th>
 									<th style="width: 10%">은행명</th>
 									<th style="width: 10%">예금주</th>
@@ -33,17 +31,15 @@
 								<tbody id="bankbody">
 
 
-									<c:forEach items="${bankList}" var="item">
 										<tr>
 											<td>${item.bankInfoId}</td>
-											<td>${item.groupNo}</td>
 											<td>${item.bankAccountNo}</td>
 											<td>${item.bankName}</td>
 											<td>${item.bankAccountHolder}</td>
 										</tr>
-									</c:forEach>
 								</tbody>
 							</table>
+									</c:forEach>
 
 						</div>
 					</form>
@@ -53,38 +49,9 @@
 	</div>
 	<br>
 </div>
-
-
-<script type="text/javascript">
-	function add_row() {
-		var bankbody = document.getElementById('bankbody');
-		var row = bankbody.insertRow(0); // 상단에 추가
-		// var row = bankbody.insertRow( my_tbody.rows.length ); // 하단에 추가
-		var cell1 = row.insertCell(0);
-		var cell2 = row.insertCell(1);
-		var cell3 = row.insertCell(2);
-		var cell4 = row.insertCell(3);
-		var cell5 = row.insertCell(4);
-
-		cell2.innerHTML = "<input name='groupNo' type='text' value='1'>";
-		cell3.innerHTML = "<input type='text' name='bankAccountNo' value=''>";
-		cell4.innerHTML = "<input type='text' name='bankName' value=''>";
-		cell5.innerHTML = "<input type='text' name='bankAccountHolder' value=''>";
-	};
-
-	function delete_row() {
-		var table = document.getElementById("reqList");
-
-		var rowCnt = table.rows.length;
-
-		for (var i = 0; i < rowCnt; i++) {
-			var row = table.rows[i];
-			var chkBox = row.cells[0].childNodes[0];
-			if (chkBox != null && chkBox.checked == true) {
-				table.deleteRow(i);
-				rowCnt--;
-				i--;
-			}
-		}
-	};
-</script>
+<style>
+.row {
+width: 879px;
+margin: auto;
+}
+</style>

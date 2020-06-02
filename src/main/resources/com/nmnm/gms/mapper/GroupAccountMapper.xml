@@ -16,15 +16,15 @@
   </resultMap>
   
    <sql id="select1">
-    select 
-      bank_info_id, 
-      group_no, 
-      bank_account_no, 
-      bank_name, 
-      bank_account_holder
+    SELECT 
+      ga.bank_info_id, 
+      g.group_no, 
+      ga.bank_account_no, 
+      ga.bank_name, 
+      ga.bank_account_holder
       
-    from 
-      nm_group_account
+    FROM 
+      nm_group_account AS ga LEFT JOIN nm_group AS g ON ga.group_no=g.group_no
   </sql>
   
   
@@ -59,14 +59,14 @@
   </select>
   
   <update id="update" parameterType="GroupAccount">
-    update nm_group_account set
+    UPDATE nm_group_account SET
       bank_info_id=#{bankInfoId}, 
       group_no=#{groupNo}, 
       bank_account_no=#{bankAccountNo}, 
       bank_name=#{bankName}, 
       bank_account_holder=#{bankAccountHolder}
       
-    where 
+    WHERE 
       bank_info_id=#{bankInfoId}
   </update>
   

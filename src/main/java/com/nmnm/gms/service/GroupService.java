@@ -9,6 +9,9 @@ public interface GroupService {
   // 모든 모임 리스트
   List<Group> list() throws Exception;
   
+  // 멤버가 가입한 모임 리스트
+  List<Group> listByJoin() throws Exception;
+  
   // 추천 모임 리스트
   List<Group> listByRec() throws Exception;
   
@@ -16,7 +19,7 @@ public interface GroupService {
   List<Group> listByCd() throws Exception;
   
   // 모임홈 app/moim/home?groupNo=1 
-  Group get(int groupNo) throws Exception; //detail
+  Group get(int groupNo) throws Exception; // 구 detail
 
   // 모임관리에서 쓸 모임 삭제
   int delete(int groupNo) throws Exception;

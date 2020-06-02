@@ -129,7 +129,27 @@
             or group_form like #{keywordPattern}
             or city  like #{keywordPattern}
     </select>
-    
+  
+  <!-- 멤버가 가입한모임 리스트 파라미터 타입 인트? 빈칸?  parameterType="int" -->
+  <select id="listByJoin" resultMap="GroupMap">
+		SELECT
+		  g.group_no, 
+		  g.group_name, 
+		  g.group_info,
+		  g.group_form,
+		  g.group_interest,
+		  g.group_photo
+		FROM
+		  (nm_member AS m LEFT JOIN nm_group_member AS gm 
+		  ON m.member_no=gm.member_no)
+		  LEFT JOIN nm_group AS g ON g.group_no=gm.group_no
+		  <!-- 
+		WHERE
+		  gm.group_no=${group.groupNo}
+		   -->
+  </select>
+  
+  
   <!-- 추천모임 리스트 -->
   <select id="listByRec" resultMap="GroupMap" parameterType="string">
 		SELECT g.group_no, g.group_name, g.group_photo, g.group_interest

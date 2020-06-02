@@ -12,7 +12,7 @@
                    <span class="icon-bar"></span>
                    <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="../moim/home?groupNo=${param.no}">홈</a>
+               <a class="navbar-brand" href="../moim/home?groupNo=${param.groupNo}">홈</a>
                <a class="navbar-brand" href="../notice/list">공지</a>
                <a class="navbar-brand" href="../plan/list">일정</a>
                <a class="navbar-brand" href="../account/list">회계</a>

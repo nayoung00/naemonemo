@@ -66,11 +66,6 @@ public class GroupController {
     model.addAttribute("group", groupService.get(groupNo));
   }
 
-  @GetMapping("list")
-  public void list(Model model) throws Exception {
-    model.addAttribute("list", groupService.list());
-  }
-
   @GetMapping("search")
   public void search(String keyword, Model model) throws Exception {
     model.addAttribute("list", groupService.search(keyword));
@@ -93,6 +88,12 @@ public class GroupController {
     } else {
       throw new Exception("변경할 그룹 번호가 유효하지 않습니다.");
     }
+  }
+  
+  // 멤버가 개입한 모임 리스트
+  @GetMapping("listByJoin")
+  public void listByJoin(Model model) throws Exception {
+    model.addAttribute("listByJoin", groupService.listByJoin());
   }
   
   // 추천 모임 리스트

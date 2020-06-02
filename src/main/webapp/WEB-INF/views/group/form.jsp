@@ -33,15 +33,7 @@ h2 { text-align: center; }
      <div class="container-fluid">
 
 
-<c:if test="${empty loginUser}">
-<div>
-<p>로그인해야 모임 생성가능!</p>
-<button id="login-btn" data-toggle="modal" data-target="#exampleModal">로그인</button>
-</div>
 
-</c:if>
-
-<c:if test="${not empty loginUser }">
 <form name='addForm' onsubmit="return checkz()" method="post" action="add" enctype="multipart/form-data" > 
 <input type="hidden" name="groupAdmin" value="${loginUser.memberNo }"/>
 <h2 align="center">모임 생성</h2>
@@ -300,10 +292,9 @@ function checkz() {
 </script>
 <p align="center">
         <input type="submit" value="모임 생성">
-         <input type="reset" value="다시입력">
+        <input type="reset" value="다시입력">
   </p>
    </form>
-   </c:if>
 
 </div>
 </div>

@@ -66,6 +66,12 @@ public class GroupServiceImpl implements GroupService {
     return groupDao.findByNo(groupNo);
   }
 
+  // 멤버가 가입한 모임 리스트
+  @Override
+  public List<Group> listByJoin() throws Exception {
+    return groupDao.listByJoin();
+  }
+
 
 
 

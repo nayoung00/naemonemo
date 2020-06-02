@@ -13,7 +13,7 @@
 					<div class="card">
 						<c:forEach items="${dues}" var="item">
 							<div class="header text-center">
-								<h4 class="title">회비 안내 : ${item.groupName}</h4>
+								<h3 class="title">회비 안내 : ${item.groupName}</h3>
 								<p class="category">모임에서 설정한 회비는 아래와 같습니다.</p>
 								<br>
 							</div>

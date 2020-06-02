@@ -14,7 +14,7 @@
 						<form action='updateDues' method='post'
 							enctype='multipart/form-data'>
 							<div class="header text-center">
-								<h4 class="title">회비 안내</h4>
+								<h3 class="title">회비 안내</h3>
 								<p class="category">모임에서 설정한 회비는 아래와 같습니다.</p>
 								<br>
 							</div>

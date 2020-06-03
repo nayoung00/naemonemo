@@ -13,6 +13,7 @@ import com.nmnm.gms.interceptor.Auth.Role;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
+
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {

@@ -91,6 +91,12 @@ public class PlanController {
       String[] endHour = plan.getEndDate().split("T");
       plan.setEndHour(endHour[0]);
     }
+    System.out.println("start: " + plan.getStartDate());
+    System.out.println("end: " + plan.getEndDate());
+    plan.setStartDate(plan.getStartDate().replace('T', ' '));
+    plan.setEndDate(plan.getEndDate().replace('T', ' '));
+    System.out.println("start: " + plan.getStartDate());
+    System.out.println("end: " + plan.getEndDate());
     plan.setStartHour(startHour[1]);
     plan.setEndHour(plan.getStartHour());
     System.out.println(plan.getCategory());

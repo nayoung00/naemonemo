@@ -2,7 +2,9 @@ package com.nmnm.gms.domain;
 
 import java.sql.Date;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Plan {
 
   private int planNo; // nm_plan PK auto_increment default=1 NN
@@ -23,7 +25,11 @@ public class Plan {
   private Date createDate;
   private String backgroundColor;
   private boolean allday = false;
+
+  //  @JsonIgnore
   private List<PlanMember> planMember;
+
+
 
 
   @Override
@@ -33,7 +39,18 @@ public class Plan {
         + ", startHour=" + startHour + ", endHour=" + endHour + ", title=" + title + ", thumbnail="
         + thumbnail + ", content=" + content + ", category=" + category + ", address=" + address
         + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
-        + ", backgroundColor=" + backgroundColor + ", allday=" + allday + "]";
+        + ", backgroundColor=" + backgroundColor + ", allday=" + allday + ", planMember="
+        + planMember + "]";
+  }
+
+
+  public String getMemberName() {
+    return memberName;
+  }
+
+
+  public void setMemberName(String memberName) {
+    this.memberName = memberName;
   }
 
 
@@ -69,14 +86,6 @@ public class Plan {
 
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
-  }
-
-  public String getMemberName() {
-    return memberName;
-  }
-
-  public void setMemberName(String memberName) {
-    this.memberName = memberName;
   }
 
   public String getStartDate() {

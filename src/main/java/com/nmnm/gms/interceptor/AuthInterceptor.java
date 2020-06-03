@@ -1,5 +1,6 @@
 package com.nmnm.gms.interceptor;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -38,14 +39,22 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     HttpSession session = request.getSession();
     if (session == null) {
       // 로그인 화면으로 이동
+      // PrintWriter out = response.getWriter();
+      // out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>");
       response.sendRedirect(request.getContextPath() + "/app/auth/login");
+
       return false;
     }
 
     // 6. 세션이 존재하면 유효한 유저인지 확인
     Object loginUser = session.getAttribute("loginUser");
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect(request.getContextPath() + "/app/auth/rejected");
+      response.setContentType("text/html;charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      out.println("<script>alert('로그인 후 이용 가능합니다.');</script>");
+      out.print("<script>location.href = \"../../app/auth/login\" </script>");
+      out.flush();
+
       return false;
     }
 
@@ -57,7 +66,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
       }
       if (loginUser instanceof Member) {
         if (!AuthRollList.contains("MEMBER")) {
-          response.sendRedirect(request.getContextPath() + "/app/auth/rejected");
+          response.setContentType("text/html;charset=UTF-8");
+          PrintWriter out = response.getWriter();
+          out.println("<script>alert('로그인 후 이용 가능합니다.');</script>");
+          out.print("<script>location.href = \"../../app/auth/login\" </script>");
+          out.flush();
           return false;
         }
       }
@@ -71,7 +84,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
       // member일 경우
       if (loginUser instanceof Member) {
         if (!AuthRollList.contains("MEMBER")) {
-          response.sendRedirect(request.getContextPath() + "/app/auth/rejected");
+          response.setContentType("text/html;charset=UTF-8");
+          PrintWriter out = response.getWriter();
+          out.println("<script>alert('로그인 후 이용 가능합니다.');</script>");
+          out.print("<script>location.href = \"../../app/auth/login\" </script>");
+          out.flush();
+          // response.sendRedirect(request.getContextPath() + "/app/auth/rejected");
           return false;
         }
       }

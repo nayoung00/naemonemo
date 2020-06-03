@@ -41,7 +41,6 @@
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                 <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
-                  <li><a href="${pageContext.servletContext.getContextPath()}/intro.html">intro(임시)</a></li>
                   <li><a href="${pageContext.servletContext.getContextPath()}/app/group/listByJoin">moim</a></li>
                   <li><a href="${pageContext.servletContext.getContextPath()}/app/co/list">forum</a></li>
                 </ul>

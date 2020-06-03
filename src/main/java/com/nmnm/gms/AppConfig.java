@@ -8,10 +8,13 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
+import com.nmnm.gms.interceptor.AuthInterceptor;
 
 // Spring IoC 컨테이너가 탐색할 패키지 설정
 // => 지정한 패키지 및 그 하위 패키지를 모두 뒤져서
@@ -19,7 +22,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 //
 @ComponentScan(value = "com.nmnm.gms")
 @EnableWebMvc
-public class AppConfig {
+public class AppConfig implements WebMvcConfigurer {
 
   static Logger logger = LogManager.getLogger(AppConfig.class);
 
@@ -62,7 +65,7 @@ public class AppConfig {
     return configurer;
   }
 
-  //    <!-- MultipartResolver 설정 --> 
+  // <!-- MultipartResolver 설정 -->
   @Bean
   public MultipartResolver multipartResolver() {
     CommonsMultipartResolver mr = new CommonsMultipartResolver();
@@ -70,6 +73,13 @@ public class AppConfig {
     mr.setMaxInMemorySize(2000000);
     mr.setMaxUploadSizePerFile(5000000);
     return mr;
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new AuthInterceptor())//
+        .addPathPatterns("/**"); // 모든 컨트롤러에 관해 인터셉터 적용
+
   }
 
 }

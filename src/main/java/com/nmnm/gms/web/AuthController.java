@@ -97,6 +97,7 @@ public class AuthController {
   public String login(String email, String password, String saveEmail, HttpServletResponse response,
       HttpSession session, Model model) throws Exception {
     Cookie cookie = new Cookie("email", email);
+
     if (saveEmail != null) {
       cookie.setMaxAge(60 * 60 * 24 * 30);
     } else {
@@ -112,6 +113,7 @@ public class AuthController {
       }
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../index.html");
+
     } else {
       session.invalidate();
       model.addAttribute("refreshUrl", "2;url=login");
@@ -331,6 +333,8 @@ public class AuthController {
     }
   }
 
+  @GetMapping("rejected")
+  public void rejected() {}
 
 
 }

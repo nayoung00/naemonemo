@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Group;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.GroupService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("/group")
 public class GroupController {
@@ -33,6 +36,7 @@ public class GroupController {
 
   @GetMapping("register")
   public void register() {}
+
 
   @PostMapping("add")
   public String add( //
@@ -89,23 +93,23 @@ public class GroupController {
       throw new Exception("변경할 그룹 번호가 유효하지 않습니다.");
     }
   }
-  
+
   // 멤버가 개입한 모임 리스트
   @GetMapping("listByJoin")
   public void listByJoin(Model model) throws Exception {
     model.addAttribute("listByJoin", groupService.listByJoin());
   }
-  
+
   // 추천 모임 리스트
   @GetMapping("listByRec")
   public void listByRec(Model model) throws Exception {
     model.addAttribute("listByRec", groupService.listByRec());
   }
-  
+
   // 신규 모임 리스트
   @GetMapping("listByCd")
   public void listByCd(Model model) throws Exception {
     model.addAttribute("listByCd", groupService.listByCd());
   }
-  
+
 }

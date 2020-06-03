@@ -12,8 +12,8 @@
   <display-name>모임관리시스템</display-name>
   
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
+    <welcome-file>intro.html</welcome-file>
+    <welcome-file>intro.htm</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   

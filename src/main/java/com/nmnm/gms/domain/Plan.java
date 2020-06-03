@@ -29,9 +29,6 @@ public class Plan {
   //  @JsonIgnore
   private List<PlanMember> planMember;
 
-
-
-
   @Override
   public String toString() {
     return "Plan [planNo=" + planNo + ", groupNo=" + groupNo + ", memberNo=" + memberNo

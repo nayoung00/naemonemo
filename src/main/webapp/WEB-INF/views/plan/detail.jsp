@@ -21,6 +21,13 @@
                                                 <p class="form-control">${plan.title}</p>
                                             </div>
                                         </div>
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>작성자</label>
+                                                <p class="form-control">${plan.memberName}</p>
+                                            </div>
+                                        </div>                                        
                                     </div>
 
                                     <div class="row">

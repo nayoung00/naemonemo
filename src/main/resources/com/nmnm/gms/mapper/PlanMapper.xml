@@ -74,19 +74,16 @@
     )
 </insert>
 
-    <select id="findPlanMember" resultMap="PlanMap" parameterType="int">
+    <select id="findPlanMember" resultMap="PlanMap">
       select 
-           p.plan_no,
            pm.attend,
-           pm.group_no,
-           m.member_name,
-           m.member_no
-       from nm_member m
-       join nm_plan_member pm on
-      pm.member_no = m.member_no
-     join nm_plan p on
-     p.plan_no = #{planNo}
-     where pm.group_no = p.group_no
+           pm.member_name
+       from nm_plan p
+         join
+      nm_plan_member pm
+        on
+      p.plan_no = pm.plan_no
+     where pm.group_no = p.group_no and pm.attend like '참가'
     </select>
 
 
@@ -106,6 +103,7 @@
     group_no,
       plan_no,
       member_no,
+      member_name,
       DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
       DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
       title,

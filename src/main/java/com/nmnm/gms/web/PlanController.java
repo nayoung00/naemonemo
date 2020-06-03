@@ -37,7 +37,6 @@ public class PlanController {
     logger.debug("PlanController 생성됨!");
   }
 
-
   @GetMapping("form")
   public void form() {
     System.out.println("form 호출==================================================");
@@ -52,7 +51,7 @@ public class PlanController {
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     mapper.setDateFormat(df);
     String jsonString = mapper.writeValueAsString(planList);
-    System.out.println(jsonString);
+    System.out.println("calendar데이터 출력: " + jsonString);
     return jsonString;
   }
 
@@ -145,6 +144,7 @@ public class PlanController {
     model.addAttribute("plan", plan);
     System.out.println(plan.getStartDate());
     System.out.println(plan.getCategory());
+    System.out.println(plan.getMemberName());
   }
 
   @GetMapping("list")

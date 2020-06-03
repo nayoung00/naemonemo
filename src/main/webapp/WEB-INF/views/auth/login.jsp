@@ -78,7 +78,7 @@
     text-decoration: none;
    } 
      
-   .div login_naver_area{ text-align: center; }  
+   .login_naver_area{ text-align: center; }  
     
 </style>
 </head>

@@ -16,7 +16,7 @@ import com.nmnm.gms.service.GroupMemberService;
 
 @Auth(role = Role.MEMBER)
 @Controller
-@RequestMapping("/groupmember")
+@RequestMapping("/admin")
 public class GroupMemberController {
 
   static Logger logger = LogManager.getLogger(GroupMemberController.class);
@@ -52,10 +52,16 @@ public class GroupMemberController {
     model.addAttribute("groupMember", groupMember);
   }
 
-  @GetMapping("list")
-  public void list(Model model) throws Exception {
-    List<GroupMember> groupMembers = groupMemberService.list();
+  @GetMapping("gmList")
+  public void list(int groupNo, Model model) throws Exception {
+    List<GroupMember> groupMembers = groupMemberService.list(groupNo);
+    // for(GroupMember gm : groupMembers) {
+    // System.out.println(gm);
+    // }
+    System.out.println("groupmember/list Test>>>>>>>>>>>>>>");
+    // model.addAttribute("groupMember", groupMemberService.get(memberNo));
     model.addAttribute("list", groupMembers);
+    System.out.println("Test");
   }
 
   @GetMapping("updateForm")

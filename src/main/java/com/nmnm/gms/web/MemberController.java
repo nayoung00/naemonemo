@@ -56,6 +56,7 @@ public class MemberController {
     model.addAttribute("list", memberService.search(keyword));
   }
 
+
   // 마이페이지
   @GetMapping("/mypage")
   public String mypage() {

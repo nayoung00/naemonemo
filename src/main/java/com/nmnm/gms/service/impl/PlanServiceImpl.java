@@ -57,4 +57,9 @@ public class PlanServiceImpl implements PlanService {
   public int apply(PlanMember planMember) throws Exception {
     return planDao.applyPlanMember(planMember);
   }
+
+  @Override
+  public List<PlanMember> find(int planNo) throws Exception {
+    return planDao.findPlanMember(planNo);
+  }
 }

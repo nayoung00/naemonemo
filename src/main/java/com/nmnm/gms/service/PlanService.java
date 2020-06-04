@@ -20,4 +20,6 @@ public interface PlanService {
   List<Plan> search(String keyword) throws Exception;
 
   int apply(PlanMember planMember) throws Exception;
+
+  List<PlanMember> find(int planNo) throws Exception;
 }

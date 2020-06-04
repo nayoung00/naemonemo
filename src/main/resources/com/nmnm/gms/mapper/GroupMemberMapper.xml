@@ -37,10 +37,10 @@
 		</sql>
 
 
-		<select id="findAll" resultMap="GroupMemberMap">
+		<select id="findAll" resultMap="GroupMemberMap" parameterType="int">
 				<include refid="select1" />
 				WHERE
-          gm.group_no=${group.groupNo}
+          gm.group_no=#{groupNo}
 		</select>
 
 
@@ -49,7 +49,19 @@
     register, grade_no를 부여하는 형식
      -->
 		<insert id="insert" parameterType="GroupMember">
-    
+    INSERT INTO nm_group_member 
+      (
+      group_no, 
+      member_no) 
+    SELECT
+      group_no,
+      member_no
+    FROM
+      nm_group, nm_member
+    WHERE
+      group_no=#{group.groupNo}
+    AND
+      member_no=#{member.memberNo}
 		</insert>
 
 
@@ -62,28 +74,39 @@
 				AND
 				  m.member_no=#{member.memberNo}
 		</select>
-<!-- 
-		<update id="update" parameterType="GroupAccount">
-				UPDATE nm_group_member SET
-				  register=#{register},
-				  grade_no=#{gradeNo}
-				WHERE
-				  member_no=#{memberNo}
+
+		<update id="update" parameterType="GroupMember">
+        UPDATE nm_group_member SET 
+          grade_no=#{gradeNo},  
+          register='#{register}' 
+        WHERE 
+          group_no=#{groupNo} 
+        AND 
+          member_no=#{memberNo}
 		</update>
 
+
+    <!-- delete 미구현
 		<delete id="delete" parameterType="int">
 				delete from nm_group_account
 				where bank_info_id=#{bankInfoId}
 		</delete>
-
-		<select id="findByKeyword" resultMap="GroupAccountMap"
-				parameterType="string">
+     -->
+     
+		<select id="findByKeyword" resultMap="GroupMemberMap" parameterType="string">
 				<bind name="keywordPattern" value="'%' + _parameter + '%'" />
 				<include refid="select1" />
-				where
-				bank_info_id like #{keywordPattern}
-				or bank_account_no like #{keywordPattern}
+        WHERE
+          gm.group_no=${group.groupNo}
+        AND
+          g.group_no like #{keywordPattern}
+        OR m.member_no like #{keywordPattern}
+        OR gm.register like #{keywordPattern}
+        OR m.birthday like #{keywordPattern}
+        OR m.member_name like #{keywordPattern}
+        OR m.nickname like #{keywordPattern}
 		</select>
-		 -->
+		 
 
 </mapper>
+

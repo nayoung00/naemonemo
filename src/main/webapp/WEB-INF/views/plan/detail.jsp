@@ -21,6 +21,13 @@
                                                 <p class="form-control">${plan.title}</p>
                                             </div>
                                         </div>
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>작성자</label>
+                                                <p class="form-control">${plan.memberName}</p>
+                                            </div>
+                                        </div>                                        
                                     </div>
 
                                     <div class="row">
@@ -93,10 +100,22 @@
                             </div>
                         </div>
                     </div>
+<div class="col-md-3">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="header">
+                                <h5 class="title">일정 참여자</h4>
+                            </div>
 
+                            <div class="content table-responsive table-full-width" id="dynamicTable">
+                            </div>
+                        </div>
+                  </div>  
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal">
+                                     참여하기
+                          </button>
+</div>
+               
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal">
-  Launch demo modal
-</button>

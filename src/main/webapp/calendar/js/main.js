@@ -193,6 +193,18 @@ var calendar = $('#calendar').fullCalendar({
       },
       success: function (response) {
         eventData = [];
+<<<<<<< Updated upstream
+        var memberData = [];
+        for (var i = 0; i < response.length; i++) {
+        for (let b of response[i].planMember) {
+          console.log(b);
+          memberData.push({
+            memberName : b.memberName,
+          });
+        }
+        }
+=======
+>>>>>>> Stashed changes
       	for (let a of response) {
     		eventData.push({
     			title : a.title, 
@@ -207,13 +219,25 @@ var calendar = $('#calendar').fullCalendar({
     			backgroundColor : a.backgroundColor,
     			allDay : a.allday,
     			type : a.category,
+<<<<<<< Updated upstream
+    			_id : a.planNo,
+    			planMember : a.planMember
+=======
     			_id : a.planNo
+>>>>>>> Stashed changes
     		});
       	}
       	response = eventData;
       	console.dir(response);
+<<<<<<< Updated upstream
+      	console.log(eventData);
+      	console.log(memberData);
+      	 	console.log(eventData[0].planMember);
+        var fixedDate = eventData.map(function (array) {
+=======
       	console.log("eventData: " + eventData);
         var fixedDate = response.map(function (array) {
+>>>>>>> Stashed changes
           if (array.allDay && array.start !== array.end) {
             // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
             array.end = moment(array.end).add(1, 'days');

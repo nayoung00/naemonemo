@@ -34,7 +34,6 @@
 <button><a href="list.jsp">목록</a></button>
 </p>
 
-</form>
 </c:if>
 
 <c:if test="${empty feed}">

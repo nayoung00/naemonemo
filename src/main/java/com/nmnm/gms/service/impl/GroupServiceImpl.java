@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.nmnm.gms.dao.GroupDao;
 import com.nmnm.gms.domain.Group;
-import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.service.GroupService;
 
 @Component
@@ -26,6 +25,7 @@ public class GroupServiceImpl implements GroupService {
     return groupDao.delete(groupNo);
   }
 
+  // 모임만들기 버튼으로 모임 생성
   @Override
   public int add(Group group) throws Exception {
     return groupDao.insert(group);
@@ -41,11 +41,6 @@ public class GroupServiceImpl implements GroupService {
   @Override
   public List<Group> search(String keyword) throws Exception {
     return groupDao.findByKeyword(keyword);
-  }
-
-  @Override
-  public int addGrMember(GroupMember grMember) throws Exception {
-    return groupDao.insertGrMember(grMember);
   }
 
   // 추천 모임 리스트

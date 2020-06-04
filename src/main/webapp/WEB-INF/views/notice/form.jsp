@@ -12,7 +12,6 @@
 <textarea name='content' rows='5' cols='60'></textarea><br>
 
 모임번호: <input name='groupNo' type='text'><br>
-회원번호: <input name='memberNo' type='text'><br>
 
 <button>등록</button>
 </form>

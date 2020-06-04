@@ -23,11 +23,11 @@ public interface GroupDao {
 
   List<Group> findByKeyword(String keyword) throws Exception;
 
-  // 멤버가 가입한 모임 리스트 - 배열 0번 그룹부터 추출 
-  List<Group> listByJoin() throws Exception;
+  // 멤버가 가입한 모임 리스트 - 배열 0번 그룹부터 추출 해야함
+  List<Group> listByJoin(int memberNo) throws Exception;
   
-  // 추천 모임 리스트 - 배열 0번 그룹 부터 추출 / mapper에서 로그인한 멤버의 interest스트링 검색 sql로 조건설정
-  List<Group> listByRec() throws Exception;
+  // 추천 모임 리스트 - 배열 0번 그룹 부터 추출해야함
+  List<Group> listByRec(String interest) throws Exception;
   
   // 신규 모임 리스트
   List<Group> listByCd() throws Exception;

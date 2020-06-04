@@ -185,6 +185,12 @@ public class MemberServiceImpl implements MemberService {
     memberDao.resetPassword(member);
   }
 
+  // 나라가 추가함 멤버닉네임 받아오려고
+  @Override
+  public Member findByNo(int no) throws Exception {
+    return memberDao.findByNo(no);
+  }
+
 
 }
 

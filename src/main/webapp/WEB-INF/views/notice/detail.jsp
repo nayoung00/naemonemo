@@ -12,7 +12,7 @@
 번호: ${notice.noticeNo}<br>
 제목: ${notice.title}<br>
 내용: ${notice.content}<br>
-회원번호(작성자닉네임조인): ${notice.memberNo}<br>
+작성자: ${notice.nickname}<br>
 등록일: ${notice.createDate}<br>
 조회수: ${notice.viewCount}<br>
 

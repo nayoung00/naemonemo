@@ -12,7 +12,7 @@
 <textarea name='content' rows='5' cols='60'></textarea><br>
 
 모임번호: <input name='groupNo' type="number"><br>
-회원번호: <input name='memberNo' type="number"><br>
+<!--  회원번호: <input name='memberNo' type="number"><br>-->
 
 사진: <input name='feedPhotos' type='file'><br>
 사진: <input name='feedPhotos' type='file'><br>

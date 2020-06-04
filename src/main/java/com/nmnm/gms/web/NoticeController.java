@@ -2,6 +2,7 @@ package com.nmnm.gms.web;
 
 import java.util.List;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Notice;
 import com.nmnm.gms.domain.NoticeReply;
 import com.nmnm.gms.interceptor.Auth;
 import com.nmnm.gms.interceptor.Auth.Role;
+import com.nmnm.gms.service.MemberService;
 import com.nmnm.gms.service.NoticeReplyService;
 import com.nmnm.gms.service.NoticeService;
 
@@ -34,6 +37,9 @@ public class NoticeController {
 
   @Autowired
   NoticeReplyService noticeReplyService;
+  
+  @Autowired
+  MemberService memberService;
 
   public NoticeController() {
     logger.debug("NoticeController 생성됨!");
@@ -48,14 +54,19 @@ public class NoticeController {
       String title, //
       String content, //
       int groupNo, //
-      int memberNo) throws Exception {
+      HttpSession httpSession) throws Exception {
 
+    // 세션에 저장된 멤버 객체를 가져옴 // 세션에 저장된 멤버 객체에는 멤버넘버와 인터레스트만 있다
+    Member memberInfo = (Member) httpSession.getAttribute("memberInfo");
+      
     Notice notice = new Notice();
 
     notice.setTitle(title);
     notice.setContent(content);
     notice.setGroupNo(groupNo);
-    notice.setMemberNo(memberNo);
+    
+    // 세션에 저장된 멤버객체의 멤버넘버를 받아서 노티스에 셋햇다
+    notice.setMemberNo(memberInfo.getMemberNo());
 
     noticeService.add(notice);
 

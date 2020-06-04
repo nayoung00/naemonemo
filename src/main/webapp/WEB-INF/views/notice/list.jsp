@@ -29,7 +29,7 @@
                                         <tr>
                                           <td>${item.noticeNo}</td>
                                           <td><a href='detail?noticeNo=${item.noticeNo}'> ${item.title}</a></td>
-                                          <td>${item.memberNo}</td>
+                                          <td>${item.nickname}</td>
                                           <td>${item.createDate}</td>
                                           <td><c:out value="${item.viewCount}"/></td>
                                         </tr>

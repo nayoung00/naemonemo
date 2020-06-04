@@ -141,29 +141,6 @@ INSERT INTO nm_group_member(group_no,member_no,grade_no)
 INSERT INTO nm_group_member(group_no,member_no,grade_no)
  values(1,3,3);
  
- 
--- 메시지 예제
-INSERT INTO nm_message(
-sender,
-receiver,
-title,
-content)
- values(1,2,'내일 뭐하시나요','내일 시간되사뇽?');
- 
-INSERT INTO nm_message(
-sender,
-receiver,
-title,
-content)
- values(2,1,'아뇨 내일 시간 안됩니다','아뇨 내일 시간 안될거 같아요');
- 
-INSERT INTO nm_message(
-sender,
-receiver,
-title,
-content)
- values(1,2,'ㄴ','ㅔ');
- 
 
 -- 공지사항 예제
 INSERT INTO nm_notice(group_no,member_no,title,content)
@@ -178,10 +155,7 @@ INSERT INTO nm_notice_reply(content,notice_no,member_no)
 INSERT INTO nm_plan
 (group_no,
 member_no,
-<<<<<<< Updated upstream
 member_name,
-=======
->>>>>>> Stashed changes
 category,
 back_color,
 title,
@@ -193,19 +167,12 @@ thumbnail,
 address,
 latitude,
 longitude)
-<<<<<<< Updated upstream
 VALUES(1,1,'오승우','중요','#D25565','프로젝트','펜타곤','2020-06-01 12:09', '2020-06-12 13:09','테스트랍니다', 'bit.jpg','주소',11,22);
-=======
-VALUES(1,1,'중요','#D25565','프로젝트','펜타곤','2020-06-01 12:09', '2020-06-12 13:09','테스트랍니다', 'bit.jpg','주소',11,22);
->>>>>>> Stashed changes
 
 INSERT INTO nm_plan
 (group_no,
 member_no,
-<<<<<<< Updated upstream
 member_name,
-=======
->>>>>>> Stashed changes
 category,
 back_color,
 title,
@@ -217,11 +184,8 @@ thumbnail,
 address,
 latitude,
 longitude)
-<<<<<<< Updated upstream
 VALUES(1,2,'손진영','선택','#f06595','봄 맞이 소풍','국수봉','2020-06-02 08:09', '2020-06-04 14:09','내용이랍니다', 'bit.jpg','주소',11,22);
-=======
-VALUES(1,2,'선택','#f06595','봄 맞이 소풍','국수봉','2020-06-02 08:09', '2020-06-04 14:09','내용이랍니다', 'bit.jpg','주소',11,22);
->>>>>>> Stashed changes
+
 
   
 -- 일정 참여자 & 일정이 먼저
@@ -339,13 +303,7 @@ values('저요~',2,1);
 insert into nm_co_reply(content,co_no,member_no)
 values('30000원 입니다',2,2);
    
--- 알림 예제
-INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
-  values(1,1,1,1);
-  
-INSERT INTO nm_alram(member_no,notice_no,plan_no,feed_no)
-  values(2,1,1,1); 
- 
+
  
 -- 모임계좌 예제
 INSERT INTO nm_group_account(

@@ -67,6 +67,8 @@ public class MemberController {
       member.setPhoto(filename);
     }
 
+    System.out.println(member.getMemberNo());
+    
     if (memberService.update(member) > 0) {
       return "redirect:list";
     } else {

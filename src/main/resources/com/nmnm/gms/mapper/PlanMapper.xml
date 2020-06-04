@@ -9,6 +9,7 @@
     <id column="plan_no"  property="planNo"/>
     <result column="group_no" property="groupNo"/>
     <result column="member_no" property="memberNo"/>
+    <result column="member_name" property="memberName"/>
     <result column="start_date" property="startDate"/>
     <result column="category" property="category"/>
     <result column="back_color" property="backgroundColor"/>
@@ -22,17 +23,18 @@
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
-<!--     <association property="planMember" javaType="PlanMember">
-         <result column="plan_no" property="planNo"/>
-         <result column="group_no" property="groupNo"/>
-         <result column="member_no" property="memberNo"/>
-         <result column="attend" property="attend"/>
-    </association> -->
+     <collection property="planMember" ofType="PlanMember">
+      <result column="plan_no"   property="planNo"/>
+      <result column="member_name"   property="memberName"/>
+      <result column="group_no" property="groupNo"/>
+      <result column="member_no" property="memberNo"/>
+      <result column="attend" property="attend"/>
+    </collection>
 </resultMap>
 
 <insert id="insert" parameterType="Plan">
   insert into nm_plan(
-    group_no,
+    group_no, 
     member_no,
     start_date, 
     end_date, 
@@ -58,7 +60,7 @@
 </insert>
 
 <!-- 보류 -->
-  <insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
+  <insert id="applyPlanMember" parameterType="com.nmnm.gms.domain.PlanMember">
     insert into nm_plan_member(
     plan_no,
     group_no,
@@ -71,6 +73,19 @@
     #{attend}
     )
 </insert>
+
+    <select id="findPlanMember" resultMap="PlanMap">
+      select 
+           pm.attend,
+           pm.member_name
+       from nm_plan p
+         join
+      nm_plan_member pm
+        on
+      p.plan_no = pm.plan_no
+     where pm.group_no = p.group_no and pm.attend like '참가'
+    </select>
+
 
    <select id="findAll" resultMap="PlanMap">
     select
@@ -88,6 +103,7 @@
     group_no,
       plan_no,
       member_no,
+      member_name,
       DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
       DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
       title,
@@ -102,7 +118,7 @@
       plan_no=#{planBoardNo}
   </select>
   
-      <select id="findByCalendar" resultMap="PlanMap">
+      <select id="findByCalendar" resultMap="PlanMap" parameterType="int">
     select 
       p.plan_no,
       p.group_no,
@@ -120,10 +136,10 @@
       p.longitude,
       p.create_date,
       p.back_color,
-      m.member_name memberName
+      m.member_name
     from 
       nm_plan p join nm_member m
-     where p.group_no=#{groupNo} and m.member_no=p.member_no
+     where p.group_no=#{planNo} and m.member_no=p.member_no
       order by plan_no desc
   </select>
    

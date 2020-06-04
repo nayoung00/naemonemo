@@ -2,7 +2,6 @@ package com.nmnm.gms.dao;
 
 import java.util.List;
 import com.nmnm.gms.domain.Group;
-import com.nmnm.gms.domain.GroupMember;
 
 // 데이터를 저장하고 꺼내는 방식(파일, 클라우드저장소, DB 등)에 상관없이
 // DAO 사용법을 통일하기 위해
@@ -10,6 +9,7 @@ import com.nmnm.gms.domain.GroupMember;
 //
 public interface GroupDao {
 
+  // 모임 생성
   int insert(Group group) throws Exception;
 
   List<Group> findAll() throws Exception;
@@ -23,8 +23,6 @@ public interface GroupDao {
 
   List<Group> findByKeyword(String keyword) throws Exception;
 
-  int insertGrMember(GroupMember grMember) throws Exception; // 그룹 가입신청
-  
   // 멤버가 가입한 모임 리스트 - 배열 0번 그룹부터 추출 
   List<Group> listByJoin() throws Exception;
   

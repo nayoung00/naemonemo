@@ -21,4 +21,6 @@ public interface PlanDao {
   List<Plan> findByKeyword(String keyword) throws Exception;
 
   int applyPlanMember(PlanMember planMember) throws Exception;
+
+  List<Plan> findPlanMember(int planNo) throws Exception;
 }

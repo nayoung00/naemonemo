@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nmnm.gms.domain.Plan;
+import com.nmnm.gms.domain.PlanMember;
 import com.nmnm.gms.service.PlanService;
 
 @Controller
@@ -36,7 +37,6 @@ public class PlanController {
     logger.debug("PlanController 생성됨!");
   }
 
-
   @GetMapping("form")
   public void form() {
     System.out.println("form 호출==================================================");
@@ -51,7 +51,7 @@ public class PlanController {
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     mapper.setDateFormat(df);
     String jsonString = mapper.writeValueAsString(planList);
-    System.out.println(jsonString);
+    System.out.println("calendar데이터 출력: " + jsonString);
     return jsonString;
   }
 
@@ -79,15 +79,23 @@ public class PlanController {
     String[] startHour = plan.getStartDate().split("T");
     System.out.println("0: " + startHour[0] + "  1:" + startHour[1]);
     System.out.println(Integer.parseInt(startHour[1].split(":")[0]));
-    if (plan.getEndDate().equals(""))
-    { plan.setEndDate(plan.getStartDate());
-    String eHour = startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1) );
-    plan.setEndHour(eHour);
-    System.out.println("0: " + eHour);
+    if (plan.getEndDate().equals("")) {
+      plan.setEndDate(plan.getStartDate());
+      String eHour =
+          startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),
+              String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1));
+      plan.setEndHour(eHour);
+      System.out.println("0: " + eHour);
     } else {
       String[] endHour = plan.getEndDate().split("T");
       plan.setEndHour(endHour[0]);
     }
+    System.out.println("start: " + plan.getStartDate());
+    System.out.println("end: " + plan.getEndDate());
+    plan.setStartDate(plan.getStartDate().replace('T', ' '));
+    plan.setEndDate(plan.getEndDate().replace('T', ' '));
+    System.out.println("start: " + plan.getStartDate());
+    System.out.println("end: " + plan.getEndDate());
     plan.setStartHour(startHour[1]);
     plan.setEndHour(plan.getStartHour());
     System.out.println(plan.getCategory());
@@ -96,6 +104,29 @@ public class PlanController {
     } else {
       throw new Exception("일정을 추가할 수 없습니다.");
     }
+  }
+
+  @GetMapping("apply")
+  public String apply(PlanMember planMember) throws Exception {
+    System.out.println(planMember.toString());
+    if (planService.apply(planMember) > 0) {
+      return "redirect:list?groupNo=" + planMember.getGroupNo();
+    } else {
+      throw new Exception("일정에 참여할 수 없습니다." + planMember.toString());
+    }
+  }
+
+  @GetMapping(value = "find", produces = "application/json; charset=utf-8")
+  @ResponseBody
+  public String find(int planNo) throws Exception {
+    List<Plan> planMemberList = planService.find(planNo);
+    System.out.println(planMemberList);
+    System.out.println("attend: " + planMemberList.get(0).getPlanMember().get(1).getAttend());
+    System.out.println("attend: " + planMemberList.get(0).getPlanMember().get(0).getAttend());
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonString = mapper.writeValueAsString(planMemberList);
+    System.out.println(jsonString);
+    return jsonString;
   }
 
   @GetMapping("delete")
@@ -113,6 +144,7 @@ public class PlanController {
     model.addAttribute("plan", plan);
     System.out.println(plan.getStartDate());
     System.out.println(plan.getCategory());
+    System.out.println(plan.getMemberName());
   }
 
   @GetMapping("list")

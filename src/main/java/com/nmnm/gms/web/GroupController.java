@@ -1,6 +1,7 @@
 package com.nmnm.gms.web;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Group;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.GroupService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("/group")
 public class GroupController {
@@ -31,13 +35,25 @@ public class GroupController {
   @GetMapping("form")
   public void form() {}
 
-  @GetMapping("register")
-  public void register() {}
+
 
   @PostMapping("add")
   public String add( //
-      Group group, //
+      String groupName, //
+      String groupInfo, //
+      String groupForm, //
+      String groupInterest,
+      String city,
       MultipartFile photoFile) throws Exception {
+    
+    Group group = new Group();
+    
+    group.setGroupName(groupName);
+    group.setGroupInfo(groupInfo);
+    group.setGroupForm(groupForm);
+    group.setGroupInterest(groupInterest);
+    group.setCity(city);
+    
     if (photoFile.getSize() > 0) {
       String dirPath = servletContext.getRealPath("/upload/group");
       String filename = UUID.randomUUID().toString();
@@ -45,11 +61,10 @@ public class GroupController {
       group.setGroupPhoto(filename);
     }
 
-    if (groupService.add(group) > 0) {
-      return "redirect:list"; // 모임 홈으로 가게
-    } else {
-      throw new Exception("그룹을 추가할 수 없습니다.");
-    }
+    groupService.add(group);
+    System.out.println("group 추가가 되었다.");
+    
+        return "redirect:http://localhost:9999/nmnm/app/moim/home?groupNo="+ group.getGroupNo(); // 모임 홈으로 가게
   }
 
   @GetMapping("delete")
@@ -89,23 +104,28 @@ public class GroupController {
       throw new Exception("변경할 그룹 번호가 유효하지 않습니다.");
     }
   }
-  
+
   // 멤버가 개입한 모임 리스트
   @GetMapping("listByJoin")
   public void listByJoin(Model model) throws Exception {
     model.addAttribute("listByJoin", groupService.listByJoin());
   }
-  
+
   // 추천 모임 리스트
   @GetMapping("listByRec")
   public void listByRec(Model model) throws Exception {
-    model.addAttribute("listByRec", groupService.listByRec());
+    System.out.println("listByRec :: Test");
+    List<Group> list = groupService.listByRec();
+    for(Group g : list) {
+      System.out.println(g);
+    }
+    model.addAttribute("listByRec", list);
   }
-  
+
   // 신규 모임 리스트
   @GetMapping("listByCd")
   public void listByCd(Model model) throws Exception {
     model.addAttribute("listByCd", groupService.listByCd());
   }
-  
+
 }

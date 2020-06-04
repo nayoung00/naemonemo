@@ -4,6 +4,132 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+   <!--본체 start -->
+    <section id="blog" class="blog">
+      <div class="container">
+          <br />
+          <br />
+          <br />
+        <div class="section-header">
+          <div>
+          <p>모임 검색 하시오</p>
+          <form action="app/group/search" method="GET">
+          <input type="text" name="keyword" placeholder="키워드" />
+          <input type="submit" value="전송"/>
+          </form>
+          <p>
+          <br>
+          <button><a href="app/group/form">모임만들기</a></button>
+          </p>
+          </div>
+        </div>
+      </div>
+           
+       
+      <div class="container">
+       <div class="section-header">
+       <hr>
+       <br>
+       <h4>추천모임 - 로그인한 멤버의 관심사와 일치하는 그룹의 리스트에서 썸네일을 가져온다</h4>
+       </div>  
+       <!--/.section-header-->
+        
+        <div class="blog-content">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <img src="images/blog/b2.jpg" alt="blog image" />
+                  <div class="single-blog-img-overlay">
+                  </div>
+                </div>
+                <div class="single-blog-txt">
+                  <h2><a href="app/group/listByRec">추천모임1</a></h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <img src="images/blog/b2.jpg" alt="blog image" />
+                  <div class="single-blog-img-overlay">
+                  </div>
+                </div>
+                <div class="single-blog-txt">
+                  <h2><a href="#">추천모임2</a></h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <img src="images/blog/b3.jpg" alt="blog image" />
+                  <div class="single-blog-img-overlay">
+                  </div>
+                </div>
+                <div class="single-blog-txt">
+                  <h2><a href="#">추천모임3</a></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.container-->
+
+      <div class="container">
+        <div class="section-header">
+        <hr>
+        <br>
+        <h4>신규모임 - 그룹리스트를 최신순으로 정렬해서 정보를 가져온다</h4>
+        </div>
+        <!--/.section-header-->
+        
+        <div class="blog-content">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <img src="images/blog/b1.jpg" alt="blog image" />
+                  <div class="single-blog-img-overlay"></div>
+                </div>
+                <div class="single-blog-txt">
+                  <h2><a href="app/group/listByCd ">신규모임1</a></h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <img src="images/blog/b2.jpg" alt="blog image" />
+                  <div class="single-blog-img-overlay"></div>
+                </div>
+                <div class="single-blog-txt">
+                  <h2><a href="#">신규모임2</a></h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <img src="images/blog/b3.jpg" alt="blog image" />
+                  <div class="single-blog-img-overlay"></div>
+                </div>
+                <div class="single-blog-txt">
+                  <h2><a href="#">신규모임3</a></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.container-->
+    </section>
+    <!--/.blog-->
+    <!--blog end -->
+    
+    
+    <!-- /////////////////////////////////////////////////////// -->
 
   <h1>피드</h1>
   <a href='form'>새 글</a><br>

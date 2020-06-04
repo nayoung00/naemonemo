@@ -54,14 +54,26 @@ function tableCreate(){
   for (let b of eventData){
   tc.push({name : b.memberName, attend : b.attend }); 
   }
+  html += '<table class="table table-hover table-striped" >';
+  html += '<thead>';
+  html += '<tr>';
+  html += '이름';
+  html += '</tr>';
+  html += '</thead>';
+  html += '</tbody>';
   for(key in tc){
   html += '<tr>';
   html += '<td align=left>'+tc[key].name+'</td>';
 //  html += '<td>'+tc[key].attend+'</td>';
   html += '</tr>';
   }
+  html += '</tbody>';
+  html += '</table>';
         
-  $("#dynamicTbody").empty();
-  $("#dynamicTbody").append(html);
+  $("#dynamicTable").empty();
+  $("#dynamicTable").append(html);
   }
+if (eventData.length != 0) {
 window.onload = tableCreate();
+console.log("실행");
+}

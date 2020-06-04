@@ -37,10 +37,6 @@ public class PlanController {
     logger.debug("PlanController 생성됨!");
   }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
   @GetMapping("form")
   public void form() {
     System.out.println("form 호출==================================================");
@@ -83,7 +79,6 @@ public class PlanController {
     String[] startHour = plan.getStartDate().split("T");
     System.out.println("0: " + startHour[0] + "  1:" + startHour[1]);
     System.out.println(Integer.parseInt(startHour[1].split(":")[0]));
-<<<<<<< Updated upstream
     if (plan.getEndDate().equals("")) {
       plan.setEndDate(plan.getStartDate());
       String eHour =
@@ -91,26 +86,16 @@ public class PlanController {
               String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1));
       plan.setEndHour(eHour);
       System.out.println("0: " + eHour);
-=======
-    if (plan.getEndDate().equals(""))
-    { plan.setEndDate(plan.getStartDate());
-    String eHour = startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1) );
-    plan.setEndHour(eHour);
-    System.out.println("0: " + eHour);
->>>>>>> Stashed changes
     } else {
       String[] endHour = plan.getEndDate().split("T");
       plan.setEndHour(endHour[0]);
     }
-<<<<<<< Updated upstream
     System.out.println("start: " + plan.getStartDate());
     System.out.println("end: " + plan.getEndDate());
     plan.setStartDate(plan.getStartDate().replace('T', ' '));
     plan.setEndDate(plan.getEndDate().replace('T', ' '));
     System.out.println("start: " + plan.getStartDate());
     System.out.println("end: " + plan.getEndDate());
-=======
->>>>>>> Stashed changes
     plan.setStartHour(startHour[1]);
     plan.setEndHour(plan.getStartHour());
     System.out.println(plan.getCategory());
@@ -159,10 +144,7 @@ public class PlanController {
     model.addAttribute("plan", plan);
     System.out.println(plan.getStartDate());
     System.out.println(plan.getCategory());
-<<<<<<< Updated upstream
     System.out.println(plan.getMemberName());
-=======
->>>>>>> Stashed changes
   }
 
   @GetMapping("list")

@@ -107,17 +107,7 @@
                                 <h5 class="title">일정 참여자</h4>
                             </div>
 
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped" id="dynamicTable">
-                                <thead>
-                                          <tr>
-                                          <th>이름</th>
-                                          </tr>
-                                          </thead>
-                                 <tbody id="dynamicTbody">
-                                            
-                                </tbody>
-                                </table>
+                            <div class="content table-responsive table-full-width" id="dynamicTable">
                             </div>
                         </div>
                   </div>  

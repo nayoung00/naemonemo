@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nmnm.gms.domain.Plan;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.PlanService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("/plan")
 public class PlanController {
@@ -79,11 +82,13 @@ public class PlanController {
     String[] startHour = plan.getStartDate().split("T");
     System.out.println("0: " + startHour[0] + "  1:" + startHour[1]);
     System.out.println(Integer.parseInt(startHour[1].split(":")[0]));
-    if (plan.getEndDate().equals(""))
-    { plan.setEndDate(plan.getStartDate());
-    String eHour = startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1) );
-    plan.setEndHour(eHour);
-    System.out.println("0: " + eHour);
+    if (plan.getEndDate().equals("")) {
+      plan.setEndDate(plan.getStartDate());
+      String eHour =
+          startHour[1].replaceAll(String.valueOf(Integer.parseInt(startHour[1].split(":")[0])),
+              String.valueOf(Integer.parseInt(startHour[1].split(":")[0]) + 1));
+      plan.setEndHour(eHour);
+      System.out.println("0: " + eHour);
     } else {
       String[] endHour = plan.getEndDate().split("T");
       plan.setEndHour(endHour[0]);

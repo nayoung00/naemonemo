@@ -33,6 +33,7 @@ import com.google.gson.JsonParser;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.service.MemberService;
 
+
 @Controller
 @RequestMapping("/auth")
 public class AuthController {

@@ -19,9 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Feed;
 import com.nmnm.gms.domain.FeedPhoto;
 import com.nmnm.gms.domain.FeedReply;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.FeedReplyService;
 import com.nmnm.gms.service.FeedService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("feed")
 public class FeedController {

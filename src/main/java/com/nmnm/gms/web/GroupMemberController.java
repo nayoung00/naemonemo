@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.nmnm.gms.domain.GroupMember;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.GroupMemberService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("/groupmember")
 public class GroupMemberController {
@@ -46,13 +48,13 @@ public class GroupMemberController {
 
   @GetMapping("detail")
   public void detail(int memberNo, Model model) throws Exception {
-  	GroupMember groupMember = groupMemberService.get(memberNo);
+    GroupMember groupMember = groupMemberService.get(memberNo);
     model.addAttribute("groupMember", groupMember);
   }
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
-    List<GroupMember> groupMembers= groupMemberService.list();
+    List<GroupMember> groupMembers = groupMemberService.list();
     model.addAttribute("list", groupMembers);
   }
 

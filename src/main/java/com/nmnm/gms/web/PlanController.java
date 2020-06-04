@@ -119,10 +119,10 @@ public class PlanController {
   @GetMapping(value = "find", produces = "application/json; charset=utf-8")
   @ResponseBody
   public String find(int planNo) throws Exception {
-    List<Plan> planMemberList = planService.find(planNo);
+    List<PlanMember> planMemberList = planService.find(planNo);
     System.out.println(planMemberList);
-    System.out.println("attend: " + planMemberList.get(0).getPlanMember().get(1).getAttend());
-    System.out.println("attend: " + planMemberList.get(0).getPlanMember().get(0).getAttend());
+    System.out.println("attend: " + planMemberList.get(0).getAttend());
+    System.out.println("memberName: " + planMemberList.get(0).getMemberName());
     ObjectMapper mapper = new ObjectMapper();
     String jsonString = mapper.writeValueAsString(planMemberList);
     System.out.println(jsonString);

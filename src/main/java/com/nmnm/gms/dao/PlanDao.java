@@ -22,5 +22,5 @@ public interface PlanDao {
 
   int applyPlanMember(PlanMember planMember) throws Exception;
 
-  List<Plan> findPlanMember(int planNo) throws Exception;
+  List<PlanMember> findPlanMember(int planNo) throws Exception;
 }

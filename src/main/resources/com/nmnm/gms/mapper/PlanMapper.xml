@@ -31,6 +31,13 @@
       <result column="attend" property="attend"/>
     </collection>
 </resultMap>
+<resultMap type="PlanMember" id="PlanMemberMap">
+  <result column="plan_no" property="planNo"/>
+  <result column="member_name" property="memberName"/>
+  <result column="member_no" property="memberNo"/>
+  <result column="group_no" property="groupNo"/>
+  <result column="attend" property="attend"/>
+</resultMap>
 
 <insert id="insert" parameterType="Plan">
   insert into nm_plan(
@@ -74,16 +81,19 @@
     )
 </insert>
 
-    <select id="findPlanMember" resultMap="PlanMap">
+    <select id="findPlanMember" resultMap="PlanMemberMap" parameterType="int">
       select 
+          pm.plan_no,
            pm.attend,
+           pm.member_no,
+           pm.group_no,
            pm.member_name
        from nm_plan p
          join
       nm_plan_member pm
         on
       p.plan_no = pm.plan_no
-     where pm.group_no = p.group_no and pm.attend like '참가'
+     where pm.group_no = p.group_no and pm.attend like '참가' and pm.plan_no=#{planNo}
     </select>
 
 

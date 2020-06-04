@@ -214,9 +214,9 @@ VALUES(1,2,'손진영','선택','#f06595','봄 맞이 소풍','국수봉','2020-
 INSERT INTO nm_plan_member(plan_no,member_no,member_name,group_no,attend)
  values(1,1,'오승우',1,'참가');
  
-INSERT INTO nm_plan_member(plan_no,member_no,group_no,attend)
- values(1,2,'하하',1,'불참');
-
+INSERT INTO nm_plan_member(plan_no,member_no,member_name,group_no,attend)
+ values(1,2,'손진영',1,'참가');
+ 
 -- 피드 예제
 INSERT INTO nm_feed(member_no,group_no,title,content)
   values(1,1,'어제 번개 사진','다음에 한 번 더 해요');

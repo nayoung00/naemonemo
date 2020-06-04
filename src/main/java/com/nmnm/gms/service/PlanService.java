@@ -21,5 +21,5 @@ public interface PlanService {
 
   int apply(PlanMember planMember) throws Exception;
 
-  List<Plan> find(int planNo) throws Exception;
+  List<PlanMember> find(int planNo) throws Exception;
 }

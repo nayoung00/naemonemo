@@ -100,40 +100,32 @@
                             </div>
                         </div>
                     </div>
-                  <div class="col-md-4">
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal">
-                                     Launch demo modal
-                          </button>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="col-md-8">
+<div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Striped Table with Hover</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <h5 class="title">일정 참여자</h4>
                             </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                      <th>ID</th>
-                                      <th>제목</th>
-                                      <th>생성일</th>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                    <c:forEach items="${list}" var="item">
-                                                            <td>${item.planNo}</td> 
-                                                            <td><a href='detail?planNo=${item.planNo}'> ${item.title}</a></td>
-                                                            <td>${item.createDate}</td>
-                                        </tr>
-                                    </c:forEach>
 
-                                    </tbody>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped" id="dynamicTable">
+                                <thead>
+                                          <tr>
+                                          <th>이름</th>
+                                          </tr>
+                                          </thead>
+                                 <tbody id="dynamicTbody">
+                                            
+                                </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
-                  </div>                  
+                  </div>  
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal">
+                                     참여하기
+                          </button>
+</div>
+               
                 </div>
             </div>
         </div>

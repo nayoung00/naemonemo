@@ -118,32 +118,46 @@
     </select>
   
   <!-- 멤버가 가입한모임 리스트 파라미터 타입 인트? 빈칸?  parameterType="int" -->
-  <select id="listByJoin" resultMap="GroupMap">
+  <select id="listByJoin" resultMap="GroupMap" parameterType="int">
 		SELECT
 		  g.group_no, 
 		  g.group_name, 
 		  g.group_info,
 		  g.group_form,
 		  g.group_interest,
-		  g.group_photo
+		  g.group_photo,
+		  gm.member_no
 		FROM
 		  (nm_member AS m LEFT JOIN nm_group_member AS gm 
 		  ON m.member_no=gm.member_no)
 		  LEFT JOIN nm_group AS g ON g.group_no=gm.group_no
-		  <!-- 
 		WHERE
-		  gm.group_no=${group.groupNo}
-		   -->
+		  gm.member_no=${memberNo}
   </select>
   
   
   <!-- 추천모임 리스트 -->
   <select id="listByRec" resultMap="GroupMap" parameterType="string">
+    SELECT
+      g.group_no, 
+      g.group_name, 
+      g.group_info,
+      g.group_form,
+      g.group_interest,
+      g.group_photo
+    FROM
+      nm_group AS g
+    LEFT JOIN nm_member AS m ON g.group_interest=m.interest
+    WHERE
+      g.group_interest='${interest}'
+  <!-- 
+  스트링 비교시 '' 따옴표 꼭 넣어야함
 		SELECT g.group_no, g.group_name, g.group_photo, g.group_interest
 		 FROM nm_group g
-		WHERE g.group_interest
+		WHERE g.group_interest=${interest}
 		 IN 
 		(SELECT m.interest FROM nm_member m)
+  -->
   </select>
   
   <!-- 신규모임 리스트 -->

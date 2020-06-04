@@ -12,7 +12,7 @@
 번호: ${feed.feedNo}<br>
 제목: ${feed.title}<br>
 내용: ${feed.content}<br>
-회원번호(작성자닉네임조인): ${feed.memberNo}<br>
+작성자: ${feed.nickname}<br>
 등록일: ${feed.createDate}<br>
 조회수: ${feed.viewCount}<br>
 

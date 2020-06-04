@@ -45,8 +45,8 @@ public class GroupServiceImpl implements GroupService {
 
   // 추천 모임 리스트
   @Override
-  public List<Group> listByRec() throws Exception {
-    return groupDao.listByRec();
+  public List<Group> listByRec(String interest) throws Exception {
+    return groupDao.listByRec(interest);
   }
 
   // 신규 모임 리스트
@@ -63,8 +63,9 @@ public class GroupServiceImpl implements GroupService {
 
   // 멤버가 가입한 모임 리스트
   @Override
-  public List<Group> listByJoin() throws Exception {
-    return groupDao.listByJoin();
+  public List<Group> listByJoin(int memberNo) throws Exception {
+    System.out.println(memberNo);
+    return groupDao.listByJoin(memberNo);
   }
 
 

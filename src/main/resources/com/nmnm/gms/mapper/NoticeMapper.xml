@@ -13,7 +13,7 @@
     <result column="content"  property="content"/>
     <result column="create_date"    property="createDate"/>
     <result column="view_count"    property="viewCount"/>
-
+    <result column="nickname"    property="nickname"/>
   </resultMap>
   
   
@@ -49,32 +49,33 @@
   
   <select id="findAll" resultMap="NoticeMap" parameterType="Map">
     select
-      notice_no,
-      member_no, 
-      title,
-      create_date,
-      view_count
+      n.notice_no,
+      n.member_no, 
+      n.title,
+      n.create_date,
+      n.view_count,
+      m.nickname
     from 
-      nm_notice
+      nm_notice n
+    LEFT JOIN nm_member m ON n.member_no=m.member_no
 
     order by
-      notice_no desc
+      n.notice_no desc
    
   </select>
 
   
   <select id="findByNo" resultMap="NoticeMap" parameterType="int">
     select
-      notice_no,
-      member_no,
-      group_no,
-      title,
-      content,
-      create_date,
-      view_count
+      n.notice_no,
+      n.member_no, 
+      n.title,
+      n.create_date,
+      n.view_count,
+      m.nickname
     from 
-      nm_notice
-    
+      nm_notice n
+    LEFT JOIN nm_member m ON n.member_no=m.member_no
     where
       notice_no=#{noticeNo}
   </select>

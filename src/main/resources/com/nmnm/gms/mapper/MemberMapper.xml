@@ -103,9 +103,10 @@
     <set>
       <if test="name != null and name != ''">member_name=#{name},</if>
       <if test="nickname != null and nickname != ''">nickname=#{nickname},</if>
-      <if test="email != null and email != ''">email=#{email},</if> 
-      <if test="password != null and password != ''">password=password(#{password}),</if>
-      <if test="photo != null and photo != ''">id_photo=#{photo}</if>
+       <if test="birthday != null">birthday=#{birthday},</if>
+      <if test="intro != null and intro != ''">intro =#{intro},</if> 
+     <if test="interest != null and interest != ''">interest=#{interest}</if>  
+   <!--   <if test="photo != null and photo != ''">id_photo=#{photo}</if> -->
     </set>
     where 
       member_no=#{memberNo}

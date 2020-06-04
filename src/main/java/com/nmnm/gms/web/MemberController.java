@@ -1,7 +1,6 @@
 package com.nmnm.gms.web;
 
-import java.io.File;
-import java.util.UUID;
+import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.domain.Message;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.MemberService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -55,26 +56,6 @@ public class MemberController {
     model.addAttribute("list", memberService.search(keyword));
   }
 
-  @PostMapping("update")
-  public String update( //
-      Member member, //
-      MultipartFile photoFile) throws Exception {
-
-    if (photoFile.getSize() > 0) {
-      String dirPath = servletContext.getRealPath("/upload/member");
-      String filename = UUID.randomUUID().toString();
-      photoFile.transferTo(new File(dirPath + "/" + filename));
-      member.setPhoto(filename);
-    }
-
-    System.out.println(member.getMemberNo());
-    
-    if (memberService.update(member) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("변경할 회원 번호가 유효하지 않습니다.");
-    }
-  }
 
   // 마이페이지
   @GetMapping("/mypage")
@@ -114,4 +95,47 @@ public class MemberController {
 
   @GetMapping("update")
   public void update() {}
+
+  @PostMapping("update")
+  public String update(Member member, HttpServletRequest request) throws Exception {
+
+    // if (file.getSize() > 0) {
+    // String dirPath = servletContext.getRealPath("/upload/member");
+    // String filename = UUID.randomUUID().toString();
+    // file.transferTo(new File(dirPath + "/" + filename));
+    // member.setPhoto(filename);
+    // }
+    System.out.println("업데이트4444");
+
+    HttpSession session = request.getSession(false);
+    System.out.println("업데이트111");
+    //
+    member.setMemberNo(member.getMemberNo());
+    System.out.println("업데이트222");
+    String name = request.getParameter("name");
+    String nickname = request.getParameter("nickname");
+    Date birthday = Date.valueOf(request.getParameter("birthday"));
+    String intro = request.getParameter("intro");
+    String interest = request.getParameter("interest");
+    member.setName(name);
+    member.setNickname(nickname);
+    member.setBirthday(birthday);
+    member.setIntro(intro);
+    member.setInterest(interest);
+    System.out.println("업데이트333");
+
+    String[] arr = request.getParameterValues("interest");
+
+
+    System.out.println("파라미터이름:" + request.getParameterNames());
+    session.setAttribute("loginUser", member);
+    System.out.println(member);
+    System.out.println(member.getName());
+    System.out.println(memberService.update(member));
+    if (memberService.update(member) > 0) {
+      return "member/mypage";
+    } else {
+      throw new Exception("변경할 회원 번호가 유효하지 않습니다.");
+    }
+  }
 }

@@ -10,7 +10,7 @@ public interface MemberDao {
   int emailCheck(String email) throws Exception;
 
   // 회원가입 db에 회원등록
-  int insert(Member memeber) throws Exception;
+  void insert(Member memeber) throws Exception;
 
   // 회원수정
   int update(Member member) throws Exception;

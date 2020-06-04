@@ -68,20 +68,22 @@
 </head>
 <body>
  <section class="update-form">
-                 <form action="update" method="post"  enctype='multipart/form-data'>
+                 <form action="update" method="post" >
             <h1>회원정보 수정</h1>
                   
-                    <div class="box" style="background: #BDBDBD;">
+                   <!--  <div class="box" style="background: #BDBDBD;">
                          <img  class="profile" id="blah" src="#"/>
                     </div>
-                                <input type="file" name="photoFile" id="form1" onchange="readURL(this);"
-                                    required="required" aria-required="true">
-                          <p class="info">     
+                                <input type="file" name="photo" id="form1" onchange="readURL(this);"
+                                    required="required" aria-required="true">  -->
 
                            <script src="jquery-3.4.1.js"></script>
+                              <div class="int-area">
+                      <input  type = "hidden" name='memberNo' readonly value='${loginUser.memberNo}' >
+                      </div>
                   <div class="int-area">
                   <label style=" font-size: 13px; color: #F4A460; ">NAME</label>
-                    <input type="text" id="email"  name = "email" value="${loginUser.name}">
+                    <input type="text" id="name"  name = "name" value="${loginUser.name}">
                      </div> 
                       <div class="int-area">
                   <label style="font-size: 13px; color: #F4A460; ">NICKNAME</label>
@@ -95,7 +97,7 @@
                   <label style="font-size: 13px; color: #F4A460; ">INTRO</label>
                     <input type="text" id="intro" name = "intro" placeholder="한줄로 자신을 소개해보세요."value="${loginUser.intro}">
                      </div> 
-                       <div class="int-area">
+                  <div class="int-area">
                   <label style="font-size: 13px; color: #F4A460; ">INTEREST</label>
                                                     <div class="checkbox">
                                                     <div class="row">
@@ -136,7 +138,7 @@
                                                     </div>
                         <input type="text" id="interest"  name = "interest" value="${loginUser.interest}">
                    
-                     </div>
+                     </div> 
                                         <div class="btn-area">
                 <button type="submit" value=update>회원 정보 수정</button>
             </div>
@@ -154,6 +156,24 @@ reader.readAsDataURL(input.files[0]);
 }
 }
 </script>
+ <script>
+function checkboxArr() {
+    var checkArr = [];     // 배열 초기화
+    $("input[name='interest']:checked").each(function(i)) {
+        checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+    }
+ 
+    $.ajax({
+        url: 'update'
+        , type: 'post'
+        , dataType: 'text'
+        , data: {
+            valueArrTest: checkArr
+        }
+    });
+}
+</script>
+ 
  
 </body>
 </html>

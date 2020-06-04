@@ -19,8 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nmnm.gms.domain.Plan;
 import com.nmnm.gms.domain.PlanMember;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.PlanService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("/plan")
 public class PlanController {

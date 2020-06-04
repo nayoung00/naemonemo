@@ -14,7 +14,7 @@ public interface MemberService {
   public void userAuth(String email) throws Exception;
 
   // 회원수정 (DB에 수정)
-  public void update(Member member, HttpSession session) throws Exception;
+  int update(Member member) throws Exception;
 
   // 1명의 회원정보
   public Member userView(String email) throws Exception;
@@ -26,7 +26,7 @@ public interface MemberService {
   void changePassword(Member member) throws Exception;
 
   // 회원탈퇴 : userkey = nc
-  public void drop(HttpSession session, String email);
+  void drop(HttpSession session, String email);
 
   Member searchGrMember(int grMemberNo) throws Exception;
 
@@ -41,7 +41,6 @@ public interface MemberService {
   // 로그아웃
   public void logout(HttpSession session) throws Exception;
 
-  public int update(Member member) throws Exception;
 
   public Object get(int no) throws Exception;
 

@@ -271,12 +271,12 @@ input:focus {
 }
 
 .sidebar .logo {
-    padding: 10px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+		margin: auto;
+		padding: 0px 0px ;
+    border-bottom: 0px solid rgba(255, 255, 255, 0.2);
 }
 
 .sidebar .logo p {
-    float: left;
     font-size: 20px;
     margin: 10px 10px;
     color: #FFFFFF;
@@ -286,7 +286,7 @@ input:focus {
 
 .sidebar .logo .simple-text {
     text-transform: uppercase;
-    padding: 5px 0px;
+    padding: 0px 0px;
     display: block;
     font-size: 18px;
     color: #FFFFFF;
@@ -369,10 +369,6 @@ input:focus {
     right: 30px;
 }
 
-.sidebar .logo {
-    padding: 10px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
 
 .sidebar .logo p {
     float: left;

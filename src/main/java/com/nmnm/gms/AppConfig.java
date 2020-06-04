@@ -36,15 +36,15 @@ public class AppConfig implements WebMvcConfigurer {
   // => 그래야만 Spring IoC 컨테이너는
   // 이 메서드를 호출하고 그 리턴 값을 보관한다.
 
-  @Bean
-  public ViewResolver viewResolver() {
-    InternalResourceViewResolver vr = new InternalResourceViewResolver(//
-        "/WEB-INF/jsp/", // prefix
-        ".jsp" // suffix
-    );
-    vr.setOrder(2);
-    return vr;
-  }
+//  @Bean
+//  public ViewResolver viewResolver() {
+//    InternalResourceViewResolver vr = new InternalResourceViewResolver(//
+//        "/WEB-INF/jsp/", // prefix
+//        ".jsp" // suffix
+//    );
+//    vr.setOrder(2);
+//    return vr;
+//  }
 
   @Bean
   public ViewResolver tilesViewResolver() {
@@ -54,7 +54,7 @@ public class AppConfig implements WebMvcConfigurer {
     vr.setViewClass(TilesView.class);
 
     // 뷰리졸버의 우선 순위를 InternalResourceViewResolver 보다 우선하게 한다.
-    vr.setOrder(1);
+    //vr.setOrder(1);
     return vr;
   }
 

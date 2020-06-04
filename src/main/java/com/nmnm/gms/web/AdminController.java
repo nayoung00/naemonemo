@@ -44,7 +44,7 @@ public class AdminController {
   // 관리 메뉴 인트로
   @GetMapping("manual")
   public void manual() throws Exception {}
-  
+
   // 모임관리 페이지
   @GetMapping("groupadmin")
   public void groupAdmin(Model model, @RequestParam("groupNo")int groupNo) throws Exception {

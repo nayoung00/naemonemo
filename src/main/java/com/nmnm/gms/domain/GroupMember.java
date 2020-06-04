@@ -13,6 +13,7 @@ public class GroupMember {
   private Date birthday; // birthday
   private String name; // member_name
   private String nickname; // nickname
+  
 	public int getGroupNo() {
 		return groupNo;
 	}

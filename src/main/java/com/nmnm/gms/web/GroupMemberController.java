@@ -1,6 +1,7 @@
 package com.nmnm.gms.web;
 
 import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import com.nmnm.gms.domain.GroupMember;
 import com.nmnm.gms.service.GroupMemberService;
 
 @Controller
-@RequestMapping("/admin/groupmember")
+@RequestMapping("/admin")
 public class GroupMemberController {
 
   static Logger logger = LogManager.getLogger(GroupMemberController.class);
@@ -50,18 +51,18 @@ public class GroupMemberController {
     model.addAttribute("groupMember", groupMember);
   }
 
-  @GetMapping("list")
-  public void list(Model model) throws Exception {
-  	int groupNumber = 1;
-    List<GroupMember> groupMembers= groupMemberService.list(groupNumber);
-    for(GroupMember gm : groupMembers) {
-    	System.out.println(gm);
-    }
+  @GetMapping("gmList")
+  public void list(int groupNo, Model model) throws Exception {
+    List<GroupMember> groupMembers= groupMemberService.list(groupNo);
+//    for(GroupMember gm : groupMembers) {
+//    	System.out.println(gm);
+//    }
     System.out.println("groupmember/list Test>>>>>>>>>>>>>>");
+//    model.addAttribute("groupMember", groupMemberService.get(memberNo));
     model.addAttribute("list", groupMembers);
     System.out.println("Test");
   }
-
+  
   @GetMapping("updateForm")
   public void updateForm(int memberNo, Model model) throws Exception {
     model.addAttribute("groupMember", groupMemberService.get(memberNo));

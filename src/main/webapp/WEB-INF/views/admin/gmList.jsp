@@ -18,6 +18,7 @@
             <div class="container">
               <table class="table table-bordered">
                 <thead>
+                <span style="float:right"><input type="submit" value="저장하기"></span>
                   <tr>
                     <th style="width: 10%" class='fixedHeader'></th>
                     <th style="width: 10%" class='fixedHeader'>회원등급</th>
@@ -25,7 +26,7 @@
                     <th style="width: 10%" class='fixedHeader'>닉네임</th>
                     <th style="width: 10%" class='fixedHeader'>생일</th>
                     <th style="width: 10%" class='fixedHeader'>가입상태</th>
-                    <th style="width: 10%" class='fixedHeader'>회비 미납 여부</td>                  
+                    <th style="width: 10%" class='fixedHeader'>회비 미납 여부</th>                  
                   </tr>
   
                 </thead>
@@ -33,12 +34,12 @@
                   <c:forEach items="${list}" var="item">
                     <tr>
                       <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>${item.gradeNo}</td>
+                      <td>${item.name}</td>
+                      <td>${item.nickname}</td>
+                      <td>${item.birthday}</td>
+                      <td>${item.register}</td>
+                      <td><input type="checkbox" name='register'></td>
                     </tr>
                   </c:forEach>
                 </tbody>

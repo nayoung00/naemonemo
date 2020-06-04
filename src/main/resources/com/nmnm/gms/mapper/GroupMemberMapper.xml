@@ -40,7 +40,7 @@
 		<select id="findAll" resultMap="GroupMemberMap" parameterType="int">
 				<include refid="select1" />
 				WHERE
-          gm.group_no=#{groupNumber}
+          gm.group_no=#{groupNo}
 		</select>
 
 

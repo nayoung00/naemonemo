@@ -5,7 +5,7 @@ import com.nmnm.gms.domain.GroupMember;
 
 public interface GroupMemberService {
 
-  List<GroupMember> list(int groupNumber) throws Exception;
+  List<GroupMember> list(int groupNo) throws Exception;
   
   int delete(int memberNo) throws Exception;
 
@@ -19,4 +19,5 @@ public interface GroupMemberService {
 
   
   List<GroupMember> search(String keyword) throws Exception;
+
 }

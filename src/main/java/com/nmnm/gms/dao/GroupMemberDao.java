@@ -13,7 +13,7 @@ public interface GroupMemberDao {
 	int insert(GroupMember memberNo) throws Exception;
 
 	// groupNo가 n인 member list
-	List<GroupMember> findAll(int groupNumber) throws Exception;
+	List<GroupMember> findAll(int groupNo) throws Exception;
 
 	GroupMember findByNo(int memberNo) throws Exception;
 

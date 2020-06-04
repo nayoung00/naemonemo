@@ -178,7 +178,10 @@ INSERT INTO nm_notice_reply(content,notice_no,member_no)
 INSERT INTO nm_plan
 (group_no,
 member_no,
+<<<<<<< Updated upstream
 member_name,
+=======
+>>>>>>> Stashed changes
 category,
 back_color,
 title,
@@ -190,12 +193,19 @@ thumbnail,
 address,
 latitude,
 longitude)
+<<<<<<< Updated upstream
 VALUES(1,1,'오승우','중요','#D25565','프로젝트','펜타곤','2020-06-01 12:09', '2020-06-12 13:09','테스트랍니다', 'bit.jpg','주소',11,22);
+=======
+VALUES(1,1,'중요','#D25565','프로젝트','펜타곤','2020-06-01 12:09', '2020-06-12 13:09','테스트랍니다', 'bit.jpg','주소',11,22);
+>>>>>>> Stashed changes
 
 INSERT INTO nm_plan
 (group_no,
 member_no,
+<<<<<<< Updated upstream
 member_name,
+=======
+>>>>>>> Stashed changes
 category,
 back_color,
 title,
@@ -207,16 +217,20 @@ thumbnail,
 address,
 latitude,
 longitude)
+<<<<<<< Updated upstream
 VALUES(1,2,'손진영','선택','#f06595','봄 맞이 소풍','국수봉','2020-06-02 08:09', '2020-06-04 14:09','내용이랍니다', 'bit.jpg','주소',11,22);
+=======
+VALUES(1,2,'선택','#f06595','봄 맞이 소풍','국수봉','2020-06-02 08:09', '2020-06-04 14:09','내용이랍니다', 'bit.jpg','주소',11,22);
+>>>>>>> Stashed changes
 
   
 -- 일정 참여자 & 일정이 먼저
 INSERT INTO nm_plan_member(plan_no,member_no,member_name,group_no,attend)
  values(1,1,'오승우',1,'참가');
  
-INSERT INTO nm_plan_member(plan_no,member_no,group_no,attend)
- values(1,2,'하하',1,'불참');
-
+INSERT INTO nm_plan_member(plan_no,member_no,member_name,group_no,attend)
+ values(1,2,'손진영',1,'참가');
+ 
 -- 피드 예제
 INSERT INTO nm_feed(member_no,group_no,title,content)
   values(1,1,'어제 번개 사진','다음에 한 번 더 해요');

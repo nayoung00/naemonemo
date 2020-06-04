@@ -59,7 +59,7 @@ public class PlanServiceImpl implements PlanService {
   }
 
   @Override
-  public List<Plan> find(int planNo) throws Exception {
+  public List<PlanMember> find(int planNo) throws Exception {
     return planDao.findPlanMember(planNo);
   }
 }

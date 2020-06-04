@@ -28,23 +28,7 @@
 
 			<ul class="nav navbar-nav navbar-right">
 
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="fa fa-bell"></i> <b
-						class="caret hidden-sm hidden-xs"></b> <span
-						class="notification hidden-sm hidden-xs">4</span>
-						<p class="hidden-lg hidden-md">
-							5 알림 <b class="caret"></b>
-						</p>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="#">알림 1</a></li>
-						<li><a href="#">알림 2</a></li>
-						<li><a href="#">알림 3</a></li>
-						<li><a href="#">알림 4</a></li>
-						<li><a href="#">전체알림보기</a></li>
-					</ul></li>
-				<li class="message"><a href="#"> <i class="fa fa-envelope"></i>
-				</a></li>
+		
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <i class="fa fa-user"></i>
 				</a>

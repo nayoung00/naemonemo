@@ -5,12 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<h1>모임 홈 = 값이 안받아 와진다</h1>
+<h1>모임 홈 = 그룹넘버값이 안받아 와진다</h1>
 
 <c:if test="${not empty group}">
 
 <p>
-<img src="${pageContext.servletContext.contextPath}/upload/group/${groupPhoto.filepath}" width='360'>
+<img src="${pageContext.servletContext.contextPath}/upload/group/${group.groupPhoto}" width='360'>
 </p>
 
 번호: ${group.groupNo}<br>

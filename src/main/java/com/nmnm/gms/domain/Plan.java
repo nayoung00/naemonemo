@@ -36,6 +36,7 @@ public class Plan {
         + ", startHour=" + startHour + ", endHour=" + endHour + ", title=" + title + ", thumbnail="
         + thumbnail + ", content=" + content + ", category=" + category + ", address=" + address
         + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
+<<<<<<< Updated upstream
         + ", backgroundColor=" + backgroundColor + ", allday=" + allday + ", planMember="
         + planMember + "]";
   }
@@ -61,125 +62,107 @@ public class Plan {
   }
 
 
+=======
+        + ", backgroundColor=" + backgroundColor + ", allday=" + allday + "]";
+  }
+>>>>>>> Stashed changes
   public int getPlanNo() {
     return planNo;
   }
-
   public void setPlanNo(int planNo) {
     this.planNo = planNo;
   }
-
   public int getGroupNo() {
     return groupNo;
   }
-
   public void setGroupNo(int groupNo) {
     this.groupNo = groupNo;
   }
-
   public int getMemberNo() {
     return memberNo;
   }
-
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
   }
-
+  public String getMemberName() {
+    return memberName;
+  }
+  public void setMemberName(String memberName) {
+    this.memberName = memberName;
+  }
   public String getStartDate() {
     return startDate;
   }
-
   public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
-
   public String getEndDate() {
     return endDate;
   }
-
   public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
-
   public String getStartHour() {
     return startHour;
   }
-
   public void setStartHour(String startHour) {
     this.startHour = startHour;
   }
-
   public String getEndHour() {
     return endHour;
   }
-
   public void setEndHour(String endHour) {
     this.endHour = endHour;
   }
-
   public String getTitle() {
     return title;
   }
-
   public void setTitle(String title) {
     this.title = title;
   }
-
   public String getThumbnail() {
     return thumbnail;
   }
-
   public void setThumbnail(String thumbnail) {
     this.thumbnail = thumbnail;
   }
-
   public String getContent() {
     return content;
   }
-
   public void setContent(String content) {
     this.content = content;
   }
-
   public String getCategory() {
     return category;
   }
-
   public void setCategory(String category) {
     this.category = category;
   }
-
   public String getAddress() {
     return address;
   }
-
   public void setAddress(String address) {
     this.address = address;
   }
-
   public int getLatitude() {
     return latitude;
   }
-
   public void setLatitude(int latitude) {
     this.latitude = latitude;
   }
-
   public int getLongitude() {
     return longitude;
   }
-
   public void setLongitude(int longitude) {
     this.longitude = longitude;
   }
-
   public Date getCreateDate() {
     return createDate;
   }
-
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
+<<<<<<< Updated upstream
 
   public String getBackgroundColor() {
     return backgroundColor;
@@ -193,6 +176,17 @@ public class Plan {
     return allday;
   }
 
+=======
+  public String getBackgroundColor() {
+    return backgroundColor;
+  }
+  public void setBackgroundColor(String backgroundColor) {
+    this.backgroundColor = backgroundColor;
+  }
+  public boolean isAllday() {
+    return allday;
+  }
+>>>>>>> Stashed changes
   public void setAllday(boolean allday) {
     this.allday = allday;
   }

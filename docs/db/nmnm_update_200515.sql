@@ -318,7 +318,10 @@ CREATE TABLE nm_plan (
   member_no   INTEGER      NULL     COMMENT '회원번호', -- 회원번호
   start_date  DATETIME     NOT NULL COMMENT '시작일', -- 시작일
   end_date    DATETIME     NOT NULL COMMENT '종료일', -- 종료일
+<<<<<<< Updated upstream
   member_name VARCHAR(20)  NULL     COMMENT '이름', -- 이름
+=======
+>>>>>>> Stashed changes
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   category    VARCHAR(20)  NULL     COMMENT '카테고리', -- 카테고리
   content     TEXT         NULL     COMMENT '내용', -- 내용

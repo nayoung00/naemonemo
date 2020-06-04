@@ -67,7 +67,11 @@
 </insert>
 
 <!-- 보류 -->
+<<<<<<< Updated upstream
   <insert id="applyPlanMember" parameterType="com.nmnm.gms.domain.PlanMember">
+=======
+  <insert id="applyPlan" parameterType="com.nmnm.gms.domain.PlanMember">
+>>>>>>> Stashed changes
     insert into nm_plan_member(
     plan_no,
     group_no,
@@ -80,6 +84,7 @@
     #{attend}
     )
 </insert>
+<<<<<<< Updated upstream
 
     <select id="findPlanMember" resultMap="PlanMemberMap" parameterType="int">
       select 
@@ -96,6 +101,8 @@
      where pm.group_no = p.group_no and pm.attend like '참가' and pm.plan_no=#{planNo}
     </select>
 
+=======
+>>>>>>> Stashed changes
 
    <select id="findAll" resultMap="PlanMap">
     select
@@ -113,7 +120,10 @@
     group_no,
       plan_no,
       member_no,
+<<<<<<< Updated upstream
       member_name,
+=======
+>>>>>>> Stashed changes
       DATE_FORMAT(start_date,'%Y-%m-%d %H:%i') start_date,
       DATE_FORMAT(end_date,'%Y-%m-%d %H:%i') end_date,
       title,
@@ -146,7 +156,11 @@
       p.longitude,
       p.create_date,
       p.back_color,
+<<<<<<< Updated upstream
       m.member_name
+=======
+      m.member_name memberName
+>>>>>>> Stashed changes
     from 
       nm_plan p join nm_member m
      where p.group_no=#{planNo} and m.member_no=p.member_no

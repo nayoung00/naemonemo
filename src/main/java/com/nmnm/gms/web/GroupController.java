@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Group;
+import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.interceptor.Auth;
 import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.GroupService;
@@ -105,17 +107,23 @@ public class GroupController {
     }
   }
 
-  // 멤버가 개입한 모임 리스트
+  // 멤버가 가입한 모임 리스트 - httpSession으로 memberInfo에 memberNo담아서 받아옴 
   @GetMapping("listByJoin")
-  public void listByJoin(Model model) throws Exception {
-    model.addAttribute("listByJoin", groupService.listByJoin());
+  public void listByJoin(Model model, HttpSession httpSession) throws Exception {
+    
+    Member memberInfo = (Member) httpSession.getAttribute("memberInfo");
+    model.addAttribute("listByJoin", groupService.listByJoin(memberInfo.getMemberNo()));
   }
 
-  // 추천 모임 리스트
+  // 추천 모임 리스트 - httpSession으로 memberInfo에 interest담아서 받아옴
   @GetMapping("listByRec")
-  public void listByRec(Model model) throws Exception {
+  public void listByRec(Model model, HttpSession httpSession) throws Exception {
+    
+    Member memberInfo = (Member) httpSession.getAttribute("memberInfo");
+    
     System.out.println("listByRec :: Test");
-    List<Group> list = groupService.listByRec();
+    System.out.println("interest :: " + memberInfo.getInterest());
+    List<Group> list = groupService.listByRec(memberInfo.getInterest());
     for(Group g : list) {
       System.out.println(g);
     }

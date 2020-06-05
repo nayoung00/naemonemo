@@ -2,18 +2,17 @@ package com.nmnm.gms.service;
 
 import java.util.List;
 import com.nmnm.gms.domain.Group;
-import com.nmnm.gms.domain.GroupMember;
 
 public interface GroupService {
 
   // 모든 모임 리스트
   List<Group> list() throws Exception;
   
-  // 멤버가 가입한 모임 리스트
-  List<Group> listByJoin() throws Exception;
+  // 멤버가 가입한 모임 리스트 - 파라미터 멤버넘버기 때문에 인트
+  List<Group> listByJoin(int memberNo) throws Exception;
   
-  // 추천 모임 리스트
-  List<Group> listByRec() throws Exception;
+  // 추천 모임 리스트 - 파라미터 인터레스트기때문에 스트링
+  List<Group> listByRec(String interest) throws Exception;
   
   // 신규 모임 리스트 
   List<Group> listByCd() throws Exception;

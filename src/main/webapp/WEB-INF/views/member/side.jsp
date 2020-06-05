@@ -8,8 +8,8 @@
       <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
       <div class="sidebar-wrapper">
         <div class="logo" style="margin:20px 45px;">    
-            <a href="/nmnm/app/moim/home?groupNo=${group.groupNo}"> 
-            <img src="${pageContext.request.getContextPath()}/images/logo/logo_white2.png"  width="170" height="50" alt="..." class="logo" >
+            <a href="../../index.html"> 
+            <img src="${pageContext.request.getContextPath()}/logo/logo_white2.png"  width="170" height="50" alt="..." class="logo" >
             </a>
 
         </div>
@@ -29,12 +29,7 @@
                         <p>신규회원</p>
                     </a>
                 </li>
-                <li> 
-                    <a href="#">
-                        <i class="pe-7s-note"></i>
-                        <p>?</p>
-                    </a>
-                </li>
+ 
               </ul>
       </div>
     </div>

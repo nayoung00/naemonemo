@@ -11,6 +11,8 @@ DEFAULT COLLATE utf8_general_ci;
 
 USE nmnmdb;
 
+
+
 -- 공지사항
 DROP TABLE IF EXISTS nm_notice RESTRICT;
 
@@ -19,9 +21,6 @@ DROP TABLE IF EXISTS nm_notice_reply RESTRICT;
 
 -- 등급
 DROP TABLE IF EXISTS nm_grade RESTRICT;
-
--- 메시지
-DROP TABLE IF EXISTS nm_message RESTRICT;
 
 -- 모임
 DROP TABLE IF EXISTS nm_group RESTRICT;
@@ -40,9 +39,6 @@ DROP TABLE IF EXISTS nm_co RESTRICT;
 
 -- 소통댓글
 DROP TABLE IF EXISTS nm_co_reply RESTRICT;
-
--- 알림
-DROP TABLE IF EXISTS nm_alram RESTRICT;
 
 -- 일정
 DROP TABLE IF EXISTS nm_plan RESTRICT;
@@ -129,31 +125,6 @@ ALTER TABLE nm_grade
     PRIMARY KEY (
       grade_no -- 등급번호
     );
-
--- 메시지
-CREATE TABLE nm_message (
-  message_no  INTEGER      NOT NULL COMMENT '메시지번호', -- 메시지번호
-  sender      INTEGER      NOT NULL COMMENT '발신자', -- 발신자
-  receiver    INTEGER      NOT NULL COMMENT '수신자', -- 수신자
-  title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content     TEXT         NOT NULL COMMENT '내용', -- 내용
-  create_date DATETIME     NULL     DEFAULT now() COMMENT '날짜', -- 날짜
-  read_date   DATETIME     NULL     COMMENT '확인일시' -- 확인일시
-)
-COMMENT '메시지';
-
--- 메시지
-ALTER TABLE nm_message
-  ADD CONSTRAINT PK_nm_message -- 메시지 기본키
-    PRIMARY KEY (
-      message_no -- 메시지번호
-    );
-
-ALTER TABLE nm_message
-  MODIFY COLUMN message_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '메시지번호';
-
-ALTER TABLE nm_message
-  AUTO_INCREMENT = 1;
 
 -- 모임
 CREATE TABLE nm_group (
@@ -295,22 +266,6 @@ ALTER TABLE nm_co_reply
 ALTER TABLE nm_co_reply
   AUTO_INCREMENT = 1;
 
--- 알림
-CREATE TABLE nm_alram (
-  member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  notice_no INTEGER NULL     DEFAULT 0 COMMENT '공지사항번호', -- 공지사항번호
-  plan_no   INTEGER NULL     DEFAULT 0 COMMENT '일정번호', -- 일정번호
-  feed_no   INTEGER NULL     DEFAULT 0 COMMENT '피드번호' -- 피드번호
-)
-COMMENT '알림';
-
--- 알림
-ALTER TABLE nm_alram
-  ADD CONSTRAINT PK_nm_alram -- 알림 기본키
-    PRIMARY KEY (
-      member_no -- 회원번호
-    );
-
 -- 일정
 CREATE TABLE nm_plan (
   plan_no     INTEGER      NOT NULL COMMENT '일정번호', -- 일정번호
@@ -318,10 +273,7 @@ CREATE TABLE nm_plan (
   member_no   INTEGER      NULL     COMMENT '회원번호', -- 회원번호
   start_date  DATETIME     NOT NULL COMMENT '시작일', -- 시작일
   end_date    DATETIME     NOT NULL COMMENT '종료일', -- 종료일
-<<<<<<< Updated upstream
   member_name VARCHAR(20)  NULL     COMMENT '이름', -- 이름
-=======
->>>>>>> Stashed changes
   title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   category    VARCHAR(20)  NULL     COMMENT '카테고리', -- 카테고리
   content     TEXT         NULL     COMMENT '내용', -- 내용
@@ -565,26 +517,6 @@ ALTER TABLE nm_notice_reply
       member_no -- 회원번호
     );
 
--- 메시지
-ALTER TABLE nm_message
-  ADD CONSTRAINT FK_nm_member_TO_nm_message -- 회원 -> 메시지
-    FOREIGN KEY (
-      sender -- 발신자
-    )
-    REFERENCES nm_member ( -- 회원
-      member_no -- 회원번호
-    );
-
--- 메시지
-ALTER TABLE nm_message
-  ADD CONSTRAINT FK_nm_member_TO_nm_message2 -- 회원 -> 메시지2
-    FOREIGN KEY (
-      receiver -- 수신자
-    )
-    REFERENCES nm_member ( -- 회원
-      member_no -- 회원번호
-    );
-
 -- 모임계좌
 ALTER TABLE nm_group_account
   ADD CONSTRAINT FK_nm_group_TO_nm_group_account -- 모임 -> 모임계좌
@@ -685,46 +617,6 @@ ALTER TABLE nm_co_reply
     )
     REFERENCES nm_member ( -- 회원
       member_no -- 회원번호
-    );
-
--- 알림
-ALTER TABLE nm_alram
-  ADD CONSTRAINT FK_nm_member_TO_nm_alram -- 회원 -> 알림
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES nm_member ( -- 회원
-      member_no -- 회원번호
-    );
-
--- 알림
-ALTER TABLE nm_alram
-  ADD CONSTRAINT FK_nm_notice_TO_nm_alram -- 공지사항 -> 알림
-    FOREIGN KEY (
-      notice_no -- 공지사항번호
-    )
-    REFERENCES nm_notice ( -- 공지사항
-      notice_no -- 공지사항번호
-    );
-
--- 알림
-ALTER TABLE nm_alram
-  ADD CONSTRAINT FK_nm_plan_TO_nm_alram -- 일정 -> 알림
-    FOREIGN KEY (
-      plan_no -- 일정번호
-    )
-    REFERENCES nm_plan ( -- 일정
-      plan_no -- 일정번호
-    );
-
--- 알림
-ALTER TABLE nm_alram
-  ADD CONSTRAINT FK_nm_feed_TO_nm_alram -- 피드 -> 알림
-    FOREIGN KEY (
-      feed_no -- 피드번호
-    )
-    REFERENCES nm_feed ( -- 피드
-      feed_no -- 피드번호
     );
 
 -- 일정

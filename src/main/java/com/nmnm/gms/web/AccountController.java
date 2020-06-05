@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Account;
-import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.domain.Dues;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.AccountService;
 import com.nmnm.gms.service.DuesService;
-import com.nmnm.gms.service.GroupService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -35,7 +36,7 @@ public class AccountController {
 
   @Autowired
   AccountService accountService;
-  
+
   @Autowired
   DuesService duesService;
 
@@ -124,14 +125,14 @@ public class AccountController {
 
   @GetMapping("search")
   public void search(
-		  @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, 
-		  @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, Model model) throws Exception {
+      @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+      @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+      Model model) throws Exception {
     model.addAttribute("list", accountService.search(startDate, endDate));
   }
-  
-  
-  
-  
+
+
+
   // 회비납부
   @GetMapping("dues")
   public void duesList(Model model) throws Exception {
@@ -142,28 +143,26 @@ public class AccountController {
   // 모임당 회비 안내는 1개씩 존재
   @GetMapping("updateDuesForm")
   public void updateDuesForm(int groupNo, Model model) throws Exception {
-  	
-  	System.out.println("updateDuesForm @@@@@@@@@");
-  	model.addAttribute("dues", duesService.get(groupNo));
+
+    System.out.println("updateDuesForm @@@@@@@@@");
+    model.addAttribute("dues", duesService.get(groupNo));
   }
-  
+
   @PostMapping("updateDues")
   public String updateDues(//
-  		int groupNo,
-  		int entranceFee, //
-  		String duesPeriod, //
-  		int dues
-  		) throws Exception {
-  	System.out.println("updateDues @@@@@@@@@");
-  	System.out.println("updateDues 호출");
+      int groupNo, int entranceFee, //
+      String duesPeriod, //
+      int dues) throws Exception {
+    System.out.println("updateDues @@@@@@@@@");
+    System.out.println("updateDues 호출");
     Dues duess = duesService.get(groupNo);
-    
+
     duess.setEntranceFee(entranceFee);
     duess.setDuesPeriod(duesPeriod);
     duess.setDues(dues);
-  	duesService.update(duess);
-  	return "redirect:dues";
+    duesService.update(duess);
+    return "redirect:dues";
   }
 
-  
+
 }

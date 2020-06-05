@@ -100,6 +100,7 @@
             </div>
             <div class="btn-area">
                 <button type="submit" value=login>SIGNUP</button>
+                <hr>
             </div>
      </form>
      </section>

@@ -9,8 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.GroupService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("moim")
 public class MoimController {
@@ -27,8 +30,8 @@ public class MoimController {
   public MoimController() {
     logger.debug("MoimController 생성됨!");
   }
-  
-  
+
+
   @GetMapping("home")
   public void home(Model model, @RequestParam("groupNo") int groupNo) throws Exception {
     model.addAttribute("group", groupService.get(groupNo));

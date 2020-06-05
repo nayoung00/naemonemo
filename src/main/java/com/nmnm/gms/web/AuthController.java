@@ -33,6 +33,7 @@ import com.google.gson.JsonParser;
 import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.service.MemberService;
 
+
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
@@ -111,9 +112,18 @@ public class AuthController {
       if (member.getAuthStatus().equals("N")) {
         return "redirect:emailAgainFail";
       }
+      
+      // 나라가 멤버 넘버, 멤버인터레스트, 멤버닉네임 받아오려고 만든 줄////////////
+      Member memberInfo = new Member();
+      memberInfo.setMemberNo(member.getMemberNo());
+      memberInfo.setInterest(member.getInterest());
+      memberInfo.setNickname(member.getNickname());
+      session.setAttribute("memberInfo", memberInfo);
+      ////////////////////////////////////////////////
+      
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../index.html");
-
+      
     } else {
       session.invalidate();
       model.addAttribute("refreshUrl", "2;url=login");

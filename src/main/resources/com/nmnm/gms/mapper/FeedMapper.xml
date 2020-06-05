@@ -13,7 +13,8 @@
     <result column="content"  property="content"/>
     <result column="create_date"    property="createDate"/>
     <result column="view_count"    property="viewCount"/>
-
+    <result column="nickname"    property="nickname"/>
+    
     <collection property="feedPhotos" ofType="FeedPhoto">
     <id column="feed_photo_no"   property="no"/>
     <result column="feed_photo_file"    property="filepath"/>
@@ -53,18 +54,19 @@
   </insert>
   
   <select id="findAll" resultMap="FeedMap" parameterType="Map">
-    select
+    SELECT
       f.feed_no,
       f.member_no, 
       f.title,
       f.create_date,
       f.view_count,
       p.feed_photo_no,
-      p.feed_photo_file
-    from 
-      nm_feed f
-      
-    inner join nm_feed_photo p on f.feed_no= p.feed_no
+      p.feed_photo_file,
+      m.nickname
+    FROM
+        (nm_feed AS f LEFT JOIN nm_feed_photo AS p
+          ON f.feed_no= p.feed_no)
+    LEFT JOIN nm_member AS m ON m.member_no=f.member_no
 
     order by
       f.feed_no desc
@@ -73,21 +75,20 @@
 
   
   <select id="findByNo" resultMap="FeedMap" parameterType="int">
-    select
+    SELECT
       f.feed_no,
-      f.member_no,
-      f.group_no,
+      f.member_no, 
       f.title,
-      f.content,
       f.create_date,
       f.view_count,
       p.feed_photo_no,
-      p.feed_photo_file
-    from 
-      nm_feed f
-    
-    inner join nm_feed_photo p on f.feed_no= p.feed_no
-      
+      p.feed_photo_file,
+      m.nickname
+    FROM
+        (nm_feed AS f LEFT JOIN nm_feed_photo AS p
+          ON f.feed_no= p.feed_no)
+    LEFT JOIN nm_member AS m ON m.member_no=f.member_no
+
     where
       f.feed_no=#{feedNo}
   </select>

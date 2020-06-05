@@ -64,13 +64,12 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public void userAuth(String email) throws Exception {
     memberDao.userAuth(email);
-
   }
 
 
   @Override
-  public void update(Member member, HttpSession session) throws Exception {
-    memberDao.update(member);
+  public int update(Member member) throws Exception {
+    return memberDao.update(member);
   }
 
   @Override
@@ -91,7 +90,7 @@ public class MemberServiceImpl implements MemberService {
       memberDao.resetPassword(name, email, newPassword);
       MimeMessage mail = mailSender.createMimeMessage();
       String htmlStr = "<h2>해당 계정의 임시 비밀번호가 발급되었습니다.<br><br>" + "<h3>" + newPassword
-          + "</h3><br><p><a href='http://localhost:9999/nmnm/auth/login'>nmnm 바로가기</a><br>(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
+          + "</h3><br><p><a href='http://localhost:9999/nmnm/app/auth/login'>nmnm 바로가기</a><br>(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
       try {
         mail.setSubject("[임시 비밀번호 발급] nmnm: 임시 비밀번호를 보내드립니다.", "utf-8");
         mail.setText(htmlStr, "utf-8", "html");
@@ -132,11 +131,6 @@ public class MemberServiceImpl implements MemberService {
     session.invalidate();
   }
 
-  @Override
-  public int update(Member member) throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
-  }
 
   @Override
   public Member get(int no) throws Exception {
@@ -189,6 +183,12 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public void resetPassword(Member member) throws Exception {
     memberDao.resetPassword(member);
+  }
+
+  // 나라가 추가함 멤버닉네임 받아오려고
+  @Override
+  public Member findByNo(int no) throws Exception {
+    return memberDao.findByNo(no);
   }
 
 

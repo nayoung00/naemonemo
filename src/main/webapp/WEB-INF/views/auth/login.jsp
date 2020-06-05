@@ -124,6 +124,7 @@
 
 <div class="login_naver_area">
   <a href="<%=apiURL%>"><img width=300 src="https://static.nid.naver.com/oauth/big_g.PNG"/></a>
+ <hr>
  </div>
 
 

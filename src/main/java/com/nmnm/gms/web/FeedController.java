@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nmnm.gms.domain.Feed;
 import com.nmnm.gms.domain.FeedPhoto;
 import com.nmnm.gms.domain.FeedReply;
+import com.nmnm.gms.domain.Member;
+import com.nmnm.gms.interceptor.Auth;
+import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.FeedReplyService;
 import com.nmnm.gms.service.FeedService;
+import com.nmnm.gms.service.MemberService;
 
+@Auth(role = Role.MEMBER)
 @Controller
 @RequestMapping("feed")
 public class FeedController {
@@ -37,6 +43,8 @@ public class FeedController {
   @Autowired
   FeedReplyService feedReplyService;
 
+  @Autowired
+  MemberService memberService;
 
 
   public FeedController() {
@@ -52,16 +60,21 @@ public class FeedController {
       String title, //
       String content, //
       int groupNo, //
-      int memberNo, //
-      MultipartFile[] feedPhotos) throws Exception {
+      MultipartFile[] feedPhotos, //
+      HttpSession httpSession) throws Exception {
 
+    // 세션에 저장된 멤버 객체를 가져옴 // 세션에 저장된 멤버 객체에는 멤버넘버와 인터레스트만 있다
+    Member memberInfo = (Member) httpSession.getAttribute("memberInfo");
+   
     Feed feed = new Feed();
 
     feed.setTitle(title);
     feed.setContent(content);
     feed.setGroupNo(groupNo);
-    feed.setMemberNo(memberNo);
-
+    //세션에 저장된 멤버객체의 멤버넘버를 받아서 노티스에 셋햇다
+    System.out.println("memberNo : " + memberInfo.getMemberNo());
+    feed.setMemberNo(memberInfo.getMemberNo());
+    
     ArrayList<FeedPhoto> feedPhotoArray = new ArrayList<>();
     String dirPath = servletContext.getRealPath("/upload/feed");
     System.out.println("1");

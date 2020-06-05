@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.nmnm.gms.Pagination;
 import com.nmnm.gms.domain.Co;
 import com.nmnm.gms.domain.CoReply;
+import com.nmnm.gms.domain.Member;
 import com.nmnm.gms.interceptor.Auth;
 import com.nmnm.gms.interceptor.Auth.Role;
 import com.nmnm.gms.service.CoReplyService;
@@ -52,9 +54,17 @@ public class CoController {
 
 
   @PostMapping("add")
-  public String add(Co co, MultipartHttpServletRequest mpRequest) throws Exception {
+  public String add(Co co, //
+      MultipartHttpServletRequest mpRequest, //
+      HttpSession httpSession) throws Exception {
     logger.info("write/add");
 
+    // 세션에 저장된 멤버 객체를 가져옴 // 세션에 저장된 멤버 객체에는 멤버넘버와 인터레스트만 있다
+    Member memberInfo = (Member) httpSession.getAttribute("memberInfo");
+    // 세션에 저장된 멤버객체의 멤버넘버를 받아서 노티스에 셋햇다
+    co.setMemberNo(memberInfo.getMemberNo());
+    
+    
     coService.add(co, mpRequest);
 
     return "redirect:list";

@@ -56,7 +56,6 @@
 <br>
 -->
 
-회원번호(작성자조인): <input name='memberNo' type='text'><br>
 
 <div>
       글 분류:<select name="category">

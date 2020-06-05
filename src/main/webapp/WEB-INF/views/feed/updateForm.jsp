@@ -13,8 +13,8 @@
 <textarea name='content' rows='5' cols='60'>${feed.content}</textarea><br>
 
 모임번호: <input name='groupNo' type='text'><br>
-그룹번호: <input name='memberNo' type='text'><br>
 
+작성자:${feed.nickname}<br>
 등록일: ${feed.createDate}<br>
 조회수: ${feed.viewCount}<br>
 

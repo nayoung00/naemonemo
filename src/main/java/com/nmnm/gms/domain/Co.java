@@ -14,7 +14,8 @@ public class Co implements Serializable{
   private String createDate; // now()
   private String nickname; 
   private int viewCount;
-
+  
+  
 
 
 

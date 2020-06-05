@@ -128,10 +128,15 @@ public class NoticeController {
   //
   // 댓글 작성
   @RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
-  public String replyWrite(NoticeReply noticeReply) throws Exception {
+  public String replyWrite(NoticeReply noticeReply, HttpSession httpSession) throws Exception {
 
     logger.info("reply Write");
-
+    
+    // 세션에 저장된 멤버 객체를 가져옴 // 세션에 저장된 멤버 객체에는 멤버넘버와 인터레스트만 있다
+    Member memberInfo = (Member) httpSession.getAttribute("memberInfo");
+    // 세션에 저장된 멤버객체의 멤버넘버를 받아서 노티스에 셋햇다
+    noticeReply.setMemberNo(memberInfo.getMemberNo());
+    
     noticeReplyService.writeReply(noticeReply);
     System.out.println("피드리플라이 한개 추가요");
 

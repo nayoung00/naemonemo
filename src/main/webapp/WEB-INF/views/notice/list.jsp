@@ -12,9 +12,10 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">공지사항</h4>
-                                  <a href='form'>새 글</a><br>
+                               <a class="btn btn-info btn-fill pull-right" href='form'>글쓰기</a><br>
                             </div>
+                            <br>
+                            <br>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
                                     <thead>

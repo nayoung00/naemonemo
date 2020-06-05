@@ -77,7 +77,7 @@
       nm_notice n
     LEFT JOIN nm_member m ON n.member_no=m.member_no
     where
-      notice_no=#{noticeNo}
+      n.notice_no=#{noticeNo}
   </select>
   
   <update id="update" parameterType="Notice">

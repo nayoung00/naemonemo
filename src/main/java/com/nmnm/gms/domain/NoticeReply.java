@@ -12,33 +12,44 @@ public class NoticeReply implements Serializable{
   private int noticeNo; // nm_notice PK/ FK NN
   private int memberNo; // nm_menber PK/ FK N
   private Date createDate; // now()
+  private String nickname;
   
   public NoticeReply() {
   }
 
-  public NoticeReply(int noticeReplyNo, String content, int noticeNo, int memberNo, Date createDate) {
+
+
+  public NoticeReply(int noticeReplyNo, String content, int noticeNo, int memberNo, Date createDate,
+      String nickname) {
+    super();
     this.noticeReplyNo = noticeReplyNo;
     this.content = content;
     this.noticeNo = noticeNo;
     this.memberNo = memberNo;
     this.createDate = createDate;
+    this.nickname = nickname;
   }
 
 
-  @Override
-  public String toString() {
-    return "NoticeReply [noticeReplyNo=" + noticeReplyNo + ", content=" + content + ", noticeNo=" + noticeNo
-        + ", memberNo=" + memberNo + ", createDate=" + createDate + "]";
-  }
+
 
 
   
+  @Override
+  public String toString() {
+    return "NoticeReply [noticeReplyNo=" + noticeReplyNo + ", content=" + content + ", noticeNo="
+        + noticeNo + ", memberNo=" + memberNo + ", createDate=" + createDate + ", nickname="
+        + nickname + "]";
+  }
+
+
+
   public int getNoticeReplyNo() {
     return noticeReplyNo;
   }
 
 
-  
+
   public void setNoticeReplyNo(int noticeReplyNo) {
     this.noticeReplyNo = noticeReplyNo;
   }
@@ -90,6 +101,20 @@ public class NoticeReply implements Serializable{
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
+
+
+
+  public String getNickname() {
+    return nickname;
+  }
+
+
+
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
+
+
 
 
 

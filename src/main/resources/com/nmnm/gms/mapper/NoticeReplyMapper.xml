@@ -12,24 +12,26 @@
     <result column="member_no" property="memberNo"/>
     <result column="content"  property="content"/>
     <result column="create_date"    property="createDate"/>
+    <result column="nickname"    property="nickname"/>
   </resultMap>
   
   <!--  댓글 목록 조회 -->
   <select id="readReply" resultMap="NoticeReplyMap" parameterType="int">
     select
-      notice_no,
-      notice_reply_no,
-      content,
-      member_no, 
-      create_date
+      r.notice_no,
+      r.notice_reply_no,
+      r.content,
+      r.member_no, 
+      r.create_date
     from 
-      nm_notice_reply
+      nm_notice_reply r
+    left join nm_member m on r.member_no=m.member_no
  
     where 
-      notice_no=#{noticeNo}
+      r.notice_no=#{noticeNo}
  
     order by
-      notice_reply_no asc
+      r.notice_reply_no asc
   </select>
 
   

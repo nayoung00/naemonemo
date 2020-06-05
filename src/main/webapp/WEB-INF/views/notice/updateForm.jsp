@@ -14,8 +14,8 @@
 <textarea name='content' rows='5' cols='60'>${notice.content}</textarea><br>
 
 모임번호: <input name='groupNo' type='text'><br>
-그룹번호: <input name='memberNo' type='text'><br>
 
+작성자:${notice.nickname}<br>
 등록일: ${notice.createDate}<br>
 조회수: ${notice.viewCount}<br>
 

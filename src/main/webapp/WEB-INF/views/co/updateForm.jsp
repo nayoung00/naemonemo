@@ -82,7 +82,7 @@
 
 번호: <input name='coNo' readonly type='text' value='${co.coNo}'><br>
 
-작성자(멤버조인해서닉네임뜨게): <input name='memberNo' readonly type='text' value='${co.memberNo}'><br>
+작성자:${co.nickname}<br>
 
 <div>
       글 분류:<select name="category">

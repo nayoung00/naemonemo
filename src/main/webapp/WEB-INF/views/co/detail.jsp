@@ -36,7 +36,7 @@
 
 번호: ${co.coNo}<br>
 글 분류: ${co.category}<br>
-회원번호(작성자닉네임조인): ${co.memberNo}<br>
+작성자: ${co.nickname}<br>
 제목: ${co.title}<br>
 내용: <br>
 ${co.content}<br>

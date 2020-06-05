@@ -71,6 +71,7 @@ public class FeedController {
     feed.setTitle(title);
     feed.setContent(content);
     feed.setGroupNo(groupNo);
+    //세션에 저장된 멤버객체의 멤버넘버를 받아서 노티스에 셋햇다
     System.out.println("memberNo : " + memberInfo.getMemberNo());
     feed.setMemberNo(memberInfo.getMemberNo());
     

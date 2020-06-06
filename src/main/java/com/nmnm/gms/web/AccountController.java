@@ -61,6 +61,7 @@ public class AccountController {
       account.setReceiptPhoto(filename);
     }
     if (accountService.add(account) > 0) {
+    	System.out.println("account add");
       return "redirect:list";
     } else {
       throw new Exception("내역을 추가할 수 없습니다.");

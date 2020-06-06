@@ -18,7 +18,7 @@
                 <li>
                     <a href="list">
                         <i class="pe-7s-#"></i>
-                        <p>account통합조회화면</p>
+                        <p>통합조회화면</p>
                     </a>
                 </li>
                 <li>

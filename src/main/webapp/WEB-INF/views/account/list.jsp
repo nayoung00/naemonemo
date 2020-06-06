@@ -10,9 +10,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card card-plain">
+
+					<div class="content table-responsive table-full-width">
+						<div class="container">
 					<div class="header">
-						<h4 class="title">모임 계좌 조회</h4>
+						<h3 class="title">모임 계좌 조회</h3>
 					</div>
+					<br>
+							<table class="table table-hover">
 					<div class="searchDate">
 						<form action='search' method='get' enctype='multipart/form-data'>
 							<div class="searchDateBox">
@@ -22,13 +27,6 @@
 							</div>
 						</form>
 					</div>
-
-					<div class="content table-responsive table-full-width">
-
-
-
-						<div class="container">
-							<table class="table table-hover">
 								<thead>
 									<th style="width: 10%" class='fixedHeader'>회계번호</th>
 									<th style="width: 10%" class='fixedHeader'>모임계좌아이디</th>
@@ -59,9 +57,8 @@
 									</c:forEach>
 								</tbody>
 							</table>
+						<a href='form' style="float: right;">사용내역추가</a>
 						</div>
-						<a href='form' style="float: right; margin-right: 200px;">사용내역
-							추가</a>
 					</div>
 				</div>
 			</div>

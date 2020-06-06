@@ -23,7 +23,7 @@
         <div class="transition-hover-top" style="font-size : 20px" onclick="location.href='detail?feedNo=${item.feedNo}'">
         ${item.title}</div>
         <p class="card-text mb-0">
-            <img src="${pageContext.servletContext.contextPath}/upload/feed/${item.feedPhotos[0].filepath}" width="300" height="400">
+            <img src="${pageContext.servletContext.contextPath}/upload/feed/${item.feedPhotos[0].filepath}" width="300" height="320">
         </p>
 <br>
       </div>

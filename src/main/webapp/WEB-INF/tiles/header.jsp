@@ -27,17 +27,15 @@
 
 
 			<ul class="nav navbar-nav navbar-right">
-
-		
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="fa fa-user"></i>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="../member/mypage">마이페이지</a></li>
-						<li><a href="../auth/logout">로그아웃</a></li>
-					</ul></li>
-				<li class="separator hidden-lg hidden-md"></li>
+          <c:if test="${not empty loginUser}">
+           <li><a href='../auth/logout'>Logout</a></li>
+           <li><a href='../member/mypage'>Mypage</a></li>
+         </c:if> 
+         <c:if test="${empty loginUser}">
+           <a href='../auth/login'>Login</a>
+         </c:if>
 			</ul>
+
 		</div>
 	</div>
 </nav>

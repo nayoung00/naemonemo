@@ -25,6 +25,7 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public int add(Account account) throws Exception {
+  	System.out.println("account add");
     return accountDao.insert(account);
   }
 

@@ -78,7 +78,7 @@
 		receipt_photo
 		)
 		values(
-		#{group.groupNo},
+		#{groupNo},
 		#{bankInfoId},
 		#{accountTypeName},
 		#{deposit},

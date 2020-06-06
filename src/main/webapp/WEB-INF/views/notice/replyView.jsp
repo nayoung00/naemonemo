@@ -36,7 +36,7 @@
       <li>
       
         <p>
-                  작성자 : ${replyList.memberNo} <br/>
+                  <!-- 작성자 : ${replyList.nickname} <br/> -->
                   작성일 : ${replyList.createDate}
         </p>
         
@@ -64,7 +64,6 @@
   <input type="hidden" id="noticeNo" name="noticeNo" value="${notice.noticeNo}" />
 
   <div>
-    <label for="memberNo">댓글 작성자</label><input type="number" id="memberNo" name="memberNo" />
     <br/>
     <label for="content">댓글 내용</label><input type="text" id="content" name="content" />
   

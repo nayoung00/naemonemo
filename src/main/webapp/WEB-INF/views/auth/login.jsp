@@ -85,7 +85,7 @@
 <body>
     <section class="login-form">
      <form action='login' method='post'> 
-        <h1> "nmnm 로그인"</h1>
+        <h1> "네모내모 로그인"</h1>
         <script src="jquery-3.4.1.js"></script>
             <div class="int-area">
                 <input type="text" name="email" id="email"

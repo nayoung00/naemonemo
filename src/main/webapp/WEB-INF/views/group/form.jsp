@@ -61,8 +61,31 @@ h2 { text-align: center; }
       </select><br>
        </tr>
        <tr class="interest">
-          <td align='left'>카테고리</td>
-          <td colspan='4'><input type="text" name="groupInterest" id='grInterest' placeholder="카테고리 "></td>
+          <td>형태</td>
+          <td colspan="4"><select id='form_check' name='groupForm' id='grForm' >
+               <option>아웃도어/여행
+               <option>운동/스포츠
+               <option>인문학/책/글
+               <option>업종/직무
+               <option>외국/언어
+               <option>문화/공연/축제
+               <option>음악/악기
+               <option>공예/만들기
+               <option>댄스/무용
+               <option>봉사활동
+               <option>사교/인맥
+               <option>차/오토바이
+               <option>사진/영상
+               <option>게임/오락
+               <option>요리/제조
+               <option>반려동물
+               <option>가족/결혼
+               <option>자유주제
+               <option>코딩
+      </select><br>
+
+          <!-- <td align='left'>카테고리</td> 
+          <td colspan='4'><input type="text" name="groupInterest" id='grInterest' placeholder="카테고리 "></td>  -->
           <!-- <button type="button" class="addBtn">항목추가</button> -->
           <!-- <td colspan='1'><button type="button" class="delBtn">삭제</button></td> -->
         </tr>

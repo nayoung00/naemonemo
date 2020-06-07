@@ -3,7 +3,13 @@
     trimDirectiveWhitespaces="true"%>
 
 
-<h1>공지사항 입력</h1>
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+    
+  
+<h6>공지사항 입력</h6>
 
 <form action='add' method='post' enctype='multipart/form-data'>
 
@@ -16,4 +22,6 @@
 <button>등록</button>
 </form>
 
-    
+</div>
+</div>
+</div>

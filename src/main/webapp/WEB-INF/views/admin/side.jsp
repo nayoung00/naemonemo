@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+<% String str = request.getParameter("groupNo"); %>
+
+   
+
 <div class="sidebar" data-color="orange" data-image="#">
 		<!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 		<div class="sidebar-wrapper">
@@ -14,13 +18,13 @@
         <br>
         <br>
 				<ul class="nav">
-						<li><a href="../admin/groupadmin?groupNo=${group.groupNo}"
+						<li><a href="../admin/groupadmin?groupNo=<%=str%>"
 								class="simple-text"> <i class="pe-7s-bell"></i> 모임관리
 						</a></li>
-						<li><a href="../admin/gmList?groupNo=${group.groupNo}"
+						<li><a href="../admin/gmList?groupNo=<%=str%>"
 								class="simple-text"> <i class="pe-7s-user"></i> 회원관리
 						</a></li>
-						<li><a href="../admin/boardadmin?groupNo=${group.groupNo}"
+						<li><a href="../admin/boardadmin?groupNo=<%=str%>"
 								class="simple-text"> <i class="pe-7s-note"></i> 게시판관리
 						</a></li>
 				</ul>

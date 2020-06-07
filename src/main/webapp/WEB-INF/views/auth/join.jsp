@@ -77,7 +77,7 @@
 <body>
     <section class="join-form">
      <form action='join' method='post' id=joinForm> 
-     <h1> "nmnm 회원가입"</h1>
+     <h1> "네모내모 회원가입"</h1>
             <div class="int-area">
                 <input type="text" name="name" id="name" autocomplete="off" 
                  required>

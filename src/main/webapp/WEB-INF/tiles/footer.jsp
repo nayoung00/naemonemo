@@ -5,7 +5,7 @@
    <footer class="footer">
        <div class="container-fluid">
            <p class="copyright pull-right">
-               &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">네모내모</a>
+               &copy; <script>document.write(new Date().getFullYear())</script> <a href="index.html">네모내모</a>
            </p>
        </div>
    </footer>

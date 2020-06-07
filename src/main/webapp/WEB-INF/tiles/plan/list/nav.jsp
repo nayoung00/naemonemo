@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+<% String str = request.getParameter("groupNo"); %>
+
    
   <nav class="navbar navbar-default navbar-fixed">
        <div class="container-fluid">
@@ -12,12 +15,13 @@
                    <span class="icon-bar"></span>
                    <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="../../moim-index.html">모임홈?</a>
-               <a class="navbar-brand" href="../notice/list">공지</a>
-               <a class="navbar-brand" href="../plan/list">일정</a>
-               <a class="navbar-brand" href="../account/list">회계</a>
-               <a class="navbar-brand" href="../feed/list">피드</a>
-               <a class="navbar-brand" href="../member/list">회원</a>
+               <a class="navbar-brand" href="../moim/home?groupNo=<%=str%>">홈</a>
+               <a class="navbar-brand" href="../notice/list?groupNo=<%=str%>">공지</a>
+               <a class="navbar-brand" href="../plan/list?groupNo=<%=str%>">일정</a>
+               <a class="navbar-brand" href="../account/list?groupNo=<%=str%>">회계</a>
+               <a class="navbar-brand" href="../feed/list?groupNo=<%=str%>">피드</a>
+               <a class="navbar-brand" href="../member/list?groupNo=<%=str%>">회원</a>
+               <a class="navbar-brand" href="../admin/manual?groupNo=<%=str%>">관리</a> 
            </div>
            <div class="collapse navbar-collapse">
 

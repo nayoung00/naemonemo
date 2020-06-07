@@ -64,7 +64,7 @@
   <definition name="co/*" extends="noside">
     <put-attribute name="body" value="/WEB-INF/views/co/{1}.jsp" />
   </definition>
-  
+
   <definition name="group/*" extends="noside">
     <put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
   </definition>

@@ -45,13 +45,17 @@ public class AccountController {
   }
 
   @GetMapping("form")
-  public void form() throws Exception {}
+  public void form() throws Exception {
+  	System.out.println("account form 호출");
+  }
 
   @PostMapping("add")
   public String add( //
       Account account, //
       MultipartFile receiptPhotoFile) throws Exception {
+  	System.out.println("account add 호출");
     if (receiptPhotoFile.getSize() > 0) {
+    	System.out.println("account 첨부파일 저장");
       String dirPath = servletContext.getRealPath("/upload/account");
       String filename = UUID.randomUUID().toString();
       receiptPhotoFile.transferTo(new File(dirPath + "/" + filename));
@@ -61,8 +65,10 @@ public class AccountController {
       account.setReceiptPhoto(filename);
     }
     if (accountService.add(account) > 0) {
-      return "redirect:list";
+    	System.out.println("account add 리턴");
+    	return "redirect:list" + "?groupNo=" + account.getGroupNo();
     } else {
+    	System.out.println("account add 예외처리");
       throw new Exception("내역을 추가할 수 없습니다.");
     }
   }

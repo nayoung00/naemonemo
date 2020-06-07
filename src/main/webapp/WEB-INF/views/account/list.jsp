@@ -10,25 +10,28 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card card-plain">
-					<div class="header">
-						<h4 class="title">모임 계좌 조회</h4>
-					</div>
-					<div class="searchDate">
-						<form action='search' method='get' enctype='multipart/form-data'>
-							<div class="searchDateBox">
-								· 기간별 조회 : <input id='startDate' name='startDate' type='date'>
-								~ <input id='endDate' name='endDate' type='date'>
-								<button id='submit_date'>검색</button>
-							</div>
-						</form>
-					</div>
 
 					<div class="content table-responsive table-full-width">
-
-
-
+							<div class="header">
+								<h3 class="title">모임 계좌 조회</h3>
+							</div>
 						<div class="container">
+							<br>
 							<table class="table table-hover">
+								<div class="searchDate">
+									<form action='search' method='get'
+										enctype='multipart/form-data'>
+										<div class="searchDateBox">
+											· 기간별 조회 : <input id='startDate' name='startDate' type='date'>
+											~ <input id='endDate' name='endDate' type='date'>
+											<button id='submit_date'>검색</button>
+										</div>
+									</form>
+									<form action="form" method="GET">
+										<input type="hidden" name="groupNo" value="${param.groupNo}" />
+										<button style="float: right;">사용내역추가</button>
+									</form>
+								</div>
 								<thead>
 									<th style="width: 10%" class='fixedHeader'>회계번호</th>
 									<th style="width: 10%" class='fixedHeader'>모임계좌아이디</th>
@@ -59,9 +62,9 @@
 									</c:forEach>
 								</tbody>
 							</table>
+
+
 						</div>
-						<a href='form' style="float: right; margin-right: 200px;">사용내역
-							추가</a>
 					</div>
 				</div>
 			</div>
@@ -108,8 +111,8 @@
 	opacity: 1;
 }
 
-<!--기간검색 -->
-.searchDate {
+<!--
+기간검색 -->.searchDate {
 	background-color: lightgray;
 	border-radius: 10px;
 	width: 800px;
@@ -128,27 +131,33 @@
 
 <!-- 기간 검색 유효성 검사 -->
 <script>
- function searchDateform() {
-	var start = $('#startDate').val();
-	var end = $('#endDate').val();
-	if (start == null || start == "") {
-    alert("시작 기간을 입력해주세요!");
-    return false;
-  }
-  if (end == null || end == "") {
-    alert("종료 기간을 입력해주세요!");
-    return false;
-  }
- }
- $(function() {
-  $(document).on("click", "#submit_date", function(e) {
-    if (searchDateform() == false) {
-      e.preventDefault();
-      document.getElementById("startDate").value = $('#startDate').val();
-      document.getElementById("endDate").value = $('#endDate').val();
-    }
-  });
-});
+	function searchDateform() {
+		var start = $('#startDate').val();
+		var end = $('#endDate').val();
+		if (start == null || start == "") {
+			alert("시작 기간을 입력해주세요!");
+			return false;
+		}
+		if (end == null || end == "") {
+			alert("종료 기간을 입력해주세요!");
+			return false;
+		}
+	}
+	$(function() {
+		$(document)
+				.on(
+						"click",
+						"#submit_date",
+						function(e) {
+							if (searchDateform() == false) {
+								e.preventDefault();
+								document.getElementById("startDate").value = $(
+										'#startDate').val();
+								document.getElementById("endDate").value = $(
+										'#endDate').val();
+							}
+						});
+	});
 </script>
 <!-- 
 <script>

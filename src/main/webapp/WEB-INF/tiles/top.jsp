@@ -31,8 +31,8 @@
 														<i class="fa fa-bars"></i>
 												</button>
 												<div class="logo" style="margin: 0px;">
-														<a href="${pageContext.request.getContextPath()}/index.html" class="navbar-brand"> <img
-																src="${pageContext.request.getContextPath()}/logo/logo_black2.png" width="170" height="50">
+														<a href="${pageContext.request.getContextPath()}/index.html" class="navbar-brand"> 
+														<img src="${pageContext.request.getContextPath()}/logo/logo_black2.png" width="170" height="50">
 														</a>
 												</div>
 										</div>

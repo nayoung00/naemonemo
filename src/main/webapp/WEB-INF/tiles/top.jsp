@@ -16,9 +16,9 @@
 												<ul>
 														<li class="profile"><c:if
 																		test="${not empty loginUser}">
-																		<a href='../auth/logout'>Logout</a>
+																		<a href='../auth/logout'>Logout</a></li>
 																		<li><a href='../member/mypage'>Mypage</a></li>
-																</c:if> <c:if test="${empty loginUser}">
+																<li></c:if> <c:if test="${empty loginUser}">
 																		<a href='../auth/login'>Login</a>
 																</c:if></li>
 												</ul>
@@ -26,10 +26,6 @@
 
 
 										<div class="navbar-header">
-												<button type="button" class="navbar-toggle"
-														data-toggle="collapse" data-target="#navbar-menu">
-														<i class="fa fa-bars"></i>
-												</button>
 												<div class="logo" style="margin: 0px;">
 														<a href="${pageContext.request.getContextPath()}/index.html" class="navbar-brand"> 
 														<img src="${pageContext.request.getContextPath()}/logo/logo_black2.png" width="170" height="50">

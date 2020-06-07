@@ -31,18 +31,24 @@ h2 { text-align: center; }
    </div>
     <div class="blog-content">
      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-plain">
 
 
 
 <form name='addForm' onsubmit="return checkz()" method="post" action="add" enctype="multipart/form-data" > 
 <input type="hidden" name="groupAdmin" value="${loginUser.memberNo }"/>
+
 <h2 align="center">모임 생성</h2>
+<br>
+<br>
     <div class="box" style="background: #BDBDBD;">
         <img  class="profile" id="blah" src="#"/>
     </div><br/>
-   <table id='add_group' align="center" border="3" cellspacing="0">
+   <table style="margin-left: auto; margin-right: auto;" id='add_group' align="center" border="3" cellspacing="0">
        <tr>
-          <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;">모임기본정보</td>
+          <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;"></td>
         </tr>
         <tr> 
           <td align="left">이름</td>
@@ -51,7 +57,7 @@ h2 { text-align: center; }
     
        <tr>
           <td >소개</td>
-           <td colspan="4"><input type="text" name='groupInfo' maxlength="12" id="grInfo" placeholder="모임소개 " > 4~12자리 간단한 모임소개</td>
+          <td colspan="4"><input type="text" name='groupInfo' maxlength="12" id="grInfo" placeholder="모임소개 " > 4~12자리 간단한 모임소개</td>
        </tr>
         <tr>
           <td>형태</td>
@@ -62,32 +68,27 @@ h2 { text-align: center; }
        </tr>
        <tr class="interest">
           <td>형태</td>
-          <td colspan="4"><select id='form_check' name='groupForm' id='grForm' >
-               <option>아웃도어/여행
-               <option>운동/스포츠
-               <option>인문학/책/글
-               <option>업종/직무
-               <option>외국/언어
-               <option>문화/공연/축제
-               <option>음악/악기
-               <option>공예/만들기
-               <option>댄스/무용
-               <option>봉사활동
-               <option>사교/인맥
-               <option>차/오토바이
-               <option>사진/영상
-               <option>게임/오락
-               <option>요리/제조
-               <option>반려동물
-               <option>가족/결혼
-               <option>자유주제
-               <option>코딩
+          <td colspan="4"><select id='form_check' name='groupInterest' id='groupInterest' >
+               <option value="아웃도어/여행">아웃도어/여행
+               <option value="운동/스포츠">운동/스포츠
+               <option value="인문학/책/글">인문학/책/글
+               <option value="업종/직무">업종/직무
+               <option value="외국/언어">외국/언어
+               <option value="문화/공연/축제">문화/공연/축제
+               <option value="음악/악기">음악/악기
+               <option value="공예/만들기">공예/만들기
+               <option value="댄스/무용">댄스/무용
+               <option value="봉사활동">봉사활동
+               <option value="사교/인맥">사교/인맥
+               <option value="차/오토바이">차/오토바이
+               <option value="사진/영상">사진/영상
+               <option value="게임/오락">게임/오락
+               <option value="요리/제조">요리/제조
+               <option value="반려동물">반려동물
+               <option value="가족/결혼">가족/결혼
+               <option value="자유주제">자유주제
+               <option value="코딩">코딩
       </select><br>
-
-          <!-- <td align='left'>카테고리</td> 
-          <td colspan='4'><input type="text" name="groupInterest" id='grInterest' placeholder="카테고리 "></td>  -->
-          <!-- <button type="button" class="addBtn">항목추가</button> -->
-          <!-- <td colspan='1'><button type="button" class="delBtn">삭제</button></td> -->
         </tr>
         <tr>
           <td>사진</td>
@@ -313,12 +314,16 @@ function checkz() {
     }
     // 카카오맵 api 끝
 </script>
+<br>
 <p align="center">
         <input type="submit" value="모임 생성">
         <input type="reset" value="다시입력">
-  </p>
-   </form>
+</p>
 
+</form>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

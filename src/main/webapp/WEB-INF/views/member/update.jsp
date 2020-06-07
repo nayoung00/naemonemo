@@ -102,38 +102,44 @@
                                                     <div class="checkbox">
                                                     <div class="row">
                                                     <br><br><br><br><br><br><br><hr>
-                                                        <input id="checkbox1" type="checkbox" name="interest" value="sports"> 
-                                                        <label for="checkbox1">Sports</label>
-                                                        <input id="checkbox2" name="interest" value="coding" type="checkbox">
-                                                        <label for="checkbox2">Coding</label>
-                                                        <input id="checkbox3" name="interest" value="music" type="checkbox">
-                                                        <label for="checkbox3">Music</label>
-														<input id="checkbox4" type="checkbox" name="interest" value="film"> 
-														<label for="checkbox4">Film</label>
-														<input id="checkbox5" type="checkbox" name="interest" value="celebrity gossip"> 
-														<label for="checkbox5">Celebrity Gossip</label>
-														<input id="checkbox6" type="checkbox" name="interest" value="art"> 
-														<label for="checkbox6">Art</label>
-														<input id="checkbox7" type="checkbox" name="interest" value="philosophy"> 
-														<label for="checkbox7">Philosophy</label>
-														<input id="checkbox8" type="checkbox" name="interest" value="beer"> 
-														<label for="checkbox8">Beer</label>
-														<input id="checkbox9" type="checkbox" name="interest" value="wine"> 
-														<label for="checkbox9">Wine</label>
-														<input id="checkbox10" type="checkbox" name="interest" value="gadgets"> 
-														<label for="checkbox10">Gadgets</label>
-														<input id="checkbox11" type="checkbox" name="interest" value="gaming"> 
-														<label for="checkbox11">Gaming</label>
-														<input id="checkbox12" type="checkbox" name="interest" value="politics"> 
-														<label for="checkbox12">Politics</label>
-														<input id="checkbox13" type="checkbox" name="interest" value="activism"> 
-														<label for="checkbox13">Activism</label>
-														<input id="checkbox14" type="checkbox" name="interest" value="environmentalism"> 
-														<label for="checkbox14">Environmentalism</label>
-														<input id="checkbox15" type="checkbox" name="interest" value="cooking"> 
-														<label for="checkbox15">Cooking</label>
-														<input id="checkbox16" type="checkbox" name="interest" value="crafts"> 
-														<label for="checkbox16">Crafts</label> 
+                                                        <input id="checkbox1" type="checkbox" name="interest" value="아웃도어/여행"> 
+                                                        <label for="checkbox1">아웃도어/여행</label>
+                                                        <input id="checkbox2" name="interest" value="운동/스포츠" type="checkbox">
+                                                        <label for="checkbox2">운동/스포츠</label>
+                                                        <input id="checkbox3" name="interest" value="인문학/책/글" type="checkbox">
+                                                        <label for="checkbox3">인문학/책/글</label>
+														<input id="checkbox4" type="checkbox" name="interest" value="업종/직무"> 
+														<label for="checkbox4">업종/직무</label>
+														<input id="checkbox5" type="checkbox" name="interest" value="외국/언어"> 
+														<label for="checkbox5">외국/언어</label>
+														<input id="checkbox6" type="checkbox" name="interest" value="문화/공연/축제"> 
+														<label for="checkbox6">문화/공연/축제</label>
+														<input id="checkbox7" type="checkbox" name="interest" value="음악/악기"> 
+														<label for="checkbox7">음악/악기</label>
+														<input id="checkbox8" type="checkbox" name="interest" value="공예/만들기"> 
+														<label for="checkbox8">공예/만들기</label>
+														<input id="checkbox9" type="checkbox" name="interest" value="댄스/무용"> 
+														<label for="checkbox9">댄스/무용</label>
+														<input id="checkbox10" type="checkbox" name="interest" value="봉사활동"> 
+														<label for="checkbox10">봉사활동</label>
+														<input id="checkbox11" type="checkbox" name="interest" value="사교/인맥"> 
+														<label for="checkbox11">사교/인맥</label>
+														<input id="checkbox12" type="checkbox" name="interest" value="차/오토바이"> 
+														<label for="checkbox12">차/오토바이</label>
+														<input id="checkbox13" type="checkbox" name="interest" value="사진/영상"> 
+														<label for="checkbox13">사진/영상</label>
+														<input id="checkbox14" type="checkbox" name="interest" value="게임/오락"> 
+														<label for="checkbox14">게임/오락</label>
+														<input id="checkbox15" type="checkbox" name="interest" value="요리/제조"> 
+														<label for="checkbox15">요리/제조</label>
+														<input id="checkbox16" type="checkbox" name="interest" value="반려동물"> 
+														<label for="checkbox16">반려동물</label> 
+														                            <input id="checkbox17" type="checkbox" name="interest" value="가족/결혼"> 
+                            <label for="checkbox17">가족/결혼</label> 
+                                                        <input id="checkbox18" type="checkbox" name="interest" value="자유주제"> 
+                            <label for="checkbox18">자유주제</label> 
+                                                        <input id="checkbox19" type="checkbox" name="interest" value="코딩"> 
+                            <label for="checkbox19">코딩</label> 
                                                     </div> 
                                                     </div>
                         <input type="text" id="interest"  name = "interest" value="${loginUser.interest}">

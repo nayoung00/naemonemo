@@ -68,8 +68,6 @@
                                 <p id="category" class="form-control">${plan.category}</p>
                             </div>
                         </div>                                    
-                                    <button type="submit"  class="btn btn-info btn-fill pull-right">등록하기</button>
-                                    <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>

@@ -23,6 +23,7 @@
     <result column="latitude" property="latitude"/>
     <result column="longitude" property="longitude"/>
     <result column="create_date" property="createDate"/>
+    <result column="place_name" property="placeName"/>
      <collection property="planMember" ofType="PlanMember">
       <result column="plan_no"   property="planNo"/>
       <result column="member_name"   property="memberName"/>
@@ -100,6 +101,9 @@
    <select id="findAll" resultMap="PlanMap">
     select
      plan_no,
+     member_name,
+     category,
+     place_name,
      title,
      create_date
     from

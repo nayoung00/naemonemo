@@ -24,6 +24,7 @@ public class Plan {
   private int longitude; // 경도 N
   private Date createDate;
   private String backgroundColor;
+  private String placeName;
   private boolean allday = false;
 
   //  @JsonIgnore
@@ -36,30 +37,9 @@ public class Plan {
         + ", startHour=" + startHour + ", endHour=" + endHour + ", title=" + title + ", thumbnail="
         + thumbnail + ", content=" + content + ", category=" + category + ", address=" + address
         + ", latitude=" + latitude + ", longitude=" + longitude + ", createDate=" + createDate
-        + ", backgroundColor=" + backgroundColor + ", allday=" + allday + ", planMember="
-        + planMember + "]";
+        + ", backgroundColor=" + backgroundColor + ", placeName=" + placeName + ", allday=" + allday
+        + ", planMember=" + planMember + "]";
   }
-
-
-  public String getMemberName() {
-    return memberName;
-  }
-
-
-  public void setMemberName(String memberName) {
-    this.memberName = memberName;
-  }
-
-
-  public List<PlanMember> getPlanMember() {
-    return planMember;
-  }
-
-
-  public void setPlanMember(List<PlanMember> planMember) {
-    this.planMember = planMember;
-  }
-
 
   public int getPlanNo() {
     return planNo;
@@ -83,6 +63,14 @@ public class Plan {
 
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
+  }
+
+  public String getMemberName() {
+    return memberName;
+  }
+
+  public void setMemberName(String memberName) {
+    this.memberName = memberName;
   }
 
   public String getStartDate() {
@@ -189,12 +177,28 @@ public class Plan {
     this.backgroundColor = backgroundColor;
   }
 
+  public String getPlaceName() {
+    return placeName;
+  }
+
+  public void setPlaceName(String placeName) {
+    this.placeName = placeName;
+  }
+
   public boolean isAllday() {
     return allday;
   }
 
   public void setAllday(boolean allday) {
     this.allday = allday;
+  }
+
+  public List<PlanMember> getPlanMember() {
+    return planMember;
+  }
+
+  public void setPlanMember(List<PlanMember> planMember) {
+    this.planMember = planMember;
   }
 
 

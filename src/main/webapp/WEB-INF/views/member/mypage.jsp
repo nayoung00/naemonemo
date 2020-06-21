@@ -6,14 +6,8 @@
 <title>nmnm</title>
 <link rel="stylesheet"  type="text/css" href="${path}/resources/css/common.css">
 <style type="text/css">
-    .mypage_wrap{
-        margin: 80px auto;
-    }
-    .mypage_title{
-        height: 169px;
-        padding-top: 62px;
-        margin-bottom: 32px;
-    }
+   
+   
     .ohyoyo_mypage{
         font-size: 2em;
     }
@@ -22,19 +16,17 @@
         width: 310px;
         height: 100px;
         margin: 0 auto;
-        font-size: 60px;
-        font-family: 'Nanum Gothic Coding', monospace;
+        font-size: 60pt;
         text-align: center;
+        color: #F4A460;
     }
-    .mypage_content{}
+    
     .mypage_main{
-        margin: 8px auto 0;
-        color: #000;
-        background: #fff;
-        width: 768px;
-        border: 1px solid #dadada;
+        text-align: center;
+        
     }
     .mypage_box{
+    font-size: 60pt;
         width: 1200px;
         margin: 0 auto;
     }
@@ -170,9 +162,8 @@
         <div class="mypage_content">
             <div class="mypage_main">
                 <div class="mypage_box mp_main_wrap">
-                    <div class="mp_main_content">
-                        <div class="mp_m_content_bar">
                         </div>
+                   
                         <div class="mp_main_massage">
                             <p class="msg_userid"><strong>
                                 <span class="name">${loginUser.name}</span>님 반갑습니다.

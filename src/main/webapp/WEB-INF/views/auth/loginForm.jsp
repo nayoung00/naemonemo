@@ -20,9 +20,25 @@
 <p>'${loginUser.name}'님 환영합니다.</p>
 </c:if>
 
+<c:choose>
+<c:when test="${authStatus == 'N'}"> <p>이메일 인증 후 로그인이 가능합니다.</p> </c:when>
+
+<c:when test="${empty loginUser}"> <p>사용자 정보가 유효하지 않습니다.</p> </c:when>
+
+<c:otherwise><p>'${loginUser.name}'님 환영합니다.</p> </c:otherwise>
+
+</c:choose>
+
+
+<%-- 
+<c:if test="${authStatus != 'Y'}">
+<p>이메일 인증 후 로그인이 가능합니다.</p>
+</c:if>
+
+
 <c:if test="${empty loginUser}">
 <p>사용자 정보가 유효하지 않습니다.</p>
-</c:if>
+</c:if> --%>
 
 
 </div>

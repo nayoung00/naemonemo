@@ -7,7 +7,7 @@
 <link rel="stylesheet"  type="text/css" href="${path}/resources/css/common.css">
 <style type="text/css">
     .mypage_wrap{
-        margin: 60px auto;
+        margin: 80px auto;
     }
     .mypage_title{
         height: 169px;

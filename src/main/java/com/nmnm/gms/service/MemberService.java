@@ -62,4 +62,6 @@ public interface MemberService {
 
   // 나라가 추가함 게시판에 멤버닉네임 불러오려고
   Member findByNo(int no) throws Exception;
+
+
 }

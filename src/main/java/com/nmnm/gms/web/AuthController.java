@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -112,7 +113,7 @@ public class AuthController {
       if (member.getAuthStatus().equals("N")) {
         return "redirect:emailAgainFail";
       }
-      
+
       // 나라가 멤버 넘버, 멤버인터레스트, 멤버닉네임 받아오려고 만든 줄////////////
       Member memberInfo = new Member();
       memberInfo.setMemberNo(member.getMemberNo());
@@ -120,10 +121,10 @@ public class AuthController {
       memberInfo.setNickname(member.getNickname());
       session.setAttribute("memberInfo", memberInfo);
       ////////////////////////////////////////////////
-      
+
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../index.html");
-      
+
     } else {
       session.invalidate();
       model.addAttribute("refreshUrl", "2;url=login");
@@ -341,6 +342,59 @@ public class AuthController {
     } catch (IOException e) {
       throw new RuntimeException("연결이 실패했습니다. : " + apiURL2, e);
     }
+  }
+
+  @SuppressWarnings("unchecked")
+  @GetMapping("facebookLogin")
+  public String facebookLogin( //
+      String accessToken, //
+      HttpSession session, //
+      Model model) throws Exception {
+
+    // 액세스토큰을 가지고 페이스북 서버에 사용자 정보를 요청한다.
+    // 1) Facebook Graph API 실행하기
+    // => JSON 또는 XML을 리턴하는 HTTP 요청을 코딩하는 방법?
+    // - 스프링에서 제공하는 RestTemplate 클래스를 사용하라.
+    // - JSON 또는 XML을 자바 객체로 자동 변환해주기 때문에 편리하다.
+    RestTemplate restTemplate = new RestTemplate();
+
+    // 2) 서버에 요청하기
+    // => 첫 번째 파라미터 : 요청 URL
+    // => 두 번째 파라미터 : 서버가 응답한 JSON을 어떤 타입의 객체로 만들지 지정.
+
+    Map<String, Object> response =
+        restTemplate.getForObject("https://graph.facebook.com/v7.0/me?access_token={1}&fields={2}",
+            Map.class, accessToken, "id,name,email");
+
+    // 사용자 정보 확인
+    String email = (String) response.get("email");
+    logger.info("페이스북 로그인 사용자 이메일: {}", email);
+
+    if (email == null) {
+      logger.info("페이스북 액세스토큰이 무효하다.");
+
+      // 액세스토큰이 무효하다면, 다시 로그인 입력 폼으로 보낸다.
+      session.invalidate();
+      model.addAttribute("refreshUrl", "2;url=form");
+      return "auth/login";
+    }
+
+    Member member = memberService.userView(email);
+    if (member == null) {
+      // 현재 서버에 등록되지 않았다면, 새 사용자로 자동 등록한다.
+      member = new Member();
+      member.setName("");
+      member.setEmail(email);
+      member.setPassword(UUID.randomUUID().toString());
+      memberService.join(member);
+      logger.info("페이지북 사용자를 회원으로 등록한다.");
+    }
+
+    logger.info("세션에 로그인 사용자 정보를 보관한다.");
+    session.setAttribute("loginUser", member);
+    model.addAttribute("refreshUrl", "2;url=../../index.html");
+
+    return "auth/login";
   }
 
   @GetMapping("rejected")

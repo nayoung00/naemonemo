@@ -18,7 +18,7 @@
         justify-content: center;
         align-items: center;
         width: 5%;
-        height: 100vh;
+        height: 120vh;
         background-size: cover
         }
     body::before {
@@ -123,13 +123,54 @@
  %>
 
 <div class="login_naver_area">
-  <a href="<%=apiURL%>"><img width=300 src="https://static.nid.naver.com/oauth/big_g.PNG"/></a>
+  <a href="<%=apiURL%>"><img src="../../naverlogin.png"/></a>
+  <div id="fb-root"></div>
+<br>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v7.0&appId=2405367886423051&autoLogAppEvents=1" nonce="7Q6tYg4R"></script>
+
+<div style="display: none" class="fb-login-button" data-size="small" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+<img src="../../facebooklogin.png"/>
+ 
+ 
+ 
  <hr>
- </div>
+ </div>    
 
-
-    
     </section>
+
+<script>
+window.fbAsyncInit = function() {
+  console.log("window.fbAsyncInit() 호출됨!");
+  FB.init({
+    appId      : ' 2405367886423051', // 개발자가 등록한 앱 ID
+    cookie     : true,  
+    xfbml      : true,  
+    version    : 'v7.0' 
+  });
+  FB.AppEvents.logPageView();
+};
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+function checkLoginState() {
+  FB.getLoginStatus(function(response) { 
+      if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+          requestAutoLogin(response.authResponse.accessToken);
+      
+      } else { // 로그인이 되지 않았을 때,
+          alert("페이스북 로그인을 취소했습니다.");
+      }
+  });
+}
+function requestAutoLogin(accessToken) {
+  location.href = "facebookLogin?accessToken=" + accessToken;
+}
+</script>
 
 
 </body>

@@ -64,4 +64,5 @@ public interface MemberService {
   Member findByNo(int no) throws Exception;
 
 
+
 }

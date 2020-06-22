@@ -16,9 +16,9 @@
             
             
 <h1>로그인 결과</h1>
-<c:if test="${not empty loginUser}">
+<%-- <c:if test="${not empty loginUser}">
 <p>'${loginUser.name}'님 환영합니다.</p>
-</c:if>
+</c:if> --%>
 
 <c:choose>
 <c:when test="${authStatus == 'N'}"> <p>이메일 인증 후 로그인이 가능합니다.</p> </c:when>

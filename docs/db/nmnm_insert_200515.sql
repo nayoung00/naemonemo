@@ -8,70 +8,6 @@ email,
 password,      
 intro,      
 interest,     
-nickname,
-auth_status
-) 
-values(
-'오승우',
-'abc.jpg',
-'1998-10-20',
-'fivewincow@gmail.com',
-password('dhtmddn1!'),
-'열심히',
-'코딩',
-'오승우',
-'y');
-
-INSERT INTO nm_member(
-member_name, 
-id_photo, 
-birthday,     
-email,       
-password,      
-intro,      
-interest,     
-nickname
-) 
-values(
-'손진영',
-'abc.jpg',
-'1998-10-20',
-'jyson19@gmail.com',
-'1111',
-'열심히',
-'코딩',
-'손진영'
-);
-
-INSERT INTO nm_member(
-member_name, 
-id_photo, 
-birthday,     
-email,       
-password,      
-intro,      
-interest,     
-nickname 
-) 
-values(
-'신나라',
-'abc.jpg',
-'1998-10-20',
-'narashin547@gmail.com',
-'1111',
-'열심히',
-'코딩',
-'신나라'
-);
- 
-INSERT INTO nm_member(
-member_name, 
-id_photo, 
-birthday,     
-email,       
-password,      
-intro,      
-interest,     
 nickname
 ) 
 values(
@@ -83,6 +19,106 @@ values(
 '김나영입니다.', 
 '댄스/무용', 
 '나사김'
+);
+INSERT INTO nm_member(
+member_name, 
+id_photo, 
+birthday,     
+email,       
+password,      
+intro,      
+interest,     
+nickname
+) 
+values(
+'김가영',
+'abc.jpg',
+'1998-10-20',
+'gayoung@gmail.com',
+'1111',
+'열심히',
+'코딩',
+'김가영'
+);
+INSERT INTO nm_member(
+member_name, 
+id_photo, 
+birthday,     
+email,       
+password,      
+intro,      
+interest,     
+nickname
+) 
+values(
+'김다영',
+'abc.jpg',
+'1998-10-20',
+'dayoung@gmail.com',
+'1111',
+'열심히',
+'코딩',
+'김다영'
+);
+INSERT INTO nm_member(
+member_name, 
+id_photo, 
+birthday,     
+email,       
+password,      
+intro,      
+interest,     
+nickname
+) 
+values(
+'김라영',
+'abc.jpg',
+'1998-10-20',
+'rayoung@gmail.com',
+'1111',
+'열심히',
+'코딩',
+'김라영'
+);
+INSERT INTO nm_member(
+member_name, 
+id_photo, 
+birthday,     
+email,       
+password,      
+intro,      
+interest,     
+nickname
+) 
+values(
+'김마영',
+'abc.jpg',
+'1998-10-20',
+'mayoung@gmail.com',
+'1111',
+'열심히',
+'코딩',
+'김마영'
+);
+INSERT INTO nm_member(
+member_name, 
+id_photo, 
+birthday,     
+email,       
+password,      
+intro,      
+interest,     
+nickname
+) 
+values(
+'김사영',
+'abc.jpg',
+'1998-10-20',
+'sayoung@gmail.com',
+'1111',
+'열심히',
+'코딩',
+'김사영'
 );
 
 -- 모임 예제
@@ -119,32 +155,29 @@ values(
 );
 
 
--- 등급 예제
-insert into nm_grade(grade_no, grade_name)
-  values(4, '모임장');  
-insert into nm_grade(grade_no, grade_name)
-  values(3, '관리자');  
-insert into nm_grade(grade_no, grade_name)
-  values(2, '정회원');  
-insert into nm_grade(grade_no, grade_name)
-  values(1, '준회원');  
-
-  
-
 -- 모임 회원 예제
-INSERT INTO nm_group_member(group_no,member_no,grade_no)
- values(1,1,1);
+INSERT INTO nm_group_member(reg_no,group_no,member_no,register)
+ values(1,1,1,'승인완료');
  
-INSERT INTO nm_group_member(group_no,member_no,grade_no)
- values(1,2,2);
+INSERT INTO nm_group_member(reg_no,group_no,member_no,register)
+ values(2,1,2,'승인완료');
  
-INSERT INTO nm_group_member(group_no,member_no,grade_no)
- values(1,3,3);
+INSERT INTO nm_group_member(reg_no,group_no,member_no,register)
+ values(3,1,3,'승인완료');
+ 
+INSERT INTO nm_group_member(reg_no,group_no,member_no,register)
+ values(4,1,4,'탈퇴');
+
+INSERT INTO nm_group_member(reg_no,group_no,member_no,register)
+ values(5, 1,5,'승인신청');
+
+ INSERT INTO nm_group_member(reg_no,group_no,member_no,register)
+ values(6, 1,6,'승인완료');
  
 
 -- 공지사항 예제
 INSERT INTO nm_notice(group_no,member_no,title,content)
- values(1,1,'모임 이용규칙','제곧내');
+ values(1,8,1,'모임 이용규칙','제곧내');
 
 
 -- 공지사항 댓글 예제

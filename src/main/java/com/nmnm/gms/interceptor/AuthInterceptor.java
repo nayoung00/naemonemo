@@ -95,13 +95,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         }
       }
     }
-
+    //
     // // 7. admin일 경우
     // String role = auth.role().toString();
     // if ("ADMIN".equals(role)) {
     // // admin임을 알 수 있는 조건을 작성한다.
     // // ex) 서비스의 id가 root이면 admin이다.
-    // if ("root".equals(authUser.getId()) == false) { // admin이 아니므로 return false
+    // if ("root".equals(((Member) loginUser).getEmail()) == false) { // admin이 아니므로 return false
     // response.sendRedirect(request.getContextPath());
     // return false;
     // }

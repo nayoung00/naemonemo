@@ -8,9 +8,9 @@
 		<resultMap type="GroupMember" id="GroupMemberMap">
 				<id column="group_no" property="groupNo" />
 				<result column="member_no" property="memberNo" />
-				<result column="grade_no" property="gradeNo" />
 				<result column="register" property="register" />
-				
+				<result column="reg_no" property="regNo" />
+				<result column="email" property="email" />
 				<result column="id_photo" property="photo"/> 
 				<result column="birthday" property="birthday"/> 
 				<result column="member_name" property="name"/> 
@@ -23,12 +23,13 @@
 				  g.group_no,
 				  m.member_no,
 				  gm.register,
-				  gm.grade_no,
+				  gm.reg_no,
 
 				  m.id_photo,
 				  m.birthday,
 				  m.member_name,
-				  m.nickname
+				  m.nickname,
+				  m.email
 
 				FROM
 				  (nm_member AS m LEFT JOIN nm_group_member AS gm
